@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="language" content="english">
+<title>Part A | CS 61C Spring 2022</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<link rel="shortcut icon" type="image/png" href="../../../img/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../../css/main.css@h=36c89645dcb547d13f6f293a379a176dff22aab9affcefc8d3a19bc23c0f8db2.css" />
+<script defer type="text/javascript" src="../../../js/main.js@h=4096b5e2a18784c27ca139ca897694176eea13de3e2168cd7e7bcdd827a35c8d"></script>
+
+<script type="text/javascript" src="../../../js/main-sync.js@h=daca62fef99fb16ad6a5fd1517d7b18bed66d3241431785bf3ac1f134c166bf1"></script>
+<script>initDarkToggle();</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.17.0/tocbot.min.js" integrity="sha512-DJhUMo5TIBb3fFziiE+3OJG+j7ky+GxScxHdLADCXskEpc/AKQsbsorIYmGFJFaJvDIyP65rJNhnCTytfYAdUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+<div class="container">
+<a class="navbar-brand" href="../../../index.html">
+<img class="d-inline-block me-2 rounded" height="48" width="48" src="../../../img/icon-small.png" alt="outline of square computer chip with cs61c label" />
+<span class="align-middle">CS 61C Spring 2022</span>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle Navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item">
+<a class="nav-link" href="../../../calendar/index.html">Calendar</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../staff/index.html">Staff</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../policies/index.html">Policies</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../resources/index.html">Resources</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../exam/index.html">Exam</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../extensions/index.html">Extensions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://oh.cs61c.org/">OH Queue</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://venus.cs61c.org/">Venus</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://inst.eecs.berkeley.edu/~cs61c/archives.html">Semesters</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<main class="mb-4">
+<section class="section">
+<div class="container">
+<div class="row spec">
+<nav class="col-md-3 d-print-none sticky-md-top nav-wrapper" aria-label="table of contents">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="../index.html">Project 2: CS61Classify</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="index.html">Part A</a>
+<div id="toc-wrapper">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-1-absolute-value-walkthrough">Task 1: Absolute Value (Walkthrough)</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#running-tests">Running Tests</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#using-vdb-to-debug-tests-via-venus">Using VDB to debug tests via Venus</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-2-relu">Task 2: ReLU</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#conceptual-overview-arrays">Conceptual Overview: Arrays</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#conceptual-overview-relu">Conceptual Overview: ReLU</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#your-task">Your Task</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-and-debugging">Testing and debugging</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-3-argmax">Task 3: Argmax</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#conceptual-overview-argmax">Conceptual Overview: Argmax</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#your-task-1">Your Task</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-and-debugging-1">Testing and debugging</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-4-dot-product">Task 4: Dot Product</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#conceptual-overview-dot-product">Conceptual Overview: Dot Product</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#conceptual-overview-array-strides">Conceptual Overview: Array Strides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#your-task-2">Your Task</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-and-debugging-2">Testing and debugging</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-5-matrix-multiplication">Task 5: Matrix Multiplication</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#conceptual-overview-storing-matrices">Conceptual Overview: Storing Matrices</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#conceptual-overview-matrix-multiplication">Conceptual Overview: Matrix Multiplication</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#your-task-3">Your Task</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-and-debugging-3">Testing and debugging</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-6-testing">Task 6: Testing</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#conceptual-overview-loss-functions">Conceptual Overview: Loss Functions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#your-task-4">Your Task</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#submission-and-grading">Submission and Grading</a>
+</li>
+</ul>
+</div>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../part-b/index.html">Part B</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../function-definitions/index.html">Appendix: Function Definitions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../calling-convention/index.html">Appendix: Calling Convention</a>
+</li>
+</ul>
+</nav>
+<div id="toc-content-wrapper" class="content col-md-9">
+<h1>Part A: Math Functions</h1>
+<p>In this part, you will implement a few math operations that will be used for classification later.</p>
+<h2 id="task-1-absolute-value-walkthrough">Task 1: Absolute Value (Walkthrough)</h2>
+<p>To familiarize you with the workflow of this project, we will walk you through this task.</p>
+<h3 id="running-tests">Running Tests</h3>
+<p>In this project, tests are written in Python and compiled into RISC-V assembly.</p>
+<p>The Python source for the provided tests is located in <code>unittests.py</code>. <strong>Look</strong> over the contents of <code>unittests.py</code>. Although the tests are written for you in Tasks 1-4, it helps to be familiar with the unit testing framework to understand what the tests are doing.</p>
+<p>To run the tests, on your <strong>local machine</strong>, start by <strong>running <code>bash test.sh</code></strong> in the <code>61c-proj2</code> directory on your local machine. This gives you an overview of the commands you can run for testing. In particular, <code>bash test.sh part_a</code> compiles and runs all the tests for Part A. You can also provide the name of a specific function to compile and run all the tests for that particular function.</p>
+<p>For this task, since we are implementing the <code>abs</code> function, on your <strong>local machine</strong>, <strong>run <code>bash test.sh test_abs</code></strong>. This creates a <code>test-src</code> folder containing the Python tests compiled into RISC-V.</p>
+<p>Since we haven't implemented the <code>abs</code> function yet, some of the tests are failing. Let's try implementing <code>abs</code>.</p>
+<p>You can edit files in a text editor or directly in Venus. To edit files in Venus, switch to the Files tab. Here you can open and edit assembly files. Remember to save your files frequently with <code>control+S</code> (Windows) or <code>command+S</code> (Mac). Venus does not auto-save as you work.</p>
+<p><strong>Open</strong> <code>src/abs.s</code> (either in a text editor or Venus) and <strong>copy-paste</strong> the implementation below.</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">abs:
+  blt a0, zero, done
+
+  # Negate a0
+  sub a0, x0, a0
+
+done:
+  ret
+</span></code></pre>
+<p>Again on your <strong>local machine</strong>, <strong>run <code>bash test.sh test_abs</code></strong>. The tests don't pass, so something is probably wrong with our implementation.</p>
+<h3 id="using-vdb-to-debug-tests-via-venus">Using VDB to debug tests via Venus</h3>
+<p>First, <strong>open up</strong> Venus in your web browser and <strong>mount</strong> your files. (Refer back to <a href="../index.html#setup-venus">the setup section of the spec</a> if you're having trouble.)</p>
+<p>Let's start by setting a breakpoint. <strong>Type</strong> <code>ebreak</code> at the start of the <code>abs</code> function. This places a breakpoint just before the <code>blt a0, zero, done</code> instruction.</p>
+<p>To start the debugger, in the <strong>Venus terminal</strong>, <strong>run <code>cd /vmfs/test-src</code></strong> and <strong>run <code>ls</code></strong>. This should list all the test files you can run. <strong>Run <code>vdb test_abs_one.s</code></strong> to start the debugger for an absolute value test.</p>
+<p>In the <strong>Venus simulator tab</strong>, <strong>Click Run</strong> to start running the program. The debugger will pause at the breakpoint we set. While paused, you can inspect the registers and memory. In particular, notice that register <code>a0</code> contains the argument <code>1</code> here, because this test calls your function with argument <code>a0</code> = 1.</p>
+<p>You can also step through code line-by-line in the debugger. <strong>Click Step</strong> to execute the next instruction, <code>blt a0, zero, done</code>. Step through the function and inspect the registers. See if you can spot the bug in our implementation.</p>
+<details>
+<summary>Click to reveal answer</summary>
+<p>In the first line, we're skipping the negation and branching to <code>done</code> if the number is less than 0. However, we actually want to skip the negation if the number is greater than and equal to 0, and perform the negation if the number is less than 0.</p>
+<p>One way to fix this is to branch to <code>done</code> if the argument is greater than or equal to 0. Other ways to fix this are possible!</p>
+</details>
+<p><strong>Change</strong> the implementation in <code>src/abs.s</code> to fix the bug. <strong>Run <code>bash test.sh test_abs</code></strong> again, and make sure that all the provided tests pass.</p>
+<h2 id="task-2-relu">Task 2: ReLU</h2>
+<h3 id="conceptual-overview-arrays">Conceptual Overview: Arrays</h3>
+<p>In this project, we will be working with integer arrays. Remember that the integers in an integer array are stored in a consecutive block of memory.</p>
+<p>To pass an integer array as an argument, we will pass a pointer to the start of the integer array, and the number of elements in the array.</p>
+<p><img src="task2-1.svg" alt="" /></p>
+<p>In this diagram, register <code>a0</code> stores the first argument (the address of the start of the array). Register <code>a1</code> stores the second argument (the number of integers in the array).</p>
+<h3 id="conceptual-overview-relu">Conceptual Overview: ReLU</h3>
+<p>The ReLU function takes in an integer array and sets every negative value in the array to 0. Positive values in the array are unchanged. In other words, for each element <code>x</code> in the array, ReLU computes <code>max(x, 0)</code>.</p>
+<p>ReLU should modify the array in place. For example, if the above integer array is passed into ReLU, the result would be stored in the same place in memory:</p>
+<p><img src="task2-2.svg" alt="" /></p>
+<p>Note that the negative values in the array were set to 0 in memory.</p>
+<h3 id="your-task">Your Task</h3>
+<p>Fill in the <code>relu</code> function in <code>src/relu.s</code>.</p>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>relu</code>: Task 2.</td>
+</tr>
+<tr>
+<td rowspan="2" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of the integer array.</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>int</code></td>
+<td>The number of integers in the array. You can assume that this argument matches the actual length of the integer array.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td colspan="3">None</td>
+</tr>
+</tbody>
+</table>
+<p>If the input is malformed in the following ways, put the appropriate return code into <code>a0</code> and run <code>j exit</code> to quit the program. (For example, if the length of the array is less than 1, run <code>li a0 36</code> and <code>j exit</code>.)</p>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 85%;">
+</colgroup>
+<tbody>
+<tr>
+<td><b>Return code</b></td>
+<td><b>Exception</b></td>
+</tr>
+<tr>
+<td>36</td>
+<td>The length of the array is less than 1.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="testing-and-debugging">Testing and debugging</h3>
+<p>To test your function, in your local terminal, run <code>bash test.sh test_relu</code>.</p>
+<p>To debug your function, in your Venus terminal, run <code>cd /vmfs/test-src</code>, then run a VDB command to start the debugger:</p>
+<pre class="z-code"><code><span class="z-text z-plain">vdb test_relu_standard.s
+vdb test_relu_length_1.s
+vdb test_relu_invalid_n.s
+</span></code></pre>
+<p>Here are some debugging tips that should apply to the entire project:</p>
+<ul>
+<li>If you see the error &quot;You are attempting to edit the text of the program though the program is set to immutable at address 0x00000000!&quot;, this means that you are trying to write to memory address 0x00000000 (or whatever memory address you see in the error). This is probably happening because you're giving this address to a store instruction, which then tries to write to this address.</li>
+<li>If you see the error &quot;label exit used but not defined&quot; when starting the debugger, make sure that you're starting the debugger with the <code>vdb</code> commands above. Clicking &quot;assemble and simulate from editor&quot; will not work.</li>
+<li>Unfortunately the local tests don't check for out-of-bounds memory accesses. If you ever encounter a failing test on the autograder, try making sure that your code never writes to memory outside of an array.</li>
+</ul>
+<p>If your ReLU works locally but not on Gradescope, here are some edge cases we've seen that the local cases don't check. You can modify <code>unittests.py</code> to write your own tests for these cases!</p>
+<ul>
+<li>The local tests don't perform ReLU on larger numbers.</li>
+</ul>
+<h2 id="task-3-argmax">Task 3: Argmax</h2>
+<h3 id="conceptual-overview-argmax">Conceptual Overview: Argmax</h3>
+<p>The argmax function takes in an integer array and returns the <em>index</em> of the largest element in the array. If multiple elements are tied as the largest element, return the smallest index.</p>
+<p>For example, if the integer array <code>[-6, -1, 6, 1]</code> is passed into the argmax function, the output should be 2, because the largest integer (6) is located at index 2 in the array. If the integer array were instead <code>[6, 1, 6, 1]</code>, then the output should be 0, because the largest integer (6) is first found at index 0.</p>
+<h3 id="your-task-1">Your Task</h3>
+<p>Fill in the <code>argmax</code> function in <code>src/argmax.s</code>.</p>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>argmax</code>: Task 3.</td>
+</tr>
+<tr>
+<td rowspan="2" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of the integer array.</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>int</code></td>
+<td>The number of integers in the array. You can assume that this argument matches the actual length of the integer array.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The index of the largest element. If the largest element appears multiple times, return the smallest index.</td>
+</tr>
+</tbody>
+</table>
+<p>If the input is malformed in the following ways, put the appropriate return code into <code>a0</code> and run <code>j exit</code> to quit the program.</p>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 85%;">
+</colgroup>
+<tbody>
+<tr>
+<td><b>Return code</b></td>
+<td><b>Exception</b></td>
+</tr>
+<tr>
+<td>36</td>
+<td>The length of the array is less than 1.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="testing-and-debugging-1">Testing and debugging</h3>
+<p>To test your function, in your local terminal, run <code>bash test.sh test_argmax</code>.</p>
+<p>To debug your function, in your Venus terminal, run <code>cd /vmfs/test-src</code>, then run a VDB command to start the debugger:</p>
+<pre class="z-code"><code><span class="z-text z-plain">vdb test_argmax_invalid_n.s
+vdb test_argmax_length_1.s
+vdb test_argmax_standard.s
+</span></code></pre>
+<p>If your ReLU works locally but not on Gradescope, here are some edge cases we've seen that the local cases don't check. You can modify <code>unittests.py</code> to write your own tests for these cases!</p>
+<ul>
+<li>The local tests don't check that your code works if the largest element in the array is the last element of the array.</li>
+<li>The local tests don't check that your code works if the largest element appears more than once.</li>
+</ul>
+<h2 id="task-4-dot-product">Task 4: Dot Product</h2>
+<h3 id="conceptual-overview-dot-product">Conceptual Overview: Dot Product</h3>
+<p>The dot product function takes in two integer arrays, multiplies the corresponding entries of the arrays together, and returns the sum of all the products.</p>
+<p>For example, if these two integer arrays were passed into the dot product function, the function would return <code>(1*6) + (2*1) + (3*6) + (4*1) + (5*6) + (6*1) + (7*6) + (8*1) + (9*6) = 170</code>.</p>
+<p><img src="task4-1.svg" alt="" /></p>
+<h3 id="conceptual-overview-array-strides">Conceptual Overview: Array Strides</h3>
+<p>Instead of iterating through every element of the array, what if we want to iterate through every other element, or every third element? To do this, we will define the stride of an array.</p>
+<p>To iterate through an array with stride <em>n</em>, start at the beginning of the array and only consider every <em>n</em>th element, skipping the elements in between.</p>
+<p>Note that the stride is given in number of elements, not number of bytes. This means that iterating with stride 1 is equivalent to iterating through every element of the array.</p>
+<p><img src="task4-2.svg" alt="" /></p>
+<p>For example, in the above diagram, both arrays are using stride 2, so we skip every other element in the array. 5 elements should be considered, so we stop after multiplying 5 pairs of elements together. The function would return <code>(1*6) + (3*6) + (5*6) + (7*6) + (9*6) = 150</code>.</p>
+<p><img src="task4-3.svg" alt="" /></p>
+<p>In the above diagram, the first array is using stride 2, so we skip every other element in this array. The second array is using stride 3, so we use every third element in this array. 3 elements should be considered, so we stop after multiplying 3 pairs of elements together. The function would return <code>(1*6) + (3*1) + (5*6) = 39</code>.</p>
+<h3 id="your-task-2">Your Task</h3>
+<p>Fill in the <code>dot</code> function in <code>src/dot.s</code>.</p>
+<p>The <code>dot</code> function may assume that the <code>a2</code> argument for the number of elements to use in the calculation will not cause an out-of-bounds array access. However, you will need to enforce this when calling <code>dot</code> from other functions later in this project.</p>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>dot</code>: Task 4.</td>
+</tr>
+<tr>
+<td rowspan="5" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of the first array.</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of the second array.</td>
+</tr>
+<tr>
+<td><code>a2</code></td>
+<td><code>int</code></td>
+<td>The number of elements to use in the calculation.</td>
+</tr>
+<tr>
+<td><code>a3</code></td>
+<td><code>int</code></td>
+<td>The stride of the first array.</td>
+</tr>
+<tr>
+<td><code>a4</code></td>
+<td><code>int</code></td>
+<td>The stride of the second array.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The dot product of the two arrays, using the given number of elements and the given strides.</td>
+</tr>
+</tbody>
+</table>
+<p>If the input is malformed in the following ways, put the appropriate return code into <code>a0</code> and run <code>j exit</code> to quit the program.</p>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 85%;">
+</colgroup>
+<tbody>
+<tr>
+<td><b>Return code</b></td>
+<td><b>Exception</b></td>
+</tr>
+<tr>
+<td>36</td>
+<td>The length of either array is less than 1.</td>
+</tr>
+<tr>
+<td>37</td>
+<td>The stride of either array is less than 1.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="testing-and-debugging-2">Testing and debugging</h3>
+<p>To test your function, in your local terminal, run <code>bash test.sh test_dot</code>.</p>
+<p>To debug your function, in your Venus terminal, run <code>cd /vmfs/test-src</code>, then run a VDB command to start the debugger:</p>
+<pre class="z-code"><code><span class="z-text z-plain">vdb test_dot_length_1.s
+vdb test_dot_length_error.s
+vdb test_dot_length_error2.s
+vdb test_dot_standard.s
+vdb test_dot_stride.s
+vdb test_dot_stride_error1.s
+vdb test_dot_stride_error2.s
+</span></code></pre>
+<h2 id="task-5-matrix-multiplication">Task 5: Matrix Multiplication</h2>
+<h3 id="conceptual-overview-storing-matrices">Conceptual Overview: Storing Matrices</h3>
+<p>A matrix is a 2-dimensional array of integers. In this project, matrices will be stored as an integer array in row-major order. Row-major order means we each row of the matrix consecutively in memory as a 1-dimensional integer array.</p>
+<p><img src="row_major.jpg" alt="" /></p>
+<h3 id="conceptual-overview-matrix-multiplication">Conceptual Overview: Matrix Multiplication</h3>
+<p>The matrix multiplication function takes in two integer matrices A (dimension <em>n</em> × <em>m</em>) and B (dimension <em>m</em> × <em>k</em>) and outputs an integer matrix C (dimension <em>n</em> × <em>k</em>).</p>
+<p>To calculate the entry at row <em>i</em>, column <em>j</em> of C, take the dot product of the <em>i</em>th row of A and the <em>j</em>th column of B. Note that this can be done by calling the <code>dot</code> function with the proper strides.</p>
+<p><img src="task5-1.svg" alt="" /></p>
+<p>For example, in the above diagram, we are computing the entry in row 1, column 1 of C by taking the dot product of the 1st row of A and the 1st row of B.</p>
+<p><img src="task5-2.svg" alt="" /></p>
+<p>In the above diagram, we are computing the entry in row 2, column 2 of C. Note that we are changing the pointer to the start of the array in order to access later rows and columns.</p>
+<h3 id="your-task-3">Your Task</h3>
+<p>Fill in the <code>matmul</code> function in <code>src/matmul.s</code>.</p>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>matmul</code>: Task 5.</td>
+</tr>
+<tr>
+<td rowspan="7" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of the first matrix A (stored as an integer array in row-major order).</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>int</code></td>
+<td>The number of rows (height) of the first matrix A.</td>
+</tr>
+<tr>
+<td><code>a2</code></td>
+<td><code>int</code></td>
+<td>The number of columns (width) of the first matrix A.</td>
+</tr>
+<tr>
+<td><code>a3</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of the second matrix B (stored as an integer array in row-major order).</td>
+</tr>
+<tr>
+<td><code>a4</code></td>
+<td><code>int</code></td>
+<td>The number of rows (height) of the second matrix B.</td>
+</tr>
+<tr>
+<td><code>a5</code></td>
+<td><code>int</code></td>
+<td>The number of columns (width) of the second matrix B.</td>
+</tr>
+<tr>
+<td><code>a6</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of an integer array where the result C should be stored. You can assume this memory has been allocated (but is uninitialized) and has enough space to store C.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td colspan="3">None</td>
+</tr>
+</tbody>
+</table>
+<p>If the input is malformed in the following ways, put the appropriate return code into <code>a0</code> and run <code>j exit</code> to quit the program.</p>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 85%;">
+</colgroup>
+<tbody>
+<tr>
+<td><b>Return code</b></td>
+<td><b>Exception</b></td>
+</tr>
+<tr>
+<td>38</td>
+<td>The height or width of either matrix is less than 1.</td>
+</tr>
+<tr>
+<td>38</td>
+<td>The number of columns (width) of the first matrix A is not equal to the number of rows (height) of the second matrix B.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="testing-and-debugging-3">Testing and debugging</h3>
+<p>To test your function, in your local terminal, run <code>bash test.sh test_matmul</code>.</p>
+<p>To debug your function, in your Venus terminal, run <code>cd /vmfs/test-src</code>, then run a VDB command to start the debugger:</p>
+<pre class="z-code"><code><span class="z-text z-plain">vdb test_matmul_length_1.s
+vdb test_matmul_negative_dim_m0_x.s
+vdb test_matmul_negative_dim_m0_y.s
+vdb test_matmul_negative_dim_m1_x.s
+vdb test_matmul_negative_dim_m1_y.s
+vdb test_matmul_nonsquare_1.s
+vdb test_matmul_nonsquare_2.s
+vdb test_matmul_square.s
+vdb test_matmul_unmatched_dims.s
+vdb test_matmul_zero_dim_m0.s
+vdb test_matmul_zero_dim_m1.s
+</span></code></pre>
+<p>Debugging advice:</p>
+<ul>
+<li>Since you'll need to call the <code>dot</code> function in <code>matmul</code>, make sure to follow calling convention! See the calling convention appendix for more details. In particular, as soon as you call <code>dot</code>, the <code>dot</code> function is allowed to change all the t0-t6 and a1-a7 registers, so when the <code>dot</code> function returns, you need to assume that those registers contain <em>garbage</em>.</li>
+</ul>
+<h2 id="task-6-testing">Task 6: Testing</h2>
+<p>In this task, you will be writing tests for some mathematical functions that have already been implemented for you.</p>
+<p>We updated the starter code for this task after the project was released (on Monday, February 14), so <strong>run <code>git pull starter main</code></strong> to ensure you have those updates before starting this task.</p>
+<h3 id="conceptual-overview-loss-functions">Conceptual Overview: Loss Functions</h3>
+<p>A loss function takes in two integer arrays and outputs an integer array containing some measure of how different each pair of corresponding entries are. Some loss functions also output the sum of all the difference measurements. This project uses three different loss functions.</p>
+<p><img src="task6-1.svg" alt="" /></p>
+<p>The absolute loss function computes and outputs the absolute difference between each pair of corresponding entries, and then outputs the sum of all the absolute differences.</p>
+<p><img src="task6-2.svg" alt="" /></p>
+<p>The squared loss function computes and outputs the square of the difference between each pair of corresponding entries, and then outputs the sum of all the squared differences.</p>
+<p><img src="task6-3.svg" alt="" /></p>
+<p>The zero-one loss function computes whether each pair of corresponding entries is equal, and does not output any sum.</p>
+<p><img src="task6-4.svg" alt="" /></p>
+<p>These loss functions use a helper function <code>initialize-zero</code>. It takes in the length of the array as input and outputs a newly-allocated array of the given length, filled with zeros.</p>
+<h3 id="your-task-4">Your Task</h3>
+<p>Fill in the tests for the three loss functions and the <code>initialize-zero</code> helper function in <code>studenttests.py</code>.</p>
+<p>We recommend looking through <code>unittests.py</code> to understand how the Python framework for writing tests works.</p>
+<p>To ensure that your tests are run by the unit testing framework, make sure that your function names start with <code>test_</code>! For example, the function <code>def test_length_0(self)</code> will run, but the function <code>def length_0(self)</code> will not run.</p>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4">Loss functions: Task 6.</td>
+</tr>
+<tr>
+<td rowspan="4" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of the first input array.</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of the second input array.</td>
+</tr>
+<tr>
+<td><code>a2</code></td>
+<td><code>int</code></td>
+<td>The number of integers in the array.</td>
+</tr>
+<tr>
+<td><code>a3</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of the output array, where the results will be stored.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The sum of the elements in the output array. (No return value for zero-one loss.)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>initialize_zero</code>: Task 6.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The size of the array to be created.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the newly-allocated array of zeros.</td>
+</tr>
+</tbody>
+</table>
+<p>The functions will return the following error codes if the input is malformed:</p>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 85%;">
+</colgroup>
+<tbody>
+<tr>
+<td><b>Return code</b></td>
+<td><b>Exception</b></td>
+</tr>
+<tr>
+<td>36</td>
+<td>The length of the array is less than 1.</td>
+</tr>
+<tr>
+<td>26</td>
+<td><code>malloc</code> returns an error.</td>
+</tr>
+</tbody>
+</table>
+<p>To test your code coverage, run <code>bash test.sh coverage</code>. To get full credit on this part, make sure that your tests achieve 100% coverage. (In other words, your tests must cause every line of the implementation to be executed.)</p>
+<h2 id="submission-and-grading">Submission and Grading</h2>
+<p>Submit your code to the Project 2A assignment on Gradescope.</p>
+<p>To ensure the autograder runs correctly, do not add any <code>.import</code> statements to the starter code. Also, make sure there are no <code>ecall</code> instructions in your code.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container border-top pt-4 mb-5">
+<div class="row">
+<div class="col">
+<div id="dark-toggle-wrapper" class="d-none">
+<div class="form-check form-switch">
+<input id="inputDarkToggle" class="form-check-input" type="checkbox">
+<label class="form-check-label" for="inputDarkToggle">
+Dark Mode
+<a id="buttonDarkToggleReset" class="d-none" href="javascript:void(0);">(reset)</a>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+  
+
+  document.addEventListener("DOMContentLoaded", function() {
+    initToC();
+  });
+</script>
+</body>
+</html>

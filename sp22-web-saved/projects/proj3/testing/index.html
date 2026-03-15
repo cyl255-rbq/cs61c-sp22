@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="language" content="english">
+<title>Appendix: Testing and Debugging | CS 61C Spring 2022</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<link rel="shortcut icon" type="image/png" href="../../../img/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../../css/main.css@h=36c89645dcb547d13f6f293a379a176dff22aab9affcefc8d3a19bc23c0f8db2.css" />
+<script defer type="text/javascript" src="../../../js/main.js@h=4096b5e2a18784c27ca139ca897694176eea13de3e2168cd7e7bcdd827a35c8d"></script>
+
+<script type="text/javascript" src="../../../js/main-sync.js@h=daca62fef99fb16ad6a5fd1517d7b18bed66d3241431785bf3ac1f134c166bf1"></script>
+<script>initDarkToggle();</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.17.0/tocbot.min.js" integrity="sha512-DJhUMo5TIBb3fFziiE+3OJG+j7ky+GxScxHdLADCXskEpc/AKQsbsorIYmGFJFaJvDIyP65rJNhnCTytfYAdUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+<div class="container">
+<a class="navbar-brand" href="../../../index.html">
+<img class="d-inline-block me-2 rounded" height="48" width="48" src="../../../img/icon-small.png" alt="outline of square computer chip with cs61c label" />
+<span class="align-middle">CS 61C Spring 2022</span>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle Navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item">
+<a class="nav-link" href="../../../calendar/index.html">Calendar</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../staff/index.html">Staff</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../policies/index.html">Policies</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../resources/index.html">Resources</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../exam/index.html">Exam</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../extensions/index.html">Extensions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://oh.cs61c.org/">OH Queue</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://venus.cs61c.org/">Venus</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://inst.eecs.berkeley.edu/~cs61c/archives.html">Semesters</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<main class="mb-4">
+<section class="section">
+<div class="container">
+<div class="row spec">
+<nav class="col-md-3 d-print-none sticky-md-top nav-wrapper" aria-label="table of contents">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="../index.html">Project 3: CS61CPU</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../part-a/index.html">Part A</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../part-b/index.html">Part B</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../control-logic/index.html">Appendix: Control Logic</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html">Appendix: Testing and Debugging</a>
+<div id="toc-wrapper">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#unit-tests">Unit Tests</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#viewing-output-files">Viewing Output Files</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#using-debugging-circuits">Using Debugging Circuits</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#integration-tests">Integration Tests</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#viewing-input-and-output-files">Viewing Input and Output Files</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#using-debugging-circuits-1">Using Debugging Circuits</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#writing-integration-tests">Writing Integration Tests</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#logisim-tips">Logisim Tips</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#wiring">Wiring</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#wiring-pitfalls">Wiring Pitfalls</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#subcircuits">Subcircuits</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#signal-tips">Signal Tips</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#banned-circuit-elements">Banned Circuit Elements</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../partial-load-store/index.html">Appendix: Partial Loads and Stores</a>
+</li>
+</ul>
+</nav>
+<div id="toc-content-wrapper" class="content col-md-9">
+<h1>Appendix: Testing and Debugging</h1>
+<h2 id="unit-tests">Unit Tests</h2>
+<p>The provided unit tests check functionality of your subcircuits (e.g. immediate generator, branch comparator). They do not check your entire CPU implementation. You don't need to write any unit tests yourself.</p>
+<p>As an example, let's debug the <code>alu-add</code> unit test. First, <strong>run the ALU unit tests with <code>bash test.sh test_alu</code></strong>. If the test doesn't pass, this will print out the difference between your subcircuit output and the reference output.</p>
+<h3 id="viewing-output-files">Viewing Output Files</h3>
+<p>The next step to debug unit tests is to compare the expected reference output to your subcircuit output. These output files will always be in the <code>out</code> directory. You can use <code>bash test.sh format filename</code> (replacing <code>filename</code>) to view the output files.</p>
+<p><strong>View the reference output with <code>bash test.sh format tests/unit-alu/out/alu-add.ref</code></strong>. You should see this reference output:</p>
+<pre class="z-code"><code><span class="z-text z-plain">Time ALUSel A        B        ALUResult
+00   0      00002020 00000f0f 00002f2f 
+01   0      ffffdead ffffbeef ffff9d9c 
+02   0      00007fff 00000001 00008000 
+03   0      00000000 00000000 00000000 
+</span></code></pre>
+<p>This shows the inputs (<code>A</code>, <code>B</code>, and <code>ALUSel</code>) sent to your subcircuit at each time step, and the expected output (<code>ALUResult</code>).</p>
+<p>Next, <strong>run <code>bash test.sh format tests/unit-alu/out/alu-add.out</code> to see the output from your subcircuit</strong>. Here's the output when the test is run on unmodified starter code:</p>
+<pre class="z-code"><code><span class="z-text z-plain">Time ALUSel A        B        ALUResult
+00   0      00002020 00000f0f UUUUUUUU 
+01   0      ffffdead ffffbeef UUUUUUUU 
+02   0      00007fff 00000001 UUUUUUUU 
+03   0      00000000 00000000 UUUUUUUU 
+</span></code></pre>
+<p>Note that in the example, the inputs to your subcircuit are the same, but the output (<code>ALUResult</code>) of your subcircuit is different (undefined).</p>
+<h3 id="using-debugging-circuits">Using Debugging Circuits</h3>
+<p>Each unit test has a <code>.circ</code> test circuit you can use for debugging. As an example, <strong>open <code>tests/unit-alu/alu-add.circ</code></strong>, which corresponds to the failed test from the previous section. The first thing you'll see in this circuit is the testing harness:</p>
+<p><img src="../alu-add-1.png" alt="Annotated screenshot of alu-add.circ." /></p>
+<p>This feeds a sequence of inputs (<code>InputA</code>, <code>InputB</code>, and <code>ALUSel</code>) to your ALU.</p>
+<p>The ROM (in the red box) contains a list of inputs to your circuit. The first input (<code>InputA = 0x00002020</code>, <code>InputB = 0x00000f0f</code>, <code>ALUSel = 0b0000</code>) is highlighted in dark gray. You can also see these values being passed into your ALU (in the blue box) with the probes.</p>
+<p>In this picture, the <code>ALUResult</code> output from your ALU is undefined (all <code>U</code>s). To see why, we can view our ALU subcircuit to see what logic it's doing. To click into your ALU, you can either <strong>right-click the ALU</strong> and <strong>select &quot;View alu&quot;</strong>, or <strong>click the ALU</strong> and <strong>click the magnifying glass</strong>, as shown below:</p>
+<p><img src="../alu-add-2.png" alt="Using the magnifying glass to click into a subcircuit." /></p>
+<p><img src="../alu-add-3.png" alt="Right-clicking to click into a subcircuit." /></p>
+<p>Inside your ALU subcircuit, you can see inputs (<code>A</code>, <code>B</code>, and <code>ALUSel</code>) provided from the harness to your subcircuit. You can <strong>click on wires to see the values in those wires.</strong></p>
+<p><img src="../alu-add-4.png" alt="Clicking on wires inside alu.circ to debug." /></p>
+<p>If the output of your subcircuit isn't what you expect, you can probe wires to investigate where the incorrect output is coming from. In the starter circuit, the <code>ALUResult</code> output is undefined. In this case, note that the <code>ALUResult</code> tunnel is undefined, so we probably want to send a value to this tunnel.</p>
+<p>To return to the harness, you can click on <code>main</code> in the Simulate → Active Simulations tab in the top-left corner.</p>
+<p><strong>To view later inputs, click Simulate → Tick Full Cycle</strong>, which will highlight the next row of the ROM blocks and send this next input into your subcircuit. You can tick cycles while viewing your ALU subcircuit to see later inputs.</p>
+<p><strong>To reset the simulation, click Simulate → Reset Simulator</strong>. You can also close and re-open the debugging circuit.</p>
+<h2 id="integration-tests">Integration Tests</h2>
+<p>Integration tests execute RISC-V instructions on your entire CPU and compare the outputs to the result of running those instructions on Venus. You'll need to make your own integration tests by writing out RISC-V instructions (the testing framework will then create the testing and debugging circuit for you).</p>
+<p>As an example, let's debug the <code>addi-basic</code> unit test. First, <strong>run the addi integration tests with <code>bash test.sh test_addi</code></strong>. If the test doesn't pass, this will print out the difference between your CPU output and the reference output.</p>
+<h3 id="viewing-input-and-output-files">Viewing Input and Output Files</h3>
+<p>The RISC-V instructions being executed by your CPU will be inside the <code>in</code> directory. In this example, <strong>view <code>tests/integration-addi/in/addi-basic.s</code></strong> to see what RISC-V instructions are being run in this test. You should see these instructions:</p>
+<pre class="z-code"><code><span class="z-text z-plain">addi t0, x0, 1
+addi t0, x0, 42
+addi t0, x0, 256
+addi t0, x0, 2047
+</span></code></pre>
+<p>As with the unit tests, you can use <code>bash test.sh format filename</code> (replacing <code>filename</code>) to view the output files.</p>
+<p><strong>View the reference output with <code>bash test.sh format tests/integration-addi/out/addi-basic.ref</code></strong>. You should see this reference output:</p>
+<pre class="z-code"><code><span class="z-text z-plain">Time PC       Instruc. ra (x1)  sp (x2)  t0 (x5)  t1 (x6)  t2 (x7)  s0 (x8)  s1 (x9)  a0 (x10)
+0000 00000000 00100293 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+0001 00000004 02a00293 00000000 00000000 00000001 00000000 00000000 00000000 00000000 00000000
+0002 00000008 10000293 00000000 00000000 0000002a 00000000 00000000 00000000 00000000 00000000
+0003 0000000c 7ff00293 00000000 00000000 00000100 00000000 00000000 00000000 00000000 00000000
+0004 00000010 00000000 00000000 00000000 000007ff 00000000 00000000 00000000 00000000 00000000
+</span></code></pre>
+<p>This shows the program counter (PC), instruction, and values in the 8 debug registers at each time step of running the input program. For example, at time step 0, <code>0x00100293</code> corresponds to <code>addi t0, x0, 1</code>. At the next time step, <code>t0</code> now has the value <code>0x00000001</code>.</p>
+<p>Next, <strong>run <code>bash test.sh format tests/integration-addi/out/addi-basic.out</code> to see the output from your CPU</strong>:</p>
+<pre class="z-code"><code><span class="z-text z-plain">Time PC       Instruc. ra (x1)  sp (x2)  t0 (x5)  t1 (x6)  t2 (x7)  s0 (x8)  s1 (x9)  a0 (x10)
+0000 00000000 00100293 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+0001 00000004 02a00293 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+0002 00000008 10000293 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+0003 0000000c 7ff00293 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+0004 00000010 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+</span></code></pre>
+<p>In this case, the test failed because the registers are not being updated with the results of the instruction (they're all zeros).</p>
+<h3 id="using-debugging-circuits-1">Using Debugging Circuits</h3>
+<p>Each integration test has a <code>.circ</code> test circuit you can use for debugging. To debug the example test from the previous section, <strong>open tests/integration-addi/addi-basic.circ</strong>.</p>
+<p><img src="../addi-basic-1.png" alt="Screenshot of addi-basic.circ." /></p>
+<p>The top-level harness for each integration test contains a ROM block (bottom half of screenshot) containing the RISC-V instructions for that test, representing IMEM (instruction memory). These instructions are passed into your CPU (the circled <code>cpu_harness</code> block at the top). You can also see the 8 debug register outputs; the testing framework will log their values into the <code>.out</code> file when running the test.</p>
+<p>To view your CPU circuit, either <strong>right-click the <code>cpu_harness</code> block</strong> and <strong>select &quot;View cpu_harness&quot;</strong>, or <strong>click the <code>cpu_harness</code> block</strong> and <strong>click the magnifying glass</strong>. This takes you into the CPU harness, where your CPU interacts with memory. <strong>Click another time into the <code>cpu</code> block</strong>, and now you should see the CPU you've been wiring.</p>
+<p><strong>To step through the RISC-V instructions, click Simulate → Tick Full Cycle</strong>. In each clock cycle, your CPU will output a new <code>ProgramCounter</code> to the harness, which will use the new PC to select the next instruction for your CPU to execute. In this <code>addi</code> test, the instructions execute in sequence, but when testing branches and jumps later, the CPU could output a different <code>ProgramCounter</code> value (not always adding 4) and execute the instructions in a different order.</p>
+<p><strong>To reset the simulation, click Simulate → Reset Simulator</strong>. You can also close and re-open the debugging circuit.</p>
+<h2 id="writing-integration-tests">Writing Integration Tests</h2>
+<p>To write an integration test, all you need to do is write some RISC-V instructions for your CPU to run, and the testing framework will handle the rest.</p>
+<ol>
+<li>Navigate to <code>tests/integration-custom/in</code>.</li>
+<li>Write a RISC-V test and save it in a filename ending in <code>.s</code>.</li>
+<li>Run <code>bash test.sh test_custom</code>.</li>
+</ol>
+<p>Some things to keep in mind when writing your RISC-V instructions:</p>
+<p>The testing framework only checks the values in the 8 debug registers when comparing your CPU output with the reference output, so when writing your own tests, make sure to only use the 8 debug registers.</p>
+<p>This also means the testing framework doesn't check memory (DMEM) when comparing your CPU with the reference. To check values in memory or a non-debug register, you'll need to put the value back into a debug register. For example, to test if a store works, you'll probably have to load the value back from memory into a debug register to see if the value was successfully stored.</p>
+<p>IMEM and DMEM are separate in Logisim, but combined in Venus. This means that if you write assembly code that tries to access memory overlapping with instructions, Venus will throw an error. Since counting exactly how many instructions your assembly code requires, and multiplying that by 4 can be annoying, we suggest you load/store using addresses greater than 0x3E8 (leaving space for 1000 bytes/250 instructions), and increase this offset if you have more instructions.</p>
+<p>Make sure to write RISC-V instructions that behave differently on a working CPU and a buggy CPU. For example, consider this test:</p>
+<pre class="z-code"><code><span class="z-text z-plain">addi t0, x0, 0
+addi t1, x0, 0
+</span></code></pre>
+<p>This wouldn't be very useful to check for a working CPU, because the output in the debugging registers could be all zeros even if your CPU doesn't work. As another example:</p>
+<pre class="z-code"><code><span class="z-text z-plain">beq t0, t0, 4
+addi t1, x0, 10
+</span></code></pre>
+<p>On a working CPU, this would branch to the <code>addi</code> instruction. On a buggy CPU where the branch is incorrectly not taken, this would still execute the <code>addi</code> instruction, so this test doesn't do a very good job of distinguishing working circuits from buggy circuits.</p>
+<h2 id="logisim-tips">Logisim Tips</h2>
+<p>This section contains some helpful Logisim tips and pitfalls to avoid.</p>
+<h3 id="wiring">Wiring</h3>
+<ul>
+<li>If you want to know more details about each component, go to <code>Help -&gt; Library Reference</code> for more information on the component and its inputs and outputs.</li>
+<li>Use tunnels! They will make your wiring cleaner and easier to follow, and will reduce your chances of encountering crossed wires or unexpected errors.</li>
+<li>Ensure you name your tunnels correctly. The labels are case sensitive!</li>
+<li>You can hover your cursor over an input/output on a component to get slightly more information about that input/output.</li>
+</ul>
+<h3 id="wiring-pitfalls">Wiring Pitfalls</h3>
+<ul>
+<li>Your circuits should always fit in the provided harnesses. This means that you should not edit the provided input/output pins or add new ones. To ensure your circuit fits int he harness, you can open the harnesses in the <code>harnesses</code> folder and check that there are no errors.</li>
+<li>Don't create new <code>.circ</code> files. You can make additional subcircuits if you want, but they must be in existing files.</li>
+</ul>
+<h3 id="subcircuits">Subcircuits</h3>
+<ul>
+<li>Note that if you modify a subcircuit, and another circuit file uses that subcircuit, you will need to close and re-open the outer circuit to load the changes from the subcircuit. For example, if you modify <code>imm-gen.circ</code>, you should close and re-open <code>cpu.circ</code> to load your changes.</li>
+<li>When modifying a subcircuit, you should always open up the subcircuit file. For example, you should modify <code>imm-gen.circ</code>, not the <code>imm-gen</code> subcircuit in <code>cpu.circ</code>.</li>
+</ul>
+<h3 id="signal-tips">Signal Tips</h3>
+<ul>
+<li>The clock input signal (<code>clk</code>) can be sent into subcircuits or attached directly to the clock inputs of memory units in Logisim, but should not otherwise be gated (i.e., do not invert it, do not <code>AND</code> it with anything, etc.).</li>
+<li>We recommend not using the <code>Enable</code> input on your MUXes. In fact, you can turn that attribute off (<code>Include Enable?</code>). We also recommend that you disable the <code>Three-state?</code> attribute (if the plexer has it).</li>
+</ul>
+<h3 id="banned-circuit-elements">Banned Circuit Elements</h3>
+<p>The following circuit elements are not necessary for this project, so please don't use them in your implementation.</p>
+<ul>
+<li>Pull Resistor</li>
+<li>Transistor</li>
+<li>Transmission Gate</li>
+<li>Power</li>
+<li>POR</li>
+<li>Ground</li>
+<li>Divider</li>
+<li>Random</li>
+<li>PLA</li>
+<li>RAM</li>
+<li>Random Generator</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container border-top pt-4 mb-5">
+<div class="row">
+<div class="col">
+<div id="dark-toggle-wrapper" class="d-none">
+<div class="form-check form-switch">
+<input id="inputDarkToggle" class="form-check-input" type="checkbox">
+<label class="form-check-label" for="inputDarkToggle">
+Dark Mode
+<a id="buttonDarkToggleReset" class="d-none" href="javascript:void(0);">(reset)</a>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+  
+
+  document.addEventListener("DOMContentLoaded", function() {
+    initToC();
+  });
+</script>
+</body>
+</html>

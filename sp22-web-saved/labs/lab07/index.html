@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="language" content="english">
+<title>Lab 7 | CS 61C Spring 2022</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<link rel="shortcut icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../css/main.css@h=36c89645dcb547d13f6f293a379a176dff22aab9affcefc8d3a19bc23c0f8db2.css" />
+<script defer type="text/javascript" src="../../js/main.js@h=4096b5e2a18784c27ca139ca897694176eea13de3e2168cd7e7bcdd827a35c8d"></script>
+
+<script type="text/javascript" src="../../js/main-sync.js@h=daca62fef99fb16ad6a5fd1517d7b18bed66d3241431785bf3ac1f134c166bf1"></script>
+<script>initDarkToggle();</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.17.0/tocbot.min.js" integrity="sha512-DJhUMo5TIBb3fFziiE+3OJG+j7ky+GxScxHdLADCXskEpc/AKQsbsorIYmGFJFaJvDIyP65rJNhnCTytfYAdUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+<div class="container">
+<a class="navbar-brand" href="../../index.html">
+<img class="d-inline-block me-2 rounded" height="48" width="48" src="../../img/icon-small.png" alt="outline of square computer chip with cs61c label" />
+<span class="align-middle">CS 61C Spring 2022</span>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle Navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item">
+<a class="nav-link" href="../../calendar/index.html">Calendar</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../staff/index.html">Staff</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../policies/index.html">Policies</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../resources/index.html">Resources</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../exam/index.html">Exam</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../extensions/index.html">Extensions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://oh.cs61c.org/">OH Queue</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://venus.cs61c.org/">Venus</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://inst.eecs.berkeley.edu/~cs61c/archives.html">Semesters</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<main class="mb-4">
+<section class="section">
+<div class="container">
+<div class="row spec">
+<nav id="toc-wrapper" class="col-md-3 d-print-none sticky-md-top nav-wrapper" aria-label="table of contents">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#setup">Setup</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#review-cache-policies">Review - Cache Policies</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#write-policies">Write Policies</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#allocation-policies">Allocation Policies</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#common-combinations">Common Combinations</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#replacement-policies">Replacement Policies</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-1-venus-cache-simulator">Exercise 1 - Venus Cache Simulator</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#action-item">Action Item</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#scenario-1">Scenario 1</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#scenario-2">Scenario 2</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#scenario-3">Scenario 3</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-2-loop-ordering-and-matrix-multiplication">Exercise 2 - Loop Ordering and Matrix Multiplication</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#action-item-1">Action Item</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-3-cache-blocking-and-matrix-transposition">Exercise 3 - Cache Blocking and Matrix Transposition</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#matrix-transposition">Matrix Transposition</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#cache-blocking">Cache Blocking</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#action-item-2">Action Item</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-4-feedback-form">Exercise 4 - Feedback Form</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#submission">Submission</a>
+</li>
+</ul>
+</nav>
+<div id="toc-content-wrapper" class="content col-md-9">
+<h1 class="title">Lab 7: Caches</h1>
+<p class="subtitle">Deadline: Monday, March 28, 11:59:59 PM PT</p>
+<p><a href="https://docs.google.com/presentation/d/1gXBaGdbX79u_zqjTL8TQG8jYMlsn0fA_Pl2kXoB0nhw/edit?usp=sharing">Lab Section Slides</a></p>
+<hr />
+<h2 id="setup">Setup</h2>
+<p>In your <code>labs</code> directory, pull the files for this lab with:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> pull starter main</span>
+</span></code></pre>
+<p>For this lab, record your answers to the Tasks questions in <a href="https://docs.google.com/forms/d/e/1FAIpQLSetbCCh2feaCHS9mmXL-7cLeerJveMZJCfn5NEbjuDIWhcDrg/viewform?usp=sf_link">the Lab 7 Google Form</a>.</p>
+<ul>
+<li>The Google Form is very simple and thus incapable of recognizing typos or incorrectly formatted answers. However, it features response validation and the ability to view your score. Please use these to verify your submission.</li>
+<li>You also have the ability to edit your response so you can submit the form to save your progress</li>
+<li>We suggest you have a single tab with this form open alongside the spec as you work on Lab 7.</li>
+</ul>
+<hr />
+<h2 id="review-cache-policies">Review - Cache Policies</h2>
+<h3 id="write-policies">Write Policies</h3>
+<p>The cache contains a subset of the data that is stored in memory. When we perform a write operation, we need to ensure that anyone trying to access the data gets the most up-to-date copy. There are two different policies to handle writes:</p>
+<p><strong>Write-back</strong></p>
+<ul>
+<li>On a write, we only write to the cache, we don't write to the memory</li>
+<li>To indicate that the data in the cache is more up-to-date than the data in the memory, we set the dirty bit of that cache line to 1. When this line gets evicted from the cache, the dirty bit will indicate that the line needs to be written to memory</li>
+<li>The data in the cache will be more up-to-date than the data in the memory for a short period of time. This is not a problem because if we want to access this data, we will search for it in the cache before looking for it in the memory</li>
+<li>Writing to the cache is much faster than writing to the memory which makes the write latency of write-back caches smaller than write-through caches</li>
+<li>The write-back policy also reduces the number of writes to memory. Once we bring a piece of data into the cache, we may write to it several times before evicting it from the cache. With the write-back policy, we only have to write to the memory when the line is evicted instead of every time it is updated</li>
+</ul>
+<p><strong>Write-through</strong> </p>
+<ul>
+<li>On a write, data is written to both the cache and main memory</li>
+<li>Writing to the cache is fast, but writing to main memory is slow; this makes the write latency in write-through caches slower than in a write-back cache </li>
+<li>Write-through caches are simpler to implement than write-back caches </li>
+</ul>
+<h3 id="allocation-policies">Allocation Policies</h3>
+<p><strong>Write-allocate</strong> </p>
+<ul>
+<li>On a write miss, you pull the block you missed on into the cache </li>
+</ul>
+<p><strong>No write-allocate</strong> </p>
+<ul>
+<li>On a write miss, you do not pull the block you missed on into the cache. Only memory is updated</li>
+<li>On a read miss, the data is still loaded into the cache</li>
+</ul>
+<h3 id="common-combinations">Common Combinations</h3>
+<p><strong>Write-through/no-write allocate:</strong></p>
+<ul>
+<li>On write hits write to both the cache <strong>and</strong> main memory</li>
+<li>On write misses, the main memory is updated and the block is not brought into the cache </li>
+<li>On read misses, the block is brought into the cache</li>
+<li>If a read of the same block occurs after the write-miss, there would be an unnecessary miss (why is this?)</li>
+<li>This policy is useful for when we are writing to a piece of data that we don't plan to to access again</li>
+</ul>
+<p><strong>Write-back/write allocate:</strong> </p>
+<ul>
+<li>On write hits, only the cache's copy is updated and therefore the dirty bit is set</li>
+<li>On write misses, the corresponding block is brought into the cache, updated, and the dirty bit is set to 1</li>
+<li>If the same block gets accessed, all subsequent writes would be hits and the dirty bit would be set until the block is evicted, at which point it would be moved back to main memory</li>
+</ul>
+<h3 id="replacement-policies">Replacement Policies</h3>
+<ul>
+<li><strong>LRU</strong> (Least Recently Used) — When we decide to evict a cache block to make space, we select the block that has been used the furthest back in time of all the blocks.</li>
+<li><strong>Random</strong> - When we decide to evict a cache block to make space, we randomly select one of the blocks in the cache to evict.</li>
+<li><strong>MRU</strong> (Most Recently Used) — When we decide to evict a cache block to make space, we select the block that has been used the most recently of all the blocks.</li>
+</ul>
+<hr />
+<h2 id="exercise-1-venus-cache-simulator">Exercise 1 - Venus Cache Simulator</h2>
+<p>Venus simulates a write-through, write-allocate cache (which is not a common convention). We will only be using Venus to track hit patterns. Write-through and write-back caches behave similarly on hits (both write to the cache), so the hit/miss patterns you see in the Venus cache simulator would be the same even if Venus simulated a write-back cache.</p>
+<p>This exercise will use Venus's cache visualization tool to analyze the performance of the code found in <code>cache.s</code>. You will be modifying parameters in the code to analyze how they affect cache performance. </p>
+<p>For <strong>each</strong> of the scenarios below, you'll be repeating these steps:</p>
+<ol>
+<li>In the code for <code>cache.s</code>, set the appropriate Program Parameters as indicated at the beginning of each scenario</li>
+<li>Go to Simulator--&gt;Cache to set the appropriate Cache Parameters as indicated at the beginning of each scenario.</li>
+<li>As you execute code in Venus, any DATA memory access (load or store) will show up (instruction fetches not shown because instructions are loaded into a separate instruction cache that is not shown in Venus).</li>
+</ol>
+<p>The Cache Simulator will show the state of your data cache. If you reset your code, you will also reset the cache hit/miss rate as well!</p>
+<p><strong>IMPORTANT</strong>: If you run the code all at once, you will get the final state of the cache and hit rate. A useful strategy might be setting a <strong>breakpoint</strong> in the <strong>loop</strong> <code>wordLoop</code> right before or after each memory access to see exactly where the hits and misses are coming from.</p>
+<p>The following are good questions to ask yourself as you are analyzing the performance of the cache:</p>
+<ul>
+<li>How big is one cache block?</li>
+<li>How many consecutive accesses (taking into account the step size) fit within a single block?</li>
+<li>How much data fits in the WHOLE cache?</li>
+<li>How far apart in memory are blocks that map to the same set (and could this create conflicts)?</li>
+<li>What is your cache's associativity?</li>
+<li>Where in the cache does a particular block map to?</li>
+<li>When considering why a specific access is a miss or hit: Have you accessed this piece of data before? If so, is it still in the cache or not?</li>
+</ul>
+<h3 id="action-item">Action Item</h3>
+<p>Read through <code>cache.s</code> to understand what the program does. Simulate the following 3 scenarios in Venus and answer the their corresponding questions.</p>
+<p><strong>Submission</strong>: Answer the questions about each scenario in the google form linked above.</p>
+<h3 id="scenario-1">Scenario 1</h3>
+<p><strong>Program Parameters</strong>: (set these by initializing the a registers in the code)</p>
+<ul>
+<li><strong>Array Size (<code>a0</code>)</strong>: 128 (bytes)</li>
+<li><strong>Step Size (<code>a1</code>)</strong>: 8</li>
+<li><strong>Rep Count (<code>a2</code>)</strong>: 4</li>
+<li><strong>Option (<code>a3</code>)</strong>: 0</li>
+</ul>
+<p><strong>Cache Parameters</strong>: (set these in the Cache tab)</p>
+<ul>
+<li><strong>Cache Levels</strong>: 1</li>
+<li><strong>Block Size</strong>: 8</li>
+<li><strong>Number of Blocks</strong>: 4</li>
+<li><strong>Enable?</strong>: Should be green</li>
+<li><strong>Placement Policy</strong>: Direct Mapped</li>
+<li><strong>Associativity</strong>: 1 (Venus won't let you change this with the Direct Mapped placement policy, why?)</li>
+<li><strong>Block Replacement Policy</strong>: LRU</li>
+</ul>
+<p><strong>Tip</strong>: If it's hard for you to visualize what's getting pulled into the cache on each memory access just from staring at the code, try getting out some paper and a pencil. Write down what the tag:index:offset (TIO) breakdown of the 32-bit addresses would be, figure out which memory addresses map to which set in the cache with the index bits, and see if that helps.</p>
+<h4 id="questions">Questions</h4>
+<p>Answer the questions found in the google form.</p>
+<h3 id="scenario-2">Scenario 2</h3>
+<p><strong>Program Parameters</strong>: (set these by initializing the a registers in the code)</p>
+<ul>
+<li><strong>Array Size (<code>a0</code>)</strong>: 256 (bytes)</li>
+<li><strong>Step Size (<code>a1</code>)</strong>: 2</li>
+<li><strong>Rep Count (<code>a2</code>)</strong>: 1</li>
+<li><strong>Option (<code>a3</code>)</strong>: 1</li>
+</ul>
+<p><strong>Cache Parameters</strong>: (set these in the Cache tab)</p>
+<ul>
+<li><strong>Cache Levels</strong>: 1</li>
+<li><strong>Block Size</strong>: 16</li>
+<li><strong>Number of Blocks</strong>: 16</li>
+<li><strong>Enable?</strong>: Should be green</li>
+<li><strong>Placement Policy</strong>: N-Way Set Associative</li>
+<li><strong>Associativity</strong>: 2</li>
+<li><strong>Block Replacement Policy</strong>: LRU</li>
+</ul>
+<h4 id="questions-1">Questions</h4>
+<p>Answer the questions found in the google form.</p>
+<h3 id="scenario-3">Scenario 3</h3>
+<p><strong>Program Parameters</strong>: (set these by initializing the a registers in the code)</p>
+<ul>
+<li><strong>Array Size (<code>a0</code>)</strong>: 128 (bytes)</li>
+<li><strong>Step Size (<code>a1</code>)</strong>: 1</li>
+<li><strong>Rep Count (<code>a2</code>)</strong>: 1</li>
+<li><strong>Option (<code>a3</code>)</strong>: 0</li>
+</ul>
+<p><strong>Cache Parameters</strong>: (set these in the Cache tab)</p>
+<ul>
+<li><strong>Cache Levels</strong>: 2</li>
+</ul>
+<p><strong>NOTE</strong>: Make sure the following parameters are for the L1 cache! (Select L1 in the dropdown located right next to the replacement policy)</p>
+<ul>
+<li><strong>Block Size</strong>: 8</li>
+<li><strong>Number of Blocks</strong>: 8</li>
+<li><strong>Enable?</strong>: Should be green</li>
+<li><strong>Placement Policy</strong>: Direct Mapped</li>
+<li><strong>Associativity</strong>: 1</li>
+<li><strong>Block Replacement Policy</strong>: LRU</li>
+</ul>
+<p><strong>NOTE</strong>: Make sure the following parameters are for the L2 cache! (Select L2 in the dropdown located right next to the replacement policy)</p>
+<ul>
+<li><strong>Block Size</strong>: 8</li>
+<li><strong>Number of Blocks</strong>: 16</li>
+<li><strong>Enable?</strong>: Should be green</li>
+<li><strong>Placement Policy</strong>: Direct Mapped</li>
+<li><strong>Associativity</strong>: 1</li>
+<li><strong>Block Replacement Policy</strong>: LRU</li>
+</ul>
+<h4 id="questions-2">Questions</h4>
+<p>Answer the questions found in the google form.</p>
+<hr />
+<h2 id="exercise-2-loop-ordering-and-matrix-multiplication">Exercise 2 - Loop Ordering and Matrix Multiplication</h2>
+<p><strong>NOTE</strong>: For this exercise, using the <strong>hive machines</strong> is recommended! This exercise depends on certain performance characteristics that may be different on your local machine.</p>
+<p>Matrices are 2-dimensional data structures where each data element is accessed via two indices. To multiply two matrices, we can simply use 3 nested loops below, assuming that matrices A, B, and C are all n-by-n and stored in one-dimensional column-major arrays:</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-keyword z-control z-c">for</span> <span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span><span class="z-storage z-type z-c">int</span> i <span class="z-keyword z-operator z-assignment z-c">=</span> <span class="z-constant z-numeric z-integer z-decimal z-c">0</span><span class="z-punctuation z-terminator z-c">;</span> i <span class="z-keyword z-operator z-comparison z-c">&lt;</span> n<span class="z-punctuation z-terminator z-c">;</span> i<span class="z-keyword z-operator z-arithmetic z-c">++</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span>
+    <span class="z-keyword z-control z-c">for</span> <span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span><span class="z-storage z-type z-c">int</span> j <span class="z-keyword z-operator z-assignment z-c">=</span> <span class="z-constant z-numeric z-integer z-decimal z-c">0</span><span class="z-punctuation z-terminator z-c">;</span> j <span class="z-keyword z-operator z-comparison z-c">&lt;</span> n<span class="z-punctuation z-terminator z-c">;</span> j<span class="z-keyword z-operator z-arithmetic z-c">++</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span>
+        <span class="z-keyword z-control z-c">for</span> <span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span><span class="z-storage z-type z-c">int</span> k <span class="z-keyword z-operator z-assignment z-c">=</span> <span class="z-constant z-numeric z-integer z-decimal z-c">0</span><span class="z-punctuation z-terminator z-c">;</span> k <span class="z-keyword z-operator z-comparison z-c">&lt;</span> n<span class="z-punctuation z-terminator z-c">;</span> k<span class="z-keyword z-operator z-arithmetic z-c">++</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span>
+            C<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>i<span class="z-keyword z-operator z-arithmetic z-c">+</span>j<span class="z-keyword z-operator z-c">*</span>n<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span> <span class="z-keyword z-operator z-assignment z-augmented z-c">+=</span> A<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>i<span class="z-keyword z-operator z-arithmetic z-c">+</span>k<span class="z-keyword z-operator z-c">*</span>n<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span> <span class="z-keyword z-operator z-c">*</span> B<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>k<span class="z-keyword z-operator z-arithmetic z-c">+</span>j<span class="z-keyword z-operator z-c">*</span>n<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span><span class="z-punctuation z-terminator z-c">;</span>
+</span></code></pre>
+<p>Matrix multiplication operations are at the heart of many linear algebra algorithms, and efficient matrix multiplication is critical for many applications within the applied sciences.</p>
+<p>In the above code, note that the loops are ordered <code>i</code>, <code>j</code>, <code>k</code>. If we examine the innermost loop (the one that increments <code>k</code>), we see that it...</p>
+<ul>
+<li>moves through B with stride 1</li>
+<li>moves through A with stride n</li>
+<li>moves through C with stride 0</li>
+</ul>
+<p>To compute the nxn matrix multiplication correctly, <strong>the loop order doesn't matter</strong>.</p>
+<p><strong>BUT</strong>, the order in which we choose to access the elements of the matrices can have a <strong>large impact on performance</strong>. Caches perform better (more cache hits, fewer cache misses) when memory accesses take advantage of spatial and temporal locality, utilizing blocks already contained within our cache. Optimizing a program's memory access patterns is essential to obtaining good performance from the memory hierarchy.</p>
+<p>Take a glance at <code>matrixMultiply.c</code>. You'll notice that the file contains multiple implementations of matrix multiply with 3 nested loops. Think about what the strides are for the nested loops in the other five implementations.</p>
+<p>Note that the compilation command in the Makefile uses the '-O3' flag. It is important here that we use the '-O3' flag to turn on compiler optimizations. Compile and run the code with the following command, and then answer the questions below:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">make</span></span><span class="z-meta z-function-call z-arguments z-shell"> ex2</span>
+</span></code></pre>
+<p>This will run some matrix multiplications according to the six different implementations in the file, and it will tell you the speed at which each implementation executed the operation. The unit &quot;Gflops/s&quot; reads, &quot;Giga-floating-point-operations per second.&quot; <strong><em>THE BIGGER THE NUMBER THE FASTER IT IS RUNNING!</em></strong></p>
+<h3 id="action-item-1">Action Item</h3>
+<p>Your answers to the following questions should go into the corresponding section of the Lab 7 Google Form; all answers should be lowercased.</p>
+<ol>
+<li>Which 2 orderings perform best for these 1000-by-1000 matrices?</li>
+<li>Which 2 orderings perform the worst?</li>
+</ol>
+<hr />
+<h2 id="exercise-3-cache-blocking-and-matrix-transposition">Exercise 3 - Cache Blocking and Matrix Transposition</h2>
+<p><strong>NOTE</strong>: For this exercise, using the <strong>hive machines</strong> is recommended! This exercise depends on certain performance characteristics that may be different on your local machine.</p>
+<h3 id="matrix-transposition">Matrix Transposition</h3>
+<p>The swapping of the rows and columns of a matrix is called a &quot;transposition&quot;. An efficient implementation can be quite helpful while performing more complicated linear algebra operations. The transpose of matrix A is often denoted as A<sup>T</sup>.</p>
+<img src="matTnorm.png" width="500" />
+<h3 id="cache-blocking">Cache Blocking</h3>
+<p>In the above code for matrix multiplication, note that we are striding across the entirety of the A and B matrices to compute a single value of C. As such, we are constantly accessing new values from memory and reuse very little cached data! We can improve the amount of data reuse in the caches by implementing a technique called cache blocking. More formally, cache blocking is a technique that attempts to reduce the cache miss rate by further improving the temporal and/or spatial locality of memory accesses. In the case of matrix transposition, we consider performing the transposition one block at a time.</p>
+<img src="matTblock.png" width="500" />
+<p><strong>Things to note</strong>: In the above image, we transpose each submatrix A<sub>ij</sub> of matrix A into its final location in the output matrix, one submatrix at a time. It is important to note that transposing each individual subsection is equivalent to transposing the entire matrix.</p>
+<p>Since we operate on and finish transposing each submatrix sequentially, we consolidate our memory accesses to that smaller chunk of memory when transposing that particular submatrix. This increases our degree of spatial locality, making our cache performance and thus our program run faster.</p>
+<h3 id="action-item-2">Action Item</h3>
+<p>Your task is to implement cache blocking in the <code>transpose_blocking()</code> function inside <code>transpose.c</code>. <strong>You may NOT assume that the matrix width (<code>n</code>) is a multiple of the block size</strong>. By default, the function does nothing, so the benchmark function will report an error. After you have implemented cache blocking, you can run your code by typing:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">make</span></span><span class="z-meta z-function-call z-arguments z-shell"> ex3</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">./transpose</span></span>
+</span></code></pre>
+<p>You can specify the width of the matrix (<code>n</code>) and the blocksize in <code>test_transpose.c</code>. The default setting is <code>n=12000</code> and <code>blocksize=80</code>.</p>
+<p>Some tips to get started:</p>
+<p>Start by looking at the <code>transpose_naive</code> function included in the file. Notice that the index <code>y</code> strides vertically across the WHOLE <code>src</code> matrix in one iteration of the inner loop before resetting to 0. Another way to say this is that the index <code>x</code> only updates after <code>y</code> is done going from 0 all the way to <code>n</code>. </p>
+<p>Instead of filling out <code>dst</code> one column at a time, we would like to fill out <code>dst</code> square chunks at a time, where each square chunk is of dimension <code>blocksize</code> by <code>blocksize</code>.</p>
+<p>Finally, since we can't assume that <code>n</code> is a multiple of <code>blocksize</code>, the final block column for each block row will be a little bit cut-off, i.e. it won't be a full <code>blocksize</code> by <code>blocksize</code> square. In addition, the final block row will all be truncated. To fix this problem, you can do the exercise assuming that <code>n</code> is a multiple of the <code>blocksize</code> and then add in a special case somewhere to do nothing when your indices reach out of bounds of the array.</p>
+<p><strong>Hint</strong>: A standard solution needs 4 (four) for loops.</p>
+<p>Once your code is working, make sure you can answer the following questions.</p>
+<h4 id="part-1-changing-array-sizes">Part 1 - Changing Array Sizes</h4>
+<p>Fix the <code>blocksize</code> to be 20, and run your code with <code>n</code> equal to 100, 1000, 2000, 5000, and 10000.</p>
+<details>
+<summary>At what point does cache blocked version of transpose become faster than the non-cache blocked version?</summary>
+n = 5000, n = 10000
+</details>
+<details>
+<summary>Why does cache blocking require the matrix to be a certain size before it outperforms the non-cache blocked code?</summary>
+With a bigger matrix size, parts of the matrix can't fit inside the cache, leading to more cache misses from non-blocked code.
+Blocked code would consolidate accesses to a smaller portion of memory, giving more cache hits.
+With a smaller matrix size, most of the matrix can probably fit in the cache, so blocking results in more overhead (for loop exits) and doesn't provide a significant increase in cache hit rate.
+</details>
+<h4 id="part-2-changing-block-size">Part 2 - Changing Block Size</h4>
+<p>Fix <code>n</code> to be 10000, and run your code with <code>blocksize</code> equal to 50, 100, 500, 1000, 5000.</p>
+<details>
+<summary>How does performance change as blocksize increases? Why is this the case?</summary>
+As the blocksize increases, performance increases until blocksize = 500, then it decreases again.
+<p>Why: When the blocksize is too large, the entire block cannot fit inside the cache, negating the advantage of cache blocking. In fact, if the blocksize keeps increasing, we just arrive at the naive approach again.</p>
+</details>
+<hr />
+<h2 id="exercise-4-feedback-form">Exercise 4 - Feedback Form</h2>
+<p>We are working to improve the labs for next semester, so please fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLScA9V-7k6BAqi0JtB63-oUmPja8e8Ah-mJ253fNMt5YxwJJiA/viewform?usp=sf_link">this survey</a> to tell us about your experience with Lab 7. The survey will be collecting your email to verify that you have submitted it, but your responses will be anonymized before the data is analyzed. Thank you!</p>
+<hr />
+<h2 id="submission">Submission</h2>
+<p>Please submit the <strong>Lab 7 Google Form</strong>. Then save, commit, and push your work, and submit to the <strong>Lab 7</strong> assignment on Gradescope.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container border-top pt-4 mb-5">
+<div class="row">
+<div class="col">
+<div id="dark-toggle-wrapper" class="d-none">
+<div class="form-check form-switch">
+<input id="inputDarkToggle" class="form-check-input" type="checkbox">
+<label class="form-check-label" for="inputDarkToggle">
+Dark Mode
+<a id="buttonDarkToggleReset" class="d-none" href="javascript:void(0);">(reset)</a>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+  
+
+  
+    document.addEventListener("DOMContentLoaded", function() {
+      initToC();
+    });
+  
+</script>
+</body>
+</html>

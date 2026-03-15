@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="language" content="english">
+<title>Appendix: Partial Loads and Stores | CS 61C Spring 2022</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<link rel="shortcut icon" type="image/png" href="../../../img/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../../css/main.css@h=36c89645dcb547d13f6f293a379a176dff22aab9affcefc8d3a19bc23c0f8db2.css" />
+<script defer type="text/javascript" src="../../../js/main.js@h=4096b5e2a18784c27ca139ca897694176eea13de3e2168cd7e7bcdd827a35c8d"></script>
+
+<script type="text/javascript" src="../../../js/main-sync.js@h=daca62fef99fb16ad6a5fd1517d7b18bed66d3241431785bf3ac1f134c166bf1"></script>
+<script>initDarkToggle();</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.17.0/tocbot.min.js" integrity="sha512-DJhUMo5TIBb3fFziiE+3OJG+j7ky+GxScxHdLADCXskEpc/AKQsbsorIYmGFJFaJvDIyP65rJNhnCTytfYAdUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+<div class="container">
+<a class="navbar-brand" href="../../../index.html">
+<img class="d-inline-block me-2 rounded" height="48" width="48" src="../../../img/icon-small.png" alt="outline of square computer chip with cs61c label" />
+<span class="align-middle">CS 61C Spring 2022</span>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle Navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item">
+<a class="nav-link" href="../../../calendar/index.html">Calendar</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../staff/index.html">Staff</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../policies/index.html">Policies</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../resources/index.html">Resources</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../exam/index.html">Exam</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../extensions/index.html">Extensions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://oh.cs61c.org/">OH Queue</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://venus.cs61c.org/">Venus</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://inst.eecs.berkeley.edu/~cs61c/archives.html">Semesters</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<main class="mb-4">
+<section class="section">
+<div class="container">
+<div class="row spec">
+<nav class="col-md-3 d-print-none sticky-md-top nav-wrapper" aria-label="table of contents">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="../index.html">Project 3: CS61CPU</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../part-a/index.html">Part A</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../part-b/index.html">Part B</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../control-logic/index.html">Appendix: Control Logic</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../testing/index.html">Appendix: Testing and Debugging</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html">Appendix: Partial Loads and Stores</a>
+<div id="toc-wrapper">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#dmem-in-logisim">DMEM in Logisim</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#alignment">Alignment</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#conceptual-overview-loads">Conceptual Overview: Loads</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#partial-load">Partial Load</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#conceptual-overview-stores">Conceptual Overview: Stores</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#partial-store">Partial Store</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-and-debugging">Testing and Debugging</a>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</nav>
+<div id="toc-content-wrapper" class="content col-md-9">
+<h1>Appendix: Partial Loads and Stores</h1>
+<p>Remember that every byte in C memory is referred to by a 32-bit address. In the CPU, store and load instructions access C memory (DMEM) by passing a 32-bit address to DMEM to request bytes of memory starting at that address.</p>
+<p>For example, if we wanted to load a byte from address <code>4</code> = <code>0b000100</code>, we can pass in the address <code>4</code> (sign-extended to 32 bits) to DMEM. But what if we wanted to load a half-word (16 bits) or a byte (8 bits) from memory? How does DMEM loading and storing a different number of bytes for different types of instructions?</p>
+<h2 id="dmem-in-logisim">DMEM in Logisim</h2>
+<p>The DMEM unit in this project is always configured to access 4 bytes at a time, starting at an address that is a multiple of 4. This means that DMEM can access the bytes at memory addresses <code>0-1-2-3</code> or the bytes at memory addresses <code>12-13-14-15</code>. (Intuitively, DMEM can access a set of 4 bytes in one of the red boxes in the diagram.)</p>
+<p><img src="../aligned-memory.svg" alt="Diagram of aligned memory (red boxes around every 4 bytes)." /></p>
+<p>However, in a single access, DMEM cannot access the bytes at memory addresses <code>13-14-15-16</code>, because it does not start at a multiple of 4. (Intuitively, the <code>13-14-15-16</code> access crosses one of the red lines in the diagram, so it is not supported by DMEM.)</p>
+<p>DMEM supports this behavior by always zeroing out the bottom 2 bits of any address you provide, and then accessing 4 bytes starting at this modified address. For example, if you give DMEM the address <code>19</code> = <code>0b010011</code>, DMEM will zero out the bottom 2 bits to get <code>16</code> = <code>0b010000</code>, and then accessing 4 bytes starting at this modified address (<code>16-17-18-19</code>).</p>
+<p>In other words, the provided address will be rounded down to the nearest multiple of 4, and 4 bytes will be read starting at this modified address. (Note that zeroing out the bottom 2 bits of a number is mathematically equivalent to rounding down the number to the nearest multiple of 4.)</p>
+<p>You don't need to zero out the bottom 2 bits yourself--the provided DMEM implementation will automatically do this for any address you provide.</p>
+<p>Note 1: You don't need to think about endianness for this section. Endianness is relevant when you're trying to interpret a set of 4 bytes as a word (e.g. integer, address) to do some calculation on it, but at this level of abstraction, we only need to worry about the bits being loaded and stored, not what they mean.</p>
+<p>Note 2: Due to Logisim size limitations, the memory unit only uses the lower 16 bits of the provided address, discarding the upper 16 bits. This means that the memory can only store 2^16 bytes of data. The provided tests will always set the upper 16 bits of addresses to 0, and any tests you write should avoid using the upper 16 bits when interacting with memory.</p>
+<h2 id="alignment">Alignment</h2>
+<p>In this project, all memory accesses will be <em>aligned</em>. This means that a single load or store instruction will never cross a word boundary in memory. (Intuitively, a single memory access will never cross one of the red lines in the diagram.)</p>
+<p>For completeness, this means that: All <code>lw</code> and <code>sw</code> instructions will use memory addresses that end in <code>0b00</code> (i.e. are a multiple of 4). All <code>lh</code> and <code>sh</code> instructions will use memory addresses that end in <code>0b00</code>, <code>0b01</code>, or <code>0b10</code> (never an address that ends in <code>0b11</code>).</p>
+<p>You should not implement any unaligned memory accesses in this project.</p>
+<h2 id="conceptual-overview-loads">Conceptual Overview: Loads</h2>
+<p>The <code>partial_load.circ</code> circuit is designed to take data read from DMEM and process it in order to put the relevant data into a register.</p>
+<p>Remember that in RISC-V, load instructions read bytes from memory (DMEM) and put those bytes into a 32-bit register. There are three load instructions that each read a different number of bits from memory: <code>lw</code> reads 32 bits, <code>lh</code> reads 16 bits, and <code>lb</code> reads 8 bits. In all three instructions, 32 bits need to be put into the destination register. If fewer than 32 bits are read from memory, they are sign-extended to 32 bits before being put in the destination register.</p>
+<p>Regardless of instruction, DMEM will always return 32 bits of memory, but in the <code>lh</code> and <code>lb</code> instructions, we only want 16 or 8 bits from memory, so we need to extract the correct bits out of the 32 bits returned from DMEM.</p>
+<p>How do we know which of the 32 bits from DMEM we care about? We can check whether the instruction is <code>lw</code>, <code>lh</code>, or <code>lb</code> to know how many bits we want to extract. We can then check the bottom 2 bits of the memory address to know where in the 32 bits we want to start extracting bits.</p>
+<p>For example, suppose we had a <code>lb</code> instruction on address 6 = <code>0b000110</code>. We know that DMEM is going to return the 4 bytes at addresses <code>4-5-6-7</code>. Intuitively, we want just the byte at address <code>6</code>. We can determine this in the subcircuit with this logic: This is a <code>lb</code> instruction, so we only want one of these bytes. The bottom 2 bits of the address are <code>0b10</code>, so we want the 2nd byte (zero-indexed), which corresponds to bits 16-23.</p>
+<p>As another example, suppose we had a <code>lh</code> instruction on address 9 = <code>0b001001</code>. We know that DMEM is going to return 4 bytes at addresses <code>8-9-10-11</code>. Intuitively, we want the bytes at addresses <code>9-10</code>. We can determine this in the subcircuit with this logic: This is a <code>lh</code> instruction, so we want two of these bytes. The bottom 2 bits of the address are <code>0b01</code>, so we want to start extracting at the 1st byte (zero-indexed). In summary, we want to extract the 1st and 2nd bytes (zero-indexed), which corresponds to bits 8-23.</p>
+<h2 id="partial-load">Partial Load</h2>
+<p>Fill in the <code>partial_load.circ</code> subcircuit.</p>
+<table>
+<tr>
+<td><b>Signal Name</b></td>
+<td><b>Direction</b></td>
+<td><b>Bit Width</b></td>
+<td><b>Description</b></td>
+</tr>
+<tr>
+<td><code>Instruction</code></td>
+<td>Input</td>
+<td>32</td>
+<td>The load instruction being executed.</td>
+</tr>
+<tr>
+<td><code>MemAddress</code></td>
+<td>Input</td>
+<td>32</td>
+<td>The memory address to read from (bottom two bits are not zeroed).</td>
+</tr>
+<tr>
+<td><code>DataFromMem</code></td>
+<td>Input</td>
+<td>32</td>
+<td>The data read from DMEM.</td>
+</tr>
+<tr>
+<td><code>DataToReg</code></td>
+<td>Output</td>
+<td>32</td>
+<td>The data to put in the register.</td>
+</tr>
+</table>
+<p>A table of all scenarios you need to handle in the partial load subcircuit is provided below:</p>
+<table>
+<tr>
+<td><b>Instruction</b></td>
+<td><b>Type</b></td>
+<td><b>Opcode</b></td>
+<td><b>Funct3</b></td>
+<td><b>Bottom 2 bits of <code>MemAddress</code></b></td>
+<td><b>Value to put in <code>DataToReg</code></b></td>
+</tr>
+<tr>
+<td rowspan="4">lb rd, offset(rs1)</td>
+<td rowspan="8">I</td>
+<td rowspan="8">0x03</td>
+<td rowspan="4">0x0</td>
+<td>0b00</td>
+<td><code>SignExt(DataFromMem[7:0])</code></td>
+</tr>
+<tr>
+<td>0b01</td>
+<td><code>SignExt(DataFromMem[15:8])</code></td>
+</tr>
+<tr>
+<td>0b10</td>
+<td><code>SignExt(DataFromMem[23:16])</code></td>
+</tr>
+<tr>
+<td>0b11</td>
+<td><code>SignExt(DataFromMem[31:24])</code></td>
+</tr>
+<tr>
+<td rowspan="3">lh rd, offset(rs1)</td>
+<td rowspan="3">0x1</td>
+<td>0b00</td>
+<td><code>SignExt(DataFromMem[15:0])</code></td>
+</tr>
+<tr>
+<td>0b01</td>
+<td><code>SignExt(DataFromMem[23:8])</code></td>
+</tr>
+<tr>
+<td>0b10</td>
+<td><code>SignExt(DataFromMem[31:16])</code></td>
+</tr>
+<tr>
+<td>lw rd, offset(rs1)</td>
+<td>0x2</td>
+<td>0b00</td>
+<td><code>DataFromMem</code></td>
+</tr>
+</table>
+<h2 id="conceptual-overview-stores">Conceptual Overview: Stores</h2>
+<p>The <code>partial_store.circ</code> circuit is designed to take data from a register and process it in order to store the relevant data into memory.</p>
+<p>Remember that in RISC-V, store instructions read bytes from a register and put those bytes into memory (DMEM). There are three load instructions that each store a different number of bits from a register to memory: <code>sw</code> stores 32 bits, <code>sh</code> stores 16 bits, and <code>sb</code> stores 8 bits. Unlike loads, these are the exact number of bits that will be stored to memory (no sign-extension needed).</p>
+<p>The <code>partial_store.circ</code> subcircuit has three jobs:</p>
+<p>First, we need to extract the relevant bits from the 32-bit register data. If fewer than 32 bits are stored, they will always be the lowest bits from the register. In <code>sh</code> instructions, the bottom 16 bits are stored to memory, and in <code>sb</code> instructions, the bottom 8 bits are stored to memory.</p>
+<p>Second, we need to put those bits in the right position of the 32-bit data we're passing to DMEM, so that the store to DMEM will store the bits at the right place in memory. We can use the bottom 2 bits of the memory address to know where to place the bits.</p>
+<p>For example, suppose we had a <code>sb</code> instruction on address <code>3</code> = <code>0b000011</code>. DMEM will take 32 bits of data we provide and write them to addresses <code>0-1-2-3</code>, but we actually want to write 8 bits to address <code>3</code>. To do this, we can make a 32-bit value where the bytes at addresses <code>0-1-2</code> (bits 0-23) are all zeros (doesn't matter), and the byte at address <code>3</code> (bits 24-31) is the 8 bits we want to store in memory.</p>
+<p>We can use this logic to implement this in our circuit: The bottom 2 bits of the address are <code>0b11</code> = 3, so we need to place the 8 bits we want to store at the 3rd byte (zero-indexed) of the data we're passing to DMEM.</p>
+<p>Finally, we need to create a 4-bit <em>write mask</em> which will tell DMEM which bytes of the data we want to store to memory. Each bit of the write mask corresponds to one of the 4 bytes in memory that DMEM might store to. If a bit in the mask is 0, DMEM will not store that byte to memory.</p>
+<p>For example, the write mask <code>0b0001</code> says to only write the 0th byte (bits 0-8) to memory, leaving the others unchanged. The write mask <code>0b1100</code> says to only write the 2nd and 3rd bytes (bits 16-31) to memory, leaving the others unchanged.</p>
+<h2 id="partial-store">Partial Store</h2>
+<p>Fill in the <code>partial_store.circ</code> subcircuit.</p>
+<table>
+<tr>
+<td><b>Signal Name</b></td>
+<td><b>Direction</b></td>
+<td><b>Bit Width</b></td>
+<td><b>Description</b></td>
+</tr>
+<tr>
+<td><code>Instruction</code></td>
+<td>Input</td>
+<td>32</td>
+<td>The store instruction being executed.</td>
+</tr>
+<tr>
+<td><code>MemAddress</code></td>
+<td>Input</td>
+<td>32</td>
+<td>The memory address to store to (bottom two bits are not zeroed).</td>
+</tr>
+<tr>
+<td><code>DataFromReg</code></td>
+<td>Input</td>
+<td>32</td>
+<td>The data from the register.</td>
+</tr>
+<tr>
+<td><code>MemWEn</code></td>
+<td>Input</td>
+<td>1</td>
+<td>The control signal indicating whether writing to memory is enabled for this instruction.</td>
+</tr>
+<tr>
+<td><code>DataToMem</code></td>
+<td>Output</td>
+<td>32</td>
+<td>The data to store to memory.</td>
+</tr>
+<tr>
+<td><code>MemWriteMask</code></td>
+<td>Output</td>
+<td>4</td>
+<td>The write mask indicating whether each byte of <code>DataToMem</code> will be written to memory.</td>
+</tr>
+</table>
+<p>A table of all scenarios you need to handle in the partial store subcircuit is provided below. All 3 store instructions have opcode <code>0x23</code>.</p>
+<table>
+<tr>
+<td rowspan="2"><b>Instruction</b></td>
+<td rowspan="2"><b>Funct3</b></td>
+<td rowspan="2"><b>Bottom 2 bits of <code>MemAddress</code></b></td>
+<td style="text-align:center" colspan="4"><b><code>DataToMem</code></b></td>
+<td rowspan="2"><b><code>MemWriteMask</code></b></td>
+</tr>
+<tr>
+<td style="text-align:center"><b>Bits 31-24</b></td>
+<td style="text-align:center"><b>Bits 23-16</b></td>
+<td style="text-align:center"><b>Bits 15-8</b></td>
+<td style="text-align:center"><b>Bits 7-0</b></td>
+</tr>
+<tr>
+<td rowspan="4"><code>sb rs2, offset(rs1)</code></td>
+<td rowspan="4"><code>0x0</code></td>
+<td><code>0b00</code></td>
+<td style="text-align:center"><code>0</code></td>
+<td style="text-align:center"><code>0</code></td>
+<td style="text-align:center"><code>0</code></td>
+<td style="text-align:center"><code>DataFromReg[7:0]</code></td>
+<td><code>0b0001</code></td>
+</tr>
+<tr>
+<td><code>0b01</code></td>
+<td style="text-align:center"><code>0</code></td>
+<td style="text-align:center"><code>0</code></td>
+<td style="text-align:center"><code>DataFromReg[7:0]</code></td>
+<td style="text-align:center"><code>0</code></td>
+<td><code>0b0010</code></td>
+</tr>
+<tr>
+<td><code>0b10</code></td>
+<td style="text-align:center"><code>0</code></td>
+<td style="text-align:center"><code>DataFromReg[7:0]</code></td>
+<td style="text-align:center"><code>0</code></td>
+<td style="text-align:center"><code>0</code></td>
+<td><code>0b0100</code></td>
+</tr>
+<tr>
+<td><code>0b11</code></td>
+<td style="text-align:center"><code>DataFromReg[7:0]</code></td>
+<td style="text-align:center"><code>0</code></td>
+<td style="text-align:center"><code>0</code></td>
+<td style="text-align:center"><code>0</code></td>
+<td><code>0b1000</code></td>
+</tr>
+<tr>
+<td rowspan="2"><code>sh rs2, offset(rs1)</code></td>
+<td rowspan="2"><code>0x1</code></td>
+<td><code>0b00</code></td>
+<td style="text-align:center" colspan="2"><code>0</code></td>
+<td style="text-align:center" colspan="2"><code>DataFromReg[15:0]</code></td>
+<td><code>0b0011</code></td>
+</tr>
+<tr>
+<td><code>0b10</code></td>
+<td style="text-align:center" colspan="2"><code>DataFromReg[15:0]</code></td>
+<td style="text-align:center" colspan="2"><code>0</code></td>
+<td><code>0b1100</code></td>
+</tr>
+<tr>
+<td><code>sw rs2, offset(rs1)</code></td>
+<td><code>0x2</code></td>
+<td><code>0b00</code></td>
+<td style="text-align:center" colspan="4"><code>DataFromReg</code></td>
+<td><code>0b1111</code></td>
+</tr>
+</table>
+<p>Note that for any non-store instruction (i.e. when your <code>MemWEn</code> control signal is 0), <code>MemWriteMask</code> should be set to <code>0b0000</code>.</p>
+<p>Note: The bytes in <code>DataToMem</code> that aren't being written to the file (i.e. where <code>MemWriteMask</code> is 0) can technically be any value, but we've listed them as 0s in the table. The unit test for this part also assumes </p>
+<h2 id="testing-and-debugging">Testing and Debugging</h2>
+<p>We've provided some unit tests for the immediate generator subcircuit. These are not comprehensive. You can run these tests with:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh test_partial_load</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh test_partial_store</span>
+</span></code></pre>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container border-top pt-4 mb-5">
+<div class="row">
+<div class="col">
+<div id="dark-toggle-wrapper" class="d-none">
+<div class="form-check form-switch">
+<input id="inputDarkToggle" class="form-check-input" type="checkbox">
+<label class="form-check-label" for="inputDarkToggle">
+Dark Mode
+<a id="buttonDarkToggleReset" class="d-none" href="javascript:void(0);">(reset)</a>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+  
+
+  document.addEventListener("DOMContentLoaded", function() {
+    initToC();
+  });
+</script>
+</body>
+</html>

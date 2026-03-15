@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="language" content="english">
+<title>Lab 8 | CS 61C Spring 2022</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<link rel="shortcut icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../css/main.css@h=36c89645dcb547d13f6f293a379a176dff22aab9affcefc8d3a19bc23c0f8db2.css" />
+<script defer type="text/javascript" src="../../js/main.js@h=4096b5e2a18784c27ca139ca897694176eea13de3e2168cd7e7bcdd827a35c8d"></script>
+
+<script type="text/javascript" src="../../js/main-sync.js@h=daca62fef99fb16ad6a5fd1517d7b18bed66d3241431785bf3ac1f134c166bf1"></script>
+<script>initDarkToggle();</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.17.0/tocbot.min.js" integrity="sha512-DJhUMo5TIBb3fFziiE+3OJG+j7ky+GxScxHdLADCXskEpc/AKQsbsorIYmGFJFaJvDIyP65rJNhnCTytfYAdUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+<div class="container">
+<a class="navbar-brand" href="../../index.html">
+<img class="d-inline-block me-2 rounded" height="48" width="48" src="../../img/icon-small.png" alt="outline of square computer chip with cs61c label" />
+<span class="align-middle">CS 61C Spring 2022</span>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle Navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item">
+<a class="nav-link" href="../../calendar/index.html">Calendar</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../staff/index.html">Staff</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../policies/index.html">Policies</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../resources/index.html">Resources</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../exam/index.html">Exam</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../extensions/index.html">Extensions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://oh.cs61c.org/">OH Queue</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://venus.cs61c.org/">Venus</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://inst.eecs.berkeley.edu/~cs61c/archives.html">Semesters</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<main class="mb-4">
+<section class="section">
+<div class="container">
+<div class="row spec">
+<nav id="toc-wrapper" class="col-md-3 d-print-none sticky-md-top nav-wrapper" aria-label="table of contents">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#setup">Setup</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-1-simd-functions">Exercise 1: SIMD Functions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-2-loop-unrolling-example">Exercise 2: Loop Unrolling Example</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-3-writing-simd-code">Exercise 3: Writing SIMD Code</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#action-item">Action Item</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#tips">Tips</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing">Testing</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#common-bugs">Common Bugs</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-4-unrolling-simd-loop">Exercise 4: Unrolling SIMD Loop</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#action-item-1">Action Item</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-1">Testing</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#general-simd-advice">General SIMD Advice</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-5-feedback-form">Exercise 5: Feedback Form</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#submission">Submission</a>
+</li>
+</ul>
+</nav>
+<div id="toc-content-wrapper" class="content col-md-9">
+<h1 class="title">Lab 8: SIMD Instructions</h1>
+<p class="subtitle">Deadline: Monday, April 4, 11:59:59 PM PT</p>
+<hr />
+<p><a href="https://docs.google.com/presentation/d/1GtCLE8DX2Y21VP1H5UBcLn8O-lOK97dcWwHSXk0GBHA/edit?usp=sharing">Lab Section Slides</a></p>
+<h2 id="setup">Setup</h2>
+<div class="alert alert-warning">
+<p><strong>Warning</strong>: We strongly recommend working on the hive machines for this lab. Many older processors don't support SSE intrinsics, and your local machine may perform differently due to having different hardware (CPU cache size, memory speed, etc.).</p>
+</div>
+<p>In your <code>labs</code> directory, pull the files for this lab with:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> pull starter main</span>
+</span></code></pre>
+<hr />
+<h2 id="exercise-1-simd-functions">Exercise 1: SIMD Functions</h2>
+<p>This exercise consists of reading documentation to familiarize yourself with Intel's SIMD instructions. This exercise is not graded, but is needed to understand the remaining exercises.</p>
+<p>Read over the <a href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/">Intel Intrinsics Guide</a> to learn about the available SIMD instructions (an intrinsic function is a function whose implementation is handled by the compiler). The <a href="https://software.intel.com/content/www/us/en/develop/documentation/cpp-compiler-developer-guide-and-reference/top/compiler-reference/intrinsics/naming-and-usage-syntax.html">Intrinsics Naming and Usage documentation</a> will be helpful in understanding the documentation. </p>
+<p>The hive machines support SSE, SSE2, SSE3, SSSE3, SSE4.1, SSE4.2, AVX, and AVX2, so you can check those boxes in the filters list. Some of the other instruction sets are also supported, but we can ignore those for the purposes of this lab.</p>
+<p>Once you have finished going through the above documentation, read over <a href="https://www.cs.virginia.edu/%7Ecr4bd/3330/S2018/simdref.html">this guide</a> to help you understand how to use the SIMD functions. </p>
+<hr />
+<h2 id="exercise-2-loop-unrolling-example">Exercise 2: Loop Unrolling Example</h2>
+<p>This exercise consists of reading provided code to help you understand loop unrolling and is not graded.</p>
+<p>The <code>sum()</code> function in <code>simd.c</code> is an un-optimized implementation of the sum the elements whose value is &gt;= <code>128</code> of a really big array (roughly <code>2^16</code> elements). We use an outer loop to repeat the sum OUTER_ITERATIONS (roughly <code>2^14</code>) times to increase the code runtime so we can take decent speedup measurements. We time the execution of the code by finding the difference between the start and end timestamps (using <code>clock()</code>). The file <code>test_simd.c</code> is the one which will have a <code>main</code> function to run the various <code>sum</code> functions.</p>
+<p>Let's look at <code>sum_unrolled()</code>. The inner loop processes 4 elements per iteration, whereas the inner loop in <code>sum()</code> processes 1 element per iteration. Note the extra loop after the primary loop -- since the primary loop advances through the array in groups of 4 elements, we need a tail case loop to handle arrays with lengths that are not multiples of 4.</p>
+<p>Try compiling and running the code:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">make</span></span><span class="z-meta z-function-call z-arguments z-shell"> simd</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">./simd</span></span>
+</span></code></pre>
+<p>The unrolled function should be slightly faster, although not by much. But faster programs are always nice to have!</p>
+<p>Question: if loop unrolling helps, why don't we unroll everything?</p>
+<ul>
+<li>The unrolled code is harder to read and write. Unless you plan to never look at the code again, code readability may outweigh the benefits of loop unrolling!</li>
+<li>Sometimes, the compiler will automatically unroll your naive loops for you! Emphasis on <em>sometimes</em> -- it can be difficult to figure out what magic tricks a modern compiler performs (see Godbolt in the next paragraph). For demonstration purposes, we've disabled compiler optimizations in this lab.</li>
+<li>Loop unrolling means more instructions, which means larger programs and potentially worse caching behavior!</li>
+<li>Our simplified examples in <code>simd.c</code> use a known array size. If you don't know the size of the array you're working on, your unrolled loop might not be a good fit for the array!</li>
+</ul>
+<p>Optional: you can visualize how the vectors and the different functions work together by inputting your code into the code environment at this <a href="https://piotte13.github.io/SIMD-Visualiser/#/">link</a>!
+Another interesting tool that might help you understand the behavior of SIMD instructions is the <a href="https://godbolt.org/z/J7HXBk">Godbolt Compiler Explorer</a> project. It can also provide a lot of insights when you need to optimize any code in the future.</p>
+<hr />
+<h2 id="exercise-3-writing-simd-code">Exercise 3: Writing SIMD Code</h2>
+<p>The following code demonstrates how to add together an 8-element integer array using SIMD instructions. Our registers in this example are 128-bits and integers are 32 bits. This means that we can fit four integers into one register.</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-storage z-type z-c">int</span> arr<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span><span class="z-constant z-numeric z-integer z-decimal z-c">8</span><span class="z-punctuation z-section z-brackets z-end z-c">]</span></span> <span class="z-keyword z-operator z-assignment z-c">=</span> <span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span><span class="z-constant z-numeric z-integer z-decimal z-c">3</span><span class="z-punctuation z-separator z-c">,</span> <span class="z-constant z-numeric z-integer z-decimal z-c">1</span><span class="z-punctuation z-separator z-c">,</span> <span class="z-constant z-numeric z-integer z-decimal z-c">4</span><span class="z-punctuation z-separator z-c">,</span> <span class="z-constant z-numeric z-integer z-decimal z-c">1</span><span class="z-punctuation z-separator z-c">,</span> <span class="z-constant z-numeric z-integer z-decimal z-c">5</span><span class="z-punctuation z-separator z-c">,</span> <span class="z-constant z-numeric z-integer z-decimal z-c">9</span><span class="z-punctuation z-separator z-c">,</span> <span class="z-constant z-numeric z-integer z-decimal z-c">2</span><span class="z-punctuation z-separator z-c">,</span> <span class="z-constant z-numeric z-integer z-decimal z-c">6</span><span class="z-punctuation z-section z-block z-end z-c">}</span></span><span class="z-punctuation z-terminator z-c">;</span>
+<span class="z-comment z-line z-double-slash z-c"><span class="z-punctuation z-definition z-comment z-c">//</span> Initialize sum vector to {0, 0, 0, 0}
+</span>__m128i sum_vec <span class="z-keyword z-operator z-assignment z-c">=</span> <span class="z-meta z-function-call z-c"><span class="z-variable z-function z-c">_mm_setzero_si128</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function-call z-c"></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-punctuation z-terminator z-c">;</span>
+
+<span class="z-comment z-line z-double-slash z-c"><span class="z-punctuation z-definition z-comment z-c">//</span> Load array elements 0-3 into a temporary vector register
+</span>__m128i tmp <span class="z-keyword z-operator z-assignment z-c">=</span> <span class="z-meta z-function-call z-c"><span class="z-variable z-function z-c">_mm_loadu_si128</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span>__m128i <span class="z-keyword z-operator z-c">*</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span> arr</span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-punctuation z-terminator z-c">;</span>
+<span class="z-comment z-line z-double-slash z-c"><span class="z-punctuation z-definition z-comment z-c">//</span> Add to existing sum vector
+</span>sum_vec <span class="z-keyword z-operator z-assignment z-c">=</span> <span class="z-meta z-function-call z-c"><span class="z-variable z-function z-c">_mm_add_epi32</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c">sum_vec<span class="z-punctuation z-separator z-c">,</span> tmp</span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-punctuation z-terminator z-c">;</span>
+<span class="z-comment z-line z-double-slash z-c"><span class="z-punctuation z-definition z-comment z-c">//</span> sum_vec = {3, 1, 4, 1}
+</span>
+<span class="z-comment z-line z-double-slash z-c"><span class="z-punctuation z-definition z-comment z-c">//</span> Load array elements 4-7 into a temporary vector register
+</span>tmp <span class="z-keyword z-operator z-assignment z-c">=</span> <span class="z-meta z-function-call z-c"><span class="z-variable z-function z-c">_mm_loadu_si128</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span>__m128i <span class="z-keyword z-operator z-c">*</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span> <span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span>arr <span class="z-keyword z-operator z-arithmetic z-c">+</span> <span class="z-constant z-numeric z-integer z-decimal z-c">4</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-punctuation z-terminator z-c">;</span>
+<span class="z-comment z-line z-double-slash z-c"><span class="z-punctuation z-definition z-comment z-c">//</span> Add to existing sum vector
+</span>sum_vec <span class="z-keyword z-operator z-assignment z-c">=</span> <span class="z-meta z-function-call z-c"><span class="z-variable z-function z-c">_mm_add_epi32</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c">sum_vec<span class="z-punctuation z-separator z-c">,</span> tmp</span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-punctuation z-terminator z-c">;</span>
+<span class="z-comment z-line z-double-slash z-c"><span class="z-punctuation z-definition z-comment z-c">//</span> sum_vec = {3 + 5, 1 + 9, 4 + 2, 1 + 6}
+</span>
+<span class="z-comment z-line z-double-slash z-c"><span class="z-punctuation z-definition z-comment z-c">//</span> Create temporary array to hold values from sum_vec
+</span><span class="z-comment z-line z-double-slash z-c"><span class="z-punctuation z-definition z-comment z-c">//</span> We must store the vector into an array in order to access the individual values (as seen below)
+</span><span class="z-storage z-type z-c">int</span> tmp_arr<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span><span class="z-constant z-numeric z-integer z-decimal z-c">4</span><span class="z-punctuation z-section z-brackets z-end z-c">]</span></span><span class="z-punctuation z-terminator z-c">;</span>
+<span class="z-meta z-function-call z-c"><span class="z-variable z-function z-c">_mm_storeu_si128</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span>__m128i <span class="z-keyword z-operator z-c">*</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span> tmp_arr<span class="z-punctuation z-separator z-c">,</span> sum_vec</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-punctuation z-terminator z-c">;</span>
+<span class="z-comment z-line z-double-slash z-c"><span class="z-punctuation z-definition z-comment z-c">//</span> Collect values from sum_vec in a single integer
+</span><span class="z-storage z-type z-c">int</span> sum <span class="z-keyword z-operator z-assignment z-c">=</span> tmp_arr<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span><span class="z-constant z-numeric z-integer z-decimal z-c">0</span><span class="z-punctuation z-section z-brackets z-end z-c">]</span></span> <span class="z-keyword z-operator z-arithmetic z-c">+</span> tmp_arr<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span><span class="z-constant z-numeric z-integer z-decimal z-c">1</span><span class="z-punctuation z-section z-brackets z-end z-c">]</span></span> <span class="z-keyword z-operator z-arithmetic z-c">+</span> tmp_arr<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span><span class="z-constant z-numeric z-integer z-decimal z-c">2</span><span class="z-punctuation z-section z-brackets z-end z-c">]</span></span> <span class="z-keyword z-operator z-arithmetic z-c">+</span> tmp_arr<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span><span class="z-constant z-numeric z-integer z-decimal z-c">3</span><span class="z-punctuation z-section z-brackets z-end z-c">]</span></span><span class="z-punctuation z-terminator z-c">;</span>
+</span></code></pre>
+<p>This is a lot of work for adding together 8 elements. However, this process greatly improves the performance of summing together the elements of large arrays.</p>
+<h3 id="action-item">Action Item</h3>
+<p>Let's implement <code>sum_simd()</code>, a vectorized version of the naive <code>sum()</code> implementation!</p>
+<p>You only need to vectorize the inner loop with SIMD. Implementation can be done with the following intrinsics:</p>
+<ul>
+<li><code>__m128i _mm_setzero_si128()</code> - returns a 128-bit zero vector</li>
+<li><code>__m128i _mm_loadu_si128(__m128i *p)</code> - returns 128-bit vector stored at pointer p</li>
+<li><code>__m128i _mm_add_epi32(__m128i a, __m128i b)</code> - returns vector (a_0 + b_0, a_1 + b_1, a_2 + b_2, a_3 + b_3)</li>
+<li><code>void _mm_storeu_si128(__m128i *p, __m128i a)</code> - stores 128-bit vector a into pointer p</li>
+<li><code>__m128i _mm_cmpgt_epi32(__m128i a, __m128i b)</code> - returns the vector (a_i &gt; b_i ? <code>0xffffffff : 0x0</code> for <code>i</code> from 0 to 3). AKA a 32-bit all-1s mask if a_i &gt; b_i and a 32-bit all-0s mask otherwise</li>
+<li><code>__m128i _mm_and_si128(__m128i a, __m128i b)</code> - returns vector (a_0 &amp; b_0, a_1 &amp; b_1, a_2 &amp; b_2, a_3 &amp; b_3), where &amp; represents the bit-wise and operator</li>
+</ul>
+<h3 id="tips">Tips</h3>
+<ul>
+<li>DON'T use the store function (<code>_mm_storeu_si128</code>) until after completing the inner loop! It turns out that storing is very costly and performing a store in every iteration will actually cause your code to slow down. However, if you wait until after the outer loop completes you may have overflow issues.</li>
+<li>Read the function declarations in the above table carefully! You'll notice that the loadu and storeu take <code>__m128i*</code> type arguments. You can just cast an int array to a <code>__m128i</code> pointer.</li>
+</ul>
+<h3 id="testing">Testing</h3>
+<p>To compile and run your code, run the following commands:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">make</span></span><span class="z-meta z-function-call z-arguments z-shell"> simd</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">./simd</span></span>
+</span></code></pre>
+<p>The naive version runs at about 7 seconds on the hive machines, and your SIMDized version should run in about 1-2 seconds.</p>
+<h3 id="common-bugs">Common Bugs</h3>
+<p>Below are common bugs that the staff have noticed in implementations for this exercise.</p>
+<ul>
+<li><strong>Forgetting the conditional in the tail case</strong>: what condition have we been checking before adding something to the sum?</li>
+<li><strong>Adding to an uninitialized array</strong>: if you add stuff to your result array without initializing it, you are adding stuff to garbage, which makes the array still garbage!</li>
+<li><strong>Re-initializing your sum vector</strong>: make sure <strong>you are not</strong> creating a new sum vector for every iteration of the inner loop!</li>
+<li><strong>Trying to store your sum vector into a <code>long long int</code> array</strong>: use an int array. The return value of this function is indeed a <code>long long int</code>, but that's because an <code>int</code> isn't big enough to hold the sum of all the values across all iterations of the outer loop. <code>long long int</code> and <code>int</code> have different bit widths, so storing an <code>int</code> array into a <code>long long int</code> will produce different numbers!</li>
+</ul>
+<hr />
+<h2 id="exercise-4-unrolling-simd-loop">Exercise 4: Unrolling SIMD Loop</h2>
+<p>To obtain even more performance improvement, carefully unroll the SIMD vector sum code that you created in the previous exercise to create <code>sum_simd_unrolled()</code>. This should get you a little more increase in performance from <code>sum_simd</code> (a few fractions of a second).</p>
+<h3 id="action-item-1">Action Item</h3>
+<p>Within <code>simd.c</code>, copy your <code>sum_simd()</code> code into <code>sum_simd_unrolled()</code> and unroll it 4 (four) times. Don't forget about your tail case!</p>
+<h3 id="testing-1">Testing</h3>
+<p>To compile and run your code, run the following commands:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">make</span></span><span class="z-meta z-function-call z-arguments z-shell"> simd</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">./simd</span></span>
+</span></code></pre>
+<hr />
+<h3 id="general-simd-advice">General SIMD Advice</h3>
+<p>Some general advice on working with SIMD instructions:</p>
+<ul>
+<li>Be cautious of memory alignment. For example, <code>_m256d _mm256_load_pd (double const * mem_addr)</code> would not work with unaligned data -- you would need <code>_m256d _mm256_loadu_pd</code>. Meanwhile, if you have control over memory allocation, is almost always desireable to keep your data aligned (can be achieved using special memory allocation APIs). Aligned loads can be folded into other operations as a memory operand which reduces code size and throughput slightly. Modern CPUs have very good support for unaligned loads, but there's still a significant performance hit when a load crosses a cache-line boundary.</li>
+<li>Recall various CPU pipeline hazards you have learned earlier this semester. Data hazards can drastically hurt performance. That being said, you may want to check data dependencies in adjacent SIMD operations if not getting the desired performance.</li>
+</ul>
+<hr />
+<h2 id="exercise-5-feedback-form">Exercise 5: Feedback Form</h2>
+<p>We are working to improve the labs for next semester, so please fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSfIc_5KIoGNDsjLi2kCRmhZXACNkIbw62OEaDFvEXsw9SpiSA/viewform?usp=sf_link">this survey</a> to tell us about your experience with Lab 9. The survey will be collecting your email to verify that you have submitted it, but your responses will be anonymized before the data is analyzed. Thank you!</p>
+<hr />
+<h2 id="submission">Submission</h2>
+<p>Save, commit, and push your work, then submit to the <strong>Lab 8</strong> assignment on Gradescope. The autograder tests are similar to those in <code>test_simd.c</code>, but with potentially different constants (<code>NUM_ELEMS</code> and <code>OUTER_ITERATIONS</code>) and reduced speedup requirements (to compensate for more variability in autograder resources).</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container border-top pt-4 mb-5">
+<div class="row">
+<div class="col">
+<div id="dark-toggle-wrapper" class="d-none">
+<div class="form-check form-switch">
+<input id="inputDarkToggle" class="form-check-input" type="checkbox">
+<label class="form-check-label" for="inputDarkToggle">
+Dark Mode
+<a id="buttonDarkToggleReset" class="d-none" href="javascript:void(0);">(reset)</a>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+  
+
+  
+    document.addEventListener("DOMContentLoaded", function() {
+      initToC();
+    });
+  
+</script>
+</body>
+</html>

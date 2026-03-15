@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="language" content="english">
+<title>Part B | CS 61C Spring 2022</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<link rel="shortcut icon" type="image/png" href="../../../img/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../../css/main.css@h=36c89645dcb547d13f6f293a379a176dff22aab9affcefc8d3a19bc23c0f8db2.css" />
+<script defer type="text/javascript" src="../../../js/main.js@h=4096b5e2a18784c27ca139ca897694176eea13de3e2168cd7e7bcdd827a35c8d"></script>
+
+<script type="text/javascript" src="../../../js/main-sync.js@h=daca62fef99fb16ad6a5fd1517d7b18bed66d3241431785bf3ac1f134c166bf1"></script>
+<script>initDarkToggle();</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.17.0/tocbot.min.js" integrity="sha512-DJhUMo5TIBb3fFziiE+3OJG+j7ky+GxScxHdLADCXskEpc/AKQsbsorIYmGFJFaJvDIyP65rJNhnCTytfYAdUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+<div class="container">
+<a class="navbar-brand" href="../../../index.html">
+<img class="d-inline-block me-2 rounded" height="48" width="48" src="../../../img/icon-small.png" alt="outline of square computer chip with cs61c label" />
+<span class="align-middle">CS 61C Spring 2022</span>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle Navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item">
+<a class="nav-link" href="../../../calendar/index.html">Calendar</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../staff/index.html">Staff</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../policies/index.html">Policies</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../resources/index.html">Resources</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../exam/index.html">Exam</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../extensions/index.html">Extensions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://oh.cs61c.org/">OH Queue</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://venus.cs61c.org/">Venus</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://inst.eecs.berkeley.edu/~cs61c/archives.html">Semesters</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<main class="mb-4">
+<section class="section">
+<div class="container">
+<div class="row spec">
+<nav class="col-md-3 d-print-none sticky-md-top nav-wrapper" aria-label="table of contents">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="../index.html">Project 3: CS61CPU</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="../part-a/index.html">Part A</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html">Part B</a>
+<div id="toc-wrapper">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-5-i-type-instructions">Task 5: I-type Instructions</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-5-1-datapath">Task 5.1: Datapath</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-5-2-control-logic">Task 5.2: Control Logic</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-and-debugging">Testing and Debugging</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-6-r-type-instructions">Task 6: R-type Instructions</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-6-1-datapath">Task 6.1: Datapath</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-6-2-control-logic">Task 6.2: Control Logic</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-and-debugging-1">Testing and Debugging</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-7-b-type-instructions">Task 7: B-type Instructions</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-7-1-branch-comparator">Task 7.1: Branch Comparator</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-7-2-immediate-generator">Task 7.2: Immediate Generator</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-7-3-datapath">Task 7.3: Datapath</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-7-4-control-logic">Task 7.4: Control Logic</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-and-debugging-2">Testing and Debugging</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-8-loading-and-storing">Task 8: Loading and Storing</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-8-1-immediate-generator">Task 8.1: Immediate Generator</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-8-2-partial-loads-and-stores">Task 8.2: Partial Loads and Stores</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-8-3-datapath">Task 8.3: Datapath</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-8-4-control-logic">Task 8.4: Control Logic</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-and-debugging-3">Testing and Debugging</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-9-jumps-and-u-type-instructions">Task 9: Jumps and U-type Instructions</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-9-1-immediate-generator">Task 9.1: Immediate Generator</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-9-2-datapath">Task 9.2: Datapath</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-9-3-control-logic">Task 9.3: Control Logic</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-and-debugging-4">Testing and Debugging</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-10-pipelining">Task 10: Pipelining</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-10-1-getting-started">Task 10.1: Getting Started</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-10-2-hazards">Task 10.2: Hazards</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-and-debugging-5">Testing and Debugging</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-11-readme-update">Task 11: README Update</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#submission-and-grading">Submission and Grading</a>
+</li>
+</ul>
+</div>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../control-logic/index.html">Appendix: Control Logic</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../testing/index.html">Appendix: Testing and Debugging</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../partial-load-store/index.html">Appendix: Partial Loads and Stores</a>
+</li>
+</ul>
+</nav>
+<div id="toc-content-wrapper" class="content col-md-9">
+<h1>Part B: More Instructions</h1>
+<p>In this part, you will expand your CPU to support more instructions and pipelining.</p>
+<p>Before starting this part, please <strong>run <code>git pull starter main</code></strong> to download the starter code for Part B.</p>
+<p>You can implement the instructions in any order you want. This spec is organized to build up your CPU with small groups of instructions at a time.</p>
+<h2 id="task-5-i-type-instructions">Task 5: I-type Instructions</h2>
+<p>The instructions you need to implement for this task are listed below:</p>
+<table>
+<tr>
+<td><b>Instruction</b></td>
+<td><b>Type</b></td>
+<td><b>Opcode</b></td>
+<td><b>Funct3</b></td>
+<td><b>Funct7</b></td>
+<td><b>Operation</b></td>
+</tr>
+<tr>
+<td><code>addi rd, rs1, imm</code></td>
+<td rowspan="4">I</td>
+<td rowspan="8"><code>0x13</code></td>
+<td><code>0x0</code></td>
+<td></td>
+<td><code>rd = rs1 + imm</code></td>
+</tr>
+<tr>
+<td><code>andi rd, rs1, imm</code></td>
+<td><code>0x7</code></td>
+<td></td>
+<td><code>rd = rs1 &amp; imm</code></td>
+</tr>
+<tr>
+<td><code>ori rd, rs1, imm</code></td>
+<td><code>0x6</code></td>
+<td></td>
+<td><code>rd = rs1 | imm</code></td>
+</tr>
+<tr>
+<td><code>xori rd, rs1, imm</code></td>
+<td><code>0x4</code></td>
+<td></td>
+<td><code>rd = rs1 ^ imm</code></td>
+</tr>
+<tr>
+<td><code>slli rd, rs1, imm</code></td>
+<td rowspan="3">I*</td>
+<td><code>0x1</code></td>
+<td><code>0x00</code></td>
+<td><code>rd = rs1 &lt;&lt; imm</code></td>
+</tr>
+<tr>
+<td><code>srli rd, rs1, imm</code></td>
+<td><code>0x5</code></td>
+<td><code>0x00</code></td>
+<td><code>rd = rs1 &gt;&gt; imm</code> (Zero-extend)</td>
+</tr>
+<tr>
+<td><code>srai rd, rs1, imm</code></td>
+<td><code>0x5</code></td>
+<td><code>0x20</code></td>
+<td><code>rd = rs1 &gt;&gt; imm</code> (Sign-extend)</td>
+</tr>
+<tr>
+<td><code>slti rd, rs1, imm</code></td>
+<td>I</td>
+<td><code>0x2</code></td>
+<td></td>
+<td><code>rd = (rs1 &lt; imm) ? 1 : 0</code></td>
+</tr>
+</table>
+<h3 id="task-5-1-datapath">Task 5.1: Datapath</h3>
+<p>Recall that you already implemented <code>addi</code> in Part A. Other I-type instructions use the same datapath as <code>addi</code>, except that each I-type instruction needs the ALU to perform a different operation. In Part A, we hard-coded the <code>ALUSel</code> input to the ALU subcircuit to be <code>0b0000</code> so that the ALU always performs the addition selection, but now you should <strong>change <code>ALUSel</code> input to the ALU subcircuit</strong> to use the value from the control logic subcircuit (which you'll implement in the next task).</p>
+<p>Remember to also <strong>change the <code>RegWEn</code> input to the regfile subcircuit</strong> to use the value from the control logic subcircuit.</p>
+<h3 id="task-5-2-control-logic">Task 5.2: Control Logic</h3>
+<p>As you add logic to support more instructions in the next few tasks, you will need to add control logic to enable the relevant datapath components depending on the instruction being executed.</p>
+<p>Modify <code>control-logic.circ</code> to output the correct control logic signals for I-type instructions. See the <a href="../control-logic/index.html">control logic appendix</a> for more details.</p>
+<h3 id="testing-and-debugging">Testing and Debugging</h3>
+<p>We don't have any provided tests for I-type instructions, so you'll need to write your own tests to find bugs in your implementation. Before requesting help from staff, please make sure you have some tests written, or we'll ask you to write some tests first before helping you.</p>
+<ol>
+<li>Navigate to <code>tests/integration-custom/in</code>.</li>
+<li>Write a RISC-V test and save it in a filename ending in <code>.s</code>.</li>
+<li>Run <code>bash test.sh test_custom</code>.</li>
+</ol>
+<p><code>test_custom</code> compiles your RISC-V test code to a Logisim circuit and runs it. If you want to only compile your test, run <code>bash test.sh create_custom</code>. If you want to only run your test, run <code>bash test.sh run_custom</code>.</p>
+<p>To debug your circuits, you can step through the debugging circuits (similar to what you did in Project 3A).</p>
+<ol>
+<li>Navigate to the <code>tests</code> folder, then navigate to the folder of the relevant test, e.g. <code>tests/integration-custom</code>.</li>
+<li>Open the generated <code>.circ</code> file in Logisim. Click into the circuits you made, and tick full cycles to step through inputs.</li>
+</ol>
+<h2 id="task-6-r-type-instructions">Task 6: R-type Instructions</h2>
+<p>The instructions you need to implement for this task are listed below:</p>
+<table>
+<tr>
+<td><b>Instruction</b></td>
+<td><b>Type</b></td>
+<td><b>Opcode</b></td>
+<td><b>Funct3</b></td>
+<td><b>Funct7</b></td>
+<td><b>Operation</b></td>
+</tr>
+<tr>
+<td><code>add rd, rs1, rs2</code></td>
+<td rowspan="12">R</td>
+<td rowspan="12"><code>0x33</code></td>
+<td><code>0x0</code></td>
+<td><code>0x00</code></td>
+<td><code>rd = rs1 + rs2</code></td>
+</tr>
+<tr>
+<td><code>sub rd, rs1, rs2</code></td>
+<td><code>0x0</code></td>
+<td><code>0x20</code></td>
+<td><code>rd = rs1 - rs2</code></td>
+</tr>
+<tr>
+<td><code>and rd, rs1, rs2</code></td>
+<td><code>0x7</code></td>
+<td><code>0x00</code></td>
+<td><code>rd = rs1 &amp; rs2</code></td>
+</tr>
+<tr>
+<td><code>or rd, rs1, rs2</code></td>
+<td><code>0x6</code></td>
+<td><code>0x00</code></td>
+<td><code>rd = rs1 | rs2</code></td>
+</tr>
+<tr>
+<td><code>xor rd, rs1, rs2</code></td>
+<td><code>0x4</code></td>
+<td><code>0x00</code></td>
+<td><code>rd = rs1 ^ rs2</code></td>
+</tr>
+<tr>
+<td><code>sll rd, rs1, rs2</code></td>
+<td><code>0x1</code></td>
+<td><code>0x00</code></td>
+<td><code>rd = rs1 &lt;&lt; rs2</code></td>
+</tr>
+<tr>
+<td><code>srl rd, rs1, rs2</code></td>
+<td><code>0x5</code></td>
+<td><code>0x00</code></td>
+<td><code>rd = rs1 &gt;&gt; rs2</code> (Zero-extend)</td>
+</tr>
+<tr>
+<td><code>sra rd, rs1, rs2</code></td>
+<td><code>0x5</code></td>
+<td><code>0x20</code></td>
+<td><code>rd = rs1 &gt;&gt; rs2</code> (Sign-extend)</td>
+</tr>
+<tr>
+<td><code>slt rd, rs1, rs2</code></td>
+<td><code>0x2</code></td>
+<td><code>0x00</code></td>
+<td><code>rd = (rs1 &lt; rs2) ? 1 : 0</code></td>
+</tr>
+<tr>
+<td><code>mul rd, rs1, rs2</code></td>
+<td><code>0x0</code></td>
+<td><code>0x01</code></td>
+<td><code>rd = (rs1 * rs2)[31:0]</code></td>
+</tr>
+<tr>
+<td><code>mulh rd, rs1, rs2</code></td>
+<td><code>0x1</code></td>
+<td><code>0x01</code></td>
+<td><code>rd = (rs1 * rs2)[63:32]</code> (Signed)</td>
+</tr>
+<tr>
+<td><code>mulhu rd, rs1, rs2</code></td>
+<td><code>0x3</code></td>
+<td><code>0x01</code></td>
+<td><code>rd = (rs1 * rs2)[63:32]</code> (Unsigned)</td>
+</tr>
+</table>
+<h3 id="task-6-1-datapath">Task 6.1: Datapath</h3>
+<p>Modify your datapath in <code>cpu.circ</code> so that it can support R-type instructions.</p>
+<p>If you're stuck, read further for some guiding questions. As with Task 4, it may help to think about each of the five stages for executing an instruction.</p>
+<details>
+<summary>Instruction Fetch: How do R-type instructions affect the program counter?</summary>
+<p>R-type instructions always increment the program counter by 4 to fetch the next instruction, just like the <code>addi</code> instruction from Part A. This means we don't need to modify the program counter implementation for this task.</p>
+</details>
+<details>
+<summary>Instruction Decode: What do we need to read from the register file?</summary>
+<p>R-type instructions require reading the values of two source registers (<code>rs1</code> and <code>rs2</code>) from the register file. In Part A, you split the <code>rs1</code> bits from the instruction and passed them to the regfile. Now, you should also split the <code>rs2</code> bits from the instruction and pass them to the regfile.</p>
+</details>
+<details>
+<summary>Execute: What two data values (<code>A</code> and <code>B</code>) should an R-type instruction input to the ALU?</summary>
+<p>R-type instructions pass the register values from the regfile into the ALU. In Part A, you already passed the first register value <code>RegReadData1</code> into the first input of the ALU. However, for the <code>addi</code> instruction, the second input of the ALU is an immediate. Since you want to support both R-type instructions and the <code>addi</code> instruction, you should use a multiplexer to select which input will be inputted to the ALU.</p>
+<p>The select bit of this multiplexer is <code>BSel</code>. You will implement the logic for determining <code>BSel</code> from the instruction bits in the control logic later in this task.</p>
+</details>
+<details>
+<summary>Memory: Do R-type instructions write to memory?</summary>
+<p>R-type instructions do not write to memory (they write to a register on the CPU, which is different from memory). This means we don't need to modify DMEM for this task.</p>
+</details>
+<details>
+<summary>Write back: What data is the R-type instruction writing, and where is the instruction writing this data to?</summary>
+<p>R-type instructions take the result of the computation (from the ALU output) and write the result to the register <code>rd</code>. In Part A, you already implemented logic to write the ALU output into a destination register.</p>
+</details>
+<h3 id="task-6-2-control-logic">Task 6.2: Control Logic</h3>
+<p>Modify <code>control-logic.circ</code> to output the correct control logic signals for R-type instructions. See the <a href="../control-logic/index.html">control logic appendix</a> for more details.</p>
+<h3 id="testing-and-debugging-1">Testing and Debugging</h3>
+<p>We don't have any provided tests for R-type instructions, so you'll need to write your own tests to find bugs in your implementation. Before requesting help from staff, please make sure you have some tests written, or we'll ask you to write some tests first before helping you.</p>
+<ol>
+<li>Navigate to <code>tests/integration-custom/in</code>.</li>
+<li>Write a RISC-V test and save it in a filename ending in <code>.s</code>.</li>
+<li>Run <code>bash test.sh test_custom</code>.</li>
+</ol>
+<h2 id="task-7-b-type-instructions">Task 7: B-type Instructions</h2>
+<p>The instructions you need to implement for this task are listed below:</p>
+<table>
+<tr>
+<td><b>Instruction</b></td>
+<td><b>Type</b></td>
+<td><b>Opcode</b></td>
+<td><b>Funct3</b></td>
+<td><b>Operation</b></td>
+</tr>
+<tr>
+<td><code>beq rs1, rs2, offset</code></td>
+<td rowspan="6">B</td>
+<td rowspan="6"><code>0x63</code></td>
+<td><code>0x0</code></td>
+<td class="c8"><code>
+if(rs1 == rs2)
+<br>
+&nbsp;PC = PC + offset
+</code></td>
+</tr>
+<tr>
+<td><code>bge rs1, rs2, offset</code></td>
+<td><code>0x5</code></td>
+<td class="c8"><code>
+if(rs1 >= rs2 (signed))
+<br>
+&nbsp;PC = PC + offset
+</code></td>
+</tr>
+<tr>
+<td><code>bgeu rs1, rs2, offset</code></td>
+<td><code>0x7</code></td>
+<td class="c8"><code>
+if(rs1 >= rs2 (unsigned))
+<br>
+&nbsp;PC = PC + offset
+</code></td>
+</tr>
+<tr>
+<td><code>blt rs1, rs2, offset</code></td>
+<td><code>0x4</code></td>
+<td class="c8"><code>
+if(rs1 < rs2 (signed))
+<br>
+&nbsp;PC = PC + offset
+</code></td>
+</tr>
+<tr>
+<td><code>bltu rs1, rs2, offset</code></td>
+<td><code>0x6</code></td>
+<td class="c8"><code>
+if(rs1 < rs2 (unsigned))
+<br>
+&nbsp;PC = PC + offset
+</code></td>
+</tr>
+<tr>
+<td><code>bne rs1, rs2, offset</code></td>
+<td><code>0x1</code></td>
+<td class="c8"><code>
+if(rs1 != rs2)
+<br>
+&nbsp;PC = PC + offset
+</code></td>
+</tr>
+</table>
+<h3 id="task-7-1-branch-comparator">Task 7.1: Branch Comparator</h3>
+<p>Fill in the branch comparator subcircuit in <code>branch-comp.circ</code>. This subcircuit takes two inputs and outputs the result of comparing the two inputs. We will use the output later for implementing branches.</p>
+<table><thead><tr><th>Signal Name</th><th>Direction</th><th>Bit Width</th><th align="left">Description</th></tr></thead><tbody>
+<tr><td><code>BrData1</code></td><td>Input</td><td>32</td><td align="left">First value to compare</td></tr>
+<tr><td><code>BrData2</code></td><td>Input</td><td>32</td><td align="left">Second value to compare</td></tr>
+<tr><td><code>BrUn</code></td><td>Input</td><td>1</td><td align="left"><code>1</code> when an <strong>unsigned</strong> comparison is wanted, and <code>0</code> when a <strong>signed</strong> comparison is wanted</td></tr>
+<tr><td><code>BrEq</code></td><td>Output</td><td>1</td><td align="left">Set to <code>1</code> if the two values are equal</td></tr>
+<tr><td><code>BrLt</code></td><td>Output</td><td>1</td><td align="left">Set to <code>1</code> if the value in rs1 is less than the value in rs2</td></tr>
+</tbody></table>
+<p>We've provided some unit tests for the branch comparator subcircuit. These are not comprehensive. You can run these tests with <code>bash test.sh test_branch_comp</code>.</p>
+<h3 id="task-7-2-immediate-generator">Task 7.2: Immediate Generator</h3>
+<p>Edit the immediate generator in <code>imm-gen.circ</code> so that it can generate immediates for B-type instructions in addition to immediates for I-type instructions (which you implemented in Part A).</p>
+<p>Recall that the bits of the immediate are stored in different bits of the instruction, depending on the type of the instruction. The <code>ImmSel</code> signal, which you will implement in the control logic, will determine which type of immediate this subcircuit should generate.</p>
+<p>The immediate storage formats are listed below:</p>
+<table>
+<thead>
+<tr>
+<th>Type<br></th>
+<th>ImmSel (default)<br></th>
+<th style="text-align:center">Bits 31-20</th>
+<th style="text-align:center">Bits 19-12</th>
+<th style="text-align:center">Bit 11</th>
+<th style="text-align:center">Bits 10-5</th>
+<th style="text-align:center">Bits 4-1</th>
+<th style="text-align:center">Bit 0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I</td>
+<td><code>0b000</code></td>
+<td style="text-align:center" colspan="3"><code>inst[31]</code></td>
+<td style="text-align:center" colspan="3"><code>inst[30:20]</code></td>
+</tr>
+<tr>
+<td>S</td>
+<td><code>0b001<br></code></td>
+<td style="text-align:center" colspan="3"><code>inst[31]</code></td>
+<td style="text-align:center"><code>inst[30:25]</code></td>
+<td style="text-align:center" colspan="2"><code>inst[11:7]</code></td>
+</tr>
+<tr>
+<td>B</td>
+<td><code>0b010</code></td>
+<td style="text-align:center" colspan="2"><code>inst[31]</code></td>
+<td style="text-align:center"><code>inst[7]</code></td>
+<td style="text-align:center"><code>inst[30:25]</code></td>
+<td style="text-align:center"><code>inst[11:8]</code></td>
+<td style="text-align:center"><code>0</code></td>
+</tr>
+<tr>
+<td>U</td>
+<td><code>0b011</code></td>
+<td style="text-align:center" colspan="2"><code>inst[31:12]</code></td>
+<td style="text-align:center" colspan="4"><code>0</code></td>
+</tr>
+<tr>
+<td>J<br></td>
+<td><code>0b100</code></td>
+<td style="text-align:center"><code>inst[31]</code></td>
+<td style="text-align:center"><code>inst[19:12]</code></td>
+<td style="text-align:center"><code>inst[20]</code></td>
+<td style="text-align:center" colspan="2"><code>inst[30:21]</code></td>
+<td style="text-align:center"><code>0</code></td>
+</tr>
+</tbody>
+</table>
+<p>Recall that all immediates are 32 bits and sign-extended. (Sign extension is shown in the table as <code>inst[31]</code> repeated in the upper bits.)</p>
+<p>We've provided some unit tests for the immediate generator subcircuit. These are not comprehensive. You can run these tests with <code>bash test.sh test_imm_gen</code>.</p>
+<p>Note that if you only implement generating B-type immediates now, some tests for other immediate types will fail, but make sure that the <code>imm-gen-b-type</code> test passes.</p>
+<p>The <code>ImmSel</code> values in the table represent the default encoding (mapping of <code>ImmSel</code> values to immediate types). If you choose to use a different encoding:</p>
+<ol>
+<li>Navigate to <code>tests/unit-imm-gen</code>.</li>
+<li>Open <code>imm-gen-encoding.csv</code>.</li>
+<li>Replace the numbers with your selected encoding (in decimal). For example, if you're using <code>ImmSel = 0b110</code> to denote an I-type instruction, the second line should say <code>I,6</code>.</li>
+<li>Run the unit tests with <code>bash test.sh test_imm_gen</code>.</li>
+</ol>
+<h3 id="task-7-3-datapath">Task 7.3: Datapath</h3>
+<p>Modify your datapath in <code>cpu.circ</code> so that it can support B-type instructions.</p>
+<p>If you're stuck, read further for some guiding questions. As with Task 4, it may help to think about each of the five stages for executing an instruction.</p>
+<details>
+<summary>Instruction Fetch: How do B-type instructions affect the program counter?</summary>
+<p>Recall that branching instructions add an immediate to the current value of PC. If the branch is taken, the PC changes to be the result of this addition. If the branch is not taken, or the instruction is not an B-type instruction, then PC changes to PC+4 (just like in the previous tasks). We will implement this in the write-back stage.</p>
+</details>
+<details>
+<summary>Instruction Decode: What do we need to read from the register file?</summary>
+<p>B-type instructions have two source registers, <code>rs1</code> and <code>rs2</code>, that we need to read from the register file. In the previous task, you already implemented reading the values in <code>rs1</code> and <code>rs2</code> for R-type instructions.</p>
+</details>
+<details>
+<summary>Execute: What two data values (<code>A</code> and <code>B</code>) should an B-type instruction input to the ALU?</summary>
+<p>B-type instructions use the ALU to add an immediate to PC. You will need to add a multiplexer so that the ALU can receive either PC or the value in <code>rs1</code>, depending on the instruction being executed. The select bit of this multiplexer is <code>ASel</code>. In the previous tasks, you already implemented sending an immediate to the ALU.</p>
+</details>
+<details>
+<summary>Memory: Do B-type instructions write to memory?</summary>
+<p>B-type instructions do not write to memory. This means we don't need to modify DMEM for this task.</p>
+</details>
+<details>
+<summary>Write back: What data is the B-type instruction writing, and where is the instruction writing this data to?</summary>
+<p>B-type instructions take the result of the addition (PC + immediate, from the ALU output) and might write the result to PC (depending on if the branch is taken). You should use a multiplexer to select which value will be written to PC.</p>
+<p>The select bit of this multiplexer is <code>PCSel</code>. You will implement the logic for determining <code>PCSel</code> from the instruction bits in the control logic.</p>
+</details>
+<h3 id="task-7-4-control-logic">Task 7.4: Control Logic</h3>
+<p>Modify <code>control-logic.circ</code> to output the correct control logic signals for B-type instructions. See the <a href="../control-logic/index.html">control logic appendix</a> for more details.</p>
+<h3 id="testing-and-debugging-2">Testing and Debugging</h3>
+<p>We have provided some tests for B-type instructions. You can run them with:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh test_integration_branch</span>
+</span></code></pre>
+<p>These tests are not comprehensive, so you should write your own tests to find bugs in your implementation.</p>
+<ol>
+<li>Navigate to <code>tests/integration-custom/in</code>.</li>
+<li>Write a RISC-V test and save it in a filename ending in <code>.s</code>.</li>
+<li>Run <code>bash test.sh test_custom</code>.</li>
+</ol>
+<h2 id="task-8-loading-and-storing">Task 8: Loading and Storing</h2>
+<p>The instructions you need to implement for this task are listed below:</p>
+<table>
+<colgroup>
+<col span="1" style="width: 20%;">
+<col span="1" style="width: 5%;">
+<col span="1" style="width: 5%;">
+<col span="1" style="width: 5%;">
+<col span="1" style="width: 65%;">
+</colgroup>
+<tr>
+<td><b>Instruction</b></td>
+<td><b>Type</b></td>
+<td><b>Opcode</b></td>
+<td><b>Funct3</b></td>
+<td><b>Operation</b></td>
+</tr>
+<tr>
+<td><code>lb rd, offset(rs1)</code></td>
+<td rowspan="3">I</td>
+<td rowspan="3"><code>0x03</code></td>
+<td><code>0x0</code></td>
+<td><code>rd = </code>1 byte of memory at address <code>rs1 + imm</code>, sign-extended</td>
+</tr>
+<tr>
+<td><code>lh rd, offset(rs1)</code></td>
+<td><code>0x1</code></td>
+<td><code>rd = </code>2 bytes of memory starting at address <code>rs1 + imm</code>, sign-extended</td>
+</tr>
+<tr>
+<td><code>lw rd, offset(rs1)</code></td>
+<td><code>0x2</code></td>
+<td><code>rd = </code>4 bytes of memory starting at address <code>rs1 + imm</code></td>
+</tr>
+<tr>
+<td><code>sb rs2, offset(rs1)</code></td>
+<td rowspan="3">S</td>
+<td rowspan="3"><code>0x23</code></td>
+<td><code>0x0</code></td>
+<td>Stores least-significant byte of <code>rs2</code> at the address <code>rs1 + imm</code> in memory</td>
+</tr>
+<tr>
+<td><code>sh rs2, offset(rs1)</code></td>
+<td><code>0x1</code></td>
+<td>Stores the 2 least-significant bytes of <code>rs2</code> starting at the address <code>rs1 + imm</code> in memory</td>
+</tr>
+<tr>
+<td><code>sw rs2, offset(rs1)</code></td>
+<td><code>0x2</code></td>
+<td>Stores <code>rs2</code> starting at the address <code>rs1 + imm</code> in memory</td>
+</tr>
+</table>
+<h3 id="task-8-1-immediate-generator">Task 8.1: Immediate Generator</h3>
+<p>Edit the immediate generator in <code>imm-gen.circ</code> so that it can generate immediates for S-type instructions in addition to all the instruction types from previous tasks. See <a href="index.html#task-7-2-immediate-generator">the earlier immediate generator task</a> for details.</p>
+<p>We've provided some unit tests for the immediate generator subcircuit. These are not comprehensive. You can run these tests with <code>bash test.sh test_imm_gen</code>.</p>
+<p>Note that if you only implement generating S-type immediates now, some tests for other immediate types will fail, but make sure that the <code>imm-gen-s-type</code> test passes.</p>
+<h3 id="task-8-2-partial-loads-and-stores">Task 8.2: Partial Loads and Stores</h3>
+<p>See <a href="../partial-load-store/index.html">Appendix: Partial Loads and Stores</a> to implement this task.</p>
+<h3 id="task-8-3-datapath">Task 8.3: Datapath</h3>
+<p>With the help of the partial load and partial store circuits you've just made, modify your datapath in <code>cpu.circ</code> so that it can support loads and stores.</p>
+<p>You should provide an address input <code>MemAddress</code> to DMEM. Remember that the ALU calculates this address by adding the address in <code>rs1</code> and the offset immediate.</p>
+<p>You should also provide <code>MemWriteMask</code> and <code>MemWriteData</code> to DMEM. These are calculated by your partial load and partial store subcircuits.</p>
+<p>For load instructions, you should also add functionality in the write-back stage so that the DMEM output data, processed by your partial load subcircuit, is written back to the <code>rd</code> register.</p>
+<h3 id="task-8-4-control-logic">Task 8.4: Control Logic</h3>
+<p>Modify <code>control-logic.circ</code> to output the correct control logic signals for loads and stores. See the <a href="../control-logic/index.html">control logic appendix</a> for more details.</p>
+<h3 id="testing-and-debugging-3">Testing and Debugging</h3>
+<p>You'll need to write your own tests to find bugs in your implementation. Before requesting help from staff, please make sure you have some tests written, or we'll ask you to write some tests first before helping you.</p>
+<ol>
+<li>Navigate to <code>tests/integration-custom/in</code>.</li>
+<li>Write a RISC-V test and save it in a filename ending in <code>.s</code>.</li>
+<li>Run <code>bash test.sh test_custom</code>.</li>
+</ol>
+<p>We have provided some tests for load and store instructions, but they require <code>lui</code> to be implemented first. You can run them with:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh test_integration_mem</span>
+</span></code></pre>
+<h2 id="task-9-jumps-and-u-type-instructions">Task 9: Jumps and U-type Instructions</h2>
+<p>The instructions you need to implement for this task are listed below:</p>
+<table>
+<tr>
+<td><b>Instruction</b></td>
+<td><b>Type</b></td>
+<td><b>Opcode</b></td>
+<td><b>Funct3</b></td>
+<td><b>Operation</b></td>
+</tr>
+<tr>
+<td><code>jal rd, imm</code></td>
+<td>J</td>
+<td><code>0x6f</code></td>
+<td></td>
+<td class="c8"><code>
+rd = PC + 4
+<br>
+&nbsp;PC = PC + offset
+</code></td>
+</tr>
+<tr>
+<td><code>jalr rd, rs1, imm</code></td>
+<td>I</td>
+<td><code>0x67</code></td>
+<td><code>0x0</code></td>
+<td class="c8"><code>
+rd = PC + 4
+<br>
+&nbsp;PC = rs1 + imm
+</code></td>
+</tr>
+<tr>
+<td><code>auipc rd, imm</code></td>
+<td rowspan="2">U</td>
+<td><code>0x17</code></td>
+<td></td>
+<td><code>rd = PC + imm</code></td>
+</tr>
+<tr>
+<td><code>lui rd, imm</code></td>
+<td><code>0x37</code></td>
+<td></td>
+<td><code>rd = imm</code></td>
+</tr>
+</table>
+<h3 id="task-9-1-immediate-generator">Task 9.1: Immediate Generator</h3>
+<p>Edit the immediate generator in <code>imm-gen.circ</code> so that it can generate immediates for U-type instructions and J-type instructions. See <a href="index.html#task-7-2-immediate-generator">the earlier immediate generator task</a> for details.</p>
+<p>We've provided some unit tests for the immediate generator subcircuit. These are not comprehensive. You can run these tests with <code>bash test.sh test_imm_gen</code>.</p>
+<h3 id="task-9-2-datapath">Task 9.2: Datapath</h3>
+<p>Modify your datapath in <code>cpu.circ</code> so that it can support these instructions. Most of these instructions are already supported by your datapath so far.</p>
+<p>Note that the U-type instructions require left-shifting the immediate by 12 bits (e.g. <code>lui</code> is written as <code>rd = imm &lt;&lt; 12</code> on the reference card), but this should already be done by your immediate generator, so your datapath doesn't need to perform any extra shifting.</p>
+<p>To support <code>jalr</code>, you should connect PC+4 to your multiplexer in the write-back stage so that PC+4 can be written back to <code>rd</code>.</p>
+<h3 id="task-9-3-control-logic">Task 9.3: Control Logic</h3>
+<p>Modify <code>control-logic.circ</code> to output the correct control logic signals for jumps and U-type instructions. See the <a href="../control-logic/index.html">control logic appendix</a> for more details.</p>
+<p>Hint: Be careful about which ALU operation you're performing for the <code>lui</code> instruction. One of the ALU operations you made in Part A but didn't use anywhere else will come in handy here.</p>
+<h3 id="testing-and-debugging-4">Testing and Debugging</h3>
+<p>We have provided some tests for jump instructions and <code>lui</code> (but not <code>auipc</code>). You can run them with:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh test_integration_jump</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh test_integration_lui</span>
+</span></code></pre>
+<p>These tests are not comprehensive, so you should write your own tests to find bugs in your implementation.</p>
+<ol>
+<li>Navigate to <code>tests/integration-custom/in</code>.</li>
+<li>Write a RISC-V test and save it in a filename ending in <code>.s</code>.</li>
+<li>Run <code>bash test.sh test_custom</code>.</li>
+</ol>
+<h2 id="task-10-pipelining">Task 10: Pipelining</h2>
+<p>In this task, you will implement a 2-stage pipeline in your CPU:</p>
+<ol>
+<li><strong>Instruction Fetch</strong>: An instruction is fetched from the instruction memory.</li>
+<li><strong>Execute</strong>: The instruction is decoded, executed, and committed (written back). This is a combination of the remaining four stages of a classic five-stage RISC-V pipeline (ID, EX, MEM and WB).</li>
+</ol>
+<h3 id="task-10-1-getting-started">Task 10.1: Getting Started</h3>
+<p>To get started, first think about which values are now different between the two stages of the pipeline. For example, will stage 1 and stage 2 have the same or different PC values? If the stages need different PCs, then you now need two different PC values in your circuit at any given time step.</p>
+<p>Once you've listed out which values are different between the stages (hint: there aren't many), you'll need to store those values between the pipelining stages.</p>
+<p>Finally, go through your entire circuit and make sure that you specify which stage's value you want to use for any values that are different between stages. For example, if the stages need different PCs, then any time you use PC in your circuit, you should specify whether you want to use the stage 1 PC, or the stage 2 PC.</p>
+<p>Note: During the first cycle, the instruction register sitting between the pipeline stages won't contain an instruction loaded from memory. What should the second stage do? Luckily, Logisim automatically sets registers to zero on reset, so the instruction pipeline register will automatically start with a no-op! If you wish, you can depend on this behavior of Logisim.</p>
+<h3 id="task-10-2-hazards">Task 10.2: Hazards</h3>
+<p>Since your CPU will support branch and jump instructions, you'll need to handle control hazards that occur when branching.</p>
+<p>The instruction immediately after a branch or jump should not be executed if a branch is taken. By the time you send a branch/jump instruction into stage 2, stage 1 has already fetched (possibly) the wrong next instruction. Therefore, you will need to <em>flush</em> the instruction fetched in stage 1 by replacing it with a no-op. You should flush the stage 1 instruction only if a branch is taken in the stage 2 instruction (do not flush if it is not taken). You should always flush the stage 1 instruction when the stage 2 instruction is a jump.</p>
+<p>Hint: One of the control logic signals will tell you whether a branch or a jump is taken. You can use this control logic signal (from stage 2) in your stage 1 logic to determine when you need to flush the pipeline.</p>
+<p>To flush an instruction, your stage 1 logic should send a no-op instruction into stage 2 instead of using the fetched instruction. You can use <code>addi x0, x0, 0</code> (<code>0x00000013</code>) as a no-op.</p>
+<p>Some more things to consider:</p>
+<ul>
+<li>To MUX a no-op into stage 2, do you place it <em>before</em> or <em>after</em> the instruction register?</li>
+<li>What address should be requested next while the EX stage executes a no-op? Is this different than normal?</li>
+</ul>
+<h3 id="testing-and-debugging-5">Testing and Debugging</h3>
+<p>You can run the tests from the previous tasks on your pipelined CPU by adding the <code>--pipelined</code> or <code>-p</code> flag to the testing commands. For example:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh run_custom<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>p</span></span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh test_integration_branch<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>p</span></span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh test_integration_immediates<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>p</span></span>
+</span></code></pre>
+<p>Note that your pipelined CPU will no longer pass the non-pipelined tests (i.e. if you run tests without <code>-p</code>, they'll fail).</p>
+<h2 id="task-11-readme-update">Task 11: README Update</h2>
+<p>This is your opportunity to tell us about your experience and leave any feedback for this project. Some things you can write about:</p>
+<ul>
+<li>A bug you encountered, and how you were able to fix it</li>
+<li>A particular task that you learned a lot from, or a task you found tedious and not useful for learning</li>
+<li>Fixes we could make in future semesters (e.g. quality-of-life improvements)</li>
+<li>Reasoning behind your design choices (e.g. how you designed your control logic, advantages/disadvantages of your design)</li>
+</ul>
+<p>Your additions to the README should be at least 512 characters (although something more than the bare minimum would be nice), but other than that feel free to get creative!</p>
+<h2 id="submission-and-grading">Submission and Grading</h2>
+<p>Submit your assignment to the Project 3B submission on Gradescope. Part B is worth 80% of your overall Project 3 grade.</p>
+<ul>
+<li>Instructions (1.5 points each, 54 points total)</li>
+<li>Integration tests (2 points each, 24 points total)</li>
+<li>README (2 points)</li>
+</ul>
+<p>Total: 80 points</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container border-top pt-4 mb-5">
+<div class="row">
+<div class="col">
+<div id="dark-toggle-wrapper" class="d-none">
+<div class="form-check form-switch">
+<input id="inputDarkToggle" class="form-check-input" type="checkbox">
+<label class="form-check-label" for="inputDarkToggle">
+Dark Mode
+<a id="buttonDarkToggleReset" class="d-none" href="javascript:void(0);">(reset)</a>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+  
+
+  document.addEventListener("DOMContentLoaded", function() {
+    initToC();
+  });
+</script>
+</body>
+</html>

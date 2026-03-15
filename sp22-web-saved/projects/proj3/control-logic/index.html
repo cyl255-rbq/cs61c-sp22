@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="language" content="english">
+<title>Appendix: Control Logic | CS 61C Spring 2022</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<link rel="shortcut icon" type="image/png" href="../../../img/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../../css/main.css@h=36c89645dcb547d13f6f293a379a176dff22aab9affcefc8d3a19bc23c0f8db2.css" />
+<script defer type="text/javascript" src="../../../js/main.js@h=4096b5e2a18784c27ca139ca897694176eea13de3e2168cd7e7bcdd827a35c8d"></script>
+
+<script type="text/javascript" src="../../../js/main-sync.js@h=daca62fef99fb16ad6a5fd1517d7b18bed66d3241431785bf3ac1f134c166bf1"></script>
+<script>initDarkToggle();</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.17.0/tocbot.min.js" integrity="sha512-DJhUMo5TIBb3fFziiE+3OJG+j7ky+GxScxHdLADCXskEpc/AKQsbsorIYmGFJFaJvDIyP65rJNhnCTytfYAdUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+<div class="container">
+<a class="navbar-brand" href="../../../index.html">
+<img class="d-inline-block me-2 rounded" height="48" width="48" src="../../../img/icon-small.png" alt="outline of square computer chip with cs61c label" />
+<span class="align-middle">CS 61C Spring 2022</span>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle Navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item">
+<a class="nav-link" href="../../../calendar/index.html">Calendar</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../staff/index.html">Staff</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../policies/index.html">Policies</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../resources/index.html">Resources</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../exam/index.html">Exam</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../extensions/index.html">Extensions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://oh.cs61c.org/">OH Queue</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://venus.cs61c.org/">Venus</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://inst.eecs.berkeley.edu/~cs61c/archives.html">Semesters</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<main class="mb-4">
+<section class="section">
+<div class="container">
+<div class="row spec">
+<nav class="col-md-3 d-print-none sticky-md-top nav-wrapper" aria-label="table of contents">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="../index.html">Project 3: CS61CPU</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../part-a/index.html">Part A</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../part-b/index.html">Part B</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html">Appendix: Control Logic</a>
+<div id="toc-wrapper">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#rom-approach">ROM Approach</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#setup">Setup</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#filling-in-spreadsheet">Filling in Spreadsheet</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#wiring-rom-inputs">Wiring ROM Inputs</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#wiring-pcsel">Wiring PCSel</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../testing/index.html">Appendix: Testing and Debugging</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../partial-load-store/index.html">Appendix: Partial Loads and Stores</a>
+</li>
+</ul>
+</nav>
+<div id="toc-content-wrapper" class="content col-md-9">
+<h1>Appendix: Control Logic</h1>
+<p>The control logic subcircuit takes the instruction bits and outputs all the control signals needed to execute that instruction. Here is a summary of the control signals you should implement:</p>
+<table>
+<tr>
+<td><b>Signal</b></td>
+<td><b>Bit Width</b></td>
+<td><b>Purpose</b></td>
+</tr>
+<tr>
+<td><code>PCSel</code></td>
+<td>1</td>
+<td>Selects the ALU input for all B-type instructions where the branch is taken (according to the branch comparator output) and all jumps. Selects the PC+4 input for all other instructions.</td>
+</tr>
+<tr>
+<td><code>ImmSel</code></td>
+<td>3</td>
+<td>Selects the instruction format so the immediate generator can extract the immediate correctly. The default encoding is <code>[0b000 = I]</code>, <code>[0b001 = S]</code>, <code>[0b010 = B]</code>, <code>[0b011 = U]</code>, <code>[0b100 = J]</code>, though you're welcome to pick your own (see below).</td>
+</tr>
+<tr>
+<td><code>RegWEn</code></td>
+<td>1</td>
+<td>1 if the instruction writes to a register, and 0 otherwise.</td>
+</tr>
+<tr>
+<td><code>BrUn</code></td>
+<td>1</td>
+<td>1 if the branch instruction is unsigned, and 0 if the branch instruction is signed. Don't care for all other instructions.</td>
+</tr>
+<tr>
+<td><code>ASel</code></td>
+<td>1</td>
+<td>Selects whether to send the data in <code>RegReadData1</code> or the PC to the ALU.</td>
+</tr>
+<tr>
+<td><code>BSel</code></td>
+<td>1</td>
+<td>Selects whether to send the data in <code>RegReadData2</code> or the immediate to the ALU.</td></td>
+</tr>
+<tr>
+<td><code>ALUSel</code></td>
+<td>4</td>
+<td>Selects the correct operation for the ALU. See <a href="../part-a/index.html#task-1-arithmetic-logic-unit-alu">Task 1</a> for the mapping of <code>ALUSel</code> values to operations.</td>
+</tr>
+<tr>
+<td><code>MemRW</code></td>
+<td>1</td>
+<td>1 if the instruction writes to memory, and 0 otherwise.</td>
+</tr>
+<tr>
+<td><code>WBSel</code></td>
+<td>2</td>
+<td>Selects whether to write the memory read from DMEM, the ALU output, or PC+4 to <code>rd</code>.</td>
+</tr>
+</table>
+<p>There are two main approaches to implementing this logic:</p>
+<ol>
+<li>
+<p><strong>Read-only memory (ROM)</strong>: Type out the control signals in a table. Use logic gates to determine which row of signals from the table should be outputted for a given instruction. This involves less Logisim wiring and more filling in values in a spreadsheet.</p>
+</li>
+<li>
+<p><strong>Hard-wired control</strong>: Use logic gates (e.g. AND/OR/NOT gates, MUXes) to calculate the control bits from the instruction. This involves more Logisim wiring.</p>
+</li>
+</ol>
+<p>Regardless of which approach you choose, you should modify <code>control_logic.circ</code> in each task to implement your control logic.</p>
+<h2 id="rom-approach">ROM Approach</h2>
+<h3 id="setup">Setup</h3>
+<ol>
+<li><strong>Make a copy of this spreadsheet</strong>: <a href="https://docs.google.com/spreadsheets/d/1yX12e8tRQAVIDJsNoREvf42UP7sXdiQVcY6aiQ3SypU/view">[61C SP22] Project 3B ROM Control Logic</a>.</li>
+<li>For each instruction, you'll <strong>fill in the cells</strong> under the &quot;Control Signals&quot; header. Do not modify any cells under other headers.</li>
+<li><strong>Copy the data</strong> in the &quot;ROM Output&quot; column (not including the headers).</li>
+<li><strong>Open <code>control-logic.circ</code></strong> in Logisim, and <strong>click on the ROM</strong>.</li>
+<li>In the <strong>properties tab</strong> on the left-hand sidebar, <strong>click on &quot;(click to edit)&quot;</strong> next to the &quot;Contents&quot; label.</li>
+<li><strong>Click on the upper-left-most data cell</strong> (which will be a collection of 4 hex digits without a preceding <code>0x</code>) and <strong>paste your values from earlier into the ROM</strong>. You should see the ROM control bits change to the values from your spreadsheet.</li>
+<li><strong>Click &quot;Close Window&quot;</strong> to exit the ROM programming view.</li>
+</ol>
+<h3 id="filling-in-spreadsheet">Filling in Spreadsheet</h3>
+<p>Some things to keep in mind when filling out the spreadsheet:</p>
+<ul>
+<li>Enter binary digits without the leading <code>0b</code> (type <code>01</code> instead of <code>0b01</code>).</li>
+<li>If the upper-right corner of the control signal's cell turns red, or if you see a warning when you hover over the cell, your cell contents are invalid. Common sources of errors include entering a control signal that has too many or too few bits, or entering characters other than <code>0</code> or <code>1</code> in a control logic cell.</li>
+<li>If a control signal is &quot;don't care&quot; for a certain instruction, you can put any valid value in the corresponding cell.</li>
+<li>Make sure to fill in every cell in a given row. If a row has empty cells, the ROM output value is unreliable (garbage).</li>
+<li>You can use any encoding (which binary digits correspond to which control logic cases) for your control logic, as long as your encoding is consistent with your circuit. For example, suppose you choose to set <code>ASel = 0</code> for instructions that input the data in <code>RegReadData1</code> to the ALU, and <code>ASel = 1</code> for instructions that input the PC to the ALU. When you make a mux with <code>ASel</code> as the select bit, input 0 should be <code>RegReadData1</code> and input 1 should be the PC. You could also use the opposite encoding (<code>ASel = 0</code> for PC and <code>ASel = 1</code> for <code>RegReadData1</code>) and flip the mux inputs, and the circuit would still behave the same way.</li>
+</ul>
+<h3 id="wiring-rom-inputs">Wiring ROM Inputs</h3>
+<p>Once you have the spreadsheet ready, you'll need to add wiring to select which row of the ROM table you want to use for a given instruction.</p>
+<p>The &quot;ROM Input&quot; column on the spreadsheet indicates the input that must be passed into the ROM for each instruction. For example, your control logic, when passed in an <code>addi</code> instruction, needs to pass <code>15</code> (<code>0b1111</code>) into the ROM so the correct entry of control signals can be selected.</p>
+<p>To determine what instruction is being inputted into the control logic subcircuit, it might help to use comparators and constants to compare bits of the instruction against some fixed constant value.</p>
+<p>To map instructions to their specific input, a Priority Encoder might be helpful. To see how the Priority Encoder works, let's consider a toy example of an ALU that only performs 3 operations: add (ALUSel=<code>0</code>), mul (ALUSel=<code>1</code>), and <code>sub</code> (ALUSel=<code>2</code>). Suppose that we have <code>is_add</code>, <code>is_mul</code>, and <code>is_sub</code> tunnels that tell us whether an instruction requires the ALU to perform that operation. To generate the ALUSel control signal, we can simply connect the <code>is_add</code>, <code>is_mul</code>, and <code>is_sub</code> tunnels to their corresponding ALUSel position (say position 2 for sub) on the Priority Encoder. Now, the Priority Encoder will return the position of the active input signal, which in this case is the correct ALUSel value.</p>
+<p><img src="../priority-encoder-example.png" alt="Example of a priority encoder." /></p>
+<p>Note: In case there are multiple active signals at the same time, a Priority Encoder returns the largest active position. However, you should try to avoid having multiple active signals at once for this use case. After all, a single instruction can't require the ALU to perform both add and multiply at once.</p>
+<h3 id="wiring-pcsel">Wiring PCSel</h3>
+<p>The <code>PCSel</code> control signal cannot be encoded in the ROM since it depends on <code>BrEq</code> and <code>BrUn</code>, which are not passed into the ROM unit. To complete the control logic, write hard-wired control to drive the PCSel output.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container border-top pt-4 mb-5">
+<div class="row">
+<div class="col">
+<div id="dark-toggle-wrapper" class="d-none">
+<div class="form-check form-switch">
+<input id="inputDarkToggle" class="form-check-input" type="checkbox">
+<label class="form-check-label" for="inputDarkToggle">
+Dark Mode
+<a id="buttonDarkToggleReset" class="d-none" href="javascript:void(0);">(reset)</a>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+  
+
+  document.addEventListener("DOMContentLoaded", function() {
+    initToC();
+  });
+</script>
+</body>
+</html>
