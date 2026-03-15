@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="language" content="english">
+<title>Project 1 | CS 61C Spring 2022</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<link rel="shortcut icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../css/main.css@h=36c89645dcb547d13f6f293a379a176dff22aab9affcefc8d3a19bc23c0f8db2.css" />
+<script defer type="text/javascript" src="../../js/main.js@h=4096b5e2a18784c27ca139ca897694176eea13de3e2168cd7e7bcdd827a35c8d"></script>
+
+<script type="text/javascript" src="../../js/main-sync.js@h=daca62fef99fb16ad6a5fd1517d7b18bed66d3241431785bf3ac1f134c166bf1"></script>
+<script>initDarkToggle();</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.17.0/tocbot.min.js" integrity="sha512-DJhUMo5TIBb3fFziiE+3OJG+j7ky+GxScxHdLADCXskEpc/AKQsbsorIYmGFJFaJvDIyP65rJNhnCTytfYAdUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+<div class="container">
+<a class="navbar-brand" href="../../index.html">
+<img class="d-inline-block me-2 rounded" height="48" width="48" src="../../img/icon-small.png" alt="outline of square computer chip with cs61c label" />
+<span class="align-middle">CS 61C Spring 2022</span>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle Navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item">
+<a class="nav-link" href="../../calendar/index.html">Calendar</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../staff/index.html">Staff</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../policies/index.html">Policies</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../resources/index.html">Resources</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../exam/index.html">Exam</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../extensions/index.html">Extensions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://oh.cs61c.org/">OH Queue</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://venus.cs61c.org/">Venus</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://inst.eecs.berkeley.edu/~cs61c/archives.html">Semesters</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<main class="mb-4">
+<section class="section">
+<div class="container">
+<div class="row spec">
+<nav id="toc-wrapper" class="col-md-3 d-print-none sticky-md-top nav-wrapper" aria-label="table of contents">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#setup">Setup</a>
+ </li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#conceptual-overview">Conceptual Overview</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#the-game-board">The game board</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#numbering-snakes">Numbering snakes</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#the-game-state-t-struct">The game_state_t struct</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#the-snake-struct">The snake struct</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-1-create-default-state">Task 1: create_default_state</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#hints">Hints</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-and-debugging">Testing and debugging</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-2-free-state">Task 2: free_state</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-and-debugging-1">Testing and debugging</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-3-print-board">Task 3: print_board</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#hints-1">Hints</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-and-debugging-2">Testing and debugging</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-4-update-state">Task 4: update_state</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-4-1-helpers">Task 4.1: Helpers</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-4-2-next-square">Task 4.2: next_square</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-4-3-update-head">Task 4.3: update_head</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-4-4-update-tail">Task 4.4: update_tail</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-4-5-update-state">Task 4.5: update_state</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-5-load-board">Task 5: load_board</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-6-initialize-snake">Task 6: initialize_snake</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-6-1-find-head">Task 6.1: find_head</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-6-2-initialize-snake">Task 6.2: initialize_snake</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-7-main">Task 7: main</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-8-readme">Task 8: README</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#submission-and-grading">Submission and Grading</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#just-for-fun-play-snake">Just for fun: play snake</a>
+</li>
+</ul>
+</nav>
+<div id="toc-content-wrapper" class="content col-md-9">
+<h1 class="title">Project 1: snek</h1>
+<p class="subtitle">Deadline: Wednesday, February 9, 11:59:59 PM PT</p>
+<style>
+pre.language-txt {
+  line-height: 1;
+}
+</style>
+<p>Welcome to the first project of 61C! In this project, you'll get some practice with C coding by creating a playable snake game. If you're not familiar with snake, <a href="https://www.xarg.org/project/html5-snake/">you can try out a demo at this link</a>.</p>
+<p>Content in scope for this project: Lectures 2-4, Discussion 2, Labs 1-2, and Homework 2. Also, make sure you've finished the setup in Lab 0.</p>
+<h2 id="setup">Setup</h2>
+<p>This assignment can be done alone or with a partner. Once you run these steps, you will <em>not</em> be able to change (add, remove, or swap) partners for this project, so please be sure of your partner before starting the project. If there are extenuating circumstances that require a partner switch (e.g. your partner drops the class, your partner is unresponsive), please reach out to us privately.</p>
+<ol>
+<li>
+<p>Visit <a href="https://galloc.cs61c.org/assignments/proj1">Galloc</a>. Log in and start the Project 1 assignment. This will create a GitHub repository for your work. If you have a partner, one partner should create a repo and invite the other partner to that repo. The other partner should accept the invite without creating their own repo.</p>
+</li>
+<li>
+<p>Clone the repository on your workspace. We recommend using the hive machines.</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> clone <a href="https://cs61c.org/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="690e001d290e001d011c0b470a0604">[email&#160;protected]</a>:61c-student/sp22-proj1-USERNAME.git 61c-proj1</span>
+</span></code></pre>
+<p>(replace <code>USERNAME</code> with your GitHub username)</p>
+</li>
+<li>
+<p>Navigate to your repository:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-support z-function z-cd z-shell">cd</span></span><span class="z-meta z-function-call z-arguments z-shell"> 61c-proj1</span>
+</span></code></pre>
+</li>
+<li>
+<p>Add the starter repository as a remote:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> remote add starter https://github.com/61c-teach/sp22-proj1-starter.git</span>
+</span></code></pre>
+</li>
+</ol>
+<h2 id="conceptual-overview">Conceptual Overview</h2>
+<h3 id="the-game-board">The game board</h3>
+<p>A snake game can be represented by a rectangular grid of characters. The grid contains walls, fruits, and one or more snakes. An example of a game is shown below:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">##############
+#            #
+#    dv      #
+#     v   #  #
+#     v   #  #
+#   s &gt;&gt;&gt; #  #
+#   v     #  #
+# *&lt;&lt;  *  #  #
+#            #
+##############
+</span></code></pre>
+<p>The grid has the following special characters:</p>
+<ul>
+<li><code>#</code> denotes a wall.</li>
+<li><code> </code> (space character) denotes an empty space.</li>
+<li><code>*</code> denotes a fruit.</li>
+<li><code>wasd</code> denotes the tail of a snake.</li>
+<li><code>^&lt;v&gt;</code> denotes the body of a snake.</li>
+<li><code>x</code> denotes the head of a snake that has died.</li>
+</ul>
+<p>Each character of the snake tells you what direction the snake is currently heading in:</p>
+<ul>
+<li><code>w</code> or <code>^</code> denotes up</li>
+<li><code>a</code> or <code>&lt;</code> denotes left</li>
+<li><code>s</code> or <code>v</code> denotes down</li>
+<li><code>d</code> or <code>&gt;</code> denotes right</li>
+</ul>
+<p>At each time step, each snakes moves according to the following rules:</p>
+<ul>
+<li>Each snake moves one step in the direction of its head.</li>
+<li>If the head crashes into the body of a snake or a wall, the snake dies and stops moving. When a snake dies, the head is replaced with an <code>x</code>.</li>
+<li>If the head moves into a fruit, the snake eats the fruit and grows by 1 unit in length. Each time fruit is consumed, a new fruit is generated on the board.</li>
+</ul>
+<p>In the example above, after one time step, the board will look like this:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">##############
+#         *  #
+#     s      #
+#     v   #  #
+#     v   #  #
+#   s &gt;&gt;&gt;&gt;#  #
+#   v     #  #
+# &lt;&lt;&lt;  *  #  #
+#            #
+##############
+</span></code></pre>
+<p>After one more time step, the board will look like this:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">##############
+#         *  #
+#     s      #
+#     v   #  #
+#     v   #  #
+#     &gt;&gt;&gt;x#  #
+#   s     #  #
+#&lt;&lt;&lt;&lt;  *  #  #
+#            #
+##############
+</span></code></pre>
+<h3 id="numbering-snakes">Numbering snakes</h3>
+<p>Each snake on the board is numbered depending on the position of its tail, in the order that the tails appear in the file (going from top-to-bottom, then left-to-right). For example, consider the following board with four snakes:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">#############
+#  s  d&gt;&gt;&gt;  #
+#  v   &lt;&lt;a  #
+#  v        #
+#       ^   #
+#       w   #
+#############
+</span></code></pre>
+<p>Snake 0 is the snake with tail <code>s</code>, snake 1 has tail <code>d</code>, snake 2 has tail <code>a</code>, and snake 3 has tail <code>w</code>.</p>
+<p>Once the snakes are numbered from their initial positions, the numbering of the snakes does not change throughout the game.</p>
+<h3 id="the-game-state-t-struct">The <code>game_state_t</code> struct</h3>
+<p>A snake game is stored in memory in a <code>game_state_t</code> struct. The struct contains the following fields:</p>
+<ul>
+<li><code>unsigned int x_size</code>: Width of the game board.</li>
+<li><code>unsigned int y_size</code>: Height of the game board.</li>
+<li><code>char** board</code>: The game board in memory. Each element of the <code>board</code> array is a <code>char*</code> pointer to a character array containing a row of the map.</li>
+<li><code>unsigned int num_snakes</code>: The number of snakes on the board.</li>
+<li><code>snake* snakes</code>: An array of snake structs.</li>
+</ul>
+<h3 id="the-snake-struct">The <code>snake</code> struct</h3>
+<p>Each <code>snake</code> struct contains the following fields:</p>
+<ul>
+<li><code>unsigned int tail_x</code>: The x-coordinate (column) of the snake's tail.</li>
+<li><code>unsigned int tail_y</code>: The y-coordinate (row) of the snake's tail.</li>
+<li><code>unsigned int head_x</code>: The x-coordinate (column) of the snake's head.</li>
+<li><code>unsigned int head_y</code>: The y-coordinate (row) of the snake's head.</li>
+<li><code>bool live</code>: <code>true</code> if the snake is alive, and <code>false</code> if the snake is dead.</li>
+</ul>
+<p>Please don't modify the provided struct definitions. You should only need to modify <code>state.c</code> and <code>snake.c</code> in this project.</p>
+<h2 id="task-1-create-default-state">Task 1: <code>create_default_state</code></h2>
+<p>Implement the <code>create_default_state</code> function in <code>state.c</code>. This function should create a default snake game in memory with the following starting state (which you can hardcode), and return a pointer to the newly created <code>game_state_t</code> struct.</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">##############
+#            #
+#        *   #
+#            #
+#   d&gt;       #
+#            #
+#            #
+#            #
+#            #
+##############
+</span></code></pre>
+<table>
+<colgroup>
+<col span="1" style="width: 12%;">
+<col span="1" style="width: 23%;">
+<col span="1" style="width: 65%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="3"> <code>create_default_state</code></td>
+</tr>
+<tr>
+<td><b>Arguments</b></td>
+<td colspan="2">None</td>
+</tr>
+<tr>
+<td><b>Return values</b></td>
+<td><code>game_state_t *</code></td>
+<td>A pointer to the newly created <code>game_state_t</code> struct.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="hints">Hints</h3>
+<ul>
+<li>The board has 10 rows and 14 columns. The fruit is at row 2, column 9 (zero-indexed). The tail is at row 4, column 4, and the head is at row 4, column 5.</li>
+<li>Which part of memory (code, static, stack, heap) should you store the new game in?</li>
+<li><code>strcpy</code> may be helpful.</li>
+</ul>
+<h3 id="testing-and-debugging">Testing and debugging</h3>
+<p>You can run <code>make run-unit-tests</code> to check your implementation for each task. Please note that the unit tests are <em>not</em> comprehensive, and passing them does not guarantee that your implementation is fully correct. However, they should be helpful to get you started with debugging.</p>
+<p>If your implementation isn't working, it's time to start debugging. You can add <code>printf</code> statements in your code to print out variables during code execution, and then run <code>make run-unit-tests</code> again to see the output of your print statements. </p>
+<p>Also, you can use <code>make debug-unit-tests</code> to start CGDB.</p>
+<h2 id="task-2-free-state">Task 2: <code>free_state</code></h2>
+<p>Implement the <code>free_state</code> function in <code>state.c</code>. This function should free all memory allocated for the given state, including all <code>snake</code> structs and all <code>map</code> contents.</p>
+<table>
+<colgroup>
+<col span="1" style="width: 12%;">
+<col span="1" style="width: 23%;">
+<col span="1" style="width: 65%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="3"> <code>free_state</code></td>
+</tr>
+<tr>
+<td><b>Arguments</b></td>
+<td><code>game_state_t* state</code></td>
+<td>A pointer to the <code>game_state_t</code> struct to be freed</td>
+</tr>
+<tr>
+<td><b>Return values</b></td>
+<td colspan="2">None</td>
+</tr>
+</tbody>
+</table>
+<h3 id="testing-and-debugging-1">Testing and debugging</h3>
+<p>To test if we correctly freed memory for the game state, run <code>make valgrind-unit-tests</code> to check for memory leaks. If nothing is leaked, then you've passed the unit test for this task.</p>
+<h2 id="task-3-print-board">Task 3: <code>print_board</code></h2>
+<p>Implement the <code>print_board</code> function in <code>state.c</code>. This function should print out the given game board to the given file pointer.</p>
+<table>
+<colgroup>
+<col span="1" style="width: 12%;">
+<col span="1" style="width: 23%;">
+<col span="1" style="width: 65%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="3"> <code>print_board</code></td>
+</tr>
+<tr>
+<td rowspan="2"><b>Arguments</b></td>
+<td><code>game_state_t* state</code></td>
+<td>A pointer to the <code>game_state_t</code> struct to be printed</td>
+</tr>
+<tr>
+<td><code>FILE* fp</code></td>
+<td>A pointer to the file object where the board should be printed to</td>
+</tr>
+<tr>
+<td><b>Return values</b></td>
+<td colspan="2">None</td>
+</tr>
+</tbody>
+</table>
+<h3 id="hints-1">Hints</h3>
+<ul>
+<li>The <code>fprintf</code> function will help you print out characters and/or strings to a given file pointer.</li>
+</ul>
+<h3 id="testing-and-debugging-2">Testing and debugging</h3>
+<p>Run <code>make run-unit-tests</code> and <code>make debug-unit-tests</code> to test and debug, just like before. Remember to uncomment out the lines you commented out from the previous task before running tests.</p>
+<p>If your function executes successfully (doesn't segfault or crash) but doesn't print the correct output, the board you printed will be in <code>unit-test-out.snk</code>. A correctly-printed board should match the default board from Task 1.</p>
+<h2 id="task-4-update-state">Task 4: <code>update_state</code></h2>
+<p>Implement the <code>update_state</code> function in <code>state.c</code>. This function should move the snakes one timestep according to the rules of the game.</p>
+<p>You are free to implement this function however you want, but you'd like, you can work through this task by implementing the helper functions we've provided. Helper functions are not graded; for this task, we'll only be checking that <code>update_state</code> is correct.</p>
+<h3 id="task-4-1-helpers">Task 4.1: Helpers</h3>
+<p>We have provided the following helper function definitions that you can implement. These functions are entirely independent of any game board or snake; they only take in a single character and output some information about that character.</p>
+<ul>
+<li><code>bool is_tail(char c)</code>: Returns true if <code>c</code> is part of the snake's tail. The snake's tail consists of these characters: <code>wasd</code>. Returns false otherwise.</li>
+<li><code>bool is_snake(char c)</code>: Returns true if <code>c</code> is part of the snake. The snake consists of these characters: <code>wasd^&lt;&gt;vx</code>. Returns false otherwise.</li>
+<li><code>char body_to_tail(char c)</code>: Converts a character in the snake's body (<code>^&lt;&gt;v</code>) to the matching character representing the snake's tail (<code>wasd</code>).</li>
+<li><code>int incr_x(char c)</code>: Returns 1 if <code>c</code> is <code>&gt;</code> or <code>d</code>. Returns -1 if <code>c</code> is <code>&lt;</code> or <code>a</code>. Returns 0 otherwise.</li>
+<li><code>int incr_y(char c)</code>: Returns 1 if <code>c</code> is <code>v</code> or <code>s</code>. Returns -1 if <code>c</code> is <code>^</code> or <code>w</code>. Returns 0 otherwise.</li>
+</ul>
+<p>Unit tests are not provided for these helper functions, but we encourage you to write your own tests to make sure that these are working as expected! You can modify <code>test_is_tail</code>, <code>test_is_snake</code>, <code>test_body_to_tail</code>, <code>test_incr_x</code>, and <code>test_incr_y</code> in <code>unit-tests.c</code> to write your own unit tests.</p>
+<p>When writing a unit test, the test function should return <code>false</code> if the test fails, and <code>true</code> if the test passes. You can use <code>printf</code> to print out debugging statements. <code>assert_equals_char</code> might be a helpful function to use for these tests.</p>
+<p>Once you've written your own unit tests, you can run them with <code>make run-unit-tests</code> and <code>make debug-unit-tests</code> as usual.</p>
+<h3 id="task-4-2-next-square">Task 4.2: <code>next_square</code></h3>
+<p>Implement the <code>next_square</code> helper function in <code>state.c</code>. This function returns the character in the cell the given snake is moving into. This function should not modify anything in the game stored in memory.</p>
+<table>
+<colgroup>
+<col span="1" style="width: 12%;">
+<col span="1" style="width: 23%;">
+<col span="1" style="width: 65%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="3"> <code>next_square</code></td>
+</tr>
+<tr>
+<td rowspan="2"><b>Arguments</b></td>
+<td><code>game_state_t* state</code></td>
+<td>A pointer to the <code>game_state_t</code> struct to be analyzed</td>
+</tr>
+<tr>
+<td><code>int snum</code></td>
+<td>The index of the snake to be analyzed</td>
+</tr>
+<tr>
+<td><b>Return values</b></td>
+<td><code>char</code></td>
+<td>The character in the cell the given snake is moving into</td>
+</tr>
+</tbody>
+</table>
+<p>As an example, consider the following board:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">##############
+#            #
+#        *   #
+#            #
+#   d&gt;x      #
+#            #
+#       s    #
+#       v    #
+#       v    #
+##############
+</span></code></pre>
+<p>Assuming that <code>state</code> is a pointer to this game state, then <code>next_square(state, 0)</code> should return <code>x</code>, because the head of snake 0 is moving into a cell with <code>x</code> in it. Similarly, <code>next_square(state, 1)</code> should return <code>#</code> for snake 1.</p>
+<p>The helper functions you wrote earlier might be helpful for this function (and the rest of this task too). Also, check out <code>get_board_at</code> and <code>set_board_at</code>, which are helper functions we wrote for you.</p>
+<p>Use <code>make run-unit-tests</code> and <code>make debug-unit-tests</code> to run the provided unit tests.</p>
+<h3 id="task-4-3-update-head">Task 4.3: <code>update_head</code></h3>
+<p>Implement the <code>update_head</code> function in <code>state.c</code>. This function will update the head of the snake.</p>
+<p>Remember that you will need to update the head both on the game board and in the snake struct. On the game board, add a character where the snake is moving. In the snake struct, update the x and y coordinates of the head.</p>
+<table>
+<colgroup>
+<col span="1" style="width: 12%;">
+<col span="1" style="width: 23%;">
+<col span="1" style="width: 65%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="3"> <code>update_head</code></td>
+</tr>
+<tr>
+<td rowspan="2"><b>Arguments</b></td>
+<td><code>game_state_t* state</code></td>
+<td>A pointer to the <code>game_state_t</code> struct to be updated</td>
+</tr>
+<tr>
+<td><code>int snum</code></td>
+<td>The index of the snake to be updated</td>
+</tr>
+<tr>
+<td><b>Return values</b></td>
+<td colspan="2">None</td>
+</tr>
+</tbody>
+</table>
+<p>As an example, consider the following board:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">##############
+#   d&gt;&gt;      #
+#        *   #
+#        ^   #
+#        ^   #
+#        ^   #
+#        w   #
+#            #
+#            #
+##############
+</span></code></pre>
+<p>Assuming that <code>state</code> is a pointer to this game state, then <code>update_head(state, 0)</code> will move the head of snake 0, leaving all other snakes unchanged. In the <code>snake_t</code> struct corresponding to snake 0, the <code>head_x</code> value should be updated from 6 to 7, and the <code>head_y</code> value should stay unchanged at 1. The new board will look like this:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">##############
+#   d&gt;&gt;&gt;     #
+#        *   #
+#        ^   #
+#        ^   #
+#        ^   #
+#        w   #
+#            #
+#            #
+##############
+</span></code></pre>
+<p>Note that this function ignores food, walls, and snake bodies when moving the head.</p>
+<p>Use <code>make run-unit-tests</code> and <code>make debug-unit-tests</code> to run the provided unit tests.</p>
+<h3 id="task-4-4-update-tail">Task 4.4: <code>update_tail</code></h3>
+<p>Implement the <code>update_tail</code> function in <code>state.c</code>. This function will update the tail of the snake.</p>
+<p>Remember that you will need to update the tail both on the game board and in the snake struct. On the game board, blank out the current tail, and change the new tail from a body character (<code>^v&lt;&gt;</code>) into a tail character (<code>wasd</code>). In the snake struct, update the x and y coordinates of the tail.</p>
+<table>
+<colgroup>
+<col span="1" style="width: 12%;">
+<col span="1" style="width: 23%;">
+<col span="1" style="width: 65%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="3"> <code>update_tail</code></td>
+</tr>
+<tr>
+<td rowspan="2"><b>Arguments</b></td>
+<td><code>game_state_t* state</code></td>
+<td>A pointer to the <code>game_state_t</code> struct to be updated</td>
+</tr>
+<tr>
+<td><code>int snum</code></td>
+<td>The index of the snake to be updated</td>
+</tr>
+<tr>
+<td><b>Return values</b></td>
+<td colspan="2">None</td>
+</tr>
+</tbody>
+</table>
+<p>As an example, consider the following board:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">##############
+#   d&gt;&gt;      #
+#        *   #
+#        ^   #
+#        ^   #
+#        ^   #
+#        w   #
+#            #
+#            #
+##############
+</span></code></pre>
+<p>Assuming that <code>state</code> is a pointer to this game state, then <code>update_tail(state, 1)</code> will move the tail of snake 1, leaving all other snakes unchanged. In the <code>snake_t</code> struct corresponding to snake 1, the <code>tail_y</code> value should be updated from 6 to 5, and the <code>tail_x</code> value should stay unchanged at 9. The new board will look like this:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">##############
+#   d&gt;&gt;      #
+#        *   #
+#        ^   #
+#        ^   #
+#        w   #
+#            #
+#            #
+#            #
+##############
+</span></code></pre>
+<p>Use <code>make run-unit-tests</code> and <code>make debug-unit-tests</code> to run the provided unit tests.</p>
+<h3 id="task-4-5-update-state">Task 4.5: <code>update_state</code></h3>
+<p>Using the helpers you created, implement <code>update_state</code> in <code>state.c</code>.</p>
+<p>As a reminder, the rules for moving a snake are as follows:</p>
+<ul>
+<li>Each snake moves one step in the direction of its head.</li>
+<li>If the head crashes into the body of a snake or a wall, the snake dies and stops moving. When a snake dies, the head is replaced with an <code>x</code>.</li>
+<li>If the head moves into a fruit, the snake eats the fruit and grows by 1 unit in length. (You can implement growing by 1 unit by updating the head without updating the tail.) Each time fruit is consumed, a new fruit is generated on the board.</li>
+</ul>
+<p>The <code>int (*add_food)(game_state_t* state)</code> argument is a function pointer, which means that <code>add_food</code> is a pointer to the code section of memory. The code that <code>add_food</code> is pointing at is a function that takes in <code>game_state_t* state</code> as an argument and returns an <code>int</code>. You can call this function with <code>add_food(x)</code>, replacing <code>x</code> with your argument, to add a fruit to the board.</p>
+<table>
+<colgroup>
+<col span="1" style="width: 12%;">
+<col span="1" style="width: 23%;">
+<col span="1" style="width: 65%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="3"> <code>update_state</code></td>
+</tr>
+<tr>
+<td rowspan="2"><b>Arguments</b></td>
+<td><code>game_state_t* state</code></td>
+<td>A pointer to the <code>game_state_t</code> struct to be updated</td>
+</tr>
+<tr>
+<td><code>int (*add_food)(game_state_t* state)</code></td>
+<td>A pointer to a function that will add fruit to the board</td>
+</tr>
+<tr>
+<td><b>Return values</b></td>
+<td colspan="2">None</td>
+</tr>
+</tbody>
+</table>
+<p>Use <code>make run-unit-tests</code> and <code>make debug-unit-tests</code> to run the provided unit tests.</p>
+<h2 id="task-5-load-board">Task 5: <code>load_board</code></h2>
+<p>Implement the <code>load_board</code> function in <code>state.c</code>. This function will read a game board from a file into memory.</p>
+<p>The game board can be of any size, but you may assume that the board is shaped like a rectangle (each row is the same length), with walls on all four sides.</p>
+<p>Tasks 5 and 6 combined will create a <code>game_state_t</code> struct in memory with all its fields set up. In this task, you can leave <code>num_snakes</code> and the <code>snakes</code> array uninitialized, as long as <code>x_size</code>, <code>y_size</code>, and <code>board</code> are correctly set up.</p>
+<table>
+<colgroup>
+<col span="1" style="width: 12%;">
+<col span="1" style="width: 23%;">
+<col span="1" style="width: 65%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="3"> <code>load_board</code></td>
+</tr>
+<tr>
+<td><b>Arguments</b></td>
+<td><code>char* filename</code></td>
+<td>The name of the file where the board is stored</td>
+</tr>
+<tr>
+<td><b>Return values</b></td>
+<td><code>game_state_t *</code></td>
+<td>A pointer to the newly created <code>game_state_t</code> struct.</td>
+</tr>
+</tbody>
+</table>
+<p>Use <code>make run-unit-tests</code> and <code>make debug-unit-tests</code> to run the provided unit tests.</p>
+<h2 id="task-6-initialize-snake">Task 6: <code>initialize_snake</code></h2>
+<p>Implement the <code>initialize_snake</code> function in <code>state.c</code>. This function takes in a game board and creates the array of snake structs.</p>
+<p>You are free to implement this function however you want, but you'd like, you can work through this task by implementing the helper function we've provided.</p>
+<h3 id="task-6-1-find-head">Task 6.1: <code>find_head</code></h3>
+<p>Implement the <code>find_head</code> function in <code>state.c</code>. Given a snake struct with the tail coordinates filled in, this function traces through the board to find the head coordinates, and fills in the head coordinates in the struct.</p>
+<table>
+<colgroup>
+<col span="1" style="width: 12%;">
+<col span="1" style="width: 23%;">
+<col span="1" style="width: 65%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="3"> <code>find_head</code></td>
+</tr>
+<tr>
+<td rowspan="2"><b>Arguments</b></td>
+<td><code>game_state_t* state</code></td>
+<td>A pointer to the <code>game_state_t</code> struct to be analyzed</td>
+</tr>
+<tr>
+<td><code>int snum</code></td>
+<td>The index of the snake to be analyzed</td>
+</tr>
+<tr>
+<td><b>Return values</b></td>
+<td colspan="2">None</td>
+</tr>
+</tbody>
+</table>
+<p>As an example, consider the following board:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">##############
+#            #
+#        *   #
+#            #
+#   d&gt;v      #
+#     v      #
+#  ^  v      #
+#  ^&lt;&lt;&lt;      #
+#            #
+##############
+</span></code></pre>
+<p>Assuming that <code>state</code> is a pointer to this game state, then <code>find_head(state, 0)</code> will fill in the <code>head_x</code> and <code>head_y</code> fields of the snake 0 struct with 3 and 6, respectively.</p>
+<p>Use <code>make run-unit-tests</code> and <code>make debug-unit-tests</code> to run the provided unit tests.</p>
+<h3 id="task-6-2-initialize-snake">Task 6.2: <code>initialize_snake</code></h3>
+<p>Using <code>find_head</code>, implement the <code>initialize_snake</code> function in <code>state.c</code>. You can assume that the state passed into this function is the result of calling <code>load_board</code>. This means the board-related fields are already filled in, and you only need to fill in <code>num_snakes</code> and create the <code>snakes</code> array.</p>
+<p>You may assume that all snakes on the board start out alive.</p>
+<table>
+<colgroup>
+<col span="1" style="width: 12%;">
+<col span="1" style="width: 23%;">
+<col span="1" style="width: 65%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="3"> <code>initialize_snakes</code></td>
+</tr>
+<tr>
+<td><b>Arguments</b></td>
+<td><code>game_state_t* state</code></td>
+<td>A pointer to the <code>game_state_t</code> struct to be filled in</td>
+</tr>
+<tr>
+<td><b>Return values</b></td>
+<td><code>game_state_t* state</code></td>
+<td>A pointer to the <code>game_state_t</code> struct with fields filled in. This can be the same as the struct passed in (you can modify the struct in-place).</td>
+</tr>
+</tbody>
+</table>
+<p>Use <code>make run-unit-tests</code> and <code>make debug-unit-tests</code> to run the provided unit tests.</p>
+<h2 id="task-7-main">Task 7: <code>main</code></h2>
+<p>Using the functions you implemented in all the previous tasks, fill in the blanks in <code>snake.c</code>. Each time the <code>snake.c</code> program is run, the board will be updated by one time step.</p>
+<p>To test your full implementation, run <code>make run-integration-tests</code>.</p>
+<p>To debug your implementation, run <code>cgdb --args ./snake -i tests/TESTNAME-in.snk -o tests/TESTNAME-out.snk</code>, replacing <code>TESTNAME</code> with one of the test names in the <code>tests</code> folder:</p>
+<ul>
+<li><code>1-simple</code></li>
+<li><code>2-direction</code></li>
+<li><code>3-tail</code></li>
+<li><code>4-food</code></li>
+<li><code>5-wall</code></li>
+<li><code>6-small</code></li>
+<li><code>7-large</code></li>
+<li><code>8-multisnake</code></li>
+<li><code>9-everything</code></li>
+</ul>
+<h2 id="task-8-readme">Task 8: <code>README</code></h2>
+<p>Congratulations on finishing the project! This is a brand-new project, so we'd love to hear your feedback on what can be improved for future semesters. Fill in <code>README.md</code> with your thoughts about the project: how long did each task take you? What were some bugs you encountered? What was the hardest/easiest/most fun/least fun part of the project? Anything you'd like to say about the project is fair game here, but 512 characters minimum, please!</p>
+<h2 id="submission-and-grading">Submission and Grading</h2>
+<p>Submit your code to <a href="https://www.gradescope.com/courses/343452/assignments/1829582">the Gradescope assignment</a>. Make sure that you have only modified <code>snake.c</code> and <code>state.c</code>. The score you see on Gradescope will be your final score for this project.</p>
+<h2 id="just-for-fun-play-snake">Just for fun: play snake</h2>
+<p>Now you can play a game with the code you've written by <code>make interactive-snake</code> followed by <code>./interactive-snake</code>. To speed up the game, you can run <code>./interactive-snake -d 0.5</code> (replacing 0.5 with the number of seconds between time steps).</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container border-top pt-4 mb-5">
+<div class="row">
+<div class="col">
+<div id="dark-toggle-wrapper" class="d-none">
+<div class="form-check form-switch">
+<input id="inputDarkToggle" class="form-check-input" type="checkbox">
+<label class="form-check-label" for="inputDarkToggle">
+Dark Mode
+<a id="buttonDarkToggleReset" class="d-none" href="javascript:void(0);">(reset)</a>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  
+
+  
+    document.addEventListener("DOMContentLoaded", function() {
+      initToC();
+    });
+  
+</script>
+</body>
+</html>

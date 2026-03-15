@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="language" content="english">
+<title>Exam Resources | CS 61C Spring 2022</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<link rel="shortcut icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../css/main.css@h=36c89645dcb547d13f6f293a379a176dff22aab9affcefc8d3a19bc23c0f8db2.css" />
+<script defer type="text/javascript" src="../../js/main.js@h=4096b5e2a18784c27ca139ca897694176eea13de3e2168cd7e7bcdd827a35c8d"></script>
+
+<script type="text/javascript" src="../../js/main-sync.js@h=daca62fef99fb16ad6a5fd1517d7b18bed66d3241431785bf3ac1f134c166bf1"></script>
+<script>initDarkToggle();</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.17.0/tocbot.min.js" integrity="sha512-DJhUMo5TIBb3fFziiE+3OJG+j7ky+GxScxHdLADCXskEpc/AKQsbsorIYmGFJFaJvDIyP65rJNhnCTytfYAdUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+<div class="container">
+<a class="navbar-brand" href="../../index.html">
+<img class="d-inline-block me-2 rounded" height="48" width="48" src="../../img/icon-small.png" alt="outline of square computer chip with cs61c label" />
+<span class="align-middle">CS 61C Spring 2022</span>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle Navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item">
+<a class="nav-link" href="../../calendar/index.html">Calendar</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../staff/index.html">Staff</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../policies/index.html">Policies</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../index.html">Resources</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../exam/index.html">Exam</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../extensions/index.html">Extensions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://oh.cs61c.org/">OH Queue</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://venus.cs61c.org/">Venus</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://inst.eecs.berkeley.edu/~cs61c/archives.html">Semesters</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<main class="mb-4">
+<section class="section">
+<div class="container">
+<div class="row spec">
+<nav id="toc-wrapper" class="col-md-3 d-print-none sticky-md-top nav-wrapper" aria-label="table of contents">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#past-exams-by-year">Past Exams By Year</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#forum-q-a-about-past-exams">Forum Q&amp;A About Past Exams</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#past-exams-by-topic">Past Exams By Topic</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#number-representation">Number Representation</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#c-programming">C Programming</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#c-memory-model">C &#x2F; Memory Model</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#floating-point">Floating Point</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#risc-v-programming">RISC-V Programming</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#risc-v-instruction-formats">RISC-V Instruction Formats</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#call">CALL</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#sds">SDS</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#boolean-algebra">Boolean Algebra</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#fsms">FSMs</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#single-cycle-datapath-control">Single-Cycle Datapath &amp; Control</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#pipelining-hazards">Pipelining &amp; Hazards</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#caches">Caches</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#parallelism">Parallelism</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#virtual-memory">Virtual Memory</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#other">Other</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<div id="toc-content-wrapper" class="content col-md-9">
+<h1 class="title">Exam Resources</h1>
+<div class="alert alert-info">
+<p><strong>Note</strong>: Before Fall 2017, CS 61C was taught using the MIPS ISA. The assembly and datapath exam problems from this period are less beneficial to review.</p>
+</div>
+<h2 id="past-exams-by-year">Past Exams By Year</h2>
+<table><thead><tr><th>Semester</th><th>Midterm 1</th><th>Midterm 2</th><th>Final</th></tr></thead><tbody>
+<tr><td>2022 Spring</td><td></td><td><a href="../../pdfs/exams/sp22-midterm-blank.pdf">Blank Exam</a> (<a href="../../pdfs/exams/sp22-midterm-sols.pdf">Solutions</a>)</td><td><a href="../../pdfs/exams/sp22-final-blank.pdf">Blank Exam</a> (<a href="../../pdfs/exams/sp22-final-sols.pdf">Solutions</a>)</td></tr>
+<tr><td>2021 Fall</td><td></td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-midterm-blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-midterm-sols.pdf">Solutions</a>)</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-sols.pdf">Solutions</a>)</td></tr>
+<tr><td>2021 Spring</td><td></td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_MT_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_MT_Solutions.pdf">Solutions</a>)</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Solutions.pdf">Solutions</a>)</td></tr>
+<tr><td>2020 Fall</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Quest_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Quest_Solutions.pdf">Solutions</a>)</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Midterm_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Midterm_Solutions.pdf">Solutions</a>)</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Solutions.pdf">Solutions</a>)</td></tr>
+<tr><td>2020 Summer</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT1_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT1_Solutions.pdf">Solutions</a>)</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT2_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT2_Solutions.pdf">Solutions</a>)</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Solutions.pdf">Solutions</a>)</td></tr>
+<tr><td>2020 Spring</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_MT1_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_MT1_Solutions.pdf">Solutions</a>)</td><td>Cancelled</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Solutions.pdf">Solutions</a>)</td></tr>
+<tr><td>2019 Fall</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Quest_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Quest_Solutions.pdf">Solutions</a>)</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_MT_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_MT_Solutions.pdf">Solutions</a>)</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Solutions.pdf">Solutions</a>)</td></tr>
+<tr><td>2019 Summer</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT1_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT1_Solutions.pdf">Solutions</a>)</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT2_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT2_Solutions.pdf">Solutions</a>)</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_Final_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_Final_Solutions.pdf">Solutions</a>)</td></tr>
+<tr><td>2019 Spring</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp19_MT1_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp19_MT1_Solutions.pdf">Solutions</a>)</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp19_MT2_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp19_MT2_Solutions.pdf">Solutions</a>)</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp19_Final_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp19_Final_Solutions.pdf">Solutions</a>)</td></tr>
+<tr><td>2018 Fall</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Quest_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Quest_Solutions.pdf">Solutions</a>)</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_MT_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_MT_Solutions.pdf">Solutions</a>, <a href="https://www.youtube.com/playlist?list=PL_iVbAzfgRWkr83rxlP5wxdW-LxSiy8EZ">Videos</a>)</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Final_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Final_Solutions.pdf">Solutions</a>)</td></tr>
+<tr><td>2018 Summer</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT1_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT1_Solutions.pdf">Solutions</a>)</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT2_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT2_Solutions.pdf">Solutions</a>)</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Solutions.pdf">Solutions</a>)</td></tr>
+<tr><td>2018 Spring</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT1_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT1_Solutions.pdf">Solutions</a>)</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT2_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT2_Solutions.pdf">Solutions</a>)</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Solutions.pdf">Solutions</a>)</td></tr>
+<tr><td>2017 Fall</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_MT1_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_MT1_Solutions.pdf">Solutions</a>)</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_MT2_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_MT2_Solutions.pdf">Solutions</a>)</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_Final_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_Final_Solutions.pdf">Solutions</a>)</td></tr>
+<tr><td>2015 Fall</td><td></td><td></td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa15_Final_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa15_Final_Solutions.pdf">Solutions</a>)</td></tr>
+<tr><td>2015 Spring</td><td></td><td></td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp15_Final_Blank.pdf">Blank Exam</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp15_Final_Solutions.pdf">Solutions</a>)</td></tr>
+</tbody></table>
+<p><a href="https://hkn.eecs.berkeley.edu/exams/course/CS/61C">HKN</a> and <a href="https://tbp.berkeley.edu/courses/cs/61C/">TBP</a> have archived more past exams.</p>
+<h2 id="forum-q-a-about-past-exams">Forum Q&amp;A About Past Exams</h2>
+<table><thead><tr><th>Semester</th><th>Links</th></tr></thead><tbody>
+<tr><td>2020 Summer</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/forum-threads/su20_past_exam_questions_2020.pdf">Past Exams 2020 Q&amp;A</a> <br> <a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/forum-threads/su20_past_exam_questions_2019.pdf">Past Exams 2019 Q&amp;A</a> <br> <a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/forum-threads/su20_past_exam_questions_2018.pdf">Past Exams 2018 Q&amp;A</a> <br> <a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/forum-threads/su20_past_exam_questions_2017.pdf">Past Exams 2017 Q&amp;A</a> <br> <a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/forum-threads/su20_past_exam_questions_2016_older.pdf">Past Exams 2016 and Older Q&amp;A</a></td></tr>
+<tr><td>2020 Spring</td><td><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/forum-threads/sp20_past_exam_questions_2019.pdf">Past Exams 2019 Q&amp;A</a> <br> <a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/forum-threads/sp20_past_exam_questions_2018.pdf">Past Exams 2018 Q&amp;A</a> <br> <a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/forum-threads/sp20_past_exam_questions_2017.pdf">Past Exams 2017 Q&amp;A</a> <br> <a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/forum-threads/sp20_past_exam_questions_2016_older.pdf">Past Exams 2016 and Older Q&amp;A</a></td></tr>
+</tbody></table>
+<h2 id="past-exams-by-topic">Past Exams By Topic</h2>
+<h3 id="number-representation">Number Representation</h3>
+<ul>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-midterm-blank.pdf#page=3">Fall 2021 Midterm Q1.5-1.8</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-midterm-sols.pdf#page=4">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Blank.pdf#page=26">Spring 2021 Final Q8</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Solutions.pdf#page=25">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_MT_Blank.pdf#page=3">Spring 2021 Midterm Q1</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_MT_Solutions.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Blank.pdf#page=2">Fall 2020 Final S1.Q1A</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Solutions.pdf#page=2">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Quest_Blank.pdf#page=1">Fall 2020 Quest Q1.1, Q1.3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Quest_Solutions.pdf#page=1">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Blank.pdf#page=39">Summer 2020 Final Q11A</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Solutions.pdf#page=39">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT1_Blank.pdf#page=18">Summer 2020 Midterm 1 Q5</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT1_Solutions.pdf#page=18">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Blank.pdf#page=3">Spring 2020 Final Q1A, Q1D</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Solutions.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_MT1_Blank.pdf#page=4">Spring 2020 Midterm Q2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_MT1_Solutions.pdf">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Blank.pdf#page=11">Fall 2019 Final Q10h</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Solutions.pdf#page=11">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Blank.pdf#page=3">Fall 2019 Final Q2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Solutions.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Quest_Blank.pdf#page=1">Fall 2019 Quest Q1, Q2, Q3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Quest_Solutions.pdf#page=1">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT1_Blank.pdf#page=2">Summer 2019 Midterm 1 Q1</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT1_Solutions.pdf#page=2">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Quest_Blank.pdf#page=1">Fall 2018 Quest Q1</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Quest_Solutions.pdf#page=1">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT1_Blank.pdf#page=3">Summer 2018 Midterm 1 Q1</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT1_Solutions.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Blank.pdf#page=2">Spring 2018 Final Q1A, Q1B</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Solutions_Rev1.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT1_Blank.pdf#page=3">Spring 2018 Midterm 1 Q1</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT1_Solutions.pdf#page=4">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_MT_Blank.pdf#page=2">Fall 2018 Midterm Q1 A-D</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_MT_Solutions.pdf#page=1">solution</a>, videos: <a href="https://youtu.be/F_VErIIlHlM">1A</a> <a href="https://youtu.be/qjfmqVuwfP0">1B</a> <a href="https://youtu.be/SFHKbfzFg2c">1C</a> <a href="https://youtu.be/DQ-AbzaT7gw">1D</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa15_Final_Blank.pdf#page=12">Fall 2015 Final MT2-5</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa15_Final_Solutions.pdf#page=12">solutions</a>, <a href="https://www.youtube.com/watch?v=pezYrJPeKcA&amp;t=57m53s">video</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp15_Final_Blank.pdf#page=2">Spring 2015 Final M1-1AB</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp15_Final_Solutions.pdf#page=2">solutions</a>, <a href="https://www.youtube.com/watch?v=hWoVRs17mD0&amp;t=0m0s">video</a>)</li>
+</ul>
+<h3 id="c-programming">C Programming</h3>
+<ul>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Blank.pdf#page=17">Spring 2021 Final Q6A</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Solutions.pdf#page=18">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_MT_Blank.pdf#page=18">Spring 2021 Midterm Q7</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_MT_Solutions.pdf#page=21">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Blank.pdf#page=2">Fall 2020 Final S1.Q1B</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Solutions.pdf#page=2">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Midterm_Blank.pdf#page=4">Fall 2020 Midterm Q2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Midterm_Solutions.pdf#page=4">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Quest_Blank.pdf#page=5">Fall 2020 Quest Q3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Quest_Solutions.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Quest_Blank.pdf#page=1">Fall 2020 Quest Q2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Quest_Solutions.pdf#page=1">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Quest_Blank.pdf#page=1">Fall 2020 Quest Q1.3</a></li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Blank.pdf#page=41">Summer 2020 Final Q12</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Solutions.pdf#page=41">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT1_Blank.pdf#page=3">Summer 2020 Midterm 1 Q1</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT1_Solutions.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Blank.pdf#page=19">Spring 2020 Final Q7A, Q7B</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Solutions.pdf#page=19">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Blank.pdf#page=11">Spring 2020 Final Q5A</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Solutions.pdf#page=11">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_MT1_Blank.pdf#page=7">Spring 2020 Midterm Q5</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_MT1_Solutions.pdf#page=9">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_MT1_Blank.pdf#page=5">Spring 2020 Midterm Q3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_MT1_Solutions.pdf#page=6">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_MT1_Blank.pdf#page=3">Spring 2020 Midterm Q1</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_MT1_Solutions.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Blank.pdf#page=4">Fall 2019 Final Q3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Solutions.pdf#page=4">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Blank.pdf#page=3">Fall 2019 Final Q2a, Q2d</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Solutions.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_MT_Blank.pdf#page=4">Fall 2019 Midterm Q3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_MT_Solutions.pdf#page=4">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Quest_Blank.pdf#page=2">Fall 2019 Quest Q4, Q6</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Quest_Solutions.pdf#page=2">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_Final_Blank.pdf#page=7">Summer 2019 Final Q3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_Final_Solutions.pdf#page=7">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT1_Blank.pdf#page=6">Summer 2019 Midterm 1 Q3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT1_Solutions.pdf#page=6">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT1_Blank.pdf#page=9">Summer 2019 Midterm 1 Q4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT1_Solutions.pdf#page=9">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT1_Blank.pdf#page=13">Summer 2019 Midterm 1 Q6</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT1_Solutions.pdf#page=13">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Quest_Blank.pdf#page=1">Fall 2018 Quest Q2A, Q2B, Q3B</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Quest_Solutions.pdf#page=1">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Blank.pdf#page=2">Summer 2018 Final Q1</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Solutions.pdf#page=2">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT1_Blank.pdf#page=8">Summer 2018 Midterm 1 Q4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT1_Solutions.pdf#page=8">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Blank.pdf#page=3">Spring 2018 Final Q1C, Q1D</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Solutions_Rev1.pdf#page=4">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Blank.pdf#page=4">Spring 2018 Final Q2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Solutions_Rev1.pdf#page=4">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT1_Blank.pdf#page=4">Spring 2018 Midterm 1 Q2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT1_Solutions.pdf#page=5">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT1_Blank.pdf#page=8">Spring 2018 Midterm 1 Q4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT1_Solutions.pdf#page=9">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_Final_Blank.pdf#page=2">Fall 2017 Final Q1</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_Final_Solutions.pdf#page=2">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_Final_Blank.pdf#page=4">Fall 2017 Final Q3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_Final_Solutions.pdf#page=4">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa15_Final_Blank.pdf#page=3">Fall 2015 Final MT1-2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa15_Final_Solutions.pdf#page=3">solutions</a>, <a href="https://www.youtube.com/watch?v=gjZuTehyYLw&amp;t=6m38s">video</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp15_Final_Blank.pdf#page=3">Spring 2015 Final M1-2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp15_Final_Solutions.pdf#page=4">solutions</a>, <a href="https://www.youtube.com/watch?v=hWoVRs17mD0&amp;t=11m46s">video</a>)</li>
+</ul>
+<h3 id="c-memory-model">C / Memory Model</h3>
+<ul>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-midterm-blank.pdf#page=6">Fall 2021 Midterm Q3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-midterm-sols.pdf#page=12">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-midterm-blank.pdf#page=4">Fall 2021 Midterm Q2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-midterm-sols.pdf#page=7">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT1_Blank.pdf#page=5">Summer 2020 Midterm 1 Q2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT1_Solutions.pdf#page=5">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Blank.pdf#page=17">Spring 2020 Final Q6</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Solutions.pdf#page=17">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_MT1_Blank.pdf#page=6">Spring 2020 Midterm Q4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_MT1_Solutions.pdf#page=7">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Quest_Blank.pdf#page=2">Fall 2019 Quest Q5</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Quest_Solutions.pdf#page=2">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT1_Blank.pdf#page=4">Summer 2019 Midterm 1 Q2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT1_Solutions.pdf#page=4">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Final_Blank.pdf#page=4">Fall 2018 Final M2 Part 2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Final_Solutions.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Quest_Blank.pdf#page=2">Fall 2018 Quest Q3A</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Quest_Solutions.pdf#page=2">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Blank.pdf#page=4">Summer 2018 Final Q2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Solutions.pdf#page=4">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT1_Blank.pdf#page=4">Summer 2018 Midterm 1 Q2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT1_Solutions.pdf#page=4">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT1_Blank.pdf#page=6">Spring 2018 Midterm 1 Q3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT1_Solutions.pdf#page=7">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa15_Final_Blank.pdf#page=3">Fall 2015 Final MT1-1B</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa15_Final_Solutions.pdf#page=3">solutions</a>, <a href="https://www.youtube.com/watch?v=gjZuTehyYLw&amp;t=2m59s">video</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp15_Final_Blank.pdf#page=2">Spring 2015 Final M1-1C</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp15_Final_Solutions.pdf#page=2">solutions</a>, <a href="https://www.youtube.com/watch?v=hWoVRs17mD0&amp;t=3m20s">video</a>)</li>
+</ul>
+<h3 id="floating-point">Floating Point</h3>
+<ul>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-blank.pdf#page=5">Fall 2021 Final Q2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-sols.pdf#page=7">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-midterm-blank.pdf#page=7">Fall 2021 Midterm Q4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-midterm-sols.pdf#page=17">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Blank.pdf#page=27">Spring 2021 Final Q9</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Solutions.pdf#page=26">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_MT_Blank.pdf#page=22">Spring 2021 Midterm Q8</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_MT_Solutions.pdf#page=24">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Blank.pdf#page=3">Fall 2020 Final S2.Q2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Solutions.pdf#page=4">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Midterm_Blank.pdf#page=2">Fall 2020 Midterm Q1</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Midterm_Solutions.pdf#page=2">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Blank.pdf#page=40">Summer 2020 Final Q11B</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Solutions.pdf#page=40">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT1_Blank.pdf#page=24">Summer 2020 Midterm 1 Q6</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT1_Solutions.pdf#page=24">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Blank.pdf#page=4">Spring 2020 Final Q1B</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Solutions.pdf#page=4">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_MT1_Blank.pdf#page=9">Spring 2020 Midterm Q6</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_MT1_Solutions.pdf#page=13">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_MT_Blank.pdf#page=3">Fall 2019 Midterm Q1</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_MT_Solutions.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_Final_Blank.pdf#page=3">Summer 2019 Final Q1.7-Q1.11</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_Final_Solutions.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT2_Blank.pdf#page=2">Summer 2019 Midterm 2 Q1</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT2_Solutions.pdf#page=2">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Final_Blank.pdf#page=3">Fall 2018 Final M2 Part 1</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Final_Solutions.pdf#page=2">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Blank.pdf#page=7">Summer 2018 Final Q4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Solutions.pdf#page=7">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT1_Blank.pdf#page=3">Summer 2018 Midterm 1 Q1</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT1_Solutions.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Blank.pdf#page=17">Spring 2018 Final Q9</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Solutions_Rev1.pdf#page=20">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_Final_Blank.pdf#page=14">Fall 2017 Final Q9</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_Final_Solutions.pdf#page=14">solution</a>)</li>
+</ul>
+<h3 id="risc-v-programming">RISC-V Programming</h3>
+<ul>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-blank.pdf#page=6">Fall 2021 Final Q3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-sols.pdf#page=9">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-midterm-blank.pdf#page=11">Fall 2201 Midterm Q6</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-midterm-sols.pdf#page=31">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-midterm-blank.pdf#page=8">Fall 2021 Midterm Q5</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-midterm-sols.pdf#page=21">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_MT_Blank.pdf#page=28">Spring 2021 Midterm Q10A</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_MT_Solutions.pdf#page=27">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Blank.pdf#page=18">Spring 2021 Final Q6B</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Solutions.pdf#page=19">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_MT_Blank.pdf#page=8">Spring 2021 Midterm Q4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_MT_Solutions.pdf#page=9">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Blank.pdf#page=6">Fall 2020 Final S2.Q5</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Solutions.pdf#page=8">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Midterm_Blank.pdf#page=10">Fall 2020 Midterm Q3B</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Midterm_Solutions.pdf#page=7">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Blank.pdf#page=37">Summer 2020 Final Q10</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Solutions.pdf#page=37">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT1_Blank.pdf#page=9">Summer 2020 Midterm 1 Q3B-D</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT1_Solutions.pdf#page=9">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Blank.pdf#page=20">Spring 2020 Final Q7C</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Solutions.pdf#page=20">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_MT1_Blank.pdf#page=10">Spring 2020 Midterm Q7</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_MT1_Solutions.pdf#page=12">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Blank.pdf#page=5">Fall 2019 Final Q4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Solutions.pdf#page=5">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Blank.pdf#page=3">Fall 2019 Final Q2b</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Solutions.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_MT_Blank.pdf#page=5">Fall 2019 Midterm Q4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_MT_Solutions.pdf#page=5">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_Final_Blank.pdf#page=9">Summer 2019 Final Q4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_Final_Solutions.pdf#page=9">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT1_Blank.pdf#page=12">Summer 2019 Midterm 1 Q5</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT1_Solutions.pdf#page=12">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Final_Blank.pdf#page=5">Fall 2018 Final M3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Final_Solutions.pdf#page=4">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Quest_Blank.pdf#page=2">Fall 2018 Quest Q4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Quest_Solutions.pdf#page=2">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Blank.pdf#page=6">Summer 2018 Final Q3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Solutions.pdf#page=6">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT1_Blank.pdf#page=6">Summer 2018 Midterm 1 Q3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT1_Solutions.pdf#page=6">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Blank.pdf#page=6">Spring 2018 Final Q3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Solutions_Rev1.pdf#page=7">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT1_Blank.pdf#page=12">Spring 2018 Midterm 1 Q6</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT1_Solutions.pdf#page=13">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_Final_Blank.pdf#page=6">Fall 2017 Final Q4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_Final_Solutions.pdf#page=6">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_MT_Blank.pdf#page=4">Fall 2018 Midterm Q4 C-E</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_MT_Solutions.pdf#page=3">solutions</a>, videos: <a href="https://youtu.be/06EoubncVQM">4C</a> <a href="https://youtu.be/g5kB32z0DT0">4D&amp;E</a>)</li>
+</ul>
+<h3 id="risc-v-instruction-formats">RISC-V Instruction Formats</h3>
+<ul>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_MT_Blank.pdf#page=30">Spring 2021 Midterm Q10B</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_MT_Solutions.pdf#page=29">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Midterm_Blank.pdf#page=10">Fall 2020 Midterm Q3A</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Midterm_Solutions.pdf#page=7">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Blank.pdf#page=44">Summer 2020 Final Q13</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Solutions.pdf#page=44">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT1_Blank.pdf#page=8">Summer 2020 Midterm 1 Q3A</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT1_Solutions.pdf#page=8">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Blank.pdf#page=4">Spring 2020 Final Q1C</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Solutions.pdf#page=4">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Blank.pdf#page=11">Fall 2019 Final Q10h</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Solutions.pdf#page=11">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Blank.pdf#page=5">Fall 2019 Final Q4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Solutions.pdf#page=5">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Blank.pdf#page=3">Fall 2019 Final Q2c</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Solutions.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT2_Blank.pdf#page=4">Summer 2019 Midterm 2 Q1</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT2_Solutions.pdf#page=4">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT1_Blank.pdf#page=10">Summer 2018 Midterm 1 Q5</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT1_Solutions.pdf#page=10">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT2_Blank.pdf#page=3">Spring 2018 Midterm 2 Q1F-H</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT2_Solutions.pdf#page=5">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT1_Blank.pdf#page=10">Spring 2018 Midterm 1 Q5</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT1_Solutions.pdf#page=11">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_MT_Blank.pdf#page=4">Fall 2018 Midterm Q4 A,B</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_MT_Solutions.pdf#page=2">solutions</a>, videos: <a href="https://youtu.be/CI1p8vT1k1Q">4A</a> <a href="https://youtu.be/_cbqOoX-qqY">4B</a>)</li>
+</ul>
+<h3 id="call">CALL</h3>
+<ul>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-blank.pdf#page=3">Fall 2021 Final Q1.1-1.2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-sols.pdf#page=3">solutions</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-midterm-blank.pdf#page=3">Fall 2021 Midterm Q1.1-1.4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-midterm-sols.pdf#page=4">solutions</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Blank.pdf#page=6">Spring 2021 Final Q1C</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Solutions.pdf#page=6">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_MT_Blank.pdf#page=5">Spring 2021 Midterm Q2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_MT_Solutions.pdf#page=5">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Blank.pdf#page=3">Fall 2020 Final S2.Q1</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Solutions.pdf#page=4">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Blank.pdf#page=31">Summer 2020 Final Q7</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Solutions.pdf#page=31">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT1_Blank.pdf#page=13">Summer 2020 Midterm 1 Q4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT1_Solutions.pdf#page=13">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Blank.pdf#page=22">Spring 2020 Final Q8</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Solutions.pdf#page=22">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Blank.pdf#page=3">Fall 2019 Final Q1</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Solutions.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_MT_Blank.pdf#page=3">Fall 2019 Midterm Q2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_MT_Solutions.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_Final_Blank.pdf#page=2">Summer 2019 Final Q1.1-Q1.6</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_Final_Solutions.pdf#page=2">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT2_Blank.pdf#page=5">Summer 2019 Midterm 2 Q2.4-Q2.8</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT2_Solutions.pdf#page=5">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Blank.pdf#page=24">Summer 2018 Final Q14</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Solutions.pdf#page=26">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Blank.pdf#page=8">Spring 2018 Final Q4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Solutions_Rev1.pdf#page=9">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT2_Blank.pdf#page=3">Spring 2018 Midterm 2 Q1 A-E</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT2_Solutions.pdf#page=4">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa15_Final_Blank.pdf#page=3">Fall 2015 Final MT1-1A</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa15_Final_Solutions.pdf#page=3">solutions</a>, <a href="https://www.youtube.com/watch?v=gjZuTehyYLw&amp;t=0m35s">video</a>)</li>
+</ul>
+<h3 id="sds">SDS</h3>
+<ul>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-blank.pdf#page=10">Fall 2021 Final Q4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-sols.pdf#page=15">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Blank.pdf#page=14">Spring 2021 Final Q4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Solutions.pdf#page=14">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_MT_Blank.pdf#page=7">Spring 2021 Midterm Q3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_MT_Solutions.pdf#page=8">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Blank.pdf#page=4">Fall 2020 Final S2.Q3A</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Solutions.pdf#page=5">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Midterm_Blank.pdf#page=14">Fall 2020 Midterm Q4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Midterm_Solutions.pdf#page=9">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Blank.pdf#page=14">Summer 2020 Final Q4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Solutions.pdf#page=14">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT2_Blank.pdf#page=23">Summer 2020 Midterm 2 Q5B</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT2_Solutions.pdf#page=25">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Blank.pdf#page=6">Fall 2019 Final Q5a Q5b</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Solutions.pdf#page=6">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_MT_Blank.pdf#page=7">Fall 2019 Midterm Q5c</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_MT_Solutions.pdf#page=7">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_Final_Blank.pdf#page=24">Summer 2019 Final Q10</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_Final_Solutions.pdf#page=25">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT2_Blank.pdf#page=9">Summer 2019 Midterm 2 Q3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT2_Solutions.pdf#page=9">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Final_Blank.pdf#page=7">Fall 2018 Final F2C</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Final_Solutions.pdf#page=7">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Blank.pdf#page=12">Summer 2018 Final Q7 Part 1</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Solutions.pdf#page=14">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT2_Blank.pdf#page=3">Summer 2018 Midterm 2 Q2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT2_Solutions.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Blank.pdf#page=10">Spring 2018 Final Q5</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Solutions_Rev1.pdf#page=12">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT2_Blank.pdf#page=5">Spring 2018 Midterm 2 Q2B-D</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT2_Solutions.pdf#page=8">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_Final_Blank.pdf#page=8">Fall 2017 Final Q5</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_Final_Solutions.pdf#page=8">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa15_Final_Blank.pdf#page=8">Fall 2015 Final MT2-1C</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa15_Final_Solutions.pdf#page=8">solutions</a>, <a href="https://www.youtube.com/watch?v=pezYrJPeKcA&amp;t=10m44s">video</a>)</li>
+</ul>
+<h3 id="boolean-algebra">Boolean Algebra</h3>
+<ul>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-blank.pdf#page=14">Fall 2021 Final Q6</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-sols.pdf#page=21">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Blank.pdf#page=16">Spring 2021 Final Q5</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Solutions.pdf#page=17">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT2_Blank.pdf#page=23">Summer 2020 Midterm 2 Q5A</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT2_Solutions.pdf#page=25">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Blank.pdf#page=6">Fall 2019 Final Q5d</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Solutions.pdf#page=6">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_MT_Blank.pdf#page=7">Fall 2019 Midterm Q5b</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_MT_Solutions.pdf#page=7">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT2_Blank.pdf#page=7">Summer 2019 Midterm 2 Q3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT2_Solutions.pdf#page=7">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Final_Blank.pdf#page=7">Fall 2018 Final F2A</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Final_Solutions.pdf#page=6">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT2_Blank.pdf#page=3">Summer 2018 Midterm 2 Q2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT2_Solutions.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT2_Blank.pdf#page=5">Spring 2018 Midterm 2 Q2A</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT2_Solutions.pdf#page=7">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa15_Final_Blank.pdf#page=7">Fall 2015 Final MT2-1A</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa15_Final_Solutions.pdf#page=6">solutions</a>, <a href="https://www.youtube.com/watch?v=pezYrJPeKcA&amp;t=0m28s">video</a>)</li>
+</ul>
+<h3 id="fsms">FSMs</h3>
+<ul>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Blank.pdf#page=12">Spring 2021 Final Q3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Solutions.pdf#page=12">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_MT_Blank.pdf#page=16">Spring 2021 Midterm Q6</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_MT_Solutions.pdf#page=19">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Blank.pdf#page=4">Fall 2020 Final S2.Q3B</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Solutions.pdf#page=5">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT2_Blank.pdf#page=25">Summer 2020 Midterm 2 Q6</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT2_Solutions.pdf#page=28">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Blank.pdf#page=6">Fall 2019 Final Q5c</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Solutions.pdf#page=6">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_MT_Blank.pdf#page=6">Fall 2019 Midterm Q5a</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_MT_Solutions.pdf#page=6">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_Final_Blank.pdf#page=6">Summer 2019 Final Q2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_Final_Solutions.pdf#page=7">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Final_Blank.pdf#page=7">Fall 2018 Final F2B</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Final_Solutions.pdf#page=7">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Blank.pdf#page=14">Summer 2018 Final Q7 Part 2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Solutions.pdf#page=16">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT2_Blank.pdf#page=2">Summer 2018 Midterm 2 Q1</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT2_Solutions.pdf#page=2">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT2_Blank.pdf#page=6">Spring 2018 Midterm 2 Q2E</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT2_Solutions.pdf#page=9">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa15_Final_Blank.pdf#page=7">Fall 2015 Final MT2-1B</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa15_Final_Solutions.pdf#page=7">solutions</a>, <a href="https://www.youtube.com/watch?v=pezYrJPeKcA&amp;t=2m52s">video</a>)</li>
+</ul>
+<h3 id="single-cycle-datapath-control">Single-Cycle Datapath &amp; Control</h3>
+<ul>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-blank.pdf#page=11">Fall 2021 Final Q5</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-sols.pdf#page=17">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Blank.pdf#page=20">Spring 2021 Final Q7</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Solutions.pdf#page=21">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_MT_Blank.pdf#page=9">Spring 2021 Midterm Q5A-B</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_MT_Solutions.pdf#page=10">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Blank.pdf#page=5">Fall 2020 Final S2.Q4A</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Solutions.pdf#page=7">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Midterm_Blank.pdf#page=16">Fall 2020 Midterm Q5A-B</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Midterm_Solutions.pdf#page=13">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Blank.pdf#page=16">Summer 2020 Final Q5</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Solutions.pdf#page=16">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT2_Blank.pdf#page=5">Summer 2020 Midterm 2 Q2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT2_Solutions.pdf#page=5">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Blank.pdf#page=13">Spring 2020 Final Q5B</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Solutions.pdf#page=13">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Blank.pdf#page=7">Fall 2019 Final Q6</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Solutions.pdf#page=7">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_MT_Blank.pdf#page=8">Fall 2019 Midterm Q6</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_MT_Solutions.pdf#page=8">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT2_Blank.pdf#page=12">Summer 2019 Midterm 2 Q4 (up to p.16)</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su19_MT2_Solutions.pdf#page=12">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Final_Blank.pdf#page=8">Fall 2018 Final F3A+F3B</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_Final_Solutions.pdf#page=8">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT2_Blank.pdf#page=4">Summer 2018 Midterm 2 Q3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT2_Solutions.pdf#page=4">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Blank.pdf#page=16">Spring 2018 Final Q8</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Solutions_Rev1.pdf#page=19">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT2_Blank.pdf#page=7">Spring 2018 Midterm 2 Q3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT2_Solutions.pdf#page=10">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_Final_Blank.pdf#page=10">Fall 2017 Final Q6</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_Final_Solutions.pdf#page=10">solution</a>)</li>
+</ul>
+<h3 id="pipelining-hazards">Pipelining &amp; Hazards</h3>
+<ul>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_MT_Blank.pdf#page=12">Spring 2021 Midterm Q5C-E</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_MT_Solutions.pdf#page=15">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Blank.pdf#page=6">Fall 2020 Final S2.Q4B</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Solutions.pdf#page=8">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Midterm_Blank.pdf#page=17">Fall 2020 Midterm Q5C</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Midterm_Solutions.pdf#page=14">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Blank.pdf#page=11">Summer 2020 Final Q3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Solutions.pdf#page=11">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT2_Blank.pdf#page=16">Summer 2020 Midterm 2 Q3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT2_Solutions.pdf#page=16">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Blank.pdf#page=15">Spring 2020 Final Q5C</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Solutions.pdf#page=15">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Blank.pdf#page=8">Fall 2019 Final Q7</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Solutions.pdf#page=8">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Blank.pdf#page=8">Summer 2018 Final Q5</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Solutions.pdf#page=8">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT2_Blank.pdf#page=6">Summer 2018 Midterm 2 Q4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT2_Solutions.pdf#page=6">solutions</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT2_Blank.pdf#page=11">Spring 2018 Midterm 2 Q4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT2_Solutions.pdf#page=17">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_MT2_Blank.pdf#page=8">Fall 2017 Midterm 2 Q4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_MT2_Solutions.pdf#page=8">solutions</a>)</li>
+</ul>
+<h3 id="caches">Caches</h3>
+<ul>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-blank.pdf#page=16">Fall 2021 Final Q7</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-sols.pdf#page=24">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Blank.pdf#page=8">Spring 2021 Final Q2A.A-H</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Solutions.pdf#page=8">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Blank.pdf#page=7">Fall 2020 Final S3.Q1B</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Solutions.pdf#page=10">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Blank.pdf#page=21">Summer 2020 Final Q6</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Solutions.pdf#page=21">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT2_Blank.pdf#page=18">Summer 2020 Midterm 2 Q4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT2_Solutions.pdf#page=19">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Blank.pdf#page=5">Spring 2020 Final Q2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Solutions.pdf#page=5">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Blank.pdf#page=9">Fall 2019 Final Q8</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Solutions.pdf#page=9">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_MT_Blank.pdf#page=3">Fall 2018 Midterm Q3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_MT_Solutions.pdf#page=2">solutions</a>, videos: <a href="https://youtu.be/fkoRQhHG7Ko">3A</a> <a href="https://youtu.be/UAH_m2u9obk">3B</a> <a href="https://youtu.be/f6Uz35p4KCg">3C</a> <a href="https://youtu.be/eygAxIPpTGs">3D</a> <a href="https://youtu.be/-pBR0fbBz7A">3E</a> <a href="https://youtu.be/tP0LT_wjGSE">3F</a> <a href="https://youtu.be/BeLOvaHyYWc">3G</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Blank.pdf#page=8">Summer 2018 Final Q1</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Solutions.pdf#page=8">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Blank.pdf#page=15">Summer 2018 Final Q6</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Solutions.pdf#page=10">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Blank.pdf#page=8">Summer 2018 Final Q8</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Solutions.pdf#page=17">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT2_Blank.pdf#page=9">Summer 2018 Midterm 2 Q5</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_MT2_Solutions.pdf#page=9">solutions</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT2_Blank.pdf#page=16">Spring 2018 Midterm 2 Q5</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_MT2_Solutions.pdf#page=25">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_MT2_Blank.pdf#page=10">Fall 2017 Midterm 2 Q5</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_MT2_Solutions.pdf#page=11">solutions</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su15_MT2_Blank.pdf#page=7">Summer 2015 MT2 Q5</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su15_MT2_Solutions.pdf#page=8">solutions</a>, <a href="https://www.youtube.com/watch?v=q61XpFsfX6U">video</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa15_Final_Blank.pdf#page=10">Fall 2015 Final MT2-4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa15_Final_Solutions.pdf#page=11">solutions</a>, <a href="https://www.youtube.com/watch?v=pezYrJPeKcA&amp;t=40m55s">video</a>)</li>
+</ul>
+<h3 id="parallelism">Parallelism</h3>
+<ul>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-blank.pdf#page=19">Fall 2021 Final Q9</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-sols.pdf#page=29">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-blank.pdf#page=3">Fall 2021 Final Q1.5,1.9,1.13</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-sols.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Blank.pdf#page=7">Spring 2021 Final Q1D</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Solutions.pdf#page=7">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Blank.pdf#page=7">Fall 2020 Final S3.Q2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Solutions.pdf#page=11">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Blank.pdf#page=7">Fall 2020 Final S3.Q1C</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Solutions.pdf#page=11">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Blank.pdf#page=33">Summer 2020 Final Q8</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Solutions.pdf#page=33">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Blank.pdf#page=9">Summer 2020 Final Q2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Solutions.pdf#page=9">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Blank.pdf#page=9">Spring 2020 Final Q3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Solutions.pdf#page=9">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Blank.pdf#page=11">Fall 2019 Final Q10a, Q10b, Q10c</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Solutions.pdf#page=11">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Blank.pdf#page=18">Summer 2018 Final Q9</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Solutions.pdf#page=18">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Blank.pdf#page=8">Summer 2018 Final Q10</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Solutions.pdf#page=20">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Blank.pdf#page=24">Summer 2018 Final Q13</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Solutions.pdf#page=25">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Blank.pdf#page=18">Spring 2018 Final Q10</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Solutions_Rev1.pdf#page=21">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Blank.pdf#page=21">Spring 2018 Final Q11</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Solutions_Rev1.pdf#page=26">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_MT_Blank.pdf#page=4">Fall 2018 Midterm Q5 A,B,E</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa18_MT_Solutions.pdf#page=3">solutions</a>, videos: <a href="https://youtu.be/f8ZnHz448iM">5A</a> <a href="https://youtu.be/JEn8ZjbR6AE">5B</a> <a href="https://youtu.be/JiFP8-J9TKU">5E</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_Final_Blank.pdf#page=3">Fall 2017 Final Q2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_Final_Solutions.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_Final_Blank.pdf#page=15">Fall 2017 Final Q10</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_Final_Solutions.pdf#page=15">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa15_Final_Blank.pdf#page=14">Fall 2015 Final F2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa15_Final_Solutions.pdf#page=15">solutions</a>, <a href="https://www.youtube.com/watch?v=kj7gj83W4gs&amp;t=6m40s">video</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa15_Final_Blank.pdf#page=16">Fall 2015 Final F3</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa15_Final_Solutions.pdf#page=18">solutions</a>, <a href="https://www.youtube.com/watch?v=kj7gj83W4gs&amp;t=16m28s">video</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp15_Final_Blank.pdf#page=11">Spring 2015 Final F2</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp15_Final_Solutions.pdf#page=15">solutions</a>, <a href="https://www.youtube.com/watch?v=ein76hKkEwA&amp;t=9m40s">video</a>)</li>
+</ul>
+<h3 id="virtual-memory">Virtual Memory</h3>
+<ul>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-blank.pdf#page=17">Fall 2021 Final Q8</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-sols.pdf#page=26">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Blank.pdf#page=10">Spring 2021 Final Q2A.H-K, Q2B</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Solutions.pdf#page=10">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Blank.pdf#page=7">Fall 2020 Final S3.Q1A</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Solutions.pdf#page=10">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Blank.pdf#page=3">Summer 2020 Final Q1</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Solutions.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT2_Blank.pdf#page=3">Summer 2020 Midterm 2 Q1</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_MT2_Solutions.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Blank.pdf#page=10">Spring 2020 Final Q4</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp20_Final_Solutions.pdf#page=10">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Blank.pdf#page=11">Fall 2019 Final Q10d</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Solutions.pdf#page=11">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Blank.pdf#page=10">Fall 2019 Final Q9</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Solutions.pdf#page=10">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Blank.pdf#page=20">Summer 2018 Final Q11</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Solutions.pdf#page=22">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Blank.pdf#page=22">Spring 2018 Final Q12</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Solutions_Rev1.pdf#page=26">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_Final_Blank.pdf#page=19">Fall 2017 Final Q12</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_Final_Solutions.pdf#page=18">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa15_Final_Blank.pdf#page=13">Fall 2015 Final F1</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa15_Final_Solutions.pdf#page=13">solutions</a>, <a href="https://www.youtube.com/watch?v=kj7gj83W4gs&amp;t=0m10s">video</a>)</li>
+<li>Adapted Question from Spring 2007 Final (<a href="https://www.youtube.com/watch?v=TwijhlsMSYc">video</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp15_Final_Blank.pdf#page=10">Spring 2015 Final F1</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp15_Final_Solutions.pdf#page=13">solutions</a>, <a href="https://www.youtube.com/watch?v=ein76hKkEwA&amp;t=0m0s">video</a>)</li>
+<li>Fall 2014 Final F2 (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa14_Final_Solutions.pdf#page=6">solutions</a>, <a href="https://www.youtube.com/watch?v=6Y4ed4kQjNA">video</a>)</li>
+</ul>
+<h3 id="other">Other</h3>
+<ul>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-blank.pdf#page=3">Fall 2021 Final 1.10-1.12 - Availability, ECC/Hamming Codes</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-sols.pdf#page=5">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-blank.pdf#page=3">Fall 2021 Final 1.7-1.8 - RAID</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-sols.pdf#page=4">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-blank.pdf#page=3">Fall 2021 Final Q1.6 - WSC</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-sols.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-blank.pdf#page=3">Fall 2021 Final Q1.3-1.4 - OS/IO</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/fa21/pdfs/exams/fa21-final-sols.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Blank.pdf#page=3">Spring 2021 Final Q1A-B - Potpourri</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp21_Final_Solutions.pdf#page=3">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Blank.pdf#page=8">Fall 2020 Final S3.Q3 - Potpourri</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa20_Final_Solutions.pdf#page=13">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Blank.pdf#page=35">Summer 2020 Final Q9 - ECC, RAID</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su20_Final_Solutions.pdf#page=35">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Blank.pdf#page=11">Fall 2019 Final Q10h</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Solutions.pdf#page=11">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Blank.pdf#page=11">Fall 2019 Final Q10e, Q10f, Q10g</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa19_Final_Solutions.pdf#page=11">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Blank.pdf#page=23">Summer 2018 Final Q12 - Hamming Codes</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Su18_Final_Solutions.pdf#page=25">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Blank.pdf#page=25">Spring 2018 Final Q13 - Potpourri</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Sp18_Final_Solutions_Rev1.pdf#page=29">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_Final_Blank.pdf#page=18">Fall 2017 Final Q11 - Atomic Instructions</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_Final_Solutions.pdf#page=17">solution</a>)</li>
+<li><a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_Final_Blank.pdf#page=21">Fall 2017 Final Q13 - Hamming Codes</a> (<a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/pdfs/exams/Fa17_Final_Solutions.pdf#page=20">solution</a>)</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container border-top pt-4 mb-5">
+<div class="row">
+<div class="col">
+<div id="dark-toggle-wrapper" class="d-none">
+<div class="form-check form-switch">
+<input id="inputDarkToggle" class="form-check-input" type="checkbox">
+<label class="form-check-label" for="inputDarkToggle">
+Dark Mode
+<a id="buttonDarkToggleReset" class="d-none" href="javascript:void(0);">(reset)</a>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+  
+
+  
+    document.addEventListener("DOMContentLoaded", function() {
+      initToC();
+    });
+  
+</script>
+</body>
+</html>

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="language" content="english">
+<title>Venus Reference | CS 61C Spring 2022</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<link rel="shortcut icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../css/main.css@h=36c89645dcb547d13f6f293a379a176dff22aab9affcefc8d3a19bc23c0f8db2.css" />
+<script defer type="text/javascript" src="../../js/main.js@h=4096b5e2a18784c27ca139ca897694176eea13de3e2168cd7e7bcdd827a35c8d"></script>
+
+<script type="text/javascript" src="../../js/main-sync.js@h=daca62fef99fb16ad6a5fd1517d7b18bed66d3241431785bf3ac1f134c166bf1"></script>
+<script>initDarkToggle();</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.17.0/tocbot.min.js" integrity="sha512-DJhUMo5TIBb3fFziiE+3OJG+j7ky+GxScxHdLADCXskEpc/AKQsbsorIYmGFJFaJvDIyP65rJNhnCTytfYAdUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+<div class="container">
+<a class="navbar-brand" href="../../index.html">
+<img class="d-inline-block me-2 rounded" height="48" width="48" src="../../img/icon-small.png" alt="outline of square computer chip with cs61c label" />
+<span class="align-middle">CS 61C Spring 2022</span>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle Navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item">
+<a class="nav-link" href="../../calendar/index.html">Calendar</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../staff/index.html">Staff</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../policies/index.html">Policies</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../index.html">Resources</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../exam/index.html">Exam</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../extensions/index.html">Extensions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://oh.cs61c.org/">OH Queue</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://venus.cs61c.org/">Venus</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://inst.eecs.berkeley.edu/~cs61c/archives.html">Semesters</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<main class="mb-4">
+<section class="section">
+<div class="container">
+<div class="row spec">
+<nav id="toc-wrapper" class="col-md-3 d-print-none sticky-md-top nav-wrapper" aria-label="table of contents">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#venus-web-interface">Venus Web Interface</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#the-editor-tab">The &quot;Editor&quot; Tab</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#the-simulator-tab">The &quot;Simulator&quot; Tab</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#the-chocopy-tab">The &quot;Chocopy&quot; Tab</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#the-venus-tab">The &quot;Venus&quot; Tab</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#settings">Settings</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#the-venus-cli">The Venus CLI</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#passing-arguments-to-your-program-1">Passing arguments to your program</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#common-venus-errors">Common Venus Errors</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#tools">Tools</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#calling-convention-checker">Calling Convention Checker</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#traces">Traces</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#writing-larger-risc-v-programs">Writing larger RISC-V programs</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#working-with-multiple-files">Working with Multiple Files</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#behavior-not-defined-in-the-risc-v-spec">Behavior not defined in the RISC-V spec</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#null-pointers">Null Pointers</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#system-calls">System Calls</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<div id="toc-content-wrapper" class="content col-md-9">
+<h1 class="title">Venus Reference</h1>
+<p>This page (WIP) covers usage of the Venus CLI and web interfaces.</p>
+<h2 id="venus-web-interface">Venus Web Interface</h2>
+<p>The Venus web interface is available at <a href="https://venus.cs61c.org">https://venus.cs61c.org</a>.</p>
+<h3 id="the-editor-tab">The &quot;Editor&quot; Tab</h3>
+<ul>
+<li>Enter your code in the &quot;Editor&quot; tab</li>
+<li>Programs start at the first line of assembly code regardless of the label, unless the <code>main</code>
+function is marked with <code>.globl</code> (see <a href="index.html#writing-larger-risc-v-programs">below</a>). That means
+that the <code>main</code> function must be put first if it is not declared <code>.globl</code>.
+<ul>
+<li>Note: Sometimes, we want to pre-allocate some items in memory before the
+program starts executing. Since this allocation isn't actual code, we can
+place it before the <code>main</code> function.</li>
+</ul>
+</li>
+<li>Programs end with an <code>ecall</code> with argument value 10. This signals for the program to exit.
+The <code>ecall</code> instructions are analogous to &quot;System Calls&quot; and allow us to do things such as print
+to the console or request chunks of memory from the heap.
+<ul>
+<li>The exception to the <code>ecall</code> exit rule is if your <code>main</code> is marked global, in which case you
+can either exit with an <code>ecall</code> or return the program's exit code in <code>a0</code> (like the return
+value of the <code>main</code> function in C).</li>
+</ul>
+</li>
+<li>Labels end with a colon (<code>:</code>).</li>
+<li>Comments start with a pound sign (<code>#</code>).</li>
+<li>You CANNOT put more than one instruction per line.</li>
+<li>You can use the save keyboard shortcut (<kbd>Cmd</kbd> + <kbd>s</kbd> /
+<kbd>Ctrl</kbd> + <kbd>s</kbd> depending on your platform, it will
+save the file). You can check the name of the active file at the bottom of the editor: if it
+is unnamed, it will prompt you to download the file, and if you hit save rapidly, you will
+receive this prompt as well.</li>
+<li>When you are done editing, click the &quot;Simulator&quot; tab to prepare for execution.</li>
+</ul>
+<h3 id="the-simulator-tab">The &quot;Simulator&quot; Tab</h3>
+<ul>
+<li>When you first reach the &quot;Simulator&quot; tab from the &quot;Editor&quot; tab, you'll see an &quot;Assemble and
+Simulate from Editor&quot; button that will report errors in your code or reassemble it.</li>
+<li>Breakpoints can be set by clicking on the desired line of code before you hit &quot;Run&quot;.
+You can also insert an <code>ebreak</code> instruction in your code to automatically force
+Venus to pause.
+<ul>
+<li>You can simulate conditional breakpoints by placing an <code>ebreak</code> within a branch, like so:<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain"># ...code
+</span>
+</span>li t0, 3 # Stops execution if a0 == 3
+</span>bne a0, t0, after_breakpoint
+</span>ebreak
+
+</span>after_breakpoint:
+</span># ...code
+</span></code></pre>
+</li>
+</ul>
+</li>
+<li>The &quot;Run&quot; button runs your program until you reach a breakpoint, much like GDB's
+&quot;run&quot; command.</li>
+<li>The &quot;Step&quot; button will go to the next assembly instruction.</li>
+<li>The &quot;Prev&quot; button reverts a single assembly instruction.</li>
+<li>The &quot;Reset&quot; button ends the current run, clears all breakpoints, and returns to the beginning
+of execution.</li>
+<li>&quot;Dump&quot; gives you a dump of the hexadecimal representation of every instruction in your program.</li>
+<li>You can see the contents of registers, memory, and caches through the sidebar on the right.
+<ul>
+<li>You can manually poke values in registers to affect the execution of your program.</li>
+<li>In the &quot;Memory&quot; tab, use the &quot;Jump to&quot; or &quot;Address&quot; boxes to quickly navigate to a certain
+address in your program.</li>
+<li>For all menus, use &quot;Display Settings&quot; at the bottom of the pane to toggle between hex, ASCII,
+two's complement decimal, and unsigned decimal interpretations of your values.</li>
+</ul>
+</li>
+<li>The &quot;Trace&quot; button will dump values in registers and memory based off a specified format,
+described in more detail in the <a href="index.html#traces">traces</a> section.</li>
+</ul>
+<h3 id="the-chocopy-tab">The &quot;Chocopy&quot; Tab</h3>
+<p>You can ignore this tab. Chocopy is a variant of Python used in CS 164 (Programming Languages
+and Compilers), so it's not really relevant to this course. The long and short of it is that you
+can actually compile a subset of Python into RISC-V assembly that you can then execute.</p>
+<h3 id="the-venus-tab">The &quot;Venus&quot; Tab</h3>
+<p>Most of the basic functionality you need for writing assembly programs exists in the &quot;Editor&quot;
+and &quot;Simulator&quot; tabs. The &quot;Venus&quot; tab exposes a terminal-like interface that lets us work
+with multiple files to build more complex programs.</p>
+<h4 id="terminal-commands">Terminal Commands</h4>
+<ul>
+<li>Typing <code>help</code> in the terminal will show the list of commands (you may need to scroll the terminal
+to the right to see all of them), and <code>help COMMAND</code> will give you information about <code>COMMAND</code>.</li>
+<li>A few common commands are listed here:
+<ul>
+<li>File manipulation:
+<ul>
+<li><code>ls</code>: Lists the contents of the specified directory (or the current directory if
+no arguments are provided.</li>
+<li><code>cd</code>: Changes the directory your terminal is in. Like with a normal terminal, you can
+use <kbd>Tab</kbd> to autocomplete the names of subfolders.</li>
+<li><code>touch</code>: Creates a new empty file that we can modify later.</li>
+<li><code>xxd</code>: Prints the contents of a file in hexadecimal.</li>
+<li>Other useful commands (similar to what you'd find in a standard shell): <code>cat</code>, <code>clear</code>,
+<code>cp</code>, <code>mkdir</code>, <code>mv</code>, <code>rm</code>, <code>pwd</code>, <code>zip</code>, <code>unzip</code></li>
+</ul>
+</li>
+<li>Venus editor and simulator:
+<ul>
+<li><code>edit</code>: Opens up the specified file in the &quot;Editor&quot; tab (for example, <code>edit file.s</code>).
+Note that the <kbd>Cmd</kbd> + <kbd>s</kbd> and <kbd>Ctrl</kbd> + <kbd>s</kbd>
+shortcuts will work to save the file in the virtual filesystem if you
+choose to edit a different file later. But, to ensure that your work is
+saved, we recommend that you periodically save local copies of every file.
+If you've mounted your local filesystem, then saving will reflect the changes in
+your local filesystem automatically.</li>
+<li><code>run</code>: Runs the provided assembly file(s) to completion in the terminal. Output will
+be displayed in the terminal as well.</li>
+<li><code>vdb</code>: Links and assembles the provided assembly file(s) and opens the result in the
+&quot;Simulator&quot; tab for debugging.</li>
+</ul>
+</li>
+<li>Connecting to a local file system:
+<ul>
+<li><code>upload</code>: Opens a prompt to upload files from our local computer to the
+virtual filesystem. You can hold down the <kbd>Cmd</kbd> or <kbd>Ctrl</kbd>
+keys to select multiple files to upload. Once a file is uploaded, we can
+edit it in the Venus editor using the <code>edit</code> command.</li>
+<li><code>download</code>: Downloads the specified files locally. You can specify multiple
+files to download, e.g. <code>download file1.s file2.s</code>, and each one will have
+a corresponding prompt to ask you where to download the files.</li>
+<li><code>mount</code>: &quot;Mounts&quot; your local file system to the Venus virtual file system.
+This command takes in the URL at which the Venus jar webserver is running,
+followed by the name you want to assign to the mounted folder in the virtual
+file system. For example, if you ran the Venus jar with
+<code>java -jar tools/venus.jar . -dm --port 6162</code> on your <em>local machine</em>,
+and wanted the mounted folder to be accessible at <code>vmfs</code> in the virtual file
+system, you would run <code>mount http://localhost:6162 vmfs</code> in the <em>Venus</em> terminal.
+<ul>
+<li>If you omit the <code>--port</code> flag, the port defaults to 6161. Running <code>mount local</code>
+will default to this port.</li>
+<li>If you omit the path argument to the <code>mount</code> command in the Venus terminal,
+it will place it at <code>drive</code> by default.</li>
+<li>You may be prompted to provide an encryption key in the browser. The key should
+be shown in the last line of the Java server's terminal output, which you should
+then copy/paste. You can also provide the key within the Venus web terminal, with
+something like <code>mount local vmfs &lt;encryption key&gt;</code>.</li>
+</ul>
+</li>
+<li><code>umount</code>: &quot;Unmounts&quot; a folder that was mounted via the <code>mount</code> command.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="passing-arguments-to-your-program">Passing arguments to your program</h4>
+<p>Use the &quot;Simulator Default Args&quot; field to set the arguments to your program. These will then
+be reflected when you run your program in the &quot;Simulator&quot; tab: <code>a0</code> will be initialized to the equivalent of <code>argc</code> and <code>a1</code> will be initialized to the equivalent of <code>argv</code>.</p>
+<h3 id="settings">Settings</h3>
+<p>Configuration options for Venus can be found in the &quot;Settings&quot; pane under the &quot;Venus&quot; tab.</p>
+<h4 id="general">General</h4>
+<ul>
+<li>&quot;Simulator Default Args&quot; - passes arguments to your program</li>
+<li>&quot;Text Start&quot; - identifies the start of the text segment</li>
+<li>&quot;Max History&quot; - specifies the maximum number of execution steps that can be reverted; leave
+negative for no limit</li>
+<li>&quot;Aligned Addressing&quot; - if on, forces all memory accesses to be aligned to the size of the data
+type, and will raise a runtime error if a memory access is not</li>
+<li>&quot;Mutable Text&quot; - if on, allows the text segment (where instructions are stored) to be overwritten
+during the execution of your program</li>
+<li>&quot;Only Ecall Exit&quot; - if on, requires <code>main</code> to terminate the program via <code>ecall</code>, as opposed to
+terminating when the PC exceeds the end of the text section</li>
+<li>&quot;Default Reg States&quot; - if on, initializes <code>a0</code> to argc, <code>a1</code> to argv, <code>gp</code> to the start of the
+static section of memory, <code>sp</code> to the top of the stack, and <code>ra</code> to the return address of the
+<code>main</code> function if a global <code>main</code> label is found; if off, all registers are initialized to 0</li>
+<li>&quot;Allow Access&quot; - if on, allows memory accesses to occur at addresses between the stack and heap</li>
+<li>&quot;Max number of steps&quot; - sets the limit for the number of steps your program can execute; leave
+negative for no limit</li>
+<li>&quot;Dark Mode&quot; - activates dark mode</li>
+</ul>
+<h4 id="calling-convention">Calling Convention</h4>
+<p>Toggles the Calling Convention Checker (see <a href="index.html#tools">Tools</a> for explanation). The checker's output
+will be dumped into the simulator console when enabled.</p>
+<h4 id="tracer">Tracer</h4>
+<p>Allows register and memory values to be printed during program execution. See <a href="index.html#traces">traces</a>
+for more details.</p>
+<h2 id="the-venus-cli">The Venus CLI</h2>
+<p>The latest version of the Venus CLI can be downloaded at
+<a href="https://venus.cs61c.org/jvm/venus-jvm-latest.jar">https://venus.cs61c.org/jvm/venus-jvm-latest.jar</a>.
+It requires a working Java install to run.</p>
+<h3 id="passing-arguments-to-your-program-1">Passing arguments to your program</h3>
+<p>Everything passed after the file name will be passed to your program as command line arguments.
+For example, if you wanted to pass arguments <code>arg1</code>, <code>arg2</code>, and <code>arg3</code> to <code>test.s</code>, you would run
+the following:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">java</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>jar</span> venus.jar test.s arg1 arg2 arg3</span>
+</span></code></pre>
+<p><code>a0</code> will be initialized to the equivalent of <code>argv</code> and <code>a1</code> will be initialized to the equivalent
+of <code>argc</code>.</p>
+<p>To provide simulator or assembler options to Venus, place your flags between the JAR and the name
+of the assembly file. For example, if you wanted to run <code>test.s</code> with immutable text (<code>-it</code>) and the
+calling convention checker (<code>-cc</code>), you would run this command:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">java</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>jar</span> venus.jar<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>it</span><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>cc</span> test.s arg1 arg2 arg3</span>
+</span></code></pre>
+<p><strong>Note:</strong> Flags to configure Venus assembly or simulation behavior can be passed after the name of
+the file. These arguments will be consumed by the simulator and not passed to the program; this
+behavior may change in the future with improvements to Venus's argument parser.
+If you wish to pass an argument to your program that shares a name with a Venus flag, then add
+<code>--</code> before your program arguments. For example, to pass the string &quot;-it&quot; as the first argument
+to <code>test.s</code>, you would run</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">java</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>jar</span> venus.jar test.s<span class="z-keyword z-operator z-end-of-options z-shell"> --</span></span><span class="z-meta z-function-call z-arguments z-shell"> -it</span>
+</span></code></pre>
+<h2 id="common-venus-errors">Common Venus Errors</h2>
+<ul>
+<li><code>Ran for more than max allowed steps!</code>:
+Venus will automatically terminate if your program runs for too many steps.
+This is expected for large MNIST sized inputs, and you can workaround it
+with the <code>-ms</code> flag.
+If you're getting this for small inputs, you might have an infinite loop.</li>
+<li><code>Attempting to access uninitialized memory between the stack and heap.</code>:
+Your code is trying to read or write to a memory address between the
+stack and heap pointers, which is causing a segmentation fault.
+Check that you are allocating enough memory,
+and that you are accessing the correct addresses.</li>
+<li><code>The magic value for this malloc node is incorrect! This means you are overriding malloc metadata OR have specified the address of an incorrect malloc node!</code>:
+Your code is modifying the metadata of a malloc node.
+This error can come from any of the <code>alloc</code> or <code>free</code> commands as
+venus implements a linked list form of malloc.
+The metadata is right below (lower address) the pointer to that location so if
+you write to the wrong location, you may corrupt that data.
+Venus has a method to detect some corruptions which is why you get this error.
+Check that you are correctly indexing any <code>malloc</code>ed data and
+that you are not writing out of bounds of what you allocated.</li>
+</ul>
+<h2 id="tools">Tools</h2>
+<h3 id="calling-convention-checker">Calling Convention Checker</h3>
+<p>The RISC-V calling convention specifies which registers are saved by the call<em>er</em> of a function,
+and which are saved by the call<em>ee</em>. Bugs resulting from a failure to comply with the calling
+convention checker can be difficult to track down on their own, so Venus provides the <code>-cc</code>
+(or <code>--callingConvention</code>) flag to automatically detect certain kinds of calling convention
+errors.</p>
+<p>Before you use the calling convention checker, you should be aware of two things:</p>
+<ol>
+<li>Venus cannot detect <em>all</em> calling convention violations - the fact that function calls in
+assembly are essentially just jumps to labels means Venus has to be very conservative in choosing
+what to detect as a function call. The CC checker serves as an excellent sanity check (much like
+Valgrind does for C memory bugs), but there will be some bugs that you ultimately need to figure
+out manually.</li>
+<li>Related to the above, the CC checker will only reliably examine calling convention violations
+within the body of functions exported with the <code>.globl</code> directive. You may sometimes see errors
+reported within functions that aren't exported, but this is usually because they are being called
+by a function that's declared <code>.globl</code>.</li>
+</ol>
+<h4 id="violation-messages">Violation Messages</h4>
+<p>There are currently three types of error messages that the CC checker can produce, each explained
+below.</p>
+<p>In each example, <code>func</code> refers to the function where the error message was reported.
+You can run these examples yourself in Venus by modifying the following code snippet:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">.globl func
+main:
+    jal func
+    li a0, 10 # Code for exit ecall
+    ecall
+
+func:
+    # Paste the example definition of func
+</span></code></pre>
+<h5 id="setting-of-a-saved-register-s0-which-has-not-been-saved">&quot;Setting of a saved register (s0) which has not been saved!&quot;</h5>
+<p><code>func</code> overwrote a callee-saved register (any of s0 through s11).
+To fix this, make sure you <code>func</code> stores the values of any registers it overwrites by clearing
+space on the stack and storing them in memory in the prologue, and then restoring their values
+and restoring the stack pointer in the epilogue.</p>
+<p>Example with error:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">func:
+    li s0, 100 # === Error reported here ===
+    li s1, 128 # === Error reported here ===
+    ret
+</span></code></pre>
+<p>Fixed example:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">func:
+    # BEGIN PROLOGUE
+    # Each clobbered register (4 bytes each) needs to be stored
+    addi sp, sp, -8
+    sw s0, 0(sp)
+    sw s1, 4(sp)
+    # END PROLOGUE
+    li s0, 100
+    li s1, 128
+    # BEGIN EPILOGUE
+    lw s1, 4(sp)
+    lw s0, 0(sp)
+    addi sp, sp, 8
+    # END EPILOGUE
+    ret
+</span></code></pre>
+<h5 id="save-register-s0-not-correctly-restored-before-return-expected-hex-value-actual-hex-value">&quot;Save register s0 not correctly restored before return! Expected &lt;hex value&gt;, Actual &lt;hex value&gt;&quot;</h5>
+<p>The value of <code>s0</code> in the function that called <code>func</code> was different before and after <code>func</code> was
+called. This error message complements the previous one, but will instead be reported on the line
+of the <code>ret</code> (or <code>jalr ra</code>) instruction.</p>
+<p>Example with error:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">func:
+    # BEGIN PROLOGUE
+    addi sp, sp, -8
+    sw s0, 0(sp)
+    sw s1, 4(sp)
+    # END PROLOGUE
+    li s0, 100
+    li s1, 128
+    # BEGIN EPILOGUE
+    # Forgot to restore the values of s0 and s1!
+    addi sp, sp, 8
+    # END EPILOGUE
+    ret # === Error reported twice here ===
+</span></code></pre>
+<p>Fixed example: Same as for the previous error. Just make sure to include both the prologue and
+epilogue.</p>
+<h5 id="usage-of-unset-register-t0">&quot;Usage of unset register t0&quot;</h5>
+<p><code>func</code> attempted to read from a register that wasn't set by the caller, and wasn't yet initialized within the body of <code>func</code>. Even if the function that calls <code>func</code> set values in a register like <code>t0</code> or <code>s0</code>, attempting to use their values within <code>func</code> would be violating an abstraction barrier:
+<code>func</code> shouldn't need to know anything about the values of registers in its caller, with the
+exception of the argument, stack pointer, and return address.</p>
+<p>Example with error:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">func:
+    mv a0, t0 # === Error reported here ===
+    ret
+</span></code></pre>
+<p>Fixed example:</p>
+<p>This sort of error usually originates due to a typo (the instruction is reading from the wrong
+register, or the order of arguments to the instruction was flipped accidentally), or a violation of abstraction barriers as described above. Fixes will vary depending on what the function was
+intended to do.</p>
+<h3 id="traces">Traces</h3>
+<p>You can set &quot;traces&quot; in both the web and CLI versions of Venus to print values in registers
+and memory during the execution of your program. In the web interface, you can enable traces in
+the &quot;Traces&quot; part of the Settings pane; in the command line you can enable and customize traces
+with the <code>--trace</code> and <code>--tracepattern</code> flags.</p>
+<p>The trace patterns support a few special symbols, somewhat like a C format string. They are as
+follows:</p>
+<ul>
+<li><code>\t</code>: tab indent</li>
+<li><code>\n</code>: newline</li>
+<li><code>%0%</code> through <code>%31%</code>: the value in the corresponding register</li>
+<li><code>%line%</code>: the line number of the code being executed</li>
+<li><code>%pc%</code>: the program counter of the current instruction</li>
+<li><code>%inst%</code>: the code of the current instruction</li>
+<li><code>%output%</code>: the output of an ecall message</li>
+<li><code>%decode%</code>: the decoded machine code of the current instruction</li>
+</ul>
+<h2 id="writing-larger-risc-v-programs">Writing larger RISC-V programs</h2>
+<p>Once we begin to write more complex RISC-V programs, it will become necessary
+to split our code into multiple files and debug/test them individually. The &quot;Venus&quot;
+tab of the web editor provides access to a terminal (and corresponding virtual
+filesystem) that lets us edit and test programs built from multiple files.</p>
+<p><strong>Note:</strong> To ensure that you don't lose any of your work, make sure to save local
+copies of your files <em>frequently</em>. To be doubly sure, also save your local work
+with git, and push those saves frequently!</p>
+<h3 id="working-with-multiple-files">Working with Multiple Files</h3>
+<p>The <code>.globl</code> directive identifies functions that we want to export to other files,
+similar to including a function in a header file in C.</p>
+<p>Venus supports the <code>.import</code> directive (not technically part of the RISC-V spec)
+to access other assembly files, similar to the C <code>include</code> directive. It will
+only make labels marked <code>.globl</code> available.</p>
+<h2 id="behavior-not-defined-in-the-risc-v-spec">Behavior not defined in the RISC-V spec</h2>
+<h3 id="null-pointers">Null Pointers</h3>
+<p>Unlike most real-world programs (and the RISC-V spec), dereferencing the null pointer
+DOES NOT segfault. This is because by default, the start of the text segment is set to
+<code>0x0000_0000</code>, whereas a real system would likely set it to something like
+<code>0x10000_0000</code>. This value can be configured in the settings pane of the web interface.</p>
+<h3 id="system-calls">System Calls</h3>
+<p>The <code>ecall</code> instruction is used to perform system calls or request other privileged
+operations such as accessing the file system or writing output to console.</p>
+<p>To perform a syscall, load the appropriate syscall number into the
+<code>a0</code> register, then place the syscall's arguments in order in the remaining argument
+registers (<code>a1</code>, <code>a2</code>, etc.) as needed. For example, the following assembly
+snippet would print the number <code>1024</code> to stdout:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">li a0, 1    # syscall number for printing integer
+li a1, 1024 # the integer we&#39;re printing
+ecall       # issue system call
+</span></code></pre>
+<p>Syscalls that return values will place the value in <code>a0</code>, as with any other function.</p>
+<p><strong>Note:</strong> The calling convention for RISC-V on Linux (described in the <a href="https://man7.org/linux/man-pages/man2/syscall.2.html#architecture-calling-conventions">Linux
+manpages</a>
+under &quot;Architecture calling conventions&quot;) actually specifies that the syscall number be
+passed through the <code>a7</code> register. Venus uses <code>a0</code> for simplicity, and follows in the
+tradition of the <a href="http://spimsimulator.sourceforge.net/">SPIM simulator</a>.</p>
+<h4 id="list-of-system-calls">List of System Calls</h4>
+<p>See the <a href="https://github.com/ThaumicMekanism/venus/wiki/Environmental-Calls">Venus wiki</a> for
+the full list of available calls.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container border-top pt-4 mb-5">
+<div class="row">
+<div class="col">
+<div id="dark-toggle-wrapper" class="d-none">
+<div class="form-check form-switch">
+<input id="inputDarkToggle" class="form-check-input" type="checkbox">
+<label class="form-check-label" for="inputDarkToggle">
+Dark Mode
+<a id="buttonDarkToggleReset" class="d-none" href="javascript:void(0);">(reset)</a>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+  
+
+  
+    document.addEventListener("DOMContentLoaded", function() {
+      initToC();
+    });
+  
+</script>
+</body>
+</html>

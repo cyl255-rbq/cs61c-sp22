@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="language" content="english">
+<title>Lab 0 | CS 61C Spring 2022</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<link rel="shortcut icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../css/main.css@h=36c89645dcb547d13f6f293a379a176dff22aab9affcefc8d3a19bc23c0f8db2.css" />
+<script defer type="text/javascript" src="../../js/main.js@h=4096b5e2a18784c27ca139ca897694176eea13de3e2168cd7e7bcdd827a35c8d"></script>
+
+<script type="text/javascript" src="../../js/main-sync.js@h=daca62fef99fb16ad6a5fd1517d7b18bed66d3241431785bf3ac1f134c166bf1"></script>
+<script>initDarkToggle();</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.17.0/tocbot.min.js" integrity="sha512-DJhUMo5TIBb3fFziiE+3OJG+j7ky+GxScxHdLADCXskEpc/AKQsbsorIYmGFJFaJvDIyP65rJNhnCTytfYAdUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+<div class="container">
+<a class="navbar-brand" href="../../index.html">
+<img class="d-inline-block me-2 rounded" height="48" width="48" src="../../img/icon-small.png" alt="outline of square computer chip with cs61c label" />
+<span class="align-middle">CS 61C Spring 2022</span>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle Navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item">
+<a class="nav-link" href="../../calendar/index.html">Calendar</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../staff/index.html">Staff</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../policies/index.html">Policies</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../resources/index.html">Resources</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../exam/index.html">Exam</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../extensions/index.html">Extensions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://oh.cs61c.org/">OH Queue</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://venus.cs61c.org/">Venus</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://inst.eecs.berkeley.edu/~cs61c/archives.html">Semesters</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<main class="mb-4">
+<section class="section">
+<div class="container">
+<div class="row spec">
+<nav id="toc-wrapper" class="col-md-3 d-print-none sticky-md-top nav-wrapper" aria-label="table of contents">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#goals">Goals</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#jargon">Jargon</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-1-accessing-services">Exercise 1: Accessing Services</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#accessing-services">Accessing Services</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#note-non-standard-enrollment">Note: Non-standard Enrollment</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#calnet-id-and-berkeley-google-accounts">CalNet ID (and Berkeley Google accounts)</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#piazza">Piazza</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#gradescope">Gradescope</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#prairielearn">PrairieLearn</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#github">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#oh-queue">OH Queue</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#youtube-kaltura">YouTube &amp; Kaltura</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#zoom">Zoom</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#instructional-accounts-and-servers-the-hive">Instructional Accounts and Servers (the hive!)</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#action-items">Action Items</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-2-command-line-essentials">Exercise 2: Command Line Essentials</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#cli-keyboard-shortcuts">CLI Keyboard Shortcuts</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#hello-world">Hello World</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#working-with-files">Working With Files</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#file-paths">File Paths</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#man-manual-pages">man - Manual Pages</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#ssh-secure-shell">ssh - &quot;Secure Shell&quot;</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#scp-secure-copy">scp - &quot;Secure Copy&quot;</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#action-items-1">Action Items</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-3-installing-dependencies">Exercise 3: Installing Dependencies</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#os-specific-setup">OS-specific Setup</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#action-items-2">Action Items</a>
+</li>
+</ul>
+</li>
+ <li class="nav-item">
+<a class="nav-link" href="index.html#exercise-4-dev-environment-setup">Exercise 4: Dev Environment Setup</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#text-editors-and-ides">Text Editors and IDEs</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#ssh-key-setup">SSH Key Setup</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#hive-ssh-configuration">Hive SSH Configuration</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#github-ssh-auth-setup">GitHub SSH Auth Setup</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-5-fun-with-git">Exercise 5: Fun with Git</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#getting-your-lab-repo">Getting Your Lab Repo</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#configuring-git">Configuring Git</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#cloning-your-repo">Cloning Your Repo</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exploring-your-repo">Exploring Your Repo</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#fizzing-and-buzzing">Fizzing and Buzzing</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#submission">Submission</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#appendix">Appendix</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#vim-basics">Vim Basics</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#github-personal-access-token-setup">GitHub Personal Access Token Setup</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<div id="toc-content-wrapper" class="content col-md-9">
+<h1 class="title">Lab 0: Intro and Setup</h1>
+<p class="subtitle">Deadline: Monday, January 24, 11:59:59 PM PT</p>
+<p>Hello! Welcome to CS61C! We're excited to have you on board :D <del>Please pay attention as we demonstrate the safety features of this aircraft.</del></p>
+<p>This lab may be a little long, but please read carefully; it covers many important things that will prepare you for the rest of the course!</p>
+<hr />
+<h2 id="goals">Goals</h2>
+<p>Each lab will begin with a few goals; use them to reflect on your learning and guide your thinking! Here are the goals for this lab:</p>
+<ul>
+<li>Describe and adhere to all course policies.</li>
+<li>Set up accounts for GitHub, Gradescope, hive machines, Piazza, and other course-related services.</li>
+<li>Get familiar with command line tools and Git commands.</li>
+</ul>
+<hr />
+<h2 id="jargon">Jargon</h2>
+<p>A quick clarification on some terms:</p>
+<ul>
+<li>TA/GSI/uGSI: Teaching Assistant (sometimes called Graduate/Undergraduate Student Instructor).</li>
+<li>AI: Academic Intern, also part of course staff. You'll see them in Lab, OH, and sometimes Piazza.
+<ul>
+<li>In this course, AI generally stands for this, and not &quot;artificial intelligence&quot;.</li>
+</ul>
+</li>
+<li>OH: Office Hours, where you can meet course staff in (virtual) meetings and ask questions.</li>
+<li>hive/&quot;hive machines&quot;/&quot;the hive&quot;: a group of instructional servers. More details later in the lab.</li>
+<li>CLI: <a href="https://en.wikipedia.org/wiki/Command-line_interface">Command Line Interface</a>, or the interface you see in terminals</li>
+<li>GUI: <a href="https://en.wikipedia.org/wiki/Graphical_user_interface">Graphical User Interface</a></li>
+<li>OS: Operating System (commonly macOS, Windows, Linux, FreeBSD, etc.)</li>
+</ul>
+<hr />
+<h2 id="exercise-1-accessing-services">Exercise 1: Accessing Services</h2>
+<p>Unfortunately, assignments in this course do require some (sometimes boring) setup. Let's get that out of the way before the semester kicks in.</p>
+<div class="alert alert-info">
+<p><strong>Note</strong>: If you were enrolled recently, it will take up to 24 hours to automatically get access to everything. If you're still having access issues after that, please reach out to us on Piazza, but please wait until 24 hours have passed before reaching out. You can contact us through Piazza (preferred) or email (<code><a href="https://cs61c.org/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="75160643441635">[email&#160;protected]</a></code>).</p>
+</div>
+<h3 id="accessing-services">Accessing Services</h3>
+<p>61C primarily uses a couple services for distributing assignments, receiving work, and grading. There's a brief overview of the important ones in the sections below.</p>
+<details>
+<summary>Note for students with internet access restrictions</summary>
+<p>Unfortunately, some regions and organizations block access to our educational materials and tools. If you're unable to access any services or resources due to internet access restrictions, you can download and use the Berkeley campus VPN (see the <a href="https://www.lib.berkeley.edu/using-the-libraries/vpn">Berkeley Library VPN info page</a>). If the campus VPN is inaccessible or doesn't work for you, contact us (Piazza preferably, if that's not accessible email <code>cs61c [at] berkeley.edu</code>) and we can try to work something out.</p>
+</details>
+<h3 id="note-non-standard-enrollment">Note: Non-standard Enrollment</h3>
+<p>If you're enrolled in 61C normally, you should already be added to everything.</p>
+<p>If you're resolving an incomplete and received an email this semester about it, you should also already be added to everything.</p>
+<p>If you're a concurrent enrollment student, in CS 47C, or in some other non-standard enrollment for 61C, you might not be able to access some of the resources below. If that is the case, please fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBZub9bHsoUiPKmjFtjIgg04MuIQSP3yBwhCu2bJ0oc95XtQ/viewform">this form</a> so we can add you.</p>
+<h3 id="calnet-id-and-berkeley-google-accounts">CalNet ID (and Berkeley Google accounts)</h3>
+<p>Most students should have a CalNet ID (and therefore, email ending in <code>@berkeley.edu</code>).</p>
+<ul>
+<li>If a service allows CalNet ID login, use that whenever possible.</li>
+<li>If a service prompts you to sign in with Google, log in using your <code>@berkeley.edu</code> email if possible. This is your &quot;Berkeley Google account&quot; (or bConnected account, but nobody says that).</li>
+<li>If you would like to use an existing account on a service, try to add your Berkeley email as the primary email.</li>
+</ul>
+<h3 id="piazza">Piazza</h3>
+<p><a href="https://piazza.com/class">Piazza</a> is a discussion forum that we'll be using as the main method of communication for this course. All announcements will be made here, and almost all questions or comments you may have should be posted here (unless we say otherwise).</p>
+<p>We automatically add new students to the 61C Piazza course approximately every 24 hours.</p>
+<p>Please take a moment to read through the <a href="../../policies/index.html#piazza">Piazza section of our policies</a>.</p>
+<h3 id="gradescope">Gradescope</h3>
+<p><a href="https://www.gradescope.com">Gradescope</a> is the platform we use for submitting and grading programming assignments.</p>
+<p>We automatically add new students to the 61C Gradescope course approximately every 24 hours.</p>
+<div class="alert alert-warning">
+<p><strong>Warning</strong>: Please ensure you set your <code>@berkeley.edu</code> email as your <strong>primary</strong> email. If not, we might not be able to find your Gradescope account for grading!</p>
+</div>
+<h3 id="prairielearn">PrairieLearn</h3>
+<p><a href="https://cbt-dev.berkeley.edu/pl">PrairieLearn</a> is the platform we use for homework and quizzes. </p>
+<p>Visit PrairieLearn and make sure you can see the 61C Spring 2022 course. If not, try the <code>Add or remove courses</code> button. Please reach out on Piazza if you're still not able to see the PrairieLearn course.</p>
+<div class="alert alert-warning">
+<p><strong>Warning</strong>: Please access Berkeley's PrairieLearn instance through the link above! If you search PrairieLearn on the web, the first result will probably be UIUC's instance.</p>
+</div>
+<h3 id="github">GitHub</h3>
+<p><a href="https://github.com">GitHub</a> is a hosted Git service we use for code distribution.</p>
+<p>If you have an existing GitHub account, feel free to use that; we don't care, repositories created in this course are private, and anything you do for this course shouldn't affect the rest of your GitHub account. Note that course staff can see your GitHub username.</p>
+<p>If you don't have a GitHub account or want to make a separate one for 61C, you can sign up at <a href="https://github.com">GitHub</a>.</p>
+<h3 id="oh-queue">OH Queue</h3>
+<p>Office Hours (OH) will be scheduled and managed through the <a href="https://oh.cs61c.org">OH Queue</a>. Please use your Berkeley Google account when logging in; non-Berkeley Google accounts will not be able to use the OH Queue properly.</p>
+<p>Please take a moment to read through the <a href="../../policies/index.html#office-hours">Office Hours section of our policies</a>.</p>
+<p>When the queue is open, there will be a form to request help. When your help ticket is called by course staff:</p>
+<ul>
+<li>If you are in-person, course staff will call out your name in the room. Wave at them, and they'll come over to you.</li>
+<li>If you are remote, a <code>Join Call</code> button will appear. Clicking that will take you to a Zoom room with a staff member.</li>
+</ul>
+<h3 id="youtube-kaltura">YouTube &amp; Kaltura</h3>
+<p>Recordings of discussions and lectures, as well as other video resources, will be uploaded to <a href="https://youtu.be/dQw4w9WgXcQ">YouTube</a> or Kaltura.</p>
+<p>Kaltura: Under the <a href="https://bcourses.berkeley.edu/courses/1513810">bCourses site for this course</a>, there is a <code>Media Gallery</code> page. Kaltura uploads will be visible here.</p>
+<p>YouTube: YouTube uploads will be linked on the course website. You will need to be signed into YouTube using your Berkeley Google account to view our YouTube uploads. If you're unable to view a video on YouTube, make sure you're using your Berkeley Google account (click your avatar on the top-right corner and <code>Switch Accounts</code>, or try the <a href="https://youtube.com/channel_switcher">YouTube Channel Switcher page</a>).</p>
+<div class="alert alert-info">
+<p><strong>Note</strong>: If you can't view the videos on YouTube, usually:</p>
+<ul>
+<li>You might be using a personal Google account on YouTube.</li>
+<li>You might be using your Berkeley Google account, but you have 2 or more YouTube channels on that account.</li>
+</ul>
+<p>If you see a &quot;More accounts&quot; button when switching accounts, try that. If not, try the <a href="https://youtube.com/channel_switcher">channel switcher</a>, or try a private browsing/incognito window.</p>
+</div>
+<h3 id="zoom">Zoom</h3>
+<p>We will be holding remote meetings (lab/project/general OH, lectures, discussions, etc.) through <a href="https://berkeley.zoom.us">Zoom</a>. When signing in, use the <code>Sign in with SSO</code> option, enter <code>berkeley.zoom.us</code>, and sign in with your CalNet ID.</p>
+<div class="alert alert-info">
+<p><strong>Note</strong>: If you get an error saying &quot;Unable to sign up with your email address&quot; or &quot;Cannot sign up with email address ending with @berkeley.edu&quot;, make sure you are using &quot;Sign in with SSO&quot; and not another method to sign in.</p>
+</div>
+<p>Relevant Zoom links can be found in the Zoom Links post on Piazza.</p>
+<h3 id="instructional-accounts-and-servers-the-hive">Instructional Accounts and Servers (the hive!)</h3>
+<p>The EECS department has several instructional computer labs in Soda 271, 273, 275, 277, and 330. Most of the software we'll be using is already pre-installed on these computers, so you use these to work on assignments. As a student in a CS course, you should have 24/7 cardkey access to the labs.</p>
+<p>The department also has instructional servers that are accessible remotely, using SSH (more on that later in this lab). Later in the semester, we may have assignments that must be completed on &quot;hive machines&quot;, which are the main group of instructional servers we'll be using. You can find a list of hive machines at <a href="https://hivemind.eecs.berkeley.edu">Hivemind</a> (<strong>only</strong> the names starting with <code>hive</code>).</p>
+<p>You will need to <a href="https://acropolis.cs.berkeley.edu/%7Eaccount/webacct/">sign up for a <code>cs61c</code> instructional account on WebAccount</a>. You'll use this account to access the instructional computers.</p>
+<p>Note: If you can't create an account for whatever reason, don't worry! See the <a href="index.html#note-non-standard-enrollment">Non-standard Enrollment section</a>, and continue without an account for now.</p>
+<h3 id="action-items">Action Items</h3>
+<ul>
+<li>Sign up for and log into all the services described above.
+<ul>
+<li>Piazza: Make sure you can access the course Piazza.</li>
+<li>GitHub: Make sure you can log into the GitHub account you plan to use for this course.</li>
+<li>Gradescope: Make sure you can log in and see the <code>Spring 2022</code> version of the <code>CS 61C</code> course.</li>
+<li>PrairieLearn: Make sure you can log in and see the <code>Spring 2022</code> version of the <code>CS 61C</code> course.</li>
+<li>OH Queue: Make sure you can log in without errors.</li>
+<li>YouTube: Make sure that you can view the lecture 1 video (linked on the home page). If it's not uploaded yet, you can come back to this later.</li>
+<li>Zoom: Follow the login instructions in the Zoom section above. Make sure you can join the various OH rooms.</li>
+<li>Instructional Account: If you haven't already, visit <a href="https://acropolis.cs.berkeley.edu/%7Eaccount/webacct/">WebAccount</a> and create a <code>cs61c</code> instructional account</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="exercise-2-command-line-essentials">Exercise 2: Command Line Essentials</h2>
+<p>If you took CS61A and CS61B, you likely have some experience with a command line interface (CLI) and
+terminal commands. We'll be using the CLI a lot in this course, so let's take a moment to review some of the basics.</p>
+<p>Example commands will be formatted like:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-support z-function z-echo z-shell">echo</span></span><span class="z-meta z-function-call z-arguments z-shell"> Hello world</span>
+</span></code></pre>
+<p>In this case, <code>echo</code> is the command, and <code>Hello</code> and <code>world</code> are arguments. Typing that line in your terminal will run the command. In this case, it just prints <code>Hello world</code> to your terminal.</p>
+<p>Flags are commonly used to specify program options or alter behavior. They usually begin with one or two dashes, and can optionally take an argument.</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> --</span>version</span></span> <span class="z-keyword z-operator z-logical z-pipe z-shell">|</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">ok</span></span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">python3</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>c</span> <span class="z-string z-quoted z-single z-shell"><span class="z-punctuation z-definition z-string z-begin z-shell">&#39;</span>print(&quot;Hello world&quot;)<span class="z-punctuation z-definition z-string z-end z-shell">&#39;</span></span></span>
+</span></code></pre>
+<p>It's generally recommended to wrap strings that should be a single argument in single quotation marks (e.g. <code>'longer string with *&amp;)<a href="https://cs61c.org/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="055a45">[email&#160;protected]</a>#(&amp;$! symbols'</code>), or you may run into unintended behavior -- many of those symbols actually do something if left unquoted/unescaped!</p>
+<p>You may find it helpful to review <a href="https://inst.eecs.berkeley.edu/%7Ecs61b/fa21/materials/lab/lab1/index.html#essential-terminal-commands">61B's list of common CLI commands</a>.</p>
+<h3 id="cli-keyboard-shortcuts">CLI Keyboard Shortcuts</h3>
+<p>When typing commands or file paths:</p>
+<ul>
+<li><kbd>Tab</kbd> will try autocomplete the current term based on what you wrote so far
+<ul>
+<li>If the current directory has <code>filename1.txt</code> and <code>filename2.txt</code>, <kbd>f</kbd> <kbd>Tab</kbd> <kbd>1</kbd> <kbd>Tab</kbd> will result in <code>filename</code> after the first tab, and <code>filename1.txt</code> after you type <code>1</code> and the second tab</li>
+</ul>
+</li>
+<li><kbd>Up Arrow</kbd> and <kbd>Down Arrow</kbd> will allow you to move through commands you've used previously, so you don't need to type them again.</li>
+<li><kbd>Ctrl</kbd> + <kbd>a</kbd> will move the cursor to the beginning of the current line (helpful for fixing mistakes)</li>
+<li><kbd>Ctrl</kbd> + <kbd>e</kbd> will move the cursor to the end of the current line (also helpful for fixing mistakes)</li>
+<li><kbd>Ctrl</kbd> + <kbd>r</kbd> will let you search through your recently used commands</li>
+</ul>
+<h3 id="hello-world">Hello World</h3>
+<p><code>echo</code> repeats whatever arguments you give it.</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-support z-function z-echo z-shell">echo</span></span><span class="z-meta z-function-call z-arguments z-shell"> Hello World</span>
+</span></code></pre>
+<h3 id="working-with-files">Working With Files</h3>
+<p><code>touch</code> will create a blank file with the file name you provided.</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">touch</span></span><span class="z-meta z-function-call z-arguments z-shell"> example.txt</span>
+</span></code></pre>
+<p>This will create a file named <code>example.txt</code> with nothing inside.</p>
+<p>If you'd like to create a file and add text in one go, you can use:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-support z-function z-echo z-shell">echo</span></span><span class="z-meta z-function-call z-arguments z-shell"> <span class="z-string z-quoted z-single z-shell"><span class="z-punctuation z-definition z-string z-begin z-shell">&#39;</span>Your contents here<span class="z-punctuation z-definition z-string z-end z-shell">&#39;</span></span> <span class="z-keyword z-operator z-assignment z-redirection z-shell">&gt;</span> example.txt</span>
+</span></code></pre>
+<p>This will create a file with the name <code>example.txt</code> in your current directory. If the file already exists, it will be overwritten. The file will contain <code>Your contents here</code>, without the quotation marks. The <code>&gt;</code> symbol takes one argument which redirects where data printed to stdout is sent. Here, we are redirecting the output of <code>echo</code> to a file named <code>example.txt</code>.</p>
+<p>You can view the contents of a file with the <code>cat</code> or <code>less</code> commands.</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">cat</span></span><span class="z-meta z-function-call z-arguments z-shell"> example.txt</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">less</span></span><span class="z-meta z-function-call z-arguments z-shell"> example.txt</span>
+</span></code></pre>
+<p><code>cat</code> print the contents of <code>example.txt</code> to your terminal. <code>less</code> opens a basic viewer which allows you to scroll and search.</p>
+<h3 id="file-paths">File Paths</h3>
+<p>You can provide a relative or absolute path to point to files that are not in the current directory:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">cat</span></span><span class="z-meta z-function-call z-arguments z-shell"> ../other-folder/file-in-other-folder</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">cat</span></span><span class="z-meta z-function-call z-arguments z-shell"> <span class="z-meta z-group z-expansion z-tilde"><span class="z-variable z-language z-tilde z-shell">~</span></span>/file-in-home-folder</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">cat</span></span><span class="z-meta z-function-call z-arguments z-shell"> /creeper/awww_man</span>
+</span></code></pre>
+<p>In relative paths, <code>.</code> refers to the current directory, and <code>..</code> refers to the parent directory. Given a folder structure:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">root-dir/
+    sub-dir-1/ (current directory)
+        file-1.txt
+    sub-dir-2/
+        file-2.txt
+</span></code></pre>
+<ul>
+<li><code>.</code> refers to <code>sub-dir-1</code>, the current directory (e.g. <code>./file-1.txt</code>)</li>
+<li><code>..</code> refers to <code>root-dir</code>, the parent directory (e.g. <code>../sub-dir-2/file-2.txt</code>).</li>
+<li>To print <code>file-2.txt</code>, you can run <code>cat ../sub-dir-2/file-2.txt</code>, or <code>cd ../sub-dir-2</code> then <code>cat file-2.txt</code>.</li>
+</ul>
+<h3 id="man-manual-pages"><code>man</code> - Manual Pages</h3>
+<p>The manual pages (&quot;man pages&quot;) are great UNIX resources that are often underused; while not as versatile as Google, they contain documentation on UNIX components from program usage, language standards and conventions, and more. They also work offline, so they can be handy if you're ever stuck in a North Alaskan woodland cabin in the middle of a snowstorm basking in the dying glow of a ThinkPad <del>which BTW runs Arch Linux</del>.</p>
+<p>While your favorite search engine probably also has the answers you're looking for, in this course, we'd still like you to get comfortable with using <code>man</code>, especially for C and UNIX-related questions.</p>
+<p>If you want the man page for a single program/command, you can run:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">man</span></span><span class="z-meta z-function-call z-arguments z-shell"> command_name</span> <span class="z-keyword z-operator z-logical z-pipe z-shell">|</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">less</span></span>
+</span></code></pre>
+<p>The man page for a program typically contains information about what the program is used for, what certain flags do when you invoke the program with them, and where to go for more information. Since we piped the man page into <code>less</code>, this page is scrollable (use your arrow keys or the space bar). Hit <code>q</code> to exit the man page and get back to your terminal prompt.</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">man</span></span><span class="z-meta z-function-call z-arguments z-shell"> echo</span> <span class="z-keyword z-operator z-logical z-pipe z-shell">|</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">less</span></span>
+</span></code></pre>
+<p>The above command should bring up the man page for the <code>echo</code> command.</p>
+<p>If you want to search the man pages for a command that pertains to a keyword:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">man</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>k</span> single_keyword</span> <span class="z-keyword z-operator z-logical z-pipe z-shell">|</span> <span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">less</span></span>
+</span></code></pre>
+<p>This command will search the manual pages for a command with the keyword <code>single_keyword</code>. Forget how to open files in Vim? You can search for <code>editor</code> and get a list of all editor-related commands on your system.</p>
+<h3 id="ssh-secure-shell"><code>ssh</code> - &quot;<strong>S</strong>ecure <strong>Sh</strong>ell&quot;</h3>
+<p>For this class, we'll expect you to test most of your projects, homeworks, and labs on the hive machines. To access the hive machines remotely, you'll be using the SSH protocol and programs.</p>
+<p>Note: If you weren't able to get an instructional account, you can come back here later!</p>
+<p>You can find a list of hive machines at <a href="https://hivemind.eecs.berkeley.edu">Hivemind</a>. There are 30 of them, named <code>hive1</code>, <code>hive2</code>, ..., <code>hive30</code>. If its name starts with <code>hive</code>, it is a hive machine. If it doesn't start with <code>hive</code> (sorry <code>ashby</code>), it's not a hive machine. Using a non-hive machine may lead to weird setup/runtime errors.</p>
+<p>Sometimes, a hive machine may be down or overloaded. If you're getting &quot;<code>Connection refused</code>&quot; or &quot;<code>Connection timeout</code>&quot; or other connection errors, check Hivemind and pick another machine to use.</p>
+<p>Once you have an instructional account, you can SSH into an instructional server with the following command:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">ssh</span></span><span class="z-meta z-function-call z-arguments z-shell"> cs61c-<span class="z-keyword z-operator z-regexp z-quantifier z-shell">?</span><span class="z-keyword z-operator z-regexp z-quantifier z-shell">?</span><span class="z-keyword z-operator z-regexp z-quantifier z-shell">?</span>@hive#.cs.berkeley.edu</span>
+</span></code></pre>
+<p>Remember to replace <code>cs61c-???</code> with your instructional account username, and <code>hive#</code> with a hive machine's name. Your default password is displayed by <a href="https://acropolis.cs.berkeley.edu/%7Eaccount/webacct/">WebAccount</a> when creating the account, and you can reset your password on WebAccount if you forgot it.</p>
+<p>Troubleshooting:</p>
+<ul>
+<li>If nothing happens for a long time: check your internet connection. Some network firewalls, including <code>CalVisitor</code> on campus, block SSH. Try another network (<code>eduroam</code> if you're on campus).</li>
+<li><code>Permission denied, please try again</code>: if you're copy-pasting the password, try typing it out manually.</li>
+<li><code>Connection refused</code> or other weird errors: the hive machine you picked might be down. Try another one</li>
+<li><code>Reserved for cs61c staff</code>: try another hive machine :)</li>
+</ul>
+<p>When your connection succeeds, you should be able to interact with and run commands on your chosen
+hive machine! To exit this SSH session, simply run:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-support z-function z-exit z-shell">exit</span></span>
+</span></code></pre>
+<p>Files on the hive machines are stored on a network drive, so your account will have the same files
+on all 30 hive machines (and other instructional lab computers).</p>
+<p>If you want to change your instructional account password, you can SSH into the update server:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">ssh</span></span><span class="z-meta z-function-call z-arguments z-shell"> cs61c-<span class="z-keyword z-operator z-regexp z-quantifier z-shell">?</span><span class="z-keyword z-operator z-regexp z-quantifier z-shell">?</span><span class="z-keyword z-operator z-regexp z-quantifier z-shell">?</span>@update.cs.berkeley.edu</span>
+</span></code></pre>
+<h4 id="sanity-check">Sanity Check</h4>
+<p>When you're in a SSH session, your prompt should look similar to this (the area <em>inside</em>, but not including, the red box):</p>
+<p><img src="inst_prompt.jpg" alt="" /></p>
+<p>If it looks very different (e.g. the prompt is white text instead of red and yellow text), try running <code>/home/ff/cs61c/bin/fix-dotfiles</code>.</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">/home/ff/cs61c/bin/fix-dotfiles</span></span>
+</span></code></pre>
+<p>If your prompt still looks very different, contact course staff on Piazza.</p>
+<h3 id="scp-secure-copy"><code>scp</code> - &quot;Secure Copy&quot;</h3>
+<p>The <code>scp</code> program is used for copying files between computers using the SSH protocol.</p>
+<p>Sometimes, you may want to get individual files or entire folders from the hive machines onto your
+local system, or vice versa. You can do this by using <code>scp</code>:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">scp</span></span><span class="z-meta z-function-call z-arguments z-shell"> <span class="z-keyword z-operator z-assignment z-redirection z-shell">&lt;</span>source<span class="z-keyword z-operator z-assignment z-redirection z-shell">&gt;</span> <span class="z-keyword z-operator z-assignment z-redirection z-shell">&lt;</span>destination<span class="z-keyword z-operator z-assignment z-redirection z-shell">&gt;</span>
+</span></span></code></pre>
+<p>To specify a remote source or destination, use <code><a href="https://cs61c.org/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ff8a8c9a8d919e929abf97908c8b">[email&#160;protected]</a>:path</code>. To specify a local destination,
+just use <code>path</code>. As an example:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">scp</span></span><span class="z-meta z-function-call z-arguments z-shell"> cs61c-<span class="z-keyword z-operator z-regexp z-quantifier z-shell">?</span><span class="z-keyword z-operator z-regexp z-quantifier z-shell">?</span><span class="z-keyword z-operator z-regexp z-quantifier z-shell">?</span>@hive1.cs.berkeley.edu:<span class="z-meta z-group z-expansion z-tilde"><span class="z-variable z-language z-tilde z-shell">~</span></span>/some-folder/example.txt <span class="z-meta z-group z-expansion z-tilde"><span class="z-variable z-language z-tilde z-shell">~</span></span>/Downloads/</span>
+</span></code></pre>
+<p>Assuming my username is <code>cs61c-???</code>, the above command would connect to <code>hive3</code> and copy
+<code>~/some-folder/example.txt</code> on my instructional account to <code>~/Downloads/example.txt</code> on my local
+machine.</p>
+<p>If I wanted to copy the other direction (from my local machine to a hive machine) I would use:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">scp</span></span><span class="z-meta z-function-call z-arguments z-shell"> <span class="z-meta z-group z-expansion z-tilde"><span class="z-variable z-language z-tilde z-shell">~</span></span>/Downloads/example.txt cs61c-<span class="z-keyword z-operator z-regexp z-quantifier z-shell">?</span><span class="z-keyword z-operator z-regexp z-quantifier z-shell">?</span><span class="z-keyword z-operator z-regexp z-quantifier z-shell">?</span>@hive2.cs.berkeley.edu:<span class="z-meta z-group z-expansion z-tilde"><span class="z-variable z-language z-tilde z-shell">~</span></span>/some-folder/</span>
+</span></code></pre>
+<p><code>scp</code> by default only works with files. To copy folders, you need to tell scp to &quot;recursively&quot; copy
+the folder and all its contents, which you can do with the <code>-r</code> flag:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">scp</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>r</span> cs61c-<span class="z-keyword z-operator z-regexp z-quantifier z-shell">?</span><span class="z-keyword z-operator z-regexp z-quantifier z-shell">?</span><span class="z-keyword z-operator z-regexp z-quantifier z-shell">?</span>@hive3.cs.berkeley.edu:<span class="z-meta z-group z-expansion z-tilde"><span class="z-variable z-language z-tilde z-shell">~</span></span>/some-folder <span class="z-meta z-group z-expansion z-tilde"><span class="z-variable z-language z-tilde z-shell">~</span></span>/Downloads/</span>
+</span></code></pre>
+<p>Pay attention to the slashes: writing <code>some-folder</code> will copy the folder itself and files inside, while <code>some-folder/</code> will only copy the files inside.</p>
+<div class="alert alert-warning">
+<p><strong>Warning</strong>: Running <code>scp</code> on the hive machines (e.g. when you're in a SSH session) is usually not desired behavior. Running <code>scp example.txt <a href="https://cs61c.org/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4a29397c7b29677575750a22233c2f7e64293964282f38212f262f33642f2e3f">[email&#160;protected]</a>:~/example.txt</code> on a hive machine will copy <code>example.txt</code> to... the same place. You probably want to run it in a local terminal session!</p>
+</div>
+<h3 id="action-items-1">Action Items</h3>
+<p>SSH into any hive machine. Then:</p>
+<ul>
+<li>If there is a prompt asking you to enter some information:
+<ul>
+<li>Last name (family name)</li>
+<li>First name (given name) and any middle name(s)</li>
+<li>Student ID</li>
+<li>Email address: please use your Berkeley email</li>
+<li>Code name: just pick something random. Ignore the &quot;posting grades&quot; bit, we don't use this system for any grades</li>
+</ul>
+</li>
+<li>If there wasn't a prompt, run <code>re-register</code>.</li>
+<li>Then, run <code>check-register</code> and make sure the information is correct. If something is wrong, run <code>re-register</code>.
+<ul>
+<li>The first email address shown <strong>must</strong> be your primary email on your Gradescope account.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="exercise-3-installing-dependencies">Exercise 3: Installing Dependencies</h2>
+<p>We're going to be using a couple programs and tools, outlined below:</p>
+<ul>
+<li>CLI (command line interface)
+<ul>
+<li><code>git</code> for distributing and managing code</li>
+<li><code>python3</code> 3.6+ for running various scripts</li>
+<li><code>gcc</code> 7+ for compiling C programs (many assignments also support <code>clang</code>/<code>clang-gcc</code>)</li>
+<li><code>java</code> 9+ for RISC-V simulation (Venus) and circuit simulation (Logisim)</li>
+</ul>
+</li>
+<li>GUI (graphical user interface)
+<ul>
+<li>A browser</li>
+<li>A terminal program</li>
+<li>Java 9+ for visual circuit simulation, and other interactive simulations</li>
+</ul>
+</li>
+</ul>
+<p><strong>CLI</strong>: the hive machines provide a Linux environment with all CLI tools already pre-installed and set up. We strongly recommend that you use the hive for assignments that use CLI tools to avoid annoying setup issues (especially on Windows). If you must work locally, note that we may not be able to help with local setup issues.</p>
+<p><strong>GUI</strong>: You will have to run GUI programs locally (screen forwarding over SSH is difficult and buggy). However, there are less complexities and potential issues with the GUI programs than with the CLI programs.</p>
+<h3 id="os-specific-setup">OS-specific Setup</h3>
+<p>The following sub-sections contain information and tips for specific OSes. Pay attention to the OS name; commands for one OS may break things on another OS!</p>
+<p>As noted above, please remember that we strongly recommend that you do most of your work on the hive machines. The staff may not be able to help you troubleshoot issues if you choose to use another machine.</p>
+<h4 id="ubuntu-linux">Ubuntu Linux</h4>
+<p>Ubuntu 18.04+ has the required programs in the default APT repositories. The following command will install them automatically:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">sudo</span></span><span class="z-meta z-function-call z-arguments z-shell"> apt update</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">sudo</span></span><span class="z-meta z-function-call z-arguments z-shell"> apt install build-essential cgdb curl default-jre git python3 python3-pip valgrind</span>
+</span></code></pre>
+<p>The built-in terminal can be used for CLI programs.</p>
+<h4 id="macos">macOS</h4>
+<p>The built-in <code>Terminal</code> app can be used for CLI programs.</p>
+<p>Recommended installation:</p>
+<ul>
+<li>Open the <code>Terminal</code> app</li>
+<li>Install the Xcode Command Line Tools:<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">xcode-select</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> --</span>install</span></span>
+</span></code></pre>
+</li>
+<li>If you do not have Python 3.6+ installed (<code>python3 --version</code> should say <code>3.6</code> or higher):
+<ul>
+<li>Download and install the <a href="https://www.python.org/downloads/">latest version of Python 3 (64-bit)</a></li>
+</ul>
+</li>
+<li>If you do not have Java 9+ installed (<code>java -version</code> should say <code>1.9</code> or higher):
+<ul>
+<li>Download an OpenJDK build (we recommend Java 17) from <a href="https://adoptium.net/releases.html">the Adoptium project</a>
+<ul>
+<li>We recommend the <code>.pkg</code> installer.</li>
+<li>If you have an M1 CPU, you want the <code>aarch64</code> version. If you have an Intel/AMD CPU, you want the <code>x64</code> version.</li>
+</ul>
+</li>
+<li>Open the <code>.pkg</code> installer and follow the instructions.</li>
+</ul>
+</li>
+</ul>
+<p>Notes:</p>
+<ul>
+<li>(C)GDB and Valgrind are difficult to get working on macOS. LLDB is available, but its syntax is somewhat different from GDB's.</li>
+<li>Most of our stuff that runs on Intel-based Apple computers should also run on M1-based computers. If it doesn't, try reaching out on Piazza.</li>
+</ul>
+<h4 id="windows">Windows</h4>
+<p>This one is a bit tricky. Developing in C on Windows works better in Windows Subsystem for Linux (WSL), but GUI support in WSL is spotty. WSL by default has its own set of accounts and files, separate from your Windows user data.</p>
+<p>Recommended installation:</p>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">Install Windows Subsystem for Linux (WSL)</a>
+<ul>
+<li>WSL 1 or 2 works, but we have observed less issues with WSL 2</li>
+<li>We recommend Ubuntu 18.04, since that is the OS on the hive machines so the experience will be similar</li>
+<li>This should install a terminal called <code>Ubuntu Bash</code> or similar. Note that <code>Ubuntu Bash</code> and <code>Git Bash</code> are very different!</li>
+</ul>
+</li>
+<li>Inside WSL (open <code>Ubuntu Bash</code>) and run the following:<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">sudo</span></span><span class="z-meta z-function-call z-arguments z-shell"> apt update</span>
+</span><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">sudo</span></span><span class="z-meta z-function-call z-arguments z-shell"> apt upgrade</span>
+</span><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">sudo</span></span><span class="z-meta z-function-call z-arguments z-shell"> apt dist-upgrade</span>
+</span></code></pre>
+</li>
+<li>Still in WSL (<code>Ubuntu Bash</code>), install the CLI programs:<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">sudo</span></span><span class="z-meta z-function-call z-arguments z-shell"> apt install build-essential cgdb default-jre gdb git python3 python3-pip valgrind</span>
+</span></code></pre>
+</li>
+<li>Now, outside WSL (in regular Windows), download and install the <a href="https://www.python.org/downloads/">latest version of Python 3 (64-bit)</a>
+<ul>
+<li>Make sure to <strong>select the &quot;Add Python 3.x to PATH&quot; option</strong></li>
+</ul>
+</li>
+<li>Still outside WSL, <a href="https://git-scm.com/download/win">download and install Git Bash</a>
+<ul>
+<li>Make sure to <strong>select the &quot;Use Windows' default console window&quot; option</strong> instead of &quot;Use MinTTY&quot;</li>
+</ul>
+</li>
+<li>Still outside WSL, <a href="https://docs.microsoft.com/en-us/java/openjdk/download">download and install Microsoft OpenJDK</a> (Java 17 is recommended)
+<ul>
+<li>You can skip this if you have an existing install of Java 9+</li>
+</ul>
+</li>
+</ul>
+<p>Tips:</p>
+<ul>
+<li>With the recommended installation, <code>Ubuntu Bash</code> is a terminal that runs inside WSL, and <code>Git Bash</code> is a terminal that runs outside WSL. Assignments involving <code>gcc</code> or RISC-V should be done in WSL, and assignments involving Logisim should be done outside WSL.</li>
+<li>We don't support Powershell. If you're looking to run something in your Windows environment (outside of WSL), please use Git Bash instead.</li>
+<li>By default, you can access your Windows files from WSL, but not vice versa (e.g. <code>C:\Users\Herobrine\Documents\cs61c</code> on Windows is <code>/mnt/c/Users/Herobrine/Documents/cs61c</code> in WSL). We recommend that you work in a Windows user directory (like <code>Documents</code> from the example) so you can swap between WSL and Windows.</li>
+<li>On Windows (not WSL), Python 3 may not be installed as <code>python3</code>. Try the following commands -- if you find a command that returns Python 3 (not Python 2), use that instead of <code>python3</code> for the rest of this lab and in future assignments:<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">python3</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>V</span></span>
+</span><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">python</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>V</span></span>
+</span><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">py</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>V</span></span>
+</span></code></pre>
+</li>
+</ul>
+<h4 id="other-oses">Other OSes</h4>
+<p>If you're using another Linux distribution (Alpine/Arch/Asahi/Debian/Fedora/NixOS/etc.), most of our programs should run fine, but we don't have resources to test on distros other than Ubuntu. If you're having trouble, you can try reaching out on Piazza or visit OH, but please note that staff has limited experience with these.</p>
+<p>If you use *BSD, HaikuOS, TempleOS, ToaruOS, or anything else, we unfortunately don't have the resources to support these platforms. If programs don't work, you can use the instructional computers (or other supported platforms).</p>
+<h3 id="action-items-2">Action Items</h3>
+<ul>
+<li>To test your GUI environment, download <a href="https://inst.eecs.berkeley.edu/%7Ecs61c/sp21/tools/logisim-evolution-3.4.3-61c.cc0f4a6.jar">Logisim here</a>. Open a terminal in your GUI environment, <code>cd</code> to the download location, and run the JAR:<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">java</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>jar</span> logisim-evolution.jar <span class="z-comment z-line z-number-sign z-shell"><span class="z-punctuation z-definition z-comment z-begin z-shell">#</span></span><span class="z-comment z-line z-number-sign z-shell"> replace the filename with the one you downloaded</span><span class="z-comment z-line z-number-sign z-shell">
+</span></span></span></code></pre>
+If the Logisim GUI interface pops up, you're all set! We won't be using it further, so you can close Logisim after checking that it works.</li>
+<li>To test your CLI environment, open a terminal in your CLI environment and run the following:<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> --</span>version</span></span>
+</span><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">python3</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> --</span>version</span></span>
+</span><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">gcc</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> --</span>version</span></span>
+</span><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">java</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>version</span></span>
+</span></code></pre>
+Make sure none of the commands throw errors!</li>
+<li>If you're getting tired of reading, try taking a short break (Minesweeper, anyone?)</li>
+</ul>
+<hr />
+<h2 id="exercise-4-dev-environment-setup">Exercise 4: Dev Environment Setup</h2>
+<h3 id="text-editors-and-ides">Text Editors and IDEs</h3>
+<p>61C doesn't require any particular text editor or IDE. However, knowing how to use at least one CLI-based text editor will make it easy to perform quick edits. Two CLI editors available on the hive machines are:</p>
+<ul>
+<li>Nano: simple and beginner-friendly
+<ul>
+<li>It provides a helpful list of commands at the bottom of the interface (the <kbd>^</kbd> means the <kbd>Ctrl</kbd> key)</li>
+<li><code>nano file.txt</code></li>
+</ul>
+</li>
+<li>Vim: more complex but powerful
+<ul>
+<li>See the <a href="index.html#vim-basics">Vim Basics section of the Appendix</a></li>
+<li>Frequently memed for not providing obvious instructions on exiting Vim</li>
+<li><code>vim file.txt</code></li>
+</ul>
+</li>
+</ul>
+<p>If you're also looking for a GUI text editor, many students like using <a href="https://code.visualstudio.com/">Visual Studio Code (VSCode)</a> (different from Visual Studio). We can't officially support VSCode since most of course staff isn't familiar with it, but it has some pretty helpful extensions, including a <a href="https://code.visualstudio.com/docs/remote/ssh">Remote SSH extension</a> that allows you to edit files over SSH in VSCode itself, without needing a CLI editor or <code>scp</code>. If you're interested in the extension, wait until the end of this exercise before setting it up, since we'll be configuring SSH.</p>
+<p>Before moving on, try familiarizing yourself with either Nano or Vim (or both). It helps to SSH into a hive machine and play with a few test files.</p>
+<h3 id="ssh-key-setup">SSH Key Setup</h3>
+<p>You'll be using the hive machines a fair bit in this class. Setting up SSH keys will let you connect without needing to dig up your instructional account password. You can skip this sub-section if you really want to, but we highly recommend doing this -- it saves a lot of time!</p>
+<ol>
+<li>On your local machine, check if you have existing keys:</li>
+</ol>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">ls</span></span><span class="z-meta z-function-call z-arguments z-shell"> <span class="z-meta z-group z-expansion z-tilde"><span class="z-variable z-language z-tilde z-shell">~</span></span>/.ssh/id_<span class="z-keyword z-operator z-regexp z-quantifier z-shell">*</span></span>
+</span></code></pre>
+<p>If not, generate a key pair:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">ssh-keygen</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>t</span> ed25519</span>
+</span></code></pre>
+<ul>
+<li>When prompted for a key file path, just press <kbd>Enter</kbd> without typing anything else to use the default path.</li>
+<li>You'll be asked to set an optional key password. You can set a password if you want the extra security, but note that you'll have to enter it every time you use the key (every time you use SSH)
+<ul>
+<li>To avoid setting a password, just press <kbd>Enter</kbd> without typing anything else.</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>Then, copy your public key to your instructional account:</li>
+</ol>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">ssh-copy-id</span></span><span class="z-meta z-function-call z-arguments z-shell"> cs61c-<span class="z-keyword z-operator z-regexp z-quantifier z-shell">?</span><span class="z-keyword z-operator z-regexp z-quantifier z-shell">?</span><span class="z-keyword z-operator z-regexp z-quantifier z-shell">?</span>@hive5.cs.berkeley.edu</span>
+</span></code></pre>
+<p>Remember to replace <code>cs61c-???</code> with your instructional account username.</p>
+<ol start="3">
+<li>Try SSH-ing into any hive machine now:</li>
+</ol>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">ssh</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>i</span> <span class="z-meta z-group z-expansion z-tilde"><span class="z-variable z-language z-tilde z-shell">~</span></span>/.ssh/id_ed25519 cs61c-<span class="z-keyword z-operator z-regexp z-quantifier z-shell">?</span><span class="z-keyword z-operator z-regexp z-quantifier z-shell">?</span><span class="z-keyword z-operator z-regexp z-quantifier z-shell">?</span>@hive6.cs.berkeley.edu</span>
+</span></code></pre>
+<p>If you didn't set a key password, that should connect without asking for any passwords!</p>
+<h3 id="hive-ssh-configuration">Hive SSH Configuration</h3>
+<p>We can configure a SSH host alias, which will let us use <code>ssh hive#</code> instead of <code>ssh <a href="https://cs61c.org/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="eb8898ddda88c6d4d4d4ab83829d8e">[email&#160;protected]</a>#.cs.berkeley.edu</code>. Open up <code>~/.ssh/config</code> in a text editor (e.g. <code>nano ~/.ssh/config</code>) and add the following host entry:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain"># Begin CS61C hive machine config
+Host hive? hive??
+    HostName %h.cs.berkeley.edu
+    Port 22
+    User cs61c-???
+    IdentityFile ~/.ssh/id_ed25519
+    ServerAliveInterval 60
+# End CS61C hive machine config
+</span></code></pre>
+<p>Make sure to replace <code>cs61c-???</code> with your instructional account username, but leave all the other symbols as-is.</p>
+<p>Try SSH-ing into any hive machine now:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">ssh</span></span><span class="z-meta z-function-call z-arguments z-shell"> hive7</span>
+</span></code></pre>
+<h3 id="github-ssh-auth-setup">GitHub SSH Auth Setup</h3>
+<p>You can configure GitHub to your SSH key that you created above.</p>
+<ol>
+<li>On your local machine, print your public key:</li>
+</ol>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">cat</span></span><span class="z-meta z-function-call z-arguments z-shell"> <span class="z-meta z-group z-expansion z-tilde"><span class="z-variable z-language z-tilde z-shell">~</span></span>/.ssh/id_ed25519.pub</span>
+</span></code></pre>
+<p>It should look similar to the following (length may differ):</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">ssh-ed25519 AAAAC3NzaC1lZDI1N6jpH3Bnbebi7Xz7wMr20LxZCKi3U8UQTE5AAAAIBTc2HwlbOi8T <a href="https://cs61c.org/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3a43554f48655f575b53567a5f425b574a565f14595557">[email&#160;protected]</a>
+</span></code></pre>
+<ol start="2">
+<li>Go to <a href="https://github.com/settings/ssh/new">GitHub =&gt; Settings =&gt; SSH and GPG Keys =&gt; New SSH key</a> and add your public key. The title is optional, but it's helpful to set it to something that helps you remember what device the key is on.</li>
+<li>Try authenticating to GitHub over SSH:</li>
+</ol>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">ssh</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>T</span> <a href="https://cs61c.org/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b6d1dfc2f6d1dfc2dec3d498d5d9db">[email&#160;protected]</a></span>
+</span></code></pre>
+<p>If all went well, you should see something like:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">Hi USERNAME! You&#39;ve successfully authenticated, but GitHub does not provide shell access.
+</span></code></pre>
+<ol start="4">
+<li>SSH into a hive machine and generate a key pair (refer to step 1 of the <a href="index.html#ssh-key-setup">SSH Key Setup section</a> for more details):</li>
+</ol>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">ssh-keygen</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>t</span> ed25519</span>
+</span></code></pre>
+<p>Then repeat steps 1-3 on the hive machine.</p>
+<p>In the future, when cloning repos that require authentication (e.g. the private labs repo you'll create next), instead of using the HTTPS repo URL (like <code>https://github.com/USERNAME/REPO_NAME.git</code>), you must use the SSH repo URL instead (like <code><a href="https://cs61c.org/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e98e809da98e809d819c8bc78a8684">[email&#160;protected]</a>:USERNAME/REPO_NAME.git</code>). For example, in <code>https://github.com/61c-student/sp22-lab-ghost.git</code>, the repo named <code>sp22-lab-ghost</code> is under the <code>61c-student</code> user/organization, so the SSH clone URL would be <code><a href="https://cs61c.org/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6e09071a2e09071a061b0c400d0103">[email&#160;protected]</a>:61c-student/sp22-lab-ghost.git</code>.</p>
+<hr />
+<h2 id="exercise-5-fun-with-git">Exercise 5: Fun with Git</h2>
+<p>In this exercise, you'll get your labs Git repository (&quot;repo&quot;), use Vim, and work with a variety of Git commands. By the end of it, you should feel comfortable using SSH, editing files, pulling/committing/pushing, and resolving merge conflicts. If you'd like to review your Git commands before beginning, you can check out <a href="https://docs.google.com/document/d/1PlnweZTG9ZxAlbbJSARNsl-Bs-yfPiM37nK98gVR4dA/view">this guide</a>.</p>
+<h3 id="getting-your-lab-repo">Getting Your Lab Repo</h3>
+<p>Visit <a href="https://galloc.cs61c.org">Galloc</a>. Log in, connect your GitHub account, and start the lab assignment. A GitHub repo will be created for you -- this will be your personal repo for any lab work you do throughout the semester.</p>
+<h3 id="configuring-git">Configuring Git</h3>
+<p>Before we start, let's tell Git who you are. This information will be used to sign and log your commits. You may not need to do this if you've set up Git before, but if you're on the hive machines it's likely a step you'll need to take.</p>
+<p>First, run the following commands on your local machine (make sure to change the name and email to match your information):</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> config<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> --</span>global</span> user.name <span class="z-string z-quoted z-double z-shell"><span class="z-punctuation z-definition z-string z-begin z-shell">&quot;</span>John Doe<span class="z-punctuation z-definition z-string z-end z-shell">&quot;</span></span></span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> config<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> --</span>global</span> user.email <a href="https://cs61c.org/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ae0e5e2e4eee5efcaeff2ebe7fae6efa4e9e5e7">[email&#160;protected]</a></span>
+</span></code></pre>
+<p>If you have an instructional account, SSH into a hive machine, and run the same commands.</p>
+<h3 id="cloning-your-repo">Cloning Your Repo</h3>
+<p>Git has the concept of &quot;local&quot; and &quot;remote&quot; repositories. A local repo is located wherever your terminal session is; if you're in a SSH session, the local repo is a folder on a hive machine; if your terminal session on your local machine, the local repo is located on your local machine's filesystem. A remote repo (e.g. GitHub repo) is typically hosted on the Internet.</p>
+<p>You have a lab repository on GitHub, but not locally (it would be a little worrying if a website could automatically access your local files). To get a local copy of this repository, you can use <code>git clone</code>, which will create a local repository based on information from a remote repo.</p>
+<p>If you have an instructional account, SSH into a hive machine. On the hive machine, clone the repository into a folder named <code>labs</code>:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> clone <a href="https://cs61c.org/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="14737d6054737d607c61763a777b79">[email&#160;protected]</a>:61c-student/sp22-lab-USERNAME.git labs</span>
+</span></code></pre>
+<p>Remember to replace <code>sp22-lab-USERNAME</code> with your actual repo name!</p>
+<p>If you don't have an instructional account, you can perform the above command on your local machine, and work on your local machine for this exercise.</p>
+<h3 id="exploring-your-repo">Exploring Your Repo</h3>
+<p><code>cd</code> into this new folder. List all hidden files (<code>ls -a</code>). Do you see a hidden file/folder?</p>
+<p>There is indeed a folder named <code>.git</code>. Its presence indicates that the current folder (folder containing <code>.git</code>) holds a Git repository.</p>
+<p>Take a look at your repo's current remotes and status:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> remote<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>v</span></span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> status</span>
+</span></code></pre>
+<p><code>git clone</code> has already worked a bit of magic here -- there's a remote called <code>origin</code>, and its URL points to your labs repo on GitHub! You're on a local branch called <code>main</code>, which is &quot;tracking&quot; <code>origin/main</code> (the <code>main</code> branch on the <code>origin</code> remote).</p>
+<div class="alert alert-info">
+<p><strong>Note</strong>: GitHub now uses <code>main</code> as the default branch name, not <code>master</code></p>
+</div>
+<p>Throughout the semester, course staff may make updates to starter code to fix bugs or release new labs. To receive these updates, you'll need to add another remote.</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> remote add starter https://github.com/61c-teach/sp22-lab-starter.git</span>
+</span></code></pre>
+<div class="alert alert-info">
+<p><strong>Note</strong>: Our starter repos are public, and you don't have write access to them, so you should actually use the unauthenticated HTTPS clone URL in this case!</p>
+</div>
+<p>If you ever want to pull <strong>updated</strong> starter code, you'd execute the following command:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> pull starter main</span>
+</span></code></pre>
+<p>Try it out now! Since you just started lab, there might not be any updates to pull yet.</p>
+<h3 id="fizzing-and-buzzing">Fizzing and Buzzing</h3>
+<p>If you started working on other labs, make sure to copy your work somewhere else before starting this exercise, since your work may be overwritten in this exercise.</p>
+<ol>
+<li><code>cd</code> into the <code>lab00</code> folder in your repo, and take a look at the files present (<code>ls</code>). Then, run the following command to initialize the lab:</li>
+</ol>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> init.sh</span>
+</span></code></pre>
+<p>Make sure that no errors are printed.</p>
+<ol start="2">
+<li>
+<p>Use Vim to open up <code>code.py</code> and look through the <code>fizzbuzz(num)</code> function. It should:</p>
+<ul>
+<li>Print <code>&quot;num: fizz&quot;</code> if num is a multiple of 3</li>
+<li>Print <code>&quot;num: buzz&quot;</code> if num is a multiple of 5</li>
+<li>Print nothing if the num is not a multiple of 3 or 5</li>
+</ul>
+<p>However, if you run the program (<code>python3 code.py</code>), that doesn't seem to happen! Try to fix this bug by only editing the <code>if</code> and <code>elif</code> statements. After fixing the code, save, add, and commit your work using <code>git add</code> and <code>git commit</code>.</p>
+<p>In many environments, <code>git commit</code> will open up Vim for editing the commit message. If you're confused on how to use it, check out the <a href="index.html#vim-basics">Vim Basics section of the Appendix</a>.</p>
+</li>
+<li>
+<p>After committing your fix, push your work.</p>
+<p>Or at least, try to push your work. You should encounter an error:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain"> ! [rejected]        main -&gt; main (non-fast-forward)
+</span>error: failed to push some refs to &#39;github.com:61c-student/sp22-lab-username.git&#39;
+</span>hint: Updates were rejected because the tip of your current branch is behind
+</span>hint: its remote counterpart. Integrate the remote changes (e.g.
+</span>hint: &#39;git pull ...&#39;) before pushing again.
+</span>hint: See the &#39;Note about fast-forwards&#39; in &#39;git push --help&#39; for details.
+</span></code></pre>
+<p>If you didn't encounter an error, try starting from step 1 again, or contact course staff if it keeps happening.</p>
+<p>Throughout the semester, you'll probably run into many strange errors. It helps to break them down into smaller chunks, and see if you can find out what each chunk is saying. As an example, let's break that down:</p>
+<ul>
+<li><code>&quot;failed to push some refs to REPO_URL&quot;</code>: the push failed</li>
+<li><code>&quot;the tip of your current branch is behind its remote counterpart&quot;</code>: the remote repo (on GitHub) has commits that your local repo doesn't</li>
+<li><code>&quot;Integrate the remote changes (e.g. 'git pull ...') before pushing again&quot;</code>: we need to tell Git how to integrate the mysterious commits</li>
+</ul>
+<p>Try pulling the remote changes with <code>git pull</code>. If you get a <code>&quot;fatal: Not possible to fast-forward, aborting&quot;</code>, try <code>git pull --ff</code>. You should encounter another error:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">Auto-merging lab00/code.py
+</span>CONFLICT (content): Merge conflict in lab00/code.py
+</span>Automatic merge failed; fix conflicts and then commit the result.
+</span></code></pre>
+<p>Uh oh, a merge conflict:</p>
+<ul>
+<li><code>&quot;Merge conflict in lab00/code.py&quot;</code>: both the remote repo and local repo have commits that made changes to <code>lab00/code.py</code></li>
+<li><code>&quot;Automatic merge failed&quot;</code>: Git tried to figure out how to integrate the commits, but couldn't</li>
+<li><code>&quot;fix conflicts and then commit the result&quot;</code>: Looks like we need to manually resolve the merge conflict!</li>
+</ul>
+<p>You can check <code>git status</code>:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">On branch main
+</span>Your branch and &#39;origin/main&#39; have diverged,
+</span>and have 1 and 1 different commits each, respectively.
+</span>  (use &quot;git pull&quot; to merge the remote branch into yours)
+
+</span>You have unmerged paths.
+</span>  (fix conflicts and run &quot;git commit&quot;)
+</span>  (use &quot;git merge --abort&quot; to abort the merge)
+
+</span>Unmerged paths:
+</span>  (use &quot;git add &lt;file&gt;...&quot; to mark resolution)
+</span>  both modified:   code.py
+</span></code></pre>
+<p>Open the conflicted file in Vim. You should see something like:</p>
+<pre data-lang="python" class="language-python z-code"><code class="language-python" data-lang="python"><span class="z-source z-python"><span class="z-meta z-function z-python"><span class="z-storage z-type z-function z-python"><span class="z-keyword z-declaration z-function z-python">def</span></span> <span class="z-entity z-name z-function z-python"><span class="z-meta z-generic-name z-python">fizzbuzz</span></span></span><span class="z-meta z-function z-parameters z-python"><span class="z-punctuation z-section z-parameters z-begin z-python">(</span></span><span class="z-meta z-function z-parameters z-python"><span class="z-variable z-parameter z-python">num</span><span class="z-punctuation z-section z-parameters z-end z-python">)</span></span><span class="z-meta z-function z-python"><span class="z-punctuation z-section z-function z-begin z-python">:</span></span>
+</span><span class="z-keyword z-operator z-comparison z-python">&lt;</span><span class="z-keyword z-operator z-comparison z-python">&lt;</span><span class="z-keyword z-operator z-comparison z-python">&lt;</span> <span class="z-meta z-qualified-name z-python"><span class="z-variable z-other z-constant z-python">HEAD</span></span>
+</span>  <span class="z-meta z-string z-python"><span class="z-string z-quoted z-double z-python"><span class="z-punctuation z-definition z-string z-begin z-python">&quot;</span></span></span><span class="z-meta z-string z-python"><span class="z-string z-quoted z-double z-python">your code<span class="z-punctuation z-definition z-string z-end z-python">&quot;</span></span></span>
+</span><span class="z-keyword z-operator z-comparison z-python">==</span><span class="z-keyword z-operator z-assignment z-python">=</span>
+</span>  <span class="z-meta z-string z-python"><span class="z-string z-quoted z-double z-python"><span class="z-punctuation z-definition z-string z-begin z-python">&quot;</span></span></span><span class="z-meta z-string z-python"><span class="z-string z-quoted z-double z-python">not your code<span class="z-punctuation z-definition z-string z-end z-python">&quot;</span></span></span>
+</span><span class="z-keyword z-operator z-comparison z-python">&gt;</span><span class="z-keyword z-operator z-comparison z-python">&gt;</span><span class="z-keyword z-operator z-comparison z-python">&gt;</span> <span class="z-meta z-qualified-name z-python"><span class="z-meta z-generic-name z-python">remote</span></span><span class="z-keyword z-operator z-arithmetic z-python">-</span><span class="z-meta z-qualified-name z-python"><span class="z-meta z-generic-name z-python">commit</span></span><span class="z-keyword z-operator z-arithmetic z-python">-</span><span class="z-meta z-qualified-name z-python"><span class="z-support z-function z-builtin z-python">hash</span></span>
+
+</span><span class="z-meta z-statement z-loop z-for z-python"><span class="z-keyword z-control z-loop z-for z-python">for</span> <span class="z-meta z-generic-name z-python">i</span> <span class="z-keyword z-control z-loop z-for z-in z-python">in</span></span><span class="z-meta z-statement z-loop z-for z-python"> <span class="z-meta z-function-call z-python"><span class="z-meta z-qualified-name z-python"><span class="z-variable z-function z-python"><span class="z-support z-function z-builtin z-python">range</span></span></span></span><span class="z-meta z-function-call z-arguments z-python"><span class="z-punctuation z-section z-arguments z-begin z-python">(</span><span class="z-constant z-numeric z-integer z-decimal z-python">0</span><span class="z-punctuation z-separator z-arguments z-python">,</span> <span class="z-constant z-numeric z-integer z-decimal z-python">20</span><span class="z-punctuation z-section z-arguments z-end z-python">)</span></span></span><span class="z-meta z-statement z-loop z-for z-python"><span class="z-punctuation z-section z-block z-loop z-for z-python">:</span></span>
+</span></code></pre>
+<p>It looks like your imaginary partner, Oski, also tried to fix the bug, without telling you. <em>Dangit Oski</em>! Oski's code seems rather... inefficient, so you want to keep your fix. However, Oski did do something useful: there's another <code>if</code> case, so multiples of 15 will print 1 line with &quot;fizzbuzz&quot; rather than 2 lines with &quot;fizz&quot; and &quot;buzz&quot;. In other words, Oski and you have both made changes you would like to keep!</p>
+<p>Now, with that in mind, fix the <code>fizzbuzz(num)</code> function by integrating both versions into one, and then removing extra merge conflict markers (<code>&lt;&lt;&lt; HEAD</code>, <code>===</code>, <code>&gt;&gt;&gt; commit-hash</code>). The fixed function should look something like the following pseudocode:</p>
+<pre data-lang="python" class="language-python z-code"><code class="language-python" data-lang="python"><span class="z-source z-python"><span class="z-meta z-function z-python"><span class="z-storage z-type z-function z-python"><span class="z-keyword z-declaration z-function z-python">def</span></span> <span class="z-entity z-name z-function z-python"><span class="z-meta z-generic-name z-python">fizzbuzz</span></span></span><span class="z-meta z-function z-parameters z-python"><span class="z-punctuation z-section z-parameters z-begin z-python">(</span></span><span class="z-meta z-function z-parameters z-python"><span class="z-variable z-parameter z-python">num</span><span class="z-punctuation z-section z-parameters z-end z-python">)</span></span><span class="z-meta z-function z-python"><span class="z-punctuation z-section z-function z-begin z-python">:</span></span>
+</span>  <span class="z-meta z-statement z-conditional z-if z-python"><span class="z-keyword z-control z-conditional z-if z-python">if</span> <span class="z-meta z-qualified-name z-python"><span class="z-meta z-generic-name z-python">multiple</span></span> <span class="z-meta z-qualified-name z-python"><span class="z-meta z-generic-name z-python">of</span></span> <span class="z-constant z-numeric z-integer z-decimal z-python">15</span><span class="z-punctuation z-section z-block z-conditional z-if z-python">:</span></span>
+</span>    <span class="z-comment z-line z-number-sign z-python"><span class="z-punctuation z-definition z-comment z-python">#</span> print num: fizzbuzz
+</span></span>  <span class="z-meta z-statement z-conditional z-elseif z-python"><span class="z-keyword z-control z-conditional z-elseif z-python">elif</span> <span class="z-meta z-qualified-name z-python"><span class="z-meta z-generic-name z-python">multiple</span></span> <span class="z-meta z-qualified-name z-python"><span class="z-meta z-generic-name z-python">of</span></span> <span class="z-constant z-numeric z-integer z-decimal z-python">3</span><span class="z-punctuation z-section z-block z-conditional z-elseif z-python">:</span></span>
+</span>    <span class="z-comment z-line z-number-sign z-python"><span class="z-punctuation z-definition z-comment z-python">#</span> print num: fizz
+</span></span>  <span class="z-meta z-statement z-conditional z-elseif z-python"><span class="z-keyword z-control z-conditional z-elseif z-python">elif</span> <span class="z-meta z-qualified-name z-python"><span class="z-meta z-generic-name z-python">multiple</span></span> <span class="z-meta z-qualified-name z-python"><span class="z-meta z-generic-name z-python">of</span></span> <span class="z-constant z-numeric z-integer z-decimal z-python">5</span><span class="z-punctuation z-section z-block z-conditional z-elseif z-python">:</span></span>
+</span>    <span class="z-comment z-line z-number-sign z-python"><span class="z-punctuation z-definition z-comment z-python">#</span> print num: buzz
+</span></span></code></pre>
+<p>When you're done, save, add, and commit your work. Now, if you push, there shouldn't be a conflict anymore. One merge conflict defeated!</p>
+</li>
+<li>
+<p>On your local machine, <code>cd</code> into the <code>lab00</code> folder if you're not there already. Then, run the following command:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> gen-debug.sh</span>
+</span></code></pre>
+<p>This creates a file named <code>debug.txt</code> that records a bit of debugging information for the autograder. Add, commit, and push this file.</p>
+</li>
+</ol>
+<hr />
+<h2 id="submission">Submission</h2>
+<p>You made it! That was quite a bit of reading and head-scratching, but you're now somewhat more familiar with the tools you'll be using for the rest of the semester. Worth it!</p>
+<p>Please check that you (and your partner, if you have one) have:</p>
+<ul>
+<li>Registered for the services from Exercise 1.</li>
+<li>Registered and checked your information on the hive in Exercise 2.</li>
+<li>Installed the dependencies from Exercise 3.</li>
+<li>Set up your development environment in Exercise 4.</li>
+<li>Completed the Git exercise in Exercise 5.</li>
+</ul>
+<p>Note: the autograder will be released around Thursday evening.</p>
+<p>Every lab will have autograded exercise(s). To submit to the autograder, you'll need to push your work to your lab repository on GitHub. Then go to the corresponding assignment on Gradescope (<code>Lab 0</code> for this lab), select your lab repository, and submit. After a short wait, the page should show your autograder score for the lab.</p>
+<p>Remember, to get credit for a lab, make sure you have finished all the exercises and passed all the autograder tests by 11:59:59 PM PT!</p>
+<hr />
+<h2 id="appendix">Appendix</h2>
+<p>These are some tools you may find helpful, but are by no means required for this course :)</p>
+<h3 id="vim-basics">Vim Basics</h3>
+<p><code>vim</code> is a text editor included on the hive machines and many UNIX-based distributions.</p>
+<p>Note: We'll be using Vim in most of our examples and documentation, but we have no hard requirement
+on which text editor you use; you're welcome to pick whatever you're comfortable with, but you
+should know how to use at least one terminal-based text editor.</p>
+<p>To open a file from your current directory, pass the file name to Vim:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">vim</span></span><span class="z-meta z-function-call z-arguments z-shell"> filename</span>
+</span></code></pre>
+<p>To open a file from another directory, use a relative or absolute path:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">vim</span></span><span class="z-meta z-function-call z-arguments z-shell"> ../other-folder/filename</span>
+</span></code></pre>
+<p>Some useful Vim commands:</p>
+<table><thead><tr><th>Command</th><th>Explanation</th></tr></thead><tbody>
+<tr><td><kbd>Esc</kbd> <code>:q</code></td><td>Closes (quits) Vim without saving</td></tr>
+<tr><td><kbd>Esc</kbd> <code>:wq</code></td><td>Closes Vim after saving</td></tr>
+<tr><td><kbd>Esc</kbd> <code>:w</code></td><td>Saves your file</td></tr>
+<tr><td><kbd>Esc</kbd> <code>:q!</code></td><td>Force-quit Vim (for when you've made changes but do not wish to save them)</td></tr>
+<tr><td><kbd>Esc</kbd> <code>i</code></td><td>Insert mode, allows you to type into the file</td></tr>
+<tr><td><kbd>Esc</kbd> <code>/cats</code></td><td>Searches your file for the nearest occurrence of the string &quot;cats&quot;. Press <code>n</code> to go to the next occurrence or <code>N</code> to go to the previous</td></tr>
+<tr><td><kbd>Esc</kbd> <code>:set nu</code></td><td>Shows line numbers within your file</td></tr>
+</tbody></table>
+<p>Note: these commands are preceded by <kbd>Esc</kbd> because you'll need to press the escape key on your
+keyboard to switch you out of your current mode. For example, if I'm inserting (typing) into a file
+and want to save, I'd have to hit <kbd>Esc</kbd> to get out of insert mode, then type <code>:w</code> to save my
+file. If you aren't in a mode (i.e. you've just opened your file) you don't need to hit escape
+first, but it won't hurt :)</p>
+<p>By default, Vim doesn't enable mouse support or line numbers. If you want these:</p>
+<ol>
+<li>Open up <code>~/.vimrc</code> (<code>vim ~/.vimrc</code>)</li>
+<li>To enable your mouse, add a new line containing <code>set mouse=a</code></li>
+<li>To enable line numbers, add a new line containing <code>set number</code></li>
+<li>Save and quit. Try opening your vimrc file again</li>
+</ol>
+<p>Vim has many more configuration options available -- feel free to experiment with Vim resources you find online!</p>
+<p>We also have a <a href="https://docs.google.com/document/d/1WQF6hQK8CXtlGynSAIX7Rts6q8lykarrqX-zkb9ZDyc/view">Vim for CS61C guide</a> that you can reference. Thanks Yijie!</p>
+<h3 id="github-personal-access-token-setup">GitHub Personal Access Token Setup</h3>
+<p>You probably won't need this, but GitHub's Personal Access Tokens (PATs) are an alternate way of authenticating to GitHub on the CLI.</p>
+<ol>
+<li>Go to <a href="https://github.com/settings/tokens/new">GitHub =&gt; Developer Settings =&gt; Personal access tokens =&gt; Generate new token</a> and generate a token. You must select the entire <code>repo</code> scope for private repo access, but the other scopes are optional and should be left off if you'll only use this token for 61C.</li>
+<li>Save the token somewhere secure, as GitHub won't show it to you again.</li>
+</ol>
+<p>In the future, when cloning repos from GitHub, you should enter this token when prompted for your GitHub password.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container border-top pt-4 mb-5">
+<div class="row">
+<div class="col">
+<div id="dark-toggle-wrapper" class="d-none">
+<div class="form-check form-switch">
+<input id="inputDarkToggle" class="form-check-input" type="checkbox">
+<label class="form-check-label" for="inputDarkToggle">
+Dark Mode
+<a id="buttonDarkToggleReset" class="d-none" href="javascript:void(0);">(reset)</a>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  
+
+  
+    document.addEventListener("DOMContentLoaded", function() {
+      initToC();
+    });
+  
+</script>
+</body>
+</html>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="language" content="english">
+<title>Lab 3 | CS 61C Spring 2022</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<link rel="shortcut icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../css/main.css@h=36c89645dcb547d13f6f293a379a176dff22aab9affcefc8d3a19bc23c0f8db2.css" />
+<script defer type="text/javascript" src="../../js/main.js@h=4096b5e2a18784c27ca139ca897694176eea13de3e2168cd7e7bcdd827a35c8d"></script>
+
+<script type="text/javascript" src="../../js/main-sync.js@h=daca62fef99fb16ad6a5fd1517d7b18bed66d3241431785bf3ac1f134c166bf1"></script>
+<script>initDarkToggle();</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.17.0/tocbot.min.js" integrity="sha512-DJhUMo5TIBb3fFziiE+3OJG+j7ky+GxScxHdLADCXskEpc/AKQsbsorIYmGFJFaJvDIyP65rJNhnCTytfYAdUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+<div class="container">
+<a class="navbar-brand" href="../../index.html">
+<img class="d-inline-block me-2 rounded" height="48" width="48" src="../../img/icon-small.png" alt="outline of square computer chip with cs61c label" />
+<span class="align-middle">CS 61C Spring 2022</span>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle Navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item">
+<a class="nav-link" href="../../calendar/index.html">Calendar</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../staff/index.html">Staff</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../policies/index.html">Policies</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../resources/index.html">Resources</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../exam/index.html">Exam</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../extensions/index.html">Extensions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://oh.cs61c.org/">OH Queue</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://venus.cs61c.org/">Venus</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://inst.eecs.berkeley.edu/~cs61c/archives.html">Semesters</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<main class="mb-4">
+<section class="section">
+<div class="container">
+<div class="row spec">
+<nav id="toc-wrapper" class="col-md-3 d-print-none sticky-md-top nav-wrapper" aria-label="table of contents">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#goals">Goals</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#setup">Setup</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#introduction-to-assembly">Introduction to Assembly</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#assembly-venus-basics">Assembly&#x2F;Venus Basics</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-1-connecting-your-files-to-venus">Exercise 1: Connecting your files to Venus</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-2-familiarizing-yourself-with-venus">Exercise 2: Familiarizing yourself with Venus</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#action-item">Action Item</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-3-translating-from-c-to-risc-v">Exercise 3: Translating from C to RISC-V</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#action-item-1">Action Item</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-4-factorial">Exercise 4: Factorial</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing">Testing</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-5-risc-v-function-calling-with-map">Exercise 5: RISC-V function calling with map</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#action-item-2">Action Item</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-1">Testing</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-6">Exercise 6</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#transitioning-to-more-complex-risc-v-programs">Transitioning to More Complex RISC-V Programs</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#submission">Submission</a>
+</li>
+</ul>
+</nav>
+<div id="toc-content-wrapper" class="content col-md-9">
+<h1 class="title">Lab 3: RISC-V Assembly</h1>
+<p class="subtitle">Deadline: Monday, February 14, 11:59:59 PM PT</p>
+<p><a href="https://docs.google.com/presentation/d/1ZDJVAVIq2JDqRNG2_Uw0t6Zg2lG-lBRJncRCmf5m9wE/edit?usp=sharing">Lab section slides</a></p>
+<h2 id="goals">Goals</h2>
+<ul>
+<li>Get familiar with using the Venus simulator</li>
+<li>Get an idea of how to translate C code to RISC-V.</li>
+<li>Write RISC-V functions with the correct function calling procedure.</li>
+</ul>
+<hr />
+<h2 id="setup">Setup</h2>
+<p>In your <code>labs</code> directory, pull the files for this lab with:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> pull starter main</span>
+</span></code></pre>
+<p>If you get an error like the following:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">fatal: &#39;starter&#39; does not appear to be a git repository
+fatal: Could not read from remote repository.
+</span></code></pre>
+<p>make sure to set the starter remote as follows:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> remote add starter https://github.com/61c-teach/sp22-lab-starter.git</span>
+</span></code></pre>
+<p>and run the original command again.</p>
+<p>Please note that it may take longer to pull this set of starter updates, since Venus, a RISC-V simulator, is included.</p>
+<hr />
+<h2 id="introduction-to-assembly">Introduction to Assembly</h2>
+<p>In this course so far, we have dealt mostly with C programs (with the <code>.c</code>
+file extension), used the <code>gcc</code> program to compile them to machine code,
+and then executed them directly on your computer or hive machine.
+Now, we're shifting our focus to the RISC-V assembly language, which is a
+lower-level language much closer to machine code.
+We can't execute RISC-V code directly because your computer and the hives
+are built to run machine code from other assembly languages --- most likely
+x86 or ARM.</p>
+<p>For the next few labs, we will work with several RISC-V assembly files,
+each of which has a <code>.s</code> file extension. To run these, we will be using <a href="https://venus.cs61c.org/">Venus</a>, an educational RISC-V assembler and simulator.
+You can run Venus locally from your own terminal or on the Venus website, and the following instructions will guide you through the steps to set it up. Though you may find using the web editor
+easier to use for this lab, <em>please go through these instructions for local setup
+regardless</em>: these steps will also set up other infrastructure needed for future
+projects and labs.</p>
+<h3 id="assembly-venus-basics">Assembly/Venus Basics</h3>
+<p>To get started with Venus, please take a look at &quot;The Editor Tab&quot; and &quot;The
+Simulator Tab&quot; in the <a href="../../resources/venus-reference/index.html">Venus reference</a>. We recommend
+that you read this whole page at some point, but these sections should be
+enough to get started.</p>
+<div class="alert alert-warning">
+<p><strong>Warning</strong>: For the following exercises, please make sure your completed code is saved on a file on your local machine. Otherwise, we will have no proof that you completed the lab exercises.</p>
+</div>
+<hr />
+<h2 id="exercise-1-connecting-your-files-to-venus">Exercise 1: Connecting your files to Venus</h2>
+<p>You can &quot;mount&quot; a folder from your local device onto Venus's web frontend, so that
+edits you make within the browser Venus editor are reflected in your local file
+system, and vice versa. If you don't do this step, files created and edited in Venus
+will be lost each time you close the tab, unless you copy/paste them to a local file.</p>
+<p>This exercise will walk you through the process of connecting your file system
+to Venus, which should save you a lot of trouble copy/pasting files between your
+local drive and the Venus editor.</p>
+<p><strong>If for some reason this feature ends up not working for you</strong> (it's
+relatively new, and there's a chance there might still be bugs), then for the rest
+of this assignment, wherever it says to open a file in Venus, you should copy/paste
+the contents into the Venus web editor, and manually copy/paste those changes back
+to your local machine.</p>
+<p>Here's what you need to do:</p>
+<ul>
+<li>If you don't already have your labs repo cloned on your local machine, open a terminal on your local machine and clone it.
+<ul>
+<li>Windows users should clone outside WSL (Git Bash is recommended). Note that Windows paths are also accessible from WSL (e.g. <code>C:/Users/oski/cs61c/labs/</code> in Windows is <code>/mnt/c/Users/oski/cs61c/labs/</code> in WSL).</li>
+</ul>
+</li>
+<li><code>cd</code> into your labs repo folder, and run <code>java -jar tools/venus.jar . -dm</code>. This will expose your lab directory to Venus on a network port.
+<ul>
+<li>You should see a big &quot;Javalin&quot; logo.</li>
+<li>If you see a message along the lines of &quot;port unable to be bound&quot;, then you
+can specify another port number explicitly by appending <code>--port PORT_NUM</code>
+to the command (for example, <code>java -jar tools/venus.jar . -dm --port 6162</code>
+will expose the file system on port 6162).</li>
+</ul>
+</li>
+<li>Open <a href="https://venus.cs61c.org">https://venus.cs61c.org</a> in your web browser (Chrome or Firefox are recommended). In the Venus web terminal, run
+<code>mount local labs</code> (if you chose a different port, replace &quot;local&quot; with the full
+URL, such as <code>http://localhost:6162</code>). This connects Venus to your file system.
+<ul>
+<li>In your browser, you may see a prompt saying
+<code>Key has been shown in the Venus mount server! Please copy and paste it into here.</code>.
+You should be able to see a key in the most recent line of your local terminal output;
+just copy and paste it into the dialog.</li>
+</ul>
+</li>
+<li>Go to the &quot;Files&quot; tab. You should now be able to see your labs directory under
+the <code>labs</code> folder.</li>
+<li>Navigate to <code>lab03</code>, and make sure it works by hitting the <code>Edit</code> button next
+to <code>fib.s</code>. This should open in the <code>Editor</code> tab.
+<ul>
+<li>If you make any changes to the file in the <code>Editor</code> tab, hitting command-s
+on a Mac and ctrl-s on Windows/Linux will update your local copy of the file.
+To check if the save was successful, open the file on your local machine to see
+if it matches what you have in the web editor (unfortunately no feedback message
+has been implemented yet).</li>
+<li><strong>Note:</strong> If you make any changes to a file in your local machine, if you
+had the same file open in the Venus editor, you'll need to reopen it
+from the &quot;Files&quot; menu to get the new changes.</li>
+</ul>
+</li>
+<li>To make it so that the file system will attempt to remount automatically
+whenever you close and reopen Venus, enable &quot;Save on Close&quot; in the Settings pane
+(again in the Venus tab).
+This will make the Venus web client attempt to locate the file system exposed
+by running Venus locally, and will pop up an error saying that it couldn't
+connect to the server if it doesn't see it running. If this happens, just
+follow the above steps to manually remount the file system.</li>
+</ul>
+<p>Once you've got <code>fib.s</code> open, you're ready to move on to Exercise 2!</p>
+<hr />
+<h2 id="exercise-2-familiarizing-yourself-with-venus">Exercise 2: Familiarizing yourself with Venus</h2>
+<p>In this exercise, we are giving you the implementation of fib in both c and assembly. Take a look at both files. </p>
+<p>At the top of <code>fib.s</code>, you can see the <code>.data</code>, <code>.word</code>, <code>.text</code> directives.</p>
+<ul>
+<li>
+<p><code>.data</code>: Denotes where global variables are declared</p>
+</li>
+<li>
+<p><code>.word</code>: Allocates and initializes space for a 4-byte variable in the data segment.</p>
+</li>
+<li>
+<p><code>.text</code>: Indicates the start of the code.</p>
+</li>
+</ul>
+<p>We have added comments to <code>fib.s</code> to help you understand the program. There are two new instructions:</p>
+<ul>
+<li>
+<p><code>la n</code>: loads the address of the label where n is located. It is a pseudo instruction that breaks down into the instructions <code>auipc</code> and <code>addi</code>. Take a look at your reference card to see what <code>auipc</code> does.</p>
+</li>
+<li>
+<p><code>ecall</code>: The ecall instruction is used to perform system calls or request other privileged operations such as accessing the file system or writing output to console. In this class, we will mostly be using <code>ecall</code> to exit or to print integers. To specify which action the ecall should take, you will pass a code to <code>ecall</code> through <code>a0</code>. To terminate the program, you set <code>a0</code> to <code>10</code>. To print an integer, you will set <code>a0</code> to 1 and set <code>a1</code> to the integer that you want to print.</p>
+</li>
+</ul>
+<p>Here is how you can run <code>fib.s</code> in Venus:</p>
+<ol>
+<li>Open <code>fib.s</code> into the Venus editor. If you were unable to mount the filesystem in
+Exercise 1, then you can copy/paste <code>fib.s</code> from your local machine into the Venus
+editor directly.</li>
+<li>Click the &quot;Simulator&quot; tab and click the &quot;Assemble &amp; Simulate from Editor&quot; button.
+This will prepare the code you wrote for execution. If you click back to the
+&quot;Editor&quot; tab, your simulation will be reset.</li>
+<li>In the simulator, to execute the next instruction, click the &quot;step&quot; button.</li>
+<li>To undo an instruction, click the &quot;prev&quot; button. Note that undo may or may not
+undo operations performed by <code>ecall</code>, such as exiting the program or printing
+to console.</li>
+<li>To run the program to completion, click the &quot;run&quot; button.</li>
+<li>To reset the program from the start, click the &quot;reset&quot; button.</li>
+<li>The contents of all 32 registers are on the right-hand side, and the
+console output is at the bottom.</li>
+<li>To view the contents of memory, click the &quot;Memory&quot; tab on the right.
+You can navigate to different portions of your memory using the
+dropdown menu at the bottom.</li>
+</ol>
+<h3 id="action-item">Action Item</h3>
+<p>Open <code>fib.s</code> in Venus and answers the following questions. Some of the questions
+will require you to run the RISC-V code using Venus's simulator tab.</p>
+<ol>
+<li>Run the program to completion. What number did the program output?
+What does this number represent?<details>
+<summary>Answer</summary>
+34, the 9th fibonacci number
+</details>
+</li>
+<li>At what address is <code>n</code> stored in memory? <strong>Hint</strong>: Step through the code and look at the contents of the registers<details>
+<summary>Answer</summary>
+0x10000000
+</details>
+</li>
+<li>How would you compute the 20th fibonacci number?<details>
+<summary>Answer</summary>
+Change the value stored at n to 20
+</details>
+</li>
+</ol>
+<hr />
+<h2 id="exercise-3-translating-from-c-to-risc-v">Exercise 3: Translating from C to RISC-V</h2>
+<p>Open the files <code>ex3.c</code> and <code>ex3.s</code>. The assembly code provided (.s file) is a
+translation of the given C program into RISC-V.</p>
+<p>In addition to opening a file in the &quot;Editor&quot; tab and then running in the &quot;Simulator&quot;
+tab as described above, you can also run <code>ex3.s</code> directly within the Venus terminal
+by <code>cd</code>ing into the appropriate folder, then running <code>run ex3.s</code> or <code>./ex3.s</code>.
+Typing <code>vdb ex3.s</code> will also assemble the file and take you to the &quot;Simulator&quot; tab
+directly.</p>
+<h3 id="action-item-1">Action Item</h3>
+<p>Find and identify the following components of this assembly file, and be able to explain
+how they work.</p>
+<ol>
+<li>
+<p>The register representing the variable <code>k</code>.</p>
+<details>
+<summary>Answer</summary>
+The <code>t0</code> register.
+</details>
+</li>
+<li>
+<p>The register representing the variable <code>sum</code>.</p>
+<details>
+<summary>Answer</summary>
+The <code>s0</code> register.
+</details>
+</li>
+<li>
+<p>The registers acting as pointers to the <code>source</code> and <code>dest</code> arrays.</p>
+<details>
+<summary>Answer</summary>
+The <code>s1</code> register is source, <code>s2</code> is dest
+</details>
+</li>
+<li>
+<p>The assembly code for the loop found in the C code.</p>
+<details>
+<summary>Answer</summary>
+The loop label denotes the start of the loop; the <code>jal</code> at the end of the label causes the loop to keep running, and the <code>beq</code> at the start checks the end condition.
+</details>
+</li>
+<li>
+<p>How the pointers are manipulated in the assembly code.</p>
+<details>
+<summary>Answer</summary>
+The <code>slli</code> instruction computes an offset from the start of the address stored in <code>k</code>. This offset is added to <code>s1</code> and <code>s2</code> to find the address from which we want to load word.
+</details>
+</li>
+</ol>
+<hr />
+<h2 id="exercise-4-factorial">Exercise 4: Factorial</h2>
+<p>In this exercise, you will be implementing the <code>factorial</code> function in RISC-V.
+This function takes in a single integer parameter <code>n</code> and returns <code>n!</code>. A stub of
+this function can be found in the file <code>factorial.s</code>.</p>
+<p>The argument that is passed into the function is located at the label <code>n</code>. You can modify <code>n</code> to test different factorials. To implement, you will need to add instructions under the <code>factorial</code> label. Note that you may find it helpful to add additional labels to simplify control flow. We recommend that you implement the iterative solution, but you are welcome to implement the recursive solution. You can assume that the <code>factorial</code> function will only be called on positive values with results that won't overflow a
+32-bit two's complement integer. </p>
+<h3 id="testing">Testing</h3>
+<p>To test your code, you can make sure your function properly returns
+that <code>3! = 6</code>, <code>7! = 5040</code> and <code>8! = 40320</code>.</p>
+<p>You can test this using the online version of Venus, but we've also provided
+Venus for you to test locally! We'll be using this local version in the autograder, so make sure
+to update your <code>factorial.s</code> file and run the following command before you submit to verify
+that the output is correct (You will need to run this from the labs directory).</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">java</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>jar</span> tools/venus.jar lab03/factorial.s</span>
+</span></code></pre>
+<hr />
+<h2 id="exercise-5-risc-v-function-calling-with-map">Exercise 5: RISC-V function calling with <code>map</code></h2>
+<p>This exercise uses the file <code>list_map.s</code>.</p>
+<p>In this exercise, you will complete an implementation of <a href="https://en.wikipedia.org/wiki/Map_(higher-order_function)"><code>map</code></a>
+on linked-lists in RISC-V. Our function will be simplified to mutate the
+list in-place, rather than creating and returning a new list with the
+modified values.</p>
+<p>You will find it helpful to refer to the <a href="../../resources/index.html">RISC-V reference
+card</a> to
+complete this exercise. If you encounter any instructions or
+pseudo-instructions you are unfamiliar with, use this as a resource.</p>
+<p>Our <code>map</code> procedure will take two parameters; the first parameter will
+be the address of the head node of a singly-linked list whose values are
+32-bit integers. So, in C, the structure would be defined as:</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-meta z-struct z-c"><span class="z-storage z-type z-c">struct</span> <span class="z-meta z-struct z-c"><span class="z-entity z-name z-struct z-c">node</span></span></span><span class="z-meta z-struct z-c"> <span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span></span></span><span class="z-meta z-struct z-c"><span class="z-meta z-block z-c">
+    <span class="z-storage z-type z-c">int</span> value<span class="z-punctuation z-terminator z-c">;</span>
+    <span class="z-meta z-struct z-c"><span class="z-storage z-type z-c">struct</span> <span class="z-meta z-struct z-c"><span class="z-entity z-name z-struct z-c">node</span></span></span><span class="z-meta z-struct z-c"> *next</span><span class="z-punctuation z-terminator z-c">;</span>
+</span></span><span class="z-meta z-struct z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-end z-c">}</span></span></span><span class="z-punctuation z-terminator z-c">;</span>
+</span></code></pre>
+<p>Our second parameter will be the <strong>address of a function</strong> that takes
+one <code>int</code> as an argument and returns an <code>int</code>. We'll use the <code>jalr</code> RISC-V
+instruction to call this function on the list node values (how does <code>jalr</code> work?).</p>
+<p>Our <code>map</code> function will recursively go down the list, applying the
+function to each value of the list and storing the value returned in
+that corresponding node. In C, the function would be something like
+this:</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-storage z-type z-c">void</span> <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">map</span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-storage z-type z-c">struct</span> node <span class="z-keyword z-operator z-c">*</span><span class="z-variable z-parameter z-c">head</span><span class="z-punctuation z-separator z-c">,</span> <span class="z-storage z-type z-c">int</span> <span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span><span class="z-keyword z-operator z-c">*</span>f<span class="z-punctuation z-section z-group z-end z-c">)</span></span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span><span class="z-storage z-type z-c">int</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c">
+</span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span></span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c">
+    <span class="z-keyword z-control z-c">if</span> <span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span><span class="z-keyword z-operator z-arithmetic z-c">!</span>head<span class="z-punctuation z-section z-group z-end z-c">)</span></span> <span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span> <span class="z-keyword z-control z-flow z-return z-c">return</span><span class="z-punctuation z-terminator z-c">;</span> <span class="z-punctuation z-section z-block z-end z-c">}</span></span>
+    head<span class="z-punctuation z-accessor z-c">-&gt;</span>value <span class="z-keyword z-operator z-assignment z-c">=</span> <span class="z-meta z-function-call z-c"><span class="z-variable z-function z-c">f</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c">head<span class="z-punctuation z-accessor z-c">-&gt;</span>value</span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-punctuation z-terminator z-c">;</span>
+    <span class="z-meta z-function-call z-c"><span class="z-variable z-function z-c">map</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c">head<span class="z-punctuation z-accessor z-c">-&gt;</span>next<span class="z-punctuation z-separator z-c">,</span>f</span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-punctuation z-terminator z-c">;</span>
+</span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-end z-c">}</span></span></span>
+</span></code></pre>
+<p>If you haven't seen the <code>int (*f)(int)</code> kind of declaration before,
+don't worry too much about it. Basically it means that <code>f</code> is a pointer
+to a function that takes an <code>int</code> as an argument (you may recall that Philphix makes use of function pointers as well). We can call this function <code>f</code> just like any other.</p>
+<p>There are exactly ten (10) markers (1 in <code>done</code>, 7 in <code>map</code>, and 2 in <code>main</code>) in the
+provided code where it says <code>YOUR CODE HERE</code>.</p>
+<h3 id="action-item-2">Action Item</h3>
+<p>Complete the implementation of <code>map</code> by filling out each of these ten markers
+with the appropriate code. Furthermore, provide a call to <code>map</code> with <code>square</code>
+as the function argument. There are comments in the code that explain what should
+be accomplished at each marker. When you've filled in these instructions, running
+the code should provide you with the following output:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">9 8 7 6 5 4 3 2 1 0 
+81 64 49 36 25 16 9 4 1 0 
+80 63 48 35 24 15 8 3 0 -1 
+</span></code></pre>
+<p>The first line is the original list, and the second line is the list with all elements
+squared after calling <code>map(head, &amp;square)</code>, and the third is the list with all elements
+decremented after now calling <code>map(head, &amp;decrement)</code>.</p>
+<p>The autograder will check that your code satisfies calling convention, so make sure you are saving and loading where necessary.</p>
+<h3 id="testing-1">Testing</h3>
+<p>To test this in the Venus web simulator, run <code>list_map.s</code> and examine the output.
+To test this locally, run the following command in your labs directory (much
+like the one for <code>factorial.s</code>):</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">java</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>jar</span> tools/venus.jar lab03/list_map.s</span>
+</span></code></pre>
+<hr />
+<h2 id="exercise-6">Exercise 6</h2>
+<p>Please fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSepf2cwlVf7U7shhnutuS1c-2w95ZkERWQoX4Z5Z6rKLARBuA/viewform?usp=sf_link">this short survey</a> about your experience with the lab. Your responses will be used to improve the lab in the future. The survey will be collecting your email to verify that you have submitted it, but your responses will be anonymized when the data is analyzed. Thank you!</p>
+<hr />
+<h2 id="transitioning-to-more-complex-risc-v-programs">Transitioning to More Complex RISC-V Programs</h2>
+<p>In the future, we'll be working with more complex RISC-V programs that require
+multiple files of assembly code. To prepare for this, we recommend looking over
+the <a href="../../resources/venus-reference/index.html">Venus reference</a>.</p>
+<hr />
+<h2 id="submission">Submission</h2>
+<p>Save, commit, and push your work, then submit to the <strong>Lab 3</strong> assignment on Gradescope.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container border-top pt-4 mb-5">
+<div class="row">
+<div class="col">
+<div id="dark-toggle-wrapper" class="d-none">
+<div class="form-check form-switch">
+<input id="inputDarkToggle" class="form-check-input" type="checkbox">
+<label class="form-check-label" for="inputDarkToggle">
+Dark Mode
+<a id="buttonDarkToggleReset" class="d-none" href="javascript:void(0);">(reset)</a>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+  
+
+  
+    document.addEventListener("DOMContentLoaded", function() {
+      initToC();
+    });
+  
+</script>
+</body>
+</html>

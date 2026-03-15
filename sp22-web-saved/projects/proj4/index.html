@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="language" content="english">
+<title>Project 4 | CS 61C Spring 2022</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<link rel="shortcut icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../css/main.css@h=36c89645dcb547d13f6f293a379a176dff22aab9affcefc8d3a19bc23c0f8db2.css" />
+<script defer type="text/javascript" src="../../js/main.js@h=4096b5e2a18784c27ca139ca897694176eea13de3e2168cd7e7bcdd827a35c8d"></script>
+
+<script type="text/javascript" src="../../js/main-sync.js@h=daca62fef99fb16ad6a5fd1517d7b18bed66d3241431785bf3ac1f134c166bf1"></script>
+<script>initDarkToggle();</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.17.0/tocbot.min.js" integrity="sha512-DJhUMo5TIBb3fFziiE+3OJG+j7ky+GxScxHdLADCXskEpc/AKQsbsorIYmGFJFaJvDIyP65rJNhnCTytfYAdUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+<div class="container">
+<a class="navbar-brand" href="../../index.html">
+<img class="d-inline-block me-2 rounded" height="48" width="48" src="../../img/icon-small.png" alt="outline of square computer chip with cs61c label" />
+<span class="align-middle">CS 61C Spring 2022</span>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle Navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item">
+<a class="nav-link" href="../../calendar/index.html">Calendar</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../staff/index.html">Staff</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../policies/index.html">Policies</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../resources/index.html">Resources</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../exam/index.html">Exam</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../extensions/index.html">Extensions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://oh.cs61c.org/">OH Queue</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://venus.cs61c.org/">Venus</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://inst.eecs.berkeley.edu/~cs61c/archives.html">Semesters</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<main class="mb-4">
+<section class="section">
+<div class="container">
+<div class="row spec">
+<nav id="toc-wrapper" class="col-md-3 d-print-none sticky-md-top nav-wrapper" aria-label="table of contents">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#setup-git">Setup: Git</a>
+
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#setup-python">Setup: Python</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#note-autograder-ratelimit">Note: Autograder Ratelimit</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-1-matrix-functions-in-c">Task 1: Matrix functions in C</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#conceptual-overview-storing-matrices">Conceptual Overview: Storing Matrices</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-1-1-get-and-set">Task 1.1: Get and Set</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-1-2-allocate">Task 1.2: Allocate</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-1-3-deallocate">Task 1.3: Deallocate</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-1-4-allocate-reference">Task 1.4: Allocate Reference</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-1-5-basic-matrix-operations">Task 1.5: Basic Matrix Operations</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-1-6-more-matrix-operations">Task 1.6: More Matrix Operations</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-and-debugging">Testing and Debugging</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-2-speeding-up-matrix-operations">Task 2: Speeding up matrix operations</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-2-1-simd-instructions">Task 2.1: SIMD Instructions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-2-2-openmp">Task 2.2: OpenMP</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-2-3-algorithmic-optimization">Task 2.3: Algorithmic Optimization</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-2-4-other-optimizations">Task 2.4: Other Optimizations</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-and-debugging-1">Testing and Debugging</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-3-readme-update">Task 3: README Update</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#submission-and-grading">Submission and Grading</a>
+</li>
+</ul>
+</nav>
+<div id="toc-content-wrapper" class="content col-md-9">
+<h1 class="title">Project 4: Numc</h1>
+<p class="subtitle">Deadline: Thursday, April 28, 11:59:59 PM PT</p>
+<p>In this project, you will write your own simple version of numpy (a Python library for performing mathematical and logical operations on arrays and matrices, whose underlying code is written in C) and optimize your code for performance.</p>
+<p>Content in scope for this project: Lectures 18-20, Labs 8-9, Discussions 10-11, Homework 8. Also, make sure you've finished the setup in Lab 0.</p>
+<h2 id="setup-git">Setup: Git</h2>
+<p>This assignment can be done alone or with a partner.</p>
+<div class="alert alert-warning">
+<p><strong>Warning</strong>: Once you create a GitHub repo, you will <em>not</em> be able to change (add, remove, or swap) partners for this project, so please be sure of your partner before starting the project.</p>
+</div>
+<p>If there are extenuating circumstances that require a partner switch (e.g. your partner drops the class, your partner is unresponsive), please reach out to us privately.</p>
+<ol>
+<li>
+<p>Visit <a href="https://galloc.cs61c.org/assignments/proj4">Galloc</a>. Log in and start the Project 4 assignment. This will create a GitHub repository for your work.</p>
+</li>
+<li>
+<p>Clone the repository on your workspace. Please use the hive machines for this project.</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> clone <a href="https://cs61c.org/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="35525c4175525c415d40571b565a58">[email&#160;protected]</a>:61c-student/sp22-proj4-USERNAME.git 61c-proj4</span>
+</span></code></pre>
+<p>(replace <code>USERNAME</code> with your GitHub username)</p>
+</li>
+<li>
+<p>Navigate to your repository:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-support z-function z-cd z-shell">cd</span></span><span class="z-meta z-function-call z-arguments z-shell"> 61c-proj4</span>
+</span></code></pre>
+</li>
+<li>
+<p>Add the starter repository as a remote:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> remote add starter https://github.com/61c-teach/sp22-proj4-starter.git</span>
+</span></code></pre>
+</li>
+</ol>
+<h2 id="setup-python">Setup: Python</h2>
+<ol>
+<li>
+<p>Create a virtual environment:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">python3.6</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>m</span> venv .venv</span>
+</span></code></pre>
+</li>
+<li>
+<p>Activate the virtual environment:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-support z-function z-source z-shell">source</span></span><span class="z-meta z-function-call z-arguments z-shell"> .venv/bin/activate</span>
+</span></code></pre>
+</li>
+<li>
+<p>Install the requirements:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">python3</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>m</span> pip install<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>r</span> requirements.txt</span>
+</span></code></pre>
+</li>
+</ol>
+<p>Every time you (re)connect to the hive, you will need to run <code>source .venv/bin/activate</code> again to activate the virtual environment.</p>
+<h2 id="note-autograder-ratelimit">Note: Autograder Ratelimit</h2>
+<p>Because of performance limitations, the autograder is unable to support too many submissions at once, so we have to limit everyone to 6 submissions every 3 hours. We highly recommend starting early, as the autograder may take longer to run when a lot of students are submitting closer to the deadline.</p>
+<h2 id="task-1-matrix-functions-in-c">Task 1: Matrix functions in C</h2>
+<h3 id="conceptual-overview-storing-matrices">Conceptual Overview: Storing Matrices</h3>
+<p>Matrices are stored in a <code>matrix</code> struct (already defined for you in <code>src/matrix.h</code>).</p>
+<p>The <code>int rows</code> and <code>int cols</code> fields store the number of rows and columns in the matrix.</p>
+<p>The <code>double* data</code> field is a pointer to an array storing the elements of the matrix. The elements of the 2-dimensional matrix are stored in row-major order. Recall that row-major order means we each row of the matrix consecutively in memory as a 1-dimensional array.</p>
+<p><img src="row_major.jpg" alt="" /></p>
+<p>The <code>int ref_cnt</code> and <code>struct matrix *parent</code> fields are used to support Python slicing. Each time you slice a matrix in Python (e.g. <code>mat[0:2]</code>), the underlying C library will allocate a new matrix struct to keep track of the sliced matrix. <code>int ref_cnt</code> keeps track of how many slices or matrices are referring to this matrix's data, and <code>struct matrix *parent</code> is a pointer to the original matrix struct that this matrix struct was sliced from (or <code>NULL</code> if this matrix is not a slice).</p>
+<p>Note that it's not too important to understand slices, parents, and reference counts conceptually for this project. As long as you implement the allocation and deallocation functions (Tasks 1.2-1.4) according to the provided hints, you shouldn't need to work with slices for the rest of the project.</p>
+<h3 id="task-1-1-get-and-set">Task 1.1: Get and Set</h3>
+<p>Fill in the <code>get</code> function in <code>src/matrix.c</code>. This function gets an element from the matrix data at the specified row and column (zero-indexed).</p>
+<table>
+<colgroup>
+<col span="1" style="width: 12%;">
+<col span="1" style="width: 18%;">
+<col span="1" style="width: 70%;">
+</colgroup>
+<tbody>
+<tr>
+<td rowspan="3"><b>Arguments</b></td>
+<td><code>matrix *mat</code></td>
+<td>A pointer to the matrix struct.</td>
+</tr>
+<tr>
+<td><code>int row</code></td>
+<td>The row index of the element to return.</td>
+</tr>
+<tr>
+<td><code>int col</code></td>
+<td>The column index of the element to return.</td>
+</tr>
+<tr>
+<td><b>Return value</b></td>
+<td><code>double</code></td>
+<td>The element at the given row and column.</td>
+</tr>
+</tbody>
+</table>
+<p>Fill in the <code>set</code> function in <code>src/matrix.c</code>. This function puts the given value in the matrix data at the specified row and column.</p>
+<table>
+<colgroup>
+<col span="1" style="width: 12%;">
+<col span="1" style="width: 18%;">
+<col span="1" style="width: 70%;">
+</colgroup>
+<tbody>
+<tr>
+<td rowspan="4"><b>Arguments</b></td>
+<td><code>matrix *mat</code></td>
+<td>A pointer to the matrix struct.</td>
+</tr>
+<tr>
+<td><code>int row</code></td>
+<td>The row index of the element to return.</td>
+</tr>
+<tr>
+<td><code>int col</code></td>
+<td>The column index of the element to return.</td>
+</tr>
+<tr>
+<td><code>double val</code></td>
+<td>The value to put in the matrix.</td>
+</tr>
+<tr>
+<td><b>Return values</b></td>
+<td colspan="2">None</td>
+</tr>
+</tbody>
+</table>
+<p>For both functions, you can assume that <code>row</code> and <code>col</code> are valid indices.</p>
+<p>You will need to finish the functions up to Task 1.3 before testing/debugging these functions.</p>
+<h3 id="task-1-2-allocate">Task 1.2: Allocate</h3>
+<p>Fill in the <code>allocate_matrix</code> function in <code>src/matrix.c</code>. This function allocates space for a new matrix struct with the provided number of rows and columns.</p>
+<table>
+<colgroup>
+<col span="1" style="width: 12%;">
+<col span="1" style="width: 18%;">
+<col span="1" style="width: 70%;">
+</colgroup>
+<tbody>
+<tr>
+<td rowspan="3"><b>Arguments</b></td>
+<td><code>matrix **mat</code></td>
+<td>A pointer to a matrix pointer in memory.</td>
+</tr>
+<tr>
+<td><code>int rows</code></td>
+<td>The number of rows to allocate space for.</td>
+</tr>
+<tr>
+<td><code>int cols</code></td>
+<td>The number of columns to allocate space for.</td>
+</tr>
+<tr>
+<td><b>Return value</b></td>
+<td><code>int</code></td>
+<td>-1 if either <code>rows</code> or <code>cols</code> is not positive. -2 if allocating memory failed. 0 otherwise.</td>
+</tr>
+</tbody>
+</table>
+<p>Hint: Follow these steps.</p>
+<ol>
+<li>Check if the dimensions are valid. Return -1 if either dimension is not positive.</li>
+<li>Allocate space for the new matrix struct. Return -2 if allocating memory failed.</li>
+<li>Allocate space for the matrix data, initializing all entries to be 0. Return -2 if allocating memory failed.</li>
+<li>Set the number of rows and columns in the matrix struct according to the arguments provided.</li>
+<li>Set the <code>parent</code> field to NULL, since this matrix was not created from a slice.</li>
+<li>Set the <code>ref_cnt</code> field to 1.</li>
+<li>Store the address of the allocated matrix struct at the location <code>mat</code> is pointing at.</li>
+<li>Return 0 upon success.</li>
+</ol>
+<p>You will need to finish the functions up to Task 1.3 before testing/debugging these functions.</p>
+<h3 id="task-1-3-deallocate">Task 1.3: Deallocate</h3>
+<p>Fill in the <code>deallocate_matrix</code> function in <code>src/matrix.c</code>. This function frees a matrix struct and, if no other structs are pointing at the data, frees the data as well.</p>
+<table>
+<colgroup>
+<col span="1" style="width: 12%;">
+<col span="1" style="width: 18%;">
+<col span="1" style="width: 70%;">
+</colgroup>
+<tbody>
+<tr>
+<td><b>Arguments</b></td>
+<td><code>matrix *mat</code></td>
+<td>A pointer to a matrix struct to be deallocated.</td>
+</tr>
+<tr>
+<td><b>Return values</b></td>
+<td colspan="2">None</td>
+</tr>
+</tbody>
+</table>
+<p>Hint: Follow these steps.</p>
+<ol>
+<li>If the matrix pointer <code>mat</code> is NULL, return.</li>
+<li>If <code>mat</code> has no parent: decrement its <code>ref_cnt</code> field by 1. If the <code>ref_cnt</code> field becomes 0, then free <code>mat</code> and its <code>data</code> field.</li>
+<li>Otherwise, recursively call <code>deallocate_matrix</code> on <code>mat</code>'s parent, then free <code>mat</code>.</li>
+</ol>
+<p>Before continuing, we recommend testing and debugging your functions so far. Refer to the <a href="index.html#testing-and-debugging">testing and debugging</a> section for detailed instructions.</p>
+<h3 id="task-1-4-allocate-reference">Task 1.4: Allocate Reference</h3>
+<p>Fill in the <code>allocate_matrix_ref</code> function in <code>src/matrix.c</code>. This function allocates space for a matrix struct created by slicing an existing matrix struct.</p>
+<table>
+<colgroup>
+<col span="1" style="width: 12%;">
+<col span="1" style="width: 18%;">
+<col span="1" style="width: 70%;">
+</colgroup>
+<tbody>
+<tr>
+<td rowspan="5"><b>Arguments</b></td>
+<td><code>matrix **mat</code></td>
+<td>A pointer to a matrix pointer in memory.</td>
+</tr>
+<tr>
+<td><code>matrix *from</code></td>
+<td>A pointer to the matrix whose data we are slicing.</td>
+</tr>
+<tr>
+<td><code>int offset</code></td>
+<td>The entry in the <code>from</code> matrix where we start slicing the data.</td>
+</tr>
+<tr>
+<td><code>int rows</code></td>
+<td>The number of rows in the new sliced matrix.</td>
+</tr>
+<tr>
+<td><code>int cols</code></td>
+<td>The number of columns in the new sliced matrix.</td>
+</tr>
+<tr>
+<td><b>Return value</b></td>
+<td><code>int</code></td>
+<td>-1 if either <code>rows</code> or <code>cols</code> is not positive. -2 if allocating memory failed. 0 otherwise.</td>
+</tr>
+</tbody>
+</table>
+<p>Hint: Follow these steps.</p>
+<ol>
+<li>Check if the dimensions are valid. Return -1 if either dimension is not positive.</li>
+<li>Allocate space for the new matrix struct. Return -2 if allocating memory failed.</li>
+<li>Set the <code>data</code> field of the new struct to be the <code>data</code> field of the <code>from</code> struct plus <code>offset</code>.</li>
+<li>Set the number of rows and columns in the new struct according to the arguments provided.</li>
+<li>Set the <code>parent</code> field of the new struct to the <code>from</code> struct pointer.</li>
+<li>Increment the <code>ref_cnt</code> field of the <code>from</code> struct by 1.</li>
+<li>Store the address of the allocated matrix struct at the location <code>mat</code> is pointing at.</li>
+<li>Return 0 upon success.</li>
+</ol>
+<h3 id="task-1-5-basic-matrix-operations">Task 1.5: Basic Matrix Operations</h3>
+<p>Fill in the <code>fill_matrix</code>, <code>abs_matrix</code>, and <code>add_matrix</code> functions in <code>src/matrix.c</code>.</p>
+<p>Optionally, you can also fill in <code>sub_matrix</code> and <code>neg_matrix</code> (not worth any points, just for fun). If you choose not to implement the optional functions, please don't delete them, comment them out, or change the function signatures - just add <code>return 0;</code> in the functions to avoid compiler warnings.</p>
+<h3 id="task-1-6-more-matrix-operations">Task 1.6: More Matrix Operations</h3>
+<p>Fill in the <code>mul_matrix</code> function in <code>src/matrix.c</code>.</p>
+<p>Fill in the <code>pow_matrix</code> function in <code>src/matrix.c</code>. This function should multiply the <code>mat</code> matrix by itself repeatedly <code>pow</code> times. We recommend calling <code>mul_matrix</code> within this function. Remember to account for the cases where <code>pow=0</code> (put the identity matrix in the result matrix) and <code>pow=1</code> (put the values of the original matrix into the result matrix).</p>
+<h3 id="testing-and-debugging">Testing and Debugging</h3>
+<p>To run the provided CUnit tests, run in the root folder of your project:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">make</span></span><span class="z-meta z-function-call z-arguments z-shell"> test</span>
+</span></code></pre>
+<p>This will create an executable called <strong><code>test</code></strong> in the root folder and run it.</p>
+<p>By default, CUnit will run these tests in Normal mode. When debugging a specific issue, it may be helpful to switch to Verbose mode, which can be done by commenting and uncommenting the relevant lines in <code>mat_test.c</code>:</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-comment z-line z-double-slash z-c"><span class="z-punctuation z-definition z-comment z-c">//</span> CU_basic_set_mode(CU_BRM_NORMAL);
+</span><span class="z-meta z-function-call z-c"><span class="z-variable z-function z-c">CU_basic_set_mode</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c">CU_BRM_VERBOSE</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-punctuation z-terminator z-c">;</span>
+</span></code></pre>
+<p>Make sure that one line is uncommented at a time.</p>
+<p>Please keep in mind that these tests are not comprehensive, and passing all the sanity tests does not necessarily mean your implementation is correct. This is especially true with the memory functions <code>allocate_matrix</code>, <code>allocate_matrix_ref</code>, and <code>deallocate_matrix</code>. Also keep in mind that the autograder will be using our own set of sanity tests, and will not be running your CUnit tests.</p>
+<p>Finally, you are welcomed to modify the <strong><code>tests/mat_test.c</code></strong> file in the <code>tests</code> directory to implement your custom test cases. To add your own custom tests, you will need to define your own test function and possibly use any of the <code>CU_ASSERT_EQUAL</code>, <code>CU_ASSERT_NOT_EQUAL</code>, or <code>CU_ASSERT_PTR_EQUAL</code> CUnit assertions to compare any value that you would like (Suggestion: CUnit has a <a href="http://cunit.sourceforge.net/doc/writing_tests.html">guide with more assertions</a>. Lastly, you will need to call <code>CU_add_test</code> to the main function to run your newly created function! A good place to start is to look at some of the provided tests and use the general approach to your own specific tests.</p>
+<h2 id="task-2-speeding-up-matrix-operations">Task 2: Speeding up matrix operations</h2>
+<h3 id="task-2-1-simd-instructions">Task 2.1: SIMD Instructions</h3>
+<p>Modify <code>fill_matrix</code>, <code>abs_matrix</code>, <code>add_matrix</code>, and <code>mul_matrix</code> in <code>src/matrix.c</code> to use SIMD instructions.</p>
+<p>Optionally, you can also modify <code>sub_matrix</code> and <code>neg_matrix</code> to use SIMD instructions (not worth any points, just for fun). You don't need to modify <code>pow_matrix</code> to use SIMD instructions, since it calls <code>mul_matrix</code> to perform its operations.</p>
+<p>The SIMD instructions in this project work on 256 bits = 4 doubles at a time, so you can use them to perform four operations in parallel.</p>
+<p>Here is a list of instructions that you may find helpful, although you are also allowed to use other instructions not on the list.</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-storage z-type z-c">void</span> <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">_mm256_storeu_pd</span></span><span class="z-meta z-function z-c"> </span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-storage z-type z-c">double</span> <span class="z-keyword z-operator z-c">*</span> <span class="z-variable z-parameter z-c">mem_addr</span><span class="z-punctuation z-separator z-c">,</span> __m256d <span class="z-variable z-parameter z-c">a</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c">
+</span>__m256d <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">_mm256_set1_pd</span></span><span class="z-meta z-function z-c"> </span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-storage z-type z-c">double</span> <span class="z-variable z-parameter z-c">a</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c">
+</span>__m256d <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">_mm256_set_pd</span></span><span class="z-meta z-function z-c"> </span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-storage z-type z-c">double</span> <span class="z-variable z-parameter z-c">e3</span><span class="z-punctuation z-separator z-c">,</span> <span class="z-storage z-type z-c">double</span> <span class="z-variable z-parameter z-c">e2</span><span class="z-punctuation z-separator z-c">,</span> <span class="z-storage z-type z-c">double</span> <span class="z-variable z-parameter z-c">e1</span><span class="z-punctuation z-separator z-c">,</span> <span class="z-storage z-type z-c">double</span> <span class="z-variable z-parameter z-c">e0</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c">
+</span>__m256d <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">_mm256_loadu_pd</span></span><span class="z-meta z-function z-c"> </span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-storage z-type z-c">double</span> <span class="z-storage z-modifier z-c">const</span> <span class="z-keyword z-operator z-c">*</span> <span class="z-variable z-parameter z-c">mem_addr</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c">
+</span>__m256d <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">_mm256_add_pd</span></span><span class="z-meta z-function z-c"> </span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c">__m256d <span class="z-variable z-parameter z-c">a</span><span class="z-punctuation z-separator z-c">,</span> __m256d <span class="z-variable z-parameter z-c">b</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c">
+</span>__m256d <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">_mm256_sub_pd</span></span><span class="z-meta z-function z-c"> </span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c">__m256d <span class="z-variable z-parameter z-c">a</span><span class="z-punctuation z-separator z-c">,</span> __m256d <span class="z-variable z-parameter z-c">b</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c">
+</span>__m256d <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">_mm256_fmadd_pd</span></span><span class="z-meta z-function z-c"> </span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c">__m256d <span class="z-variable z-parameter z-c">a</span><span class="z-punctuation z-separator z-c">,</span> __m256d <span class="z-variable z-parameter z-c">b</span><span class="z-punctuation z-separator z-c">,</span> __m256d <span class="z-variable z-parameter z-c">c</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c">
+</span>__m256d <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">_mm256_mul_pd</span></span><span class="z-meta z-function z-c"> </span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c">__m256d <span class="z-variable z-parameter z-c">a</span><span class="z-punctuation z-separator z-c">,</span> __m256d <span class="z-variable z-parameter z-c">b</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c">
+</span>__m256d <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">_mm256_cmp_pd</span></span><span class="z-meta z-function z-c"> </span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c">__m256d <span class="z-variable z-parameter z-c">a</span><span class="z-punctuation z-separator z-c">,</span> __m256d <span class="z-variable z-parameter z-c">b</span><span class="z-punctuation z-separator z-c">,</span> <span class="z-storage z-modifier z-c">const</span> <span class="z-storage z-type z-c">int</span> <span class="z-variable z-parameter z-c">imm8</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c">
+</span>__m256d <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">_mm256_and_pd</span></span><span class="z-meta z-function z-c"> </span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c">__m256d <span class="z-variable z-parameter z-c">a</span><span class="z-punctuation z-separator z-c">,</span> __m256d <span class="z-variable z-parameter z-c">b</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c">
+</span>__m256d <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">_mm256_max_pd</span></span><span class="z-meta z-function z-c"> </span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c">__m256d <span class="z-variable z-parameter z-c">a</span><span class="z-punctuation z-separator z-c">,</span> __m256d <span class="z-variable z-parameter z-c">b</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c">
+</span></span></code></pre>
+<p>As a reminder, you can use the <a href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/">Intel Intrinsics Guide</a> as a reference to look up the relevant instructions. You will have to use the <code>__m256d</code> type to hold 4 doubles in a YMM register, and then use the <code>_mm256_*</code> intrinsics to operate on them.</p>
+<p>After implementing only SIMD instructions, our reference implementation achieves a speedup of approximately 3.10 on <code>mul_matrix</code> and 1.00 on <code>add_matrix</code> and <code>abs_matrix</code>. Note that your speedup might be different depending on your implementation, so don't worry if your speedup doesn't match exactly.</p>
+<p>Here are some tips for optimization/common mistakes collected from students this semester:</p>
+<ul>
+<li>To vectorize the dot product (multiplication and addition) operations in matrix multiplication, consider transposing the second matrix so that the elements in a column are located at adjacent memory addresses.</li>
+<li>Cache blocking by splitting the matrix into &quot;tiles&quot; and working on each tile separately is not needed for this project, especially if you're already transposing the entire matrix.</li>
+</ul>
+<h3 id="task-2-2-openmp">Task 2.2: OpenMP</h3>
+<p>Use OpenMP to parallelize <code>fill_matrix</code>, <code>abs_matrix</code>, <code>add_matrix</code>, and <code>mul_matrix</code> in <code>src/matrix.c</code>.</p>
+<p>Note that you will need to make sure that none of the different threads overwrites each others' data. Just adding a <code>#pragma omp parallel for</code> may cause errors. Here are a few useful links to use as a starting point: <a href="https://curc.readthedocs.io/en/latest/programming/OpenMP-C.html">Using OpenMP with C</a> and <a href="https://docs.microsoft.com/en-us/cpp/parallel/openmp/reference/openmp-functions?view=msvc-160">OpenMP Functions</a>.</p>
+<p>After implementing SIMD instructions and OpenMP only, our reference implementation achieves a speedup of approximately 12.67 on <code>mul_matrix</code> and 2.68 on <code>add_matrix</code> and <code>abs_matrix</code>. Note that your speedup might be different depending on your implementation, so don't worry if your speedup doesn't match exactly.</p>
+<p>Here are some tips for optimization/common mistakes collected from students this semester:</p>
+<ul>
+<li>Avoid using <code>omp_set_num_threads</code>, because you don't necessarily know the number of threads being used to run your code.</li>
+<li>Avoid using nested OpenMP directives. For example, if you have a double for loop, you probably don't want to add <code>#pragma omp parallel for</code> to both loops, because that would create more threads than you have and cause a lot of unnecessary thread switching. Instead, consider only parallelizing the outermost loop.</li>
+</ul>
+<h3 id="task-2-3-algorithmic-optimization">Task 2.3: Algorithmic Optimization</h3>
+<p>Modify <code>pow_matrix</code> in <code>src/matrix.c</code> to use an efficient exponentiation algorithm. An efficient algorithm should be faster than the naive exponentiation algorithm, which requires <code>n</code> calls to <code>mul_matrix</code> to raise a matrix to the <code>n</code>th power. We recommmend <a href="https://en.wikipedia.org/wiki/Exponentiation_by_squaring#Basic_method">repeated squaring</a>.</p>
+<p>After implementing algorithmic optimization (in addition to SIMD and OpenMP on <code>mul_matrix</code>), our reference implementation achieves a speedup of approximately 745.5 on <code>pow_matrix</code>. Note that your speedup might be different depending on your implementation, so don't worry if your speedup doesn't match exactly.</p>
+<h3 id="task-2-4-other-optimizations">Task 2.4: Other Optimizations</h3>
+<p>If your code is still not passing the performance tests at this point, you can consider some other techniques for speeding up your code.</p>
+<ul>
+<li><strong>Reduce function calls</strong>: Function calls are slow because the program must set up a stack frame and jump to a different part of code. If some part of your code is repeatedly calling a function, you could try to reduce the number of times the function is called.</li>
+<li><strong>Loop unrolling</strong>: You can manually reduce the number of loop iterations your program needs to execute. See <a href="https://en.wikipedia.org/wiki/Loop_unrolling#Simple_manual_example_in_C">this link</a> for a simple example of loop unrolling.</li>
+<li><strong>Cache blocking</strong>: You can rearrange how data is stored in memory to improve locality for better cache performance. For example, accessing a column of data in a row-major matrix requires skipping through elements in the matrix, but if the same matrix were stored in column-major order, the column of data would be located in one continuous block of memory.</li>
+</ul>
+<p>Here are some tips for optimization/common mistakes collected from students this semester:</p>
+<ul>
+<li>Avoid using a for loop to initialize allocated memory to 0. Instead, use a built-in function that allocates memory and initializes the memory to 0.</li>
+<li>If you've implemented other matrix operations (e.g. creating an identity matrix, transposing a matrix), consider parallelizing those as well.</li>
+</ul>
+<h3 id="testing-and-debugging-1">Testing and Debugging</h3>
+<p>We use <strong><code>tests/unittests</code></strong> as the framework for testing and have provided a <code>tests/unittests</code> folder that contains this framework for testing your python module. Here is the official documentation for the standard <a href="https://docs.python.org/3.6/library/unittest.html">Python unittest library</a>.
+<code>tests/unittests/unittests.py</code> contains all the skeleton code for both correctness and performance tests, and <code>tests/unittests/utils.py</code> has all the functions that you might need in order to write tests. We have provided some sample tests for you, but it is up to you to design and code up the tests. We will not be grading your tests.</p>
+<p>We have installed the naive solution which we will be comparing against on hive! The python package is called <code>dumbpy</code> and you can import it like any other python library (so long as you are on hive)! Please note we will not be distributing this binary which means you must work on hive if you want to test with it. You should use this and the <strong><code>time</code></strong> package to determine how much you sped up your code.</p>
+<p>To debug your Python tests:</p>
+<ol>
+<li>If you haven't already, activate the virtual environment: <code>source .venv/bin/activate</code></li>
+<li>If you haven't already, install the requirements: <code>python3 -m pip install -r requirements.txt</code></li>
+<li>Navigate to your root project 4 directory and run <code>make install</code></li>
+<li>In the <code>tests/unittests</code> directory, run <code>cgdb --args python3 -m unittest unittests.py -v</code></li>
+</ol>
+<h4 id="functions-in-tests-unittests-utils-py">Functions in <code>tests/unittests/utils.py</code></h4>
+<ul>
+<li>
+<p><strong><code>dp_nc_matrix(*args, **kwargs)</code></strong></p>
+<ul>
+<li>This function will return a <code>dumbpy</code> matrix and a <code>numc</code> matrix that are identical. <code>*args</code> and <code>**kwargs</code> will be used as the arguments to instantiate both matrices in the exact same format as you would instantiate a <code>numc.Matrix</code>. We provide some examples below.<pre data-lang="python" class="language-python z-code"><code class="language-python" data-lang="python"><span class="z-source z-python"> <span class="z-keyword z-operator z-comparison z-python">&gt;</span><span class="z-keyword z-operator z-comparison z-python">&gt;</span><span class="z-keyword z-operator z-comparison z-python">&gt;</span> <span class="z-meta z-qualified-name z-python"><span class="z-meta z-generic-name z-python">dp_mat</span></span>, <span class="z-meta z-qualified-name z-python"><span class="z-meta z-generic-name z-python">nc_mat</span></span> <span class="z-keyword z-operator z-assignment z-python">=</span> <span class="z-meta z-function-call z-python"><span class="z-meta z-qualified-name z-python"><span class="z-variable z-function z-python"><span class="z-meta z-generic-name z-python">dp_nc_matrix</span></span></span></span><span class="z-meta z-function-call z-arguments z-python"><span class="z-punctuation z-section z-arguments z-begin z-python">(</span><span class="z-constant z-numeric z-integer z-decimal z-python">2</span><span class="z-punctuation z-separator z-arguments z-python">,</span> <span class="z-constant z-numeric z-integer z-decimal z-python">2</span><span class="z-punctuation z-separator z-arguments z-python">,</span> <span class="z-constant z-numeric z-integer z-decimal z-python">0</span><span class="z-punctuation z-section z-arguments z-end z-python">)</span></span>
+</span> <span class="z-keyword z-operator z-comparison z-python">&gt;</span><span class="z-keyword z-operator z-comparison z-python">&gt;</span><span class="z-keyword z-operator z-comparison z-python">&gt;</span> <span class="z-meta z-qualified-name z-python"><span class="z-meta z-generic-name z-python">dp_mat</span></span>
+</span> <span class="z-meta z-sequence z-list z-python"><span class="z-punctuation z-section z-sequence z-begin z-python">[</span><span class="z-meta z-sequence z-list z-python"><span class="z-punctuation z-section z-sequence z-begin z-python">[</span><span class="z-constant z-numeric z-float z-decimal z-python">0<span class="z-punctuation z-separator z-decimal z-python">.</span>0</span><span class="z-punctuation z-separator z-sequence z-python">,</span> <span class="z-constant z-numeric z-float z-decimal z-python">0<span class="z-punctuation z-separator z-decimal z-python">.</span>0</span><span class="z-punctuation z-section z-sequence z-end z-python">]</span></span><span class="z-punctuation z-separator z-sequence z-python">,</span> <span class="z-meta z-sequence z-list z-python"><span class="z-punctuation z-section z-sequence z-begin z-python">[</span><span class="z-constant z-numeric z-float z-decimal z-python">0<span class="z-punctuation z-separator z-decimal z-python">.</span>0</span><span class="z-punctuation z-separator z-sequence z-python">,</span> <span class="z-constant z-numeric z-float z-decimal z-python">0<span class="z-punctuation z-separator z-decimal z-python">.</span>0</span><span class="z-punctuation z-section z-sequence z-end z-python">]</span></span><span class="z-punctuation z-section z-sequence z-end z-python">]</span></span>
+</span> <span class="z-keyword z-operator z-comparison z-python">&gt;</span><span class="z-keyword z-operator z-comparison z-python">&gt;</span><span class="z-keyword z-operator z-comparison z-python">&gt;</span> <span class="z-meta z-qualified-name z-python"><span class="z-meta z-generic-name z-python">nc_mat</span></span>
+</span> <span class="z-meta z-sequence z-list z-python"><span class="z-punctuation z-section z-sequence z-begin z-python">[</span><span class="z-meta z-sequence z-list z-python"><span class="z-punctuation z-section z-sequence z-begin z-python">[</span><span class="z-constant z-numeric z-float z-decimal z-python">0<span class="z-punctuation z-separator z-decimal z-python">.</span>0</span><span class="z-punctuation z-separator z-sequence z-python">,</span> <span class="z-constant z-numeric z-float z-decimal z-python">0<span class="z-punctuation z-separator z-decimal z-python">.</span>0</span><span class="z-punctuation z-section z-sequence z-end z-python">]</span></span><span class="z-punctuation z-separator z-sequence z-python">,</span> <span class="z-meta z-sequence z-list z-python"><span class="z-punctuation z-section z-sequence z-begin z-python">[</span><span class="z-constant z-numeric z-float z-decimal z-python">0<span class="z-punctuation z-separator z-decimal z-python">.</span>0</span><span class="z-punctuation z-separator z-sequence z-python">,</span> <span class="z-constant z-numeric z-float z-decimal z-python">0<span class="z-punctuation z-separator z-decimal z-python">.</span>0</span><span class="z-punctuation z-section z-sequence z-end z-python">]</span></span><span class="z-punctuation z-section z-sequence z-end z-python">]</span></span>
+</span> <span class="z-keyword z-operator z-comparison z-python">&gt;</span><span class="z-keyword z-operator z-comparison z-python">&gt;</span><span class="z-keyword z-operator z-comparison z-python">&gt;</span> <span class="z-meta z-qualified-name z-python"><span class="z-meta z-generic-name z-python">dp_mat</span></span>, <span class="z-meta z-qualified-name z-python"><span class="z-meta z-generic-name z-python">nc_mat</span></span> <span class="z-keyword z-operator z-assignment z-python">=</span> <span class="z-meta z-function-call z-python"><span class="z-meta z-qualified-name z-python"><span class="z-variable z-function z-python"><span class="z-meta z-generic-name z-python">dp_nc_matrix</span></span></span></span><span class="z-meta z-function-call z-arguments z-python"><span class="z-punctuation z-section z-arguments z-begin z-python">(</span><span class="z-meta z-sequence z-list z-python"><span class="z-punctuation z-section z-sequence z-begin z-python">[</span><span class="z-meta z-sequence z-list z-python"><span class="z-punctuation z-section z-sequence z-begin z-python">[</span><span class="z-constant z-numeric z-integer z-decimal z-python">1</span><span class="z-punctuation z-separator z-sequence z-python">,</span> <span class="z-constant z-numeric z-integer z-decimal z-python">2</span><span class="z-punctuation z-separator z-sequence z-python">,</span> <span class="z-constant z-numeric z-integer z-decimal z-python">3</span><span class="z-punctuation z-section z-sequence z-end z-python">]</span></span><span class="z-punctuation z-section z-sequence z-end z-python">]</span></span><span class="z-punctuation z-section z-arguments z-end z-python">)</span></span>
+</span> <span class="z-keyword z-operator z-comparison z-python">&gt;</span><span class="z-keyword z-operator z-comparison z-python">&gt;</span><span class="z-keyword z-operator z-comparison z-python">&gt;</span> <span class="z-meta z-qualified-name z-python"><span class="z-meta z-generic-name z-python">dp_mat</span></span>
+</span> <span class="z-meta z-sequence z-list z-python"><span class="z-punctuation z-section z-sequence z-begin z-python">[</span><span class="z-meta z-sequence z-list z-python"><span class="z-punctuation z-section z-sequence z-begin z-python">[</span><span class="z-constant z-numeric z-float z-decimal z-python">1<span class="z-punctuation z-separator z-decimal z-python">.</span>0</span><span class="z-punctuation z-separator z-sequence z-python">,</span> <span class="z-constant z-numeric z-float z-decimal z-python">2<span class="z-punctuation z-separator z-decimal z-python">.</span>0</span><span class="z-punctuation z-separator z-sequence z-python">,</span> <span class="z-constant z-numeric z-float z-decimal z-python">3<span class="z-punctuation z-separator z-decimal z-python">.</span>0</span><span class="z-punctuation z-section z-sequence z-end z-python">]</span></span><span class="z-punctuation z-section z-sequence z-end z-python">]</span></span>
+</span> <span class="z-keyword z-operator z-comparison z-python">&gt;</span><span class="z-keyword z-operator z-comparison z-python">&gt;</span><span class="z-keyword z-operator z-comparison z-python">&gt;</span> <span class="z-meta z-qualified-name z-python"><span class="z-meta z-generic-name z-python">nc_mat</span></span>
+</span> <span class="z-meta z-sequence z-list z-python"><span class="z-punctuation z-section z-sequence z-begin z-python">[</span><span class="z-meta z-sequence z-list z-python"><span class="z-punctuation z-section z-sequence z-begin z-python">[</span><span class="z-constant z-numeric z-float z-decimal z-python">1<span class="z-punctuation z-separator z-decimal z-python">.</span>0</span><span class="z-punctuation z-separator z-sequence z-python">,</span> <span class="z-constant z-numeric z-float z-decimal z-python">2<span class="z-punctuation z-separator z-decimal z-python">.</span>0</span><span class="z-punctuation z-separator z-sequence z-python">,</span> <span class="z-constant z-numeric z-float z-decimal z-python">3<span class="z-punctuation z-separator z-decimal z-python">.</span>0</span><span class="z-punctuation z-section z-sequence z-end z-python">]</span></span><span class="z-punctuation z-section z-sequence z-end z-python">]</span></span>
+</span></code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><code>rand_dp_nc_matrix(rows, cols, low=0, high=1, seed=0)</code></strong></p>
+<ul>
+<li>This function will instantiate a random <code>dumbpy</code> matrix and a random <code>numc</code> matrix with <code>seed</code> where each element is in the range [low, high). The two matrices are identical with <code>rows</code> rows and <code>cols</code>. <code>seed</code> is defaulted to 0.<pre data-lang="python" class="language-python z-code"><code class="language-python" data-lang="python"><span class="z-source z-python"><span class="z-keyword z-operator z-comparison z-python">&gt;</span><span class="z-keyword z-operator z-comparison z-python">&gt;</span><span class="z-keyword z-operator z-comparison z-python">&gt;</span><span class="z-keyword z-operator z-comparison z-python">&gt;</span> <span class="z-meta z-qualified-name z-python"><span class="z-meta z-generic-name z-python">dp_mat</span></span>, <span class="z-meta z-qualified-name z-python"><span class="z-meta z-generic-name z-python">nc_mat</span></span> <span class="z-keyword z-operator z-assignment z-python">=</span> <span class="z-meta z-function-call z-python"><span class="z-meta z-qualified-name z-python"><span class="z-variable z-function z-python"><span class="z-meta z-generic-name z-python">rand_dp_nc_matrix</span></span></span></span><span class="z-meta z-function-call z-arguments z-python"><span class="z-punctuation z-section z-arguments z-begin z-python">(</span><span class="z-constant z-numeric z-integer z-decimal z-python">2</span><span class="z-punctuation z-separator z-arguments z-python">,</span> <span class="z-constant z-numeric z-integer z-decimal z-python">2</span><span class="z-punctuation z-separator z-arguments z-python">,</span> <span class="z-variable z-parameter z-python">seed</span><span class="z-keyword z-operator z-assignment z-python">=</span><span class="z-constant z-numeric z-integer z-decimal z-python">5</span><span class="z-punctuation z-section z-arguments z-end z-python">)</span></span>
+</span><span class="z-keyword z-operator z-comparison z-python">&gt;</span><span class="z-keyword z-operator z-comparison z-python">&gt;</span><span class="z-keyword z-operator z-comparison z-python">&gt;</span> <span class="z-meta z-qualified-name z-python"><span class="z-meta z-generic-name z-python">dp_mat</span></span>
+</span><span class="z-meta z-sequence z-list z-python"><span class="z-punctuation z-section z-sequence z-begin z-python">[</span><span class="z-meta z-sequence z-list z-python"><span class="z-punctuation z-section z-sequence z-begin z-python">[</span><span class="z-constant z-numeric z-float z-decimal z-python">0<span class="z-punctuation z-separator z-decimal z-python">.</span>27474559623503386</span><span class="z-punctuation z-separator z-sequence z-python">,</span> <span class="z-constant z-numeric z-float z-decimal z-python">0<span class="z-punctuation z-separator z-decimal z-python">.</span>046467764790387715</span><span class="z-punctuation z-section z-sequence z-end z-python">]</span></span><span class="z-punctuation z-separator z-sequence z-python">,</span> <span class="z-meta z-sequence z-list z-python"><span class="z-punctuation z-section z-sequence z-begin z-python">[</span><span class="z-constant z-numeric z-float z-decimal z-python">0<span class="z-punctuation z-separator z-decimal z-python">.</span>9927552244592249</span><span class="z-punctuation z-separator z-sequence z-python">,</span> <span class="z-constant z-numeric z-float z-decimal z-python">0<span class="z-punctuation z-separator z-decimal z-python">.</span>08003044504673706</span><span class="z-punctuation z-section z-sequence z-end z-python">]</span></span><span class="z-punctuation z-section z-sequence z-end z-python">]</span></span>
+</span><span class="z-keyword z-operator z-comparison z-python">&gt;</span><span class="z-keyword z-operator z-comparison z-python">&gt;</span><span class="z-keyword z-operator z-comparison z-python">&gt;</span> <span class="z-meta z-qualified-name z-python"><span class="z-meta z-generic-name z-python">nc_mat</span></span>
+</span><span class="z-meta z-sequence z-list z-python"><span class="z-punctuation z-section z-sequence z-begin z-python">[</span><span class="z-meta z-sequence z-list z-python"><span class="z-punctuation z-section z-sequence z-begin z-python">[</span><span class="z-constant z-numeric z-float z-decimal z-python">0<span class="z-punctuation z-separator z-decimal z-python">.</span>27474559623503386</span><span class="z-punctuation z-separator z-sequence z-python">,</span> <span class="z-constant z-numeric z-float z-decimal z-python">0<span class="z-punctuation z-separator z-decimal z-python">.</span>046467764790387715</span><span class="z-punctuation z-section z-sequence z-end z-python">]</span></span><span class="z-punctuation z-separator z-sequence z-python">,</span> <span class="z-meta z-sequence z-list z-python"><span class="z-punctuation z-section z-sequence z-begin z-python">[</span><span class="z-constant z-numeric z-float z-decimal z-python">0<span class="z-punctuation z-separator z-decimal z-python">.</span>9927552244592249</span><span class="z-punctuation z-separator z-sequence z-python">,</span> <span class="z-constant z-numeric z-float z-decimal z-python">0<span class="z-punctuation z-separator z-decimal z-python">.</span>08003044504673706</span><span class="z-punctuation z-section z-sequence z-end z-python">]</span></span><span class="z-punctuation z-section z-sequence z-end z-python">]</span></span>
+</span></code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><code>cmp_dp_nc_matrix(dp_mat: dp.Matrix, nc_mat: nc.Matrix)</code></strong></p>
+<ul>
+<li>This function will return True if <code>dp_mat</code> has the same size of <code>nc_mat</code> and all corresponding elements are equal (within a margin of error).</li>
+</ul>
+</li>
+<li>
+<p><strong><code>compute(dp_mat_lst: List[Union[dp.Matrix, int]], nc_mat_lst: List[Union[nc.Matrix, int]], op: str)</code></strong></p>
+<ul>
+<li>This function takes in a list of dumbpy matrices and a list of numc matrices, then applies the specified operation <code>op</code> on these matrices. Note that <code>op</code> is a string. <code>&quot;add&quot;</code>, <code>&quot;sub&quot;</code>, <code>&quot;mul&quot;</code>, <code>&quot;neg&quot;</code>, <code>&quot;abs&quot;</code>, and <code>&quot;pow&quot;</code> correspond to the operations <code>+</code>, <code>-</code>(subtraction), <code>*</code>, <code>-</code>(negation), and <code>abs</code>, respectively. This function will return whether the computed <code>dumbpy</code> matrix is equal to the computed <code>numc</code> matrix, as well as the speedup for this specific computation.
+<ul>
+<li>For unary operations like <code>&quot;neg&quot;</code> and <code>&quot;abs&quot;</code>, each matrix list must only contain 1 matrix. For the binary operations, they must contain more than 1 matrix.</li>
+<li>Note that to compute <code>&quot;pow&quot;</code>, <code>dp_mat_lst</code> and <code>nc_mat_lst</code> should look like something like <code>[Matrix(2, 2), 1]</code>.</li>
+<li>You can also do chained operations like <code>compute([a, b, c], [d, e, f], &quot;add&quot;)</code> where <code>a, b, c, d, e, f</code> are matrices, and the function will compute <code>a + b + c</code> and <code>d + e + f</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="more-about-the-python-tests">More about the Python tests</h4>
+<p>If you change any code, remember to run <code>make install</code> to re-build your numc module.</p>
+<ul>
+<li>If you want to run all tests in <code>unittests.py</code>:<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">python</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>m</span> unittest unittests.py<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>v</span></span>
+</span></code></pre>
+</li>
+<li>If you only want to run tests of one particular class, run<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">python</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>m</span> unittest unittests.<span class="z-meta z-group z-expansion z-brace z-shell"><span class="z-punctuation z-section z-expansion z-brace z-begin z-shell">{</span>CLASSNAME<span class="z-punctuation z-section z-expansion z-brace z-end z-shell">}</span></span><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>v</span></span>
+</span></code></pre>
+For example, running<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">python</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>m</span> unittest unittests.TestAdd<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>v</span></span>
+</span></code></pre>
+will only run the tests under the <code>TestAdd</code> class.</li>
+<li>If you want to run a specific test under a specific class, run<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">python</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>m</span> unittest unittests.<span class="z-meta z-group z-expansion z-brace z-shell"><span class="z-punctuation z-section z-expansion z-brace z-begin z-shell">{</span>CLASSNAME<span class="z-punctuation z-section z-expansion z-brace z-end z-shell">}</span></span>.<span class="z-meta z-group z-expansion z-brace z-shell"><span class="z-punctuation z-section z-expansion z-brace z-begin z-shell">{</span>TESTNAME<span class="z-punctuation z-section z-expansion z-brace z-end z-shell">}</span></span><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>v</span></span>
+</span></code></pre>
+For example, running <pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">python</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>m</span> unittest unittests.TestAdd.test_small_add<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>v</span></span>
+</span></code></pre>
+will only run the <code>test_small_add</code> test.</li>
+</ul>
+<h2 id="task-3-readme-update">Task 3: README Update</h2>
+<p>Write a brief description of what you did in this project in <code>README.md</code>. You can also leave any feedback about the project here so we can improve it for future semesters! Minimum 500 characters, please.</p>
+<h2 id="submission-and-grading">Submission and Grading</h2>
+<p>Submit your repository to the <a href="https://www.gradescope.com/courses/288632/assignments/1551696">Project 4 assignment on Gradescope</a>.</p>
+<p>We will only be using your <code>src/matrix.h</code>, <code>src/matrix.c</code>, <code>src/numc.c</code>, and <code>README.md</code> for grading.</p>
+<p>The score you see on Gradescope is your final score for this project. In the unlikely event we find a major bug in the autograder, we may need to rerun the autograder - if this happens, we will notify everyone and give you time to resubmit before the deadline. (An earlier version of the spec said we would rerun the autograder after the deadline - we no longer plan to do this.)</p>
+<ul>
+<li>Correctness tests: 40 points
+<ul>
+<li><code>get</code> (3)</li>
+<li><code>set</code> (3)</li>
+<li><code>abs_matrix</code> (3)</li>
+<li><code>add_matrix</code> (3)</li>
+<li><code>mul_matrix</code> (7)</li>
+<li><code>pow_matrix</code> (12)</li>
+<li>Non-positive dimensions (2)</li>
+<li>Memory leak (7)</li>
+</ul>
+</li>
+<li>Performance tests: 55 points
+<ul>
+<li>Simple (tests <code>add_matrix</code> and <code>abs_matrix</code>) (8)</li>
+<li><code>mul_matrix</code> (10)</li>
+<li><code>pow_matrix</code> (15)</li>
+<li>Comprehensive (tests all the functions together) (22)</li>
+</ul>
+</li>
+<li>README update: 5 points</li>
+</ul>
+<p>Total: 100 points</p>
+<p>Here are the graphs for the speedup tests. The x-axis is your speedup times and the y-axis indicates what percentage of that test's total score you will receive. </p>
+<div class="grading-graphs" markdown="1">
+<table><thead><tr><th align="center">Multiplication</th><th align="center">Power</th></tr></thead><tbody>
+<tr><td align="center"><img src="mul.png@v=2" alt="mul.png" /></td><td align="center"><img src="pow.png@v=2" alt="pow.png" /></td></tr>
+</tbody></table>
+<table><thead><tr><th align="center">Simple</th><th align="center">Comprehensive</th></tr></thead><tbody>
+<tr><td align="center"><img src="simple.png@v=2" alt="simple.png" /></td><td align="center"><img src="comp.png@v=2" alt="comp.png" /></td></tr>
+</tbody></table>
+</div>
+<p>Minimum speedup for 100% on each test:</p>
+<ul>
+<li>Multiplication: 59x</li>
+<li>Power: 700x</li>
+<li>Simple: 2.6x</li>
+<li>Comprehensive: 48x</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container border-top pt-4 mb-5">
+<div class="row">
+<div class="col">
+<div id="dark-toggle-wrapper" class="d-none">
+<div class="form-check form-switch">
+<input id="inputDarkToggle" class="form-check-input" type="checkbox">
+<label class="form-check-label" for="inputDarkToggle">
+Dark Mode
+<a id="buttonDarkToggleReset" class="d-none" href="javascript:void(0);">(reset)</a>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  
+
+  
+    document.addEventListener("DOMContentLoaded", function() {
+      initToC();
+    });
+  
+</script>
+</body>
+</html>

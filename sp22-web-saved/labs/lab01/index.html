@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="language" content="english">
+<title>Lab 1 | CS 61C Spring 2022</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<link rel="shortcut icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../css/main.css@h=36c89645dcb547d13f6f293a379a176dff22aab9affcefc8d3a19bc23c0f8db2.css" />
+<script defer type="text/javascript" src="../../js/main.js@h=4096b5e2a18784c27ca139ca897694176eea13de3e2168cd7e7bcdd827a35c8d"></script>
+
+<script type="text/javascript" src="../../js/main-sync.js@h=daca62fef99fb16ad6a5fd1517d7b18bed66d3241431785bf3ac1f134c166bf1"></script>
+<script>initDarkToggle();</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.17.0/tocbot.min.js" integrity="sha512-DJhUMo5TIBb3fFziiE+3OJG+j7ky+GxScxHdLADCXskEpc/AKQsbsorIYmGFJFaJvDIyP65rJNhnCTytfYAdUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+<div class="container">
+<a class="navbar-brand" href="../../index.html">
+<img class="d-inline-block me-2 rounded" height="48" width="48" src="../../img/icon-small.png" alt="outline of square computer chip with cs61c label" />
+<span class="align-middle">CS 61C Spring 2022</span>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle Navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item">
+<a class="nav-link" href="../../calendar/index.html">Calendar</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../staff/index.html">Staff</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../policies/index.html">Policies</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../resources/index.html">Resources</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../exam/index.html">Exam</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../extensions/index.html">Extensions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://oh.cs61c.org/">OH Queue</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://venus.cs61c.org/">Venus</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://inst.eecs.berkeley.edu/~cs61c/archives.html">Semesters</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<main class="mb-4">
+<section class="section">
+<div class="container">
+<div class="row spec">
+<nav id="toc-wrapper" class="col-md-3 d-print-none sticky-md-top nav-wrapper" aria-label="table of contents">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#setup">Setup</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#learning-goals">Learning Goals</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-1-warm-up">Exercise 1: Warm Up</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#learning-goals-1">Learning Goals</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#compiling-and-running-a-c-program">Compiling and Running a C Program</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#part-1">Part 1</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#part-2">Part 2</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-2">Exercise 2</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#learning-goals-2">Learning Goals</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#part-1-compiler-warnings">Part 1: Compiler Warnings</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#part-2-assert-statements">Part 2: Assert Statements</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#part-3-intro-to-gdb-start-step-next-finish-print-quit">Part 3: Intro to GDB: start, step, next, finish, print, quit</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#part-4-intro-to-gdb-break-conditional-break-run-continue">Part 4: Intro to GDB: break, conditional break, run, continue</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-3">Exercise 3</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#learning-goals-3">Learning Goals</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#part-1-printing">Part 1: Printing</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#part-2-double-pointers">Part 2: Double Pointers</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#part-3-how-to-find-segfaults">Part 3: How to find segfaults</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-4-optional">Exercise 4 (Optional)</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#action-item">Action Item</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-5">Exercise 5</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#submission">Submission</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#other-useful-gdb-commands-recommended">Other Useful GDB Commands (Recommended)</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#command-info-locals">Command: info locals</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#command-command">Command: command</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#command-delete">Command: delete</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#faq">FAQ</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#what-is-a-null-terminator">What is a null terminator?</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#what-is-an-executable">What is an executable?</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#what-is-strlen">What is strlen?</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#what-is-a-macro">What is a macro?</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#what-is-a-segfault">What is a segfault?</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#what-is-a-header-file">What is a header file?</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#common-gdb-errors">Common GDB Errors</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#gdb-is-skipping-over-lines-of-code">GDB is skipping over lines of code</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#gdb-isn-t-loading-my-file">GDB isn&#x27;t loading my file</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#how-do-i-switch-between-the-code-window-and-the-console">How do I switch between the code window and the console?</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#i-m-stuck-in-the-code-window">I&#x27;m stuck in the code window</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#the-text-ui-is-garbled">The text UI is garbled</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<div id="toc-content-wrapper" class="content col-md-9">
+<h1 class="title">Lab 1: C &amp; CGDB</h1>
+<p class="subtitle">Deadline: Monday, January 31, 11:59:59 PM PT</p>
+<p><a href="https://docs.google.com/presentation/d/1qhEsD1aSHxG9Ge5HXkwNG1SiAXAl5RHo9uKClmUCOgM/edit?usp=sharing">Lab Section Slides</a></p>
+<p>The lab provides both video-based and text-based guidance to cater to how you learn best. The same material is presented in both the video-based and text-based option. You may choose whichever version works best for you or choose to use both sets of resources. There is an FAQ section at the bottom of the lab page. You will find FAQs throughout the lab that are linked to the bottom on the page.</p>
+<hr />
+<h2 id="setup">Setup</h2>
+<div class="alert alert-warning">
+<p>You must complete this lab on the hive machines. See <a href="../lab00/index.html">Lab 0</a> for a refresher on using them.</p>
+</div>
+<p>In your <code>labs</code> directory, pull the files for this lab with:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> pull starter main</span>
+</span></code></pre>
+<p>If you get an error like the following:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">fatal: &#39;starter&#39; does not appear to be a git repository
+fatal: Could not read from remote repository.
+</span></code></pre>
+<p>make sure to set the starter remote as follows:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> remote add starter https://github.com/61c-teach/sp22-lab-starter.git</span>
+</span></code></pre>
+<p>and run the original command again.</p>
+<hr />
+<h2 id="learning-goals">Learning Goals</h2>
+<ol>
+<li>Practice with pointers, strings, and structs</li>
+<li>Learn basic debugging skills: compiler warnings, assert statements, and GDB</li>
+</ol>
+<hr />
+<h2 id="exercise-1-warm-up">Exercise 1: Warm Up</h2>
+<h3 id="learning-goals-1">Learning Goals</h3>
+<ol>
+<li>Practice the C programming concepts you have learned in lecture: strings, structs, and pointers</li>
+<li>Introduction to <code>assert()</code></li>
+</ol>
+<h3 id="compiling-and-running-a-c-program">Compiling and Running a C Program</h3>
+<p>In this lab, we will be using the command line program <a href="https://gcc.gnu.org/">gcc</a> to compile programs
+in C. Use the following command to compile the code for Part 1</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">gcc</span></span><span class="z-meta z-function-call z-arguments z-shell"> ex1.c test_ex1.c</span>
+</span></code></pre>
+<p>This compiles <code>ex1.c</code> and <code>test_ex1.c</code> into an <a href="index.html#faq">executable</a> file named <code>a.out</code>. If you've taken
+CS61B or have experience with Java, you can kinda think of <code>gcc</code> as the C equivalent
+of <code>javac</code>. This file can be run with the following command:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">./a.out</span></span>
+</span></code></pre>
+<p>The executable file is <code>a.out</code>, so what is the <code>./</code> for? Answer: when
+you want to execute an executable, you need to prepend the path to the name of the executable.
+The dot refers to the &quot;current directory.&quot; Double dots (<code>..</code>) would refer to the directory one
+level up.</p>
+<p><code>gcc</code> has various command line options which you are encouraged to
+explore. In this lab, however, we will only be using <code>-o</code>, which is used to specify
+the name of the executable file that <code>gcc</code> creates. By default, the name of the executable generated by <code>gcc</code> is <code>a.out</code>. You can use the following
+commands to compile <code>ex1.c</code> into a program named <code>ex1</code>, and then run it.
+This is helpful if you don't want all of your executable files to be named <code>a.out</code>.</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">gcc</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>o</span> ex1 ex1.c test_ex1.c</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">./ex1</span></span>
+</span></code></pre>
+<h3 id="part-1">Part 1</h3>
+<ol>
+<li>
+<p>Implement the function <code>num_occurrences</code> in <code>exercise1/ex1.c</code>. The directions for completing the function can be found in the comments above the function. <code>test_ex1.c</code> will be used to test your code.</p>
+<details>
+<summary>What is <code>assert</code>?</summary>
+The Linux man pages serve as a manual for various standard library and operating system features. You can access the man pages through your terminal.
+<p>Type the following line into your terminal to learn about assert</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">man</span></span><span class="z-meta z-function-call z-arguments z-shell"> assert</span>
+</span></code></pre>
+<p>To exit the man pages, press <kbd>q</kbd>.</p>
+<p>Also see: <a href="index.html#faq">FAQ: What is a macro?</a></p>
+</details>
+<p><a href="index.html#faq">FAQ: What is a null terminator?</a></p>
+</li>
+<li>
+<p>Think of a scenario that is not tested by the current test cases. Create one additional test case to test this scenario.</p>
+</li>
+</ol>
+<h3 id="part-2">Part 2</h3>
+<ol>
+<li>Implement the function <code>compute_nucleotide_occurrences</code> in <code>ex1.c</code>. Look at <code>ex1.h</code> to see relevant struct definitions. <details>
+<summary>Hint</summary>
+You may be able to reuse `num_occurrences`
+</details>
+</li>
+<li>Think of a scenario that is not tested by the current test cases. Create one additional test case to test this scenario.</li>
+</ol>
+<h2 id="exercise-2">Exercise 2</h2>
+<h3 id="learning-goals-2">Learning Goals</h3>
+<ul>
+<li>Get familiar with basic GDB commands</li>
+</ul>
+<h3 id="part-1-compiler-warnings">Part 1: Compiler Warnings</h3>
+<ol>
+<li>
+<p>Read over the code in <code>exercise2/pwd_checker.c</code>.</p>
+</li>
+<li>
+<p>Learn about compiler warnings and the importance of resolving them. This section will resolve bug(s) along the way. Make sure to fix the bug(s) before moving on to the next section.</p>
+<p><a href="https://youtu.be/xzquCHudolU">Click here to watch the companion video</a></p>
+<ol>
+<li>
+<p>Compiler warnings are generated to help you find potential bugs in your code. Make sure that you fix all of your compiler warnings before you attempt to run your code. This will save you a lot of time debugging in the future because fixing the compiler warnings is much faster than trying to find the bug on your own.</p>
+</li>
+<li>
+<p>Compile your code</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">gcc</span></span><span class="z-meta z-function-call z-arguments z-shell"> pwd_checker.c test_pwd_checker.c<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>o</span> pwd_checker</span>
+</span></code></pre>
+<p>The -o flag names your executable <code>pwd_checker</code>.</p>
+</li>
+<li>
+<p>You should see 4 warnings. When you read the warning, you can see that the first warning is in the function <code>check_upper</code>. The warning states that we are doing a comparison between a pointer and a zero character constant and prints out the line where the warning occurs. </p>
+</li>
+<li>
+<p>The next line gives us a suggestion for how to fix our warning. The compiler will not always give us a suggestion for how to fix warnings. When it does give us a suggestion, it might not be accurate, but it is a good place to start.</p>
+</li>
+<li>
+<p>Take a look at the code where the warning is occurring. It is trying to compare a <code>const char *</code> to a <code>char</code>. The compiler has pointed this out as a potential error because we should not be performing a comparison between a pointer and a character type.</p>
+</li>
+<li>
+<p>This line of code is trying to check if the current character in the password is the null terminator. The code is currently comparing the pointer-to-the-character and the null terminator. We need to compare the pointed-to-character with the null terminator. To do this, we need to dereference the pointer. Change the line to this:</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-keyword z-control z-c">while</span> <span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span><span class="z-keyword z-operator z-c">*</span>password <span class="z-keyword z-operator z-comparison z-c">!=</span> <span class="z-string z-quoted z-single z-c"><span class="z-punctuation z-definition z-string z-begin z-c">&#39;</span><span class="z-constant z-character z-escape z-c">\0</span><span class="z-punctuation z-definition z-string z-end z-c">&#39;</span></span><span class="z-punctuation z-section z-group z-end z-c">)</span></span> <span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span>
+</span></span></code></pre>
+</li>
+<li>
+<p>Recompile your code. You can now see that this warning does not appear and there are three warnings left. </p>
+</li>
+</ol>
+</li>
+<li>
+<p>Fix the remaining compiler warnings in <code>pwd_checker.c</code></p>
+</li>
+</ol>
+<h3 id="part-2-assert-statements">Part 2: Assert Statements</h3>
+<ol>
+<li>
+<p>Learn about how you can use assert statements to debug your code. Edit the code in <code>pwd_checker</code> according to the directions in this section.</p>
+<p><a href="https://youtu.be/rVHHxF-s16A">Click here to watch the companion video</a></p>
+<ol>
+<li>
+<p>Compile and run your code</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">gcc</span></span><span class="z-meta z-function-call z-arguments z-shell"> pwd_checker.c test_pwd_checker.c<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>o</span> pwd_checker</span>
+</span><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">./pwd_checker</span></span>
+</span></code></pre>
+</li>
+<li>
+<p>The program says that <code>qrtv?,mp!ltrA0b13rab4ham</code> is not a valid password for Abraham Garcia. However, we can see that this password fits all of the requirements. It looks like there is a bug in our code.</p>
+</li>
+<li>
+<p>The function <code>check_password</code> makes several function calls to verify that the password meets each of the requirements. To find the location of our bug, we can use assert statements to figure out which function is not returning the expected value. For example, you can add the following line after the function call to <code>check_lower</code> to verify that the function returns the correct value. We expect <code>check_lower</code> to return <code>true</code> because the password contains a lower case letter.</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-meta z-function-call z-c"><span class="z-variable z-function z-c">assert</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c">lower</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span>
+</span></code></pre>
+</li>
+</ol>
+</li>
+<li>
+<p>Add the remaining assert statements after each function call in the function <code>check_password</code>. This will help you determine which functions are not working as expected.</p>
+</li>
+<li>
+<p>Compile your code.</p>
+</li>
+<li>
+<p>Oh no! We just created a new compiler warning! Learn how to fix this warning using the man pages</p>
+<p><a href="https://youtu.be/uVcaPtqJCBE">Click here to watch the companion video</a></p>
+<p><a href="index.html#faq">FAQ: What is a header file?</a></p>
+<ol>
+<li>
+<p>The warning states that we have an implicit declaration of the function <code>assert</code>. This means that we do not have a definition for <code>assert</code>. This often means that you have forgotten to include a <a href="index.html#faq">header file</a> or that we spelled something wrong. The only thing that we have added since the last time our code was compiling without warnings is <code>assert</code> statements. This must mean that we need to include the definition of the function <code>assert</code>. <code>assert</code> is a library macro, so we can use the man pages to figure out which header file we need to include. Type the following into your terminal to pull up the man pages</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">man</span></span><span class="z-meta z-function-call z-arguments z-shell"> assert</span>
+</span></code></pre>
+</li>
+<li>
+<p>The synopsis section tells us which header file to include. We can see that in order to use <code>assert</code> we need to include <code>assert.h</code></p>
+</li>
+<li>
+<p>Add the following line to the top of <code>pwd_checker.c</code></p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-meta z-preprocessor z-include z-c"><span class="z-keyword z-control z-import z-include z-c">#include</span> <span class="z-string z-quoted z-other z-lt-gt z-include z-c"><span class="z-punctuation z-definition z-string z-begin z-c">&lt;</span>assert.h<span class="z-punctuation z-definition z-string z-end z-c">&gt;</span></span>
+</span></span></code></pre>
+<p>Note that it is best practice to put your include statements in alphabetical order to make it easier for someone else reading your code to see which header files you have included. System header files should come before your own header files.</p>
+</li>
+<li>
+<p>Compile your code. There should be no warnings.</p>
+</li>
+<li>
+<p>Run your code. We can see that the assertion <code>length</code> failed. Look back at the function <code>check_password</code>. It looks like the function <code>check_lower</code> is working properly because <code>assert(length)</code> comes after <code>assert(lower)</code>. This failed assertion is telling us that <code>check_length</code> is not working properly for this test case. We will investigate this in Part 3.</p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="part-3-intro-to-gdb-start-step-next-finish-print-quit">Part 3: Intro to GDB: start, step, next, finish, print, quit</h3>
+<h4 id="what-is-gdb">What is GDB?</h4>
+<p>Here is an excerpt from the <a href="https://www.gnu.org/software/gdb/">GDB website</a>:</p>
+<p>GDB, the GNU Project debugger, allows you to see what is going on 'inside' another program while it executes -- or what another program was doing at the moment it crashed.</p>
+<p>GDB can do four main kinds of things (plus other things in support of these) to help you catch bugs in the act:</p>
+<ul>
+<li>Start your program, specifying anything that might affect its behavior.</li>
+<li>Make your program stop on specified conditions.</li>
+<li>Examine what has happened, when your program has stopped.</li>
+<li>Change things in your program, so you can experiment with correcting the effects of one bug and go on to learn about another.</li>
+</ul>
+<p>In this class, we will be using <a href="https://cgdb.github.io/">CGDB</a> which provides a lightweight interface to gdb to make it easier to use. CGDB is already installed on the hive machines, so there is no installation required. The remainder of the document uses CGDB and GDB interchangeably.</p>
+<p>Here's a <a href="https://inst.eecs.berkeley.edu/%7Ecs61c/resources/gdb5-refcard.pdf">GDB reference card</a>.</p>
+<p>If you run into any issues with GDB, see <a href="index.html#common-gdb-errors">the Common GDB Errors section below</a></p>
+<ol>
+<li>
+<p>In this section, you will learn the GDB commands <code>start</code>, <code>step</code>, <code>next</code>, <code>finish</code>, <code>print</code>, and <code>quit</code>. This section will resolve bug(s) along the way. Make sure to fix the bug(s) in the code before moving on.</p>
+<p><a href="https://youtu.be/JoJIRTwgYZE">Click here to watch the companion video</a> (Please note that at the end of this video, there is an error in <code>check_name</code>. We have removed this error to shorten the lab.)</p>
+<ol>
+<li>
+<p>Before we can run our code through GDB, we need to include some additional debugging information in the executable. To do this, you will compile your code with the -g flag</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">gcc</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>g</span> pwd_checker.c test_pwd_checker.c<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>o</span> pwd_checker</span>
+</span></code></pre>
+</li>
+<li>
+<p>To start CGDB, run the following command. Note that you should be using the executable (<code>pwd_checker</code>) as the argument, not the source file (<code>pwd_checker.c</code>)</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">cgdb</span></span><span class="z-meta z-function-call z-arguments z-shell"> pwd_checker</span>
+</span></code></pre>
+</li>
+<li>
+<p>You should now see CGDB open. The top window displays our code and the bottom window displays the console</p>
+</li>
+<li>
+<p>Start running your program at the first line in main by typing the following command into the console. This will set a breakpoint at line 1 and begin running the program.</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">start
+</span></code></pre>
+</li>
+<li>
+<p>The first line in main is a call to <code>printf</code>. We do not want to step into this function. To step over it, you can use the following command:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">next
+</span></code></pre>
+<p>or </p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">n
+</span></code></pre>
+</li>
+<li>
+<p>Step into <code>check_password</code>.</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">step
+</span></code></pre>
+<p>or</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">s
+</span></code></pre>
+</li>
+<li>
+<p>Step into <code>check_lower</code>.</p>
+</li>
+<li>
+<p>We have already seen that <code>check_lower</code> behaves properly with the given test case, so there is nothing that we need to look at here. To get out of this function, type the following command into the console</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">finish
+</span></code></pre>
+<p>Alternatively, you could have stepped until you reached the end of the function and it would have returned.</p>
+</li>
+<li>
+<p>Step to the next line. We do not want to step into the <code>assert</code> function call because this is a library function, so we know that our error isn't going to be in there. Step over this line.</p>
+</li>
+<li>
+<p>Step into <code>check_length</code>.</p>
+</li>
+<li>
+<p>Step over <code>strlen</code> because this is a library function.</p>
+</li>
+<li>
+<p>Step to the last line of the function.</p>
+</li>
+<li>
+<p>Let's print out the return value</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">print meets_len_req
+</span></code></pre>
+<p>or </p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">p meets_len_req
+</span></code></pre>
+</li>
+<li>
+<p>Hmmm... it's <code>false</code>. That's odd. Let's print out <code>length</code>.</p>
+</li>
+<li>
+<p>The value of <code>length</code> looks correct, so there must be some logic error on line 24</p>
+</li>
+<li>
+<p>Ahah, the code is checking if <code>length</code> is less than or equal to 10, not greater than or equal. Update this line to</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-storage z-type z-c">bool</span> meets_len_req <span class="z-keyword z-operator z-assignment z-c">=</span> <span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span>length <span class="z-keyword z-operator z-comparison z-c">&gt;=</span> <span class="z-constant z-numeric z-integer z-decimal z-c">10</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span><span class="z-punctuation z-terminator z-c">;</span>
+</span></code></pre>
+</li>
+<li>
+<p>Let's run our code to see if this works. First, we need to quit out of gdb which you can do with the following commands</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">quit
+</span></code></pre>
+<p>or</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">q
+</span></code></pre>
+</li>
+<li>
+<p>GDB will ask you to make sure that you want to quit. Type</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">y
+</span></code></pre>
+</li>
+<li>
+<p>Compile and run your code. </p>
+</li>
+<li>
+<p>Yay, it worked!</p>
+</li>
+</ol>
+</li>
+<li>
+<p><code>check_number</code> is now failing, we will address this in the next part.</p>
+</li>
+</ol>
+<h3 id="part-4-intro-to-gdb-break-conditional-break-run-continue">Part 4: Intro to GDB: break, conditional break, run, continue</h3>
+<ol>
+<li>
+<p>In this section, you will learn the gdb commands <code>break</code>, <code>conditional break</code>, <code>run</code>, and <code>continue</code>. This section will resolve bug(s) along the way. Make sure to fix the bug(s) in the code before moving on.</p>
+<p><a href="https://youtu.be/WzO9U143hLg">Click here to watch the companion video</a></p>
+<ol>
+<li>
+<p>Recompile and run your code. You should see that the assertion <code>number</code> is failing</p>
+</li>
+<li>
+<p>Start cgdb</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">cgdb</span></span><span class="z-meta z-function-call z-arguments z-shell"> pwd_checker</span>
+</span></code></pre>
+</li>
+<li>
+<p>Let's set a breakpoint in our code to jump straight to the the function <code>check_number</code> using the following command</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">break pwd_checker.c:check_number
+</span></code></pre>
+<p>or</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">b pwd_checker.c:check_number
+</span></code></pre>
+</li>
+<li>
+<p>Use the following command to beginning running the program</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">run
+</span></code></pre>
+<p>or</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">r
+</span></code></pre>
+<p>Your code should run until it gets to the breakpoint that we just set.</p>
+</li>
+<li>
+<p>Step into <code>check_range</code>.</p>
+</li>
+<li>
+<p>Recall that the numbers do not appear until later in the password. Instead of stepping through all of the non-numerical characters at the beginning of password, we can jump straight to the point in the code where the numbers are being compared using a conditional breakpoint. A conditional breakpoint will only stop the program based on a given condition. The first number in the password <code>1</code>, so we can set the breakpoint when <code>letter</code> is <code>'1'</code>. To set this breakpoint, enter the following line</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">b 31 if letter==&#39;1&#39;
+</span></code></pre>
+<p>We are using the single quote because <code>1</code> is a char.
+We did not need to specify the file name as we did last time, because we are already in <code>pwd_checker.c</code>.</p>
+</li>
+<li>
+<p>To continue executing your code after it stops at a breakpoint, use the following command</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">continue
+</span></code></pre>
+<p>or</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">c
+</span></code></pre>
+</li>
+<li>
+<p>The code has stopped at the conditional breakpoint. To verify this, print <code>letter</code></p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">p letter
+</span></code></pre>
+<p>It printed <code>49 '1'</code> which is a decimal number followed by it's corresponding ASCII representation. If you look at an <a href="https://www.cs.cmu.edu/%7Epattis/15-1XX/common/handouts/ascii.html">ASCII table</a>, you can see that <code>49</code> is the decimal representation of the character <code>1</code>.</p>
+</li>
+<li>
+<p>Let's take a look at the return value of <code>check_range</code>. Print <code>is_in_range</code>.</p>
+</li>
+<li>
+<p>The result is <code>false</code>. That's strange. <code>'1'</code> should be in the range. </p>
+</li>
+<li>
+<p>Let's look at the upper and lower bounds of the range. Print <code>lower</code> and <code>upper</code>.</p>
+</li>
+<li>
+<p>Ahah! The ASCII representation of <code>lower</code> is <code>\000</code>(the null terminator) and the ASCII representation of <code>upper</code> is <code>\t</code>. It looks like we passed in the numbers <code>0</code> and <code>9</code> instead of the characters <code>'0'</code> and <code>'9'</code>! Let's fix that</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-keyword z-control z-c">if</span> <span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span><span class="z-meta z-function-call z-c"><span class="z-variable z-function z-c">check_range</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c"><span class="z-keyword z-operator z-c">*</span>password<span class="z-punctuation z-separator z-c">,</span> <span class="z-string z-quoted z-single z-c"><span class="z-punctuation z-definition z-string z-begin z-c">&#39;</span>0<span class="z-punctuation z-definition z-string z-end z-c">&#39;</span></span><span class="z-punctuation z-separator z-c">,</span> <span class="z-string z-quoted z-single z-c"><span class="z-punctuation z-definition z-string z-begin z-c">&#39;</span>9<span class="z-punctuation z-definition z-string z-end z-c">&#39;</span></span></span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-punctuation z-section z-group z-end z-c">)</span></span> <span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span>
+</span></span></code></pre>
+</li>
+<li>
+<p>Quit cgdb and compile and run your code.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Debug <code>check_upper</code> on your own using the commands you just learned.</p>
+</li>
+<li>
+<p>Once you have fixed the bug in <code>check_upper</code> be sure to remove the assert statements that you added in exercise 2, part 2 since these asserts were created to test only the first test case.</p>
+</li>
+</ol>
+<hr />
+<h2 id="exercise-3">Exercise 3</h2>
+<h3 id="learning-goals-3">Learning Goals</h3>
+<ol>
+<li>See an application of double pointers</li>
+<li>Get more practice using gdb</li>
+<li>Learn how to find the location of segfaults using gdb</li>
+</ol>
+<h3 id="part-1-printing">Part 1: Printing</h3>
+<p>In GDB, you can print out more than just simple variables. Here are some examples:</p>
+<ol>
+<li>
+<p>You can print out a member of a struct</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">p my_struct-&gt;my_member
+</span></code></pre>
+</li>
+<li>
+<p>You can print out the result of a function</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">p strlen(my_string)
+</span></code></pre>
+</li>
+<li>
+<p>You can print the dereferenced value of a pointer</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">p *my_pointer
+</span></code></pre>
+</li>
+</ol>
+<h3 id="part-2-double-pointers">Part 2: Double Pointers</h3>
+<ol>
+<li>
+<p>When do we use double pointers?</p>
+<p>Here is a scenario to help you understand when to use double pointers.</p>
+<p>Let's say that we have the following struct:</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-storage z-type z-c">typedef</span> <span class="z-storage z-type z-c">struct</span> Node <span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span>
+</span></span>    <span class="z-storage z-type z-c">int</span> data<span class="z-punctuation z-terminator z-c">;</span>
+</span></span>    <span class="z-storage z-type z-c">struct</span> Node <span class="z-keyword z-operator z-c">*</span>next<span class="z-punctuation z-terminator z-c">;</span>
+</span></span><span class="z-punctuation z-section z-block z-end z-c">}</span></span> <span class="z-entity z-name z-type z-typedef z-c">Node</span><span class="z-punctuation z-terminator z-c">;</span>
+</span></code></pre>
+<p>And the following linked list:
+<img src="linked_list.png" alt="" /></p>
+<ol>
+<li>
+<p>We want to have a function called <code>update_integer</code> that will update the value of an integer. It's signature should look like:</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-storage z-type z-c">void</span> <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">update_integer</span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c">SOMETYPE <span class="z-variable z-parameter z-c">int_to_update</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c">
+</span></span></code></pre>
+<p>What should be the type of <code>int_to_update</code>?</p>
+<details>
+<summary>Answer</summary>
+<p><code>int *</code></p>
+<p>We must use a pointer of to the integer in order to change the value of the original integer. If we just pass <code>int</code>, we will only change the local copy of the integer, and the change will not be reflected outside of the function.</p>
+</details>
+</li>
+<li>
+<p>How would we call <code>update_integer</code> to update the data field of node1?</p>
+<details>
+<summary>Answer</summary>
+<p><code>update_integer(&amp;(head-&gt;data))</code></p>
+<p>Just as before, we must pass in a pointer to the integer in order to change the value of the original integer.</p>
+</details>
+</li>
+<li>
+<p>We want to have a function called <code>update_head</code> that will update the head of a list. It's signature should look like: </p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-storage z-type z-c">void</span> <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">update_head</span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c">SOMETYPE <span class="z-variable z-parameter z-c">head_to_update</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c">
+</span></span></code></pre>
+<p>What should be the type of <code>head_to_update</code>?</p>
+<details>
+<summary>Answer</summary>
+<p><code>Node **</code></p>
+<p>Just as before, whenever we want to update the value of a variable, we need to pass a pointer to it. In this scenario, the variable that we want to update is a pointer, so we need to pass a pointer to a pointer.</p>
+</details>
+</li>
+<li>
+<p>How would we call <code>update_head</code> to ensure that head is updated properly?</p>
+<details>
+<summary>Answer</summary>
+<p><code>update_head(&amp;head)</code></p>
+<p>Again, we need to pass the pointer to the head to ensure that the original head is being updated and not just the local copy.</p>
+</details>
+</li>
+</ol>
+</li>
+<li>
+<p>Read over the function <code>add_to_front</code> in <code>exercise3/linked_list.c</code> to see an example of double pointers.</p>
+</li>
+</ol>
+<h3 id="part-3-how-to-find-segfaults">Part 3: How to find segfaults</h3>
+<p>In this section, we will be debugging the recursive implementation of reversing a linked list. </p>
+<ol>
+<li>
+<p>Read over the code in <code>exercise3/linked_list.c</code>.</p>
+</li>
+<li>
+<p>In this step, you will learn how to find <a href="index.html#faq">segfaults</a> using cgdb. This section will resolve bug(s) along the way. Make sure to fix the bug(s) in the code before moving on.</p>
+<p><a href="https://youtu.be/ffc0mtPEcAY">Click here to watch the companion video</a></p>
+<ol>
+<li>
+<p>Compile and run your code.</p>
+</li>
+<li>
+<p>We can see that there is a segfault, but we do not know where it is occurring.</p>
+</li>
+<li>
+<p>Let's open up the code in cgdb (make sure that you compiled it with the <code>-g</code> flag).</p>
+</li>
+<li>
+<p>Recall the <code>run</code> command will run your code until something stops it (like a segfault or a breakpoint). Execute the <code>run</code> command.</p>
+</li>
+<li>
+<p>The command window shows us that the the program encountered a segfault (&quot;Program received signal SIGSEGV&quot;) at line 62. Now we know the line where the segfault occurred.</p>
+</li>
+<li>
+<p>Another command that can be useful when you are debugging segfaults is <code>backtrace</code>. This will allow you to see the call stack at the time of the crash. Execute the following command to see the call stack</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">backtrace
+</span></code></pre>
+<p>or</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">bt
+</span></code></pre>
+</li>
+</ol>
+<p>In this case, we can see that <code>reverse_list</code> was called from <code>main</code>. We already knew this, so <code>backtrace</code> was not helpful in this case, but it can be helpful in the future if you have longer call stacks.</p>
+<ol start="7">
+<li>
+<p>Let's examine the state of the program when the segfault occurred by printing some variables. Print out <code>head</code>.</p>
+</li>
+<li>
+<p>Remember that <code>head</code> is a double pointer, so we expect to see an address when we print it out. <code>head</code> looks fine. Let's print out the dereferenced head (<code>*head</code>).</p>
+</li>
+<li>
+<p>It looks like <code>*head</code> is <code>NULL</code>. If you look at the line of code that the program is segfaulting on, you can see that we are trying to access <code>(*head)-&gt;next</code>. We know that trying to access a member of a <code>NULL</code> struct will result in a segfault, so this is our problem.</p>
+</li>
+<li>
+<p>What does it mean for <code>*head</code> to be NULL? It means that the list is empty. How do we reverse an empty list? The reverse of an empty list is just an empty list, so we do not need to modify the list. At the top of the function, we can add a check to see if the list if empty and return if so. Modify the first line of the function to be the following:</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-keyword z-control z-c">if</span> <span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span>head <span class="z-keyword z-operator z-comparison z-c">==</span> <span class="z-constant z-language z-c">NULL</span> <span class="z-keyword z-operator z-arithmetic z-c">||</span> <span class="z-keyword z-operator z-c">*</span>head <span class="z-keyword z-operator z-comparison z-c">==</span> <span class="z-constant z-language z-c">NULL</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span> <span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span>
+</span></span></code></pre>
+</li>
+<li>
+<p>Compile and run your code. It should pass the reverse list tests now.</p>
+</li>
+</ol>
+</li>
+</ol>
+<hr />
+<h2 id="exercise-4-optional">Exercise 4 (Optional)</h2>
+<p>Here's one to help you in your interviews. In <code>ll_cycle.c</code>, complete the function
+<code>ll_has_cycle()</code> to implement the following algorithm for checking if a singly-
+linked list has a cycle.</p>
+<ol>
+<li>Start with two pointers at the head of the list. One will be called fast_ptr
+and the other will be called slow_ptr.</li>
+<li>Advance fast_ptr by two nodes. If this is not possible because of a null pointer,
+we have found the end of the list, and therefore the list is acyclic.</li>
+<li>Advance slow_ptr by one node. (A null pointer check is unnecessary. Why?)</li>
+<li>If the fast_ptr and slow_ptr ever point to the same node, the list is cyclic. Otherwise,
+go back to step 2.</li>
+</ol>
+<p>If you want to see the definition of the <code>node</code> struct, open <code>ll_cycle.h</code> (<a href="index.html#faq">FAQ: What is a header file?</a>)</p>
+<h3 id="action-item">Action Item</h3>
+<p>Implement <code>ll_has_cycle()</code>. Once you've done so, you can execute the following
+commands to run the tests for your code. If you make <strong>any</strong> changes, make sure
+to run <strong>ALL</strong> of the following commands again, in order.</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">gcc</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>g</span><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>o</span> test_ll_cycle test_ll_cycle.c ll_cycle.c</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">./test_ll_cycle</span></span>
+</span></code></pre>
+<p>Here's a <a href="https://en.wikipedia.org/wiki/Cycle_detection#Floyd.27s_Tortoise_and_Hare">Wikipedia article</a>
+on the algorithm and why it works. Don't worry about it if you don't completely
+understand it. We won't test you on this.</p>
+<hr />
+<h2 id="exercise-5">Exercise 5</h2>
+<p><a href="https://docs.google.com/forms/d/e/1FAIpQLSehvBgBoY2bNDkV395KTttP3PfT2fj0_oedYria1WwyB0Kcsw/viewform?usp=sf_link">Please complete this feedback survey</a>. The survey will collect your email so that we can record whether you completed it, but we will anonymize the data before we analyze it. Thanks for taking the time to fill it out!</p>
+<hr />
+<h2 id="submission">Submission</h2>
+<p>Save, commit, and push your work, then submit to the <strong>Lab 1</strong> assignment on Gradescope. If you have a partner, you should submit the assignment together by adding your partner to your Gradescope submission.</p>
+<hr />
+<h2 id="other-useful-gdb-commands-recommended">Other Useful GDB Commands (Recommended)</h2>
+<h3 id="command-info-locals">Command: <code>info locals</code></h3>
+<p>Prints the value of all of the local variables in the current stack frame</p>
+<h3 id="command-command">Command: <code>command</code></h3>
+<p>Executes a list of commands every time a break point is reached. For example:</p>
+<p>Set a breakpoint:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">b 73
+</span></code></pre>
+<p>Type <code>commands</code> followed by the breakpoint number:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">commands 1
+</span></code></pre>
+<p>Type the list of commands that you want to execute separated by a new line. After your list of commands, type <code>end</code> and hit <kbd>Enter</kbd>.</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">p var1
+p var2
+end
+</span></code></pre>
+<h3 id="command-delete">Command: <code>delete</code></h3>
+<p>Deletes the specified breakpoint. See the <a href="https://inst.eecs.berkeley.edu/%7Ecs61c/resources/gdb5-refcard.pdf">reference card</a> for more info.</p>
+<hr />
+<h2 id="faq">FAQ</h2>
+<h3 id="what-is-a-null-terminator">What is a null terminator?</h3>
+<p>A null terminator is a character used to denote the end of a string in C. The null terminator is written as <code>'\0'</code>. The ASCII value of the null terminator is <code>0</code>. When you make a character array, you should terminate the array with a null terminator like this</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-storage z-type z-c">char</span> my_str<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span><span class="z-punctuation z-section z-brackets z-end z-c">]</span></span> <span class="z-keyword z-operator z-assignment z-c">=</span> <span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span><span class="z-string z-quoted z-single z-c"><span class="z-punctuation z-definition z-string z-begin z-c">&#39;</span>e<span class="z-punctuation z-definition z-string z-end z-c">&#39;</span></span><span class="z-punctuation z-separator z-c">,</span> <span class="z-string z-quoted z-single z-c"><span class="z-punctuation z-definition z-string z-begin z-c">&#39;</span>x<span class="z-punctuation z-definition z-string z-end z-c">&#39;</span></span><span class="z-punctuation z-separator z-c">,</span> <span class="z-string z-quoted z-single z-c"><span class="z-punctuation z-definition z-string z-begin z-c">&#39;</span>a<span class="z-punctuation z-definition z-string z-end z-c">&#39;</span></span><span class="z-punctuation z-separator z-c">,</span> <span class="z-string z-quoted z-single z-c"><span class="z-punctuation z-definition z-string z-begin z-c">&#39;</span>m<span class="z-punctuation z-definition z-string z-end z-c">&#39;</span></span><span class="z-punctuation z-separator z-c">,</span> <span class="z-string z-quoted z-single z-c"><span class="z-punctuation z-definition z-string z-begin z-c">&#39;</span>p<span class="z-punctuation z-definition z-string z-end z-c">&#39;</span></span><span class="z-punctuation z-separator z-c">,</span> <span class="z-string z-quoted z-single z-c"><span class="z-punctuation z-definition z-string z-begin z-c">&#39;</span>l<span class="z-punctuation z-definition z-string z-end z-c">&#39;</span></span><span class="z-punctuation z-separator z-c">,</span> <span class="z-string z-quoted z-single z-c"><span class="z-punctuation z-definition z-string z-begin z-c">&#39;</span>e<span class="z-punctuation z-definition z-string z-end z-c">&#39;</span></span><span class="z-punctuation z-separator z-c">,</span> <span class="z-string z-quoted z-single z-c"><span class="z-punctuation z-definition z-string z-begin z-c">&#39;</span><span class="z-constant z-character z-escape z-c">\0</span><span class="z-punctuation z-definition z-string z-end z-c">&#39;</span></span><span class="z-punctuation z-section z-block z-end z-c">}</span></span><span class="z-punctuation z-terminator z-c">;</span>
+</span></code></pre>
+<p>If you are using double quotes to create a string, the null terminator is implicitly added, so you should not add it yourself. For example:</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-storage z-type z-c">char</span> <span class="z-keyword z-operator z-c">*</span>my_str <span class="z-keyword z-operator z-assignment z-c">=</span> <span class="z-string z-quoted z-double z-c"><span class="z-punctuation z-definition z-string z-begin z-c">&quot;</span>example<span class="z-punctuation z-definition z-string z-end z-c">&quot;</span></span><span class="z-punctuation z-terminator z-c">;</span>
+</span></code></pre>
+<h3 id="what-is-an-executable">What is an executable?</h3>
+<p>An executable is a file composed of binary that can be executed on your computer. Executables are created by compiling source code.</p>
+<h3 id="what-is-strlen">What is <code>strlen</code>?</h3>
+<p>See the man pages for a full description. Type the following into your terminal</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">man</span></span><span class="z-meta z-function-call z-arguments z-shell"> strlen</span>
+</span></code></pre>
+<p>To exit the man pages, press <kbd>q</kbd>.</p>
+<h3 id="what-is-a-macro">What is a macro?</h3>
+<p>A macro is a chunk of text that has a name. Whenever this name appears in code, the preprocessor replaces the name with the text. Macros are indicated with <code>#define</code> For example:</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-meta z-preprocessor z-macro z-c"><span class="z-keyword z-control z-import z-define z-c">#define</span></span><span class="z-meta z-preprocessor z-macro z-c"> <span class="z-entity z-name z-constant z-preprocessor z-c">ARR_SIZE</span></span><span class="z-meta z-preprocessor z-macro z-c"> <span class="z-constant z-numeric z-integer z-decimal z-c">1024</span></span>
+<span class="z-meta z-preprocessor z-macro z-c"><span class="z-keyword z-control z-import z-define z-c">#define</span></span><span class="z-meta z-preprocessor z-macro z-c"> <span class="z-entity z-name z-function z-preprocessor z-c">min</span></span><span class="z-meta z-preprocessor z-macro z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span><span class="z-variable z-parameter z-c">X</span><span class="z-punctuation z-separator z-c">,</span> <span class="z-variable z-parameter z-c">Y</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-preprocessor z-macro z-c">  <span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span>X<span class="z-punctuation z-section z-group z-end z-c">)</span></span> <span class="z-keyword z-operator z-comparison z-c">&lt;</span> <span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span>Y<span class="z-punctuation z-section z-group z-end z-c">)</span></span> <span class="z-keyword z-operator z-ternary z-c">?</span> <span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span>X<span class="z-punctuation z-section z-group z-end z-c">)</span></span> <span class="z-keyword z-operator z-ternary z-c">:</span> <span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span>Y<span class="z-punctuation z-section z-group z-end z-c">)</span></span><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span>
+
+<span class="z-storage z-type z-c">int</span> <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">main</span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c"> </span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span></span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c">
+    <span class="z-storage z-type z-c">int</span> arr1<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>ARR_SIZE<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span><span class="z-punctuation z-terminator z-c">;</span>
+    <span class="z-storage z-type z-c">int</span> arr2<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>ARR_SIZE<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span><span class="z-punctuation z-terminator z-c">;</span>
+    <span class="z-storage z-type z-c">int</span> arr3<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>ARR_SIZE<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span><span class="z-punctuation z-terminator z-c">;</span>
+
+    <span class="z-keyword z-control z-c">for</span> <span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span><span class="z-storage z-type z-c">int</span> i <span class="z-keyword z-operator z-assignment z-c">=</span> <span class="z-constant z-numeric z-integer z-decimal z-c">0</span><span class="z-punctuation z-terminator z-c">;</span> i <span class="z-keyword z-operator z-comparison z-c">&lt;</span> ARR_SIZE<span class="z-punctuation z-terminator z-c">;</span> <span class="z-keyword z-operator z-arithmetic z-c">++</span>i<span class="z-punctuation z-section z-group z-end z-c">)</span></span> <span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span>
+        arr3<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>i<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span> <span class="z-keyword z-operator z-assignment z-c">=</span> <span class="z-meta z-function-call z-c"><span class="z-variable z-function z-c">min</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c">arr1<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>i<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span><span class="z-punctuation z-separator z-c">,</span> arr2<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>i<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span></span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-punctuation z-terminator z-c">;</span>
+    <span class="z-punctuation z-section z-block z-end z-c">}</span></span>
+</span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-end z-c">}</span></span></span>
+</span></code></pre>
+<p>In this code, the preprocessor will replace <code>ARR_SIZE</code> with <code>1024</code>, and it will replace</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c">arr3<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>i<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span> <span class="z-keyword z-operator z-assignment z-c">=</span> <span class="z-meta z-function-call z-c"><span class="z-variable z-function z-c">min</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c">arr1<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>i<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span><span class="z-punctuation z-separator z-c">,</span> arr2<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>i<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span></span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-punctuation z-terminator z-c">;</span>
+</span></code></pre>
+<p>with</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c">arr3<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>i<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span> <span class="z-keyword z-operator z-assignment z-c">=</span> <span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span>arr1<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>i<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span><span class="z-punctuation z-section z-group z-end z-c">)</span></span> <span class="z-keyword z-operator z-comparison z-c">&lt;</span> <span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span>arr2<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>i<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span><span class="z-punctuation z-section z-group z-end z-c">)</span></span> <span class="z-keyword z-operator z-ternary z-c">?</span> <span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span>arr1<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>i<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span><span class="z-punctuation z-section z-group z-end z-c">)</span></span> <span class="z-keyword z-operator z-ternary z-c">:</span> <span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span>arr2<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>i<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span><span class="z-punctuation z-section z-group z-end z-c">)</span></span><span class="z-punctuation z-section z-group z-end z-c">)</span></span><span class="z-punctuation z-terminator z-c">;</span>
+</span></code></pre>
+<p>Macros can be much more complex than the example above. You can find more information <a href="https://gcc.gnu.org/onlinedocs/cpp/Macros.html">in the GCC docs</a></p>
+<h3 id="what-is-a-segfault">What is a segfault?</h3>
+<p>A segfault occurs when you try to access a piece of memory that &quot;does not belong to you.&quot; There are several things that can cause a segfault including</p>
+<ol>
+<li>Accessing an array out of bounds. Note that accessing an array out of bounds will not always lead to a segfault. The index at which a segfault will occur is somewhat unpredictable.</li>
+<li>Derefrencing a null pointer.</li>
+<li>Accessing a pointer that has been <code>free</code>'d (<code>free</code> is not in the scope of this lab).</li>
+<li>Attempting to write to read-only memory. For example, strings created with the following syntax are read only. This means that you cannot alter the value of the string after you have created it. In other words, it is immutable.</li>
+</ol>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-storage z-type z-c">char</span> <span class="z-keyword z-operator z-c">*</span>my_str <span class="z-keyword z-operator z-assignment z-c">=</span> <span class="z-string z-quoted z-double z-c"><span class="z-punctuation z-definition z-string z-begin z-c">&quot;</span>Hello<span class="z-punctuation z-definition z-string z-end z-c">&quot;</span></span><span class="z-punctuation z-terminator z-c">;</span>
+</span></code></pre>
+<p>However, a string created using the following syntax is mutable.</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-storage z-type z-c">char</span> my_str<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span><span class="z-punctuation z-section z-brackets z-end z-c">]</span></span> <span class="z-keyword z-operator z-assignment z-c">=</span> <span class="z-string z-quoted z-double z-c"><span class="z-punctuation z-definition z-string z-begin z-c">&quot;</span>hello<span class="z-punctuation z-definition z-string z-end z-c">&quot;</span></span><span class="z-punctuation z-terminator z-c">;</span>
+</span></code></pre>
+<p>Why is the first string immutable while the second string is mutable? The first string is stored in the data portion of memory which is read-only while the second string is stored on the stack.</p>
+<h3 id="what-is-a-header-file">What is a header file?</h3>
+<p>Header files allow you to share functions and macros across different source files. For more info, see the <a href="https://gcc.gnu.org/onlinedocs/cpp/Header-Files.html#Header-Files">GCC header docs</a>.</p>
+<hr />
+<h2 id="common-gdb-errors">Common GDB Errors</h2>
+<h3 id="gdb-is-skipping-over-lines-of-code">GDB is skipping over lines of code</h3>
+<p>This could mean that your source file is more recent than your executable. Exit GDB, recompile your code with the <code>-g</code> flag, and restart gdb.</p>
+<h3 id="gdb-isn-t-loading-my-file">GDB isn't loading my file</h3>
+<p>You might see an error like this &quot;not in executable format: file format not recognized&quot; or &quot;No symbol table loaded. Use the &quot;file&quot; command.&quot;</p>
+<p>This means that you called gdb on the source file (the one ending in <code>.c</code>) instead of the executable. Exit GDB and make sure that you call it with the executable.</p>
+<h3 id="how-do-i-switch-between-the-code-window-and-the-console">How do I switch between the code window and the console?</h3>
+<p>CGDB presents a vim-like navigation interface: Press <kbd>i</kbd> on your keyboard to switch from the code window to the console. Press <kbd>Esc</kbd> to switch from the console to the code window.</p>
+<p>GDB presents a readline/emacs-like navigation interface: Press <kbd>Ctrl</kbd> + <kbd>X</kbd> then <kbd>O</kbd> to switch between windows.</p>
+<h3 id="i-m-stuck-in-the-code-window">I'm stuck in the code window</h3>
+<p>Press <kbd>i</kbd> on your keyboard. This should get you back to the console.</p>
+<h3 id="the-text-ui-is-garbled">The text UI is garbled</h3>
+<p>Refresh the GDB text UI by pressing <kbd>Ctrl</kbd> + <kbd>l</kbd>.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+ <div class="container border-top pt-4 mb-5">
+<div class="row">
+<div class="col">
+<div id="dark-toggle-wrapper" class="d-none">
+<div class="form-check form-switch">
+<input id="inputDarkToggle" class="form-check-input" type="checkbox">
+<label class="form-check-label" for="inputDarkToggle">
+Dark Mode
+<a id="buttonDarkToggleReset" class="d-none" href="javascript:void(0);">(reset)</a>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+  
+
+  
+    document.addEventListener("DOMContentLoaded", function() {
+      initToC();
+    });
+  
+</script>
+</body>
+</html>

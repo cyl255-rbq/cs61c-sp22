@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="language" content="english">
+<title>Lab 4 | CS 61C Spring 2022</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<link rel="shortcut icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../css/main.css@h=36c89645dcb547d13f6f293a379a176dff22aab9affcefc8d3a19bc23c0f8db2.css" />
+<script defer type="text/javascript" src="../../js/main.js@h=4096b5e2a18784c27ca139ca897694176eea13de3e2168cd7e7bcdd827a35c8d"></script>
+
+<script type="text/javascript" src="../../js/main-sync.js@h=daca62fef99fb16ad6a5fd1517d7b18bed66d3241431785bf3ac1f134c166bf1"></script>
+<script>initDarkToggle();</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.17.0/tocbot.min.js" integrity="sha512-DJhUMo5TIBb3fFziiE+3OJG+j7ky+GxScxHdLADCXskEpc/AKQsbsorIYmGFJFaJvDIyP65rJNhnCTytfYAdUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+<div class="container">
+<a class="navbar-brand" href="../../index.html">
+<img class="d-inline-block me-2 rounded" height="48" width="48" src="../../img/icon-small.png" alt="outline of square computer chip with cs61c label" />
+<span class="align-middle">CS 61C Spring 2022</span>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle Navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item">
+<a class="nav-link" href="../../calendar/index.html">Calendar</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../staff/index.html">Staff</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../policies/index.html">Policies</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../resources/index.html">Resources</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../exam/index.html">Exam</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../extensions/index.html">Extensions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://oh.cs61c.org/">OH Queue</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://venus.cs61c.org/">Venus</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://inst.eecs.berkeley.edu/~cs61c/archives.html">Semesters</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<main class="mb-4">
+<section class="section">
+<div class="container">
+<div class="row spec">
+<nav id="toc-wrapper" class="col-md-3 d-print-none sticky-md-top nav-wrapper" aria-label="table of contents">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#setup">Setup</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#risc-v-simulator">RISC-V Simulator</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-1-array-practice">Exercise 1: Array Practice</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#action-item">Action Item</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-2-calling-convention-checker">Exercise 2: Calling Convention Checker</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#action-items">Action Items</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing">Testing</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-3-debugging-megalistmanips-s">Exercise 3: Debugging megalistmanips.s</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#action-item-1">Action Item</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-1">Testing</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#survey">Survey</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#submission">Submission</a>
+</li>
+</ul>
+</nav>
+<div id="toc-content-wrapper" class="content col-md-9">
+<h1 class="title">Lab 4: RISC-V Functions, Pointers</h1>
+<p class="subtitle">Deadline: Monday, February 28, 11:59:59 PM PT</p>
+<hr />
+<p><a href="https://docs.google.com/presentation/d/1e5GnFyAqQew_B6QQg4N0BSiOmrL_kvu8tAeBHKxduUE/edit?usp=sharing">Lab Section Slides</a></p>
+<hr />
+<h2 id="setup">Setup</h2>
+<p>In your <code>labs</code> directory, pull the files for this lab with:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> pull starter main</span>
+</span></code></pre>
+<p>If you get an error like the following:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">fatal: &#39;starter&#39; does not appear to be a git repository
+fatal: Could not read from remote repository.
+</span></code></pre>
+<p>make sure to set the starter remote as follows:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> remote add starter https://github.com/61c-teach/sp22-lab-starter.git</span>
+</span></code></pre>
+<p>and run the original command again.</p>
+<hr />
+<h2 id="risc-v-simulator">RISC-V Simulator</h2>
+<p>Like last week, we will be using the <a href="https://venus.cs61c.org/">Venus RISC-V simulator</a>. Also, please refer to the <a href="../../resources/venus-reference/index.html">Venus reference</a> on our course website when you need a refresher on any of the Venus features.</p>
+<p>Mount the lab 4 files as you did with <a href="../lab03/index.html#exercise-1-connecting-your-files-to-venus">Lab 3</a>.</p>
+<p>Once you've got <code>discrete_fn.s</code> open, you're ready to move on to Exercise 1!</p>
+<hr />
+<h2 id="exercise-1-array-practice">Exercise 1: Array Practice</h2>
+<p>Consider the discrete-valued function <code>f</code> defined on integers in the set
+<code>{-3, -2, -1, 0, 1, 2, 3}</code>. Here's the function definition:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">f(-3) = 6
+f(-2) = 61
+f(-1) = 17
+f(0) = -38
+f(1) = 19
+f(2) = 42
+f(3) = 5
+</span></code></pre>
+<h3 id="action-item">Action Item</h3>
+<ol>
+<li>
+<p>Implement the function in <code>discrete_fn.s</code> in RISC-V, with the condition that
+your code may <strong>NOT</strong> use any branch and/or jump instructions! Make sure that
+your code is saved locally. We have provided some hints in case you get stuck.</p>
+<p>Note that you can shorten <code>jal ra, label</code> to <code>jal label</code>. These two lines do the same thing.</p>
+<details>
+<summary>Hint 1</summary>
+<p>All of the output values are stored in the output array which is passed to <code>f</code> through register a1.
+You can index into that array to get the output corresponding to the input.</p>
+</details>
+<details>
+<summary>Hint 2</summary>
+<p>You can access the values of the array using <code>lw</code>.</p>
+</details>
+<details>
+<summary>Hint 3</summary>
+<p><code>lw</code> requires that the offset is an immediate value. When we compute the offset
+for this problem, it will be stored in a register. Since we cannot use a register
+as the offset, we can add the value stored in the register to the base address to compute the address
+of the index that we are interested in. Then we can perform a <code>lw</code> with an offset of <code>0</code>.</p>
+<p>In the following example, the index is stored in <code>t0</code> and the pointer to the array is stored in <code>t1</code>. The size of each element is 4 bytes. In RISC-V, we have to do our own pointer arithmetic, so (1) we need to multiply the index by the size of the elements of the array. (2) Then we add this offset to the address of the array to get the address of the element that we wish to read and then (3) read the element.</p>
+<pre data-lang="code" class="language-code z-code"><code class="language-code" data-lang="code"><span class="z-text z-plain">slli t2, t0, 2 # step 1 (see above)
+</span>add t2, t2, t1  # step 2 (see above)
+</span>lw t3, 0(t2) # step 3 (see above)
+</span></code></pre>
+</details>
+</li>
+</ol>
+<hr />
+<h2 id="exercise-2-calling-convention-checker">Exercise 2: Calling Convention Checker</h2>
+<p>Calling convention errors can cause bugs in your code that are difficult to find.
+The calling convention checker is used to detect calling convention violations in your code.
+To enable the calling convention checker, go to the Venus tab at the top of the page.
+In the settings box, click on &quot;Calling Convention&quot; and click &quot;Enable&quot;</p>
+<p>Run <code>cc_tests.s</code> in the simlator tab.</p>
+<p>Alternatively, you can run Venus locally with the following command:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">java</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>jar</span> tools/venus.jar<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>cc</span> lab04/cc_test.s</span>
+</span></code></pre>
+<p>The <code>-cc</code> flag enables the calling convention checker, and detects some basic
+violations. </p>
+<p>In the terminal, you should see something simlar to the following.</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">[CC Violation]: (PC=0x0000004C) Setting of a saved register (s0) which has not been saved! cc_test.s:56 li s0, 1
+[CC Violation]: (PC=0x00000054) Setting of a saved register (s0) which has not been saved! cc_test.s:59 mul s0, s0, a0
+[CC Violation]: (PC=0x00000054) Setting of a saved register (s0) which has not been saved! cc_test.s:59 mul s0, s0, a0
+[CC Violation]: (PC=0x00000054) Setting of a saved register (s0) which has not been saved! cc_test.s:59 mul s0, s0, a0
+[CC Violation]: (PC=0x00000054) Setting of a saved register (s0) which has not been saved! cc_test.s:59 mul s0, s0, a0
+[CC Violation]: (PC=0x00000054) Setting of a saved register (s0) which has not been saved! cc_test.s:59 mul s0, s0, a0
+[CC Violation]: (PC=0x00000054) Setting of a saved register (s0) which has not been saved! cc_test.s:59 mul s0, s0, a0
+[CC Violation]: (PC=0x00000054) Setting of a saved register (s0) which has not been saved! cc_test.s:59 mul s0, s0, a0
+[CC Violation]: (PC=0x00000064) Save register s0 not correctly restored before return! Expected 0x00000000, Actual 0x00000080. cc_test.s:66 ret
+[CC Violation]: (PC=0x00000070) Setting of a saved register (s0) which has not been saved! cc_test.s:80 mv s0, a0 # Copy start of array to saved register
+[CC Violation]: (PC=0x00000074) Setting of a saved register (s1) which has not been saved! cc_test.s:81 mv s1, a1 # Copy length of array to saved register
+[CC Violation]: (PC=0x000000A4) Setting of a saved register (s0) which has not been saved! cc_test.s:115 addi s0, t1, 1
+Found 12 warnings!
+--------------------
+[ERROR] An error has occurred!
+
+Error:
+`SimulatorError: Attempting to access uninitialized memory between the stack and heap. Attempting to access &#39;4&#39; bytes at address &#39;0x63080013&#39;.
+</span></code></pre>
+<p>More information about these errors can be found in the <a href="../../resources/venus-reference/index.html#calling-convention-checker">Venus reference</a>.</p>
+<p><strong>Note:</strong> Venus's calling convention checker will not report all calling convention
+bugs; it is intended to be used primarily as a basic check. Most importantly, <strong>it will
+only look for bugs in functions that are exported with the <code>.globl</code> directive</strong> - the
+meaning of <code>.globl</code> is explained in more detail in the
+<a href="../../resources/venus-reference/index.html#working-with-multiple-files">Venus reference</a>.</p>
+<h3 id="action-items">Action Items</h3>
+<ol>
+<li>
+<p>Resolve all the calling convention errors in <code>cc_test.s</code>.</p>
+<p>The fixes for all of these errors (both the ones reported by the CC checker and the
+ones it can't find) should be added near the lines marked by the <code>FIXME</code> comments
+in the starter code.</p>
+</li>
+<li>
+<p>Once you have answered these, run Venus with the calling convention checker on
+<code>discrete_fn.s</code> from the last exercise as well. Make sure to fix any bugs you find.</p>
+</li>
+<li>
+<p>After you finish the exercise, be sure that you can answer the following questions.</p>
+</li>
+</ol>
+<details>
+<summary>Is <code>next_test</code> a function?</summary>
+<p>No, it's just a label that is used to skip over the call to <code>failure</code>. If a label is a function, we will jump and link to it because we always want our functions to return back to us. In this case, we just jumped to <code>next_test</code>.</p>
+</details>
+<details>
+<summary>What caused the errors in <code>pow</code>, and <code>inc_arr</code> that
+were reported by the Venus CC checker?</summary>
+<ul>
+<li>
+<p><code>pow</code>: Missing epilogue and prologue.</p>
+</li>
+<li>
+<p><code>inc_arr</code>: Failure to save <code>s0</code>, <code>s1</code> in prologue/epilogue, and failure to save <code>t0</code> before calling <code>helper_fn</code>.</p>
+</li>
+</ul>
+</details>
+<details>
+<summary>In RISC-V, we call functions by jumping to them and storing the return address in the <code>ra</code> register. Does calling convention apply to the jumps to the <code>pow_loop</code> or <code>pow_end</code> labels?</summary>
+<p>No, since they're not functions, we don't need to return to the location the function was called.</p>
+</details>
+<details>
+<summary>Why do we need to store <code>ra</code> in the prologue for <code>inc_arr</code>, but not in any other function?</summary>
+<p><code>inc_arr</code> itself calls another function - <code>ra</code> holds the address of the instruction to continue executing after returning, which is overwritten when we call another function since we need to be able to return to the body of <code>inc_arr</code>.</p>
+</details>
+<details>
+<summary>Why wasn't the calling convention error in <code>helper_fn</code> reported by the CC checker? (Hint: it's mentioned above in the exercise instructions.)</summary>
+<p>It's not declared <code>.globl</code>. The calling convention checker will not test functions that are not declared <code>.globl</code>. Note: The bug in helper_fn will initially be reported by the checker, but when the bugs in the function that calls it are fixed, this one is no longer reported.</p>
+</details>
+<h3 id="testing">Testing</h3>
+<p>After fixing the errors in <code>cc_test.s</code>, rerun the program to make sure the behavior of the functions hasn't changed and that you've remedied all calling convention violations.</p>
+<p>Once you have fixed everything, running the above Venus command should output the following:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">Sanity checks passed! Make sure there are no CC violations.
+Found 0 warnings!
+</span></code></pre>
+<hr />
+<h2 id="exercise-3-debugging-megalistmanips-s">Exercise 3: Debugging <code>megalistmanips.s</code></h2>
+<p>In Lab 3, you completed a RISC-V procedure that applied a function to every element
+of a linked list. In this lab, you will be working with a similar (but slightly
+more complex) version of that procedure.</p>
+<p>Now, instead of having a linked list of <code>int</code>'s, our data structure is a linked
+list of <code>int</code> arrays. Remember that when dealing with arrays within <code>struct</code>'s, we
+need to explicitly store the size of the array. In C code, here's what the data
+structure looks like:</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-meta z-struct z-c"><span class="z-storage z-type z-c">struct</span> <span class="z-meta z-struct z-c"><span class="z-entity z-name z-struct z-c">node</span></span></span><span class="z-meta z-struct z-c"> <span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span></span></span><span class="z-meta z-struct z-c"><span class="z-meta z-block z-c">
+    <span class="z-storage z-type z-c">int</span> <span class="z-keyword z-operator z-c">*</span>arr<span class="z-punctuation z-terminator z-c">;</span>
+    <span class="z-storage z-type z-c">int</span> size<span class="z-punctuation z-terminator z-c">;</span>
+    <span class="z-meta z-struct z-c"><span class="z-storage z-type z-c">struct</span> <span class="z-meta z-struct z-c"><span class="z-entity z-name z-struct z-c">node</span></span></span><span class="z-meta z-struct z-c"> *next</span><span class="z-punctuation z-terminator z-c">;</span>
+</span></span><span class="z-meta z-struct z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-end z-c">}</span></span></span><span class="z-punctuation z-terminator z-c">;</span>
+</span></code></pre>
+<p>Also, here's what the new <code>map</code> function does: it traverses the linked list and
+for each element in each array of each <code>node</code>, it applies the passed-in function
+to it, and stores it back into the array.</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-storage z-type z-c">void</span> <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">map</span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-storage z-type z-c">struct</span> node <span class="z-keyword z-operator z-c">*</span><span class="z-variable z-parameter z-c">curr_node</span><span class="z-punctuation z-separator z-c">,</span> <span class="z-storage z-type z-c">int</span> <span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span><span class="z-keyword z-operator z-c">*</span>f<span class="z-punctuation z-section z-group z-end z-c">)</span></span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span><span class="z-storage z-type z-c">int</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c"> </span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span></span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c">
+    <span class="z-keyword z-control z-c">if</span> <span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span><span class="z-keyword z-operator z-arithmetic z-c">!</span>curr_node<span class="z-punctuation z-section z-group z-end z-c">)</span></span> <span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span> <span class="z-keyword z-control z-flow z-return z-c">return</span><span class="z-punctuation z-terminator z-c">;</span> <span class="z-punctuation z-section z-block z-end z-c">}</span></span>
+    <span class="z-keyword z-control z-c">for</span> <span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span><span class="z-storage z-type z-c">int</span> i <span class="z-keyword z-operator z-assignment z-c">=</span> <span class="z-constant z-numeric z-integer z-decimal z-c">0</span><span class="z-punctuation z-terminator z-c">;</span> i <span class="z-keyword z-operator z-comparison z-c">&lt;</span> curr_node<span class="z-punctuation z-accessor z-c">-&gt;</span>size<span class="z-punctuation z-terminator z-c">;</span> i<span class="z-keyword z-operator z-arithmetic z-c">++</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span> <span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span>
+      curr_node<span class="z-punctuation z-accessor z-c">-&gt;</span>arr<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>i<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span> <span class="z-keyword z-operator z-assignment z-c">=</span> <span class="z-meta z-function-call z-c"><span class="z-variable z-function z-c">f</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c">curr_node<span class="z-punctuation z-accessor z-c">-&gt;</span>arr<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>i<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span></span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-punctuation z-terminator z-c">;</span>
+    <span class="z-punctuation z-section z-block z-end z-c">}</span></span>
+    <span class="z-meta z-function-call z-c"><span class="z-variable z-function z-c">map</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c">curr_node<span class="z-punctuation z-accessor z-c">-&gt;</span>next<span class="z-punctuation z-separator z-c">,</span> f</span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-punctuation z-terminator z-c">;</span>
+</span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-end z-c">}</span></span></span>
+</span></code></pre>
+<p>You can pass arguments into function pointers just like you do with normal functions.
+You can read more about function pointers <a href="https://www.geeksforgeeks.org/function-pointer-in-c/">here</a>).</p>
+<h3 id="action-item-1">Action Item</h3>
+<p><strong>For this exercise, we are requiring that you don't use any extra save registers
+in your implementation</strong>. While you normally can use the save registers to
+store values that you want to use after returning from a function (in this
+case, when we're calling <code>f</code> in <code>map</code>), we want you to use temporary registers
+instead and follow their caller/callee conventions. <strong>The provided <code>map</code>
+implementation only uses the <code>s0</code> and <code>s1</code> registers, so we'll require that you
+don't use <code>s2</code>-<code>s11</code>.</strong></p>
+<p><em>Note</em>: The CC checker won't check if you are using registers besides <code>s0</code> and <code>s1</code>, but you need to implement this requirement in order to pass the autograder.</p>
+<p>Fix all of the mistakes inside the <code>map</code> function. Read
+all of the commented lines under the <code>map</code> function in <code>megalistmanips.s</code>
+and <strong>make sure that the lines do what the
+comments say</strong>. All bugs are within the <code>map</code> function, <code>mapLoop</code>, and <code>done</code> but
+it's worth understanding the full program. We have provided some hints in case you get stuck.</p>
+<details>
+<summary>If I have a register that contains the address of a node that is stored in memory, what instruction would I use to read elements from that node?</summary>
+<p>You would use the load word instruction. Load word is used to read values from the memory, so if I have a pointer to something that is located in memory, I need to use load word to read it.</p>
+</details>
+<details>
+<summary>What are the steps of executing a function?</summary>
+<ol>
+<li>
+<p>If you will be calling another function, make sure that you save register <code>ra</code> on the stack. (When you call another function, you will end up overwritting register <code>ra</code> so that the function you are calling knows where to return to.</p>
+</li>
+<li>
+<p>If you need to overwrite any callee-saved registers, make room for them on the stack and save them.</p>
+</li>
+<li>
+<p>Perform the desired task.</p>
+</li>
+<li>
+<p>Restore the registers that were saved and move the stack pointer back up.</p>
+</li>
+<li>
+<p><strong>Return</strong></p>
+</li>
+</ol>
+</details>
+<details>
+<summary>How do we read an element from an array given a pointer to the beginning of an int array (a0) and the index of the element that we want to read (a1)? Assume sizeof(int) = 4.</summary>
+<p>In the following example, the index is stored in <code>t0</code> and the pointer to the array is stored in <code>t1</code>. The size of each element is 4 bytes. In RISC-V, we have to do our own pointer arithmetic, so (1) we need to multiply the index by the size of the elements of the array. (2) Then we add this offset to the address of the array to get the address of the element that we wish to read and then (3) read the element.</p>
+<pre data-lang="code" class="language-code z-code"><code class="language-code" data-lang="code"><span class="z-text z-plain">slli t2, t0, 2 # step 1 (see above)
+add t2, t2, t1  # step 2 (see above)
+lw t3, 0(t2) # step 3 (see above)
+</span></code></pre>
+</details>
+<h3 id="testing-1">Testing</h3>
+<p>Save your corrected code in the <code>megalistmanips.s</code> file. <strong>Use the <code>-cc</code> flag to run a
+basic calling convention check on your code locally</strong>:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">java</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>jar</span> tools/venus.jar<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>cc</span> lab04/megalistmanips.s</span>
+</span></code></pre>
+<p>The CC checker should report 0 warnings.</p>
+<p>For reference, running <code>megalistmanips</code> on the web interface should give the following output:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">Lists before:
+5 2 7 8 1
+1 6 3 8 4
+5 2 7 4 3
+1 2 3 4 7
+5 6 7 8 9
+
+Lists after:
+30 6 56 72 2
+2 42 12 72 20
+30 6 56 20 12
+2 6 12 20 56
+30 42 56 72 90
+</span></code></pre>
+<hr />
+<h2 id="survey">Survey</h2>
+<p>Please fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSc0PNnZJeNqEKeN8X1h-sbJYhV2uivlVrCQCsQU_CdVanyN0Q/viewform?usp=sf_link">this short survey</a> about your experience with the lab. Your responses will be used to improve the lab in the future. The survey will be collecting your email to verify that you have submitted it, but your responses will be anonymized when the data is analyzed. Thank you!</p>
+<hr />
+<h2 id="submission">Submission</h2>
+<p>Save, commit, and push your work, then submit to the <strong>Lab 4</strong> assignment on Gradescope.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container border-top pt-4 mb-5">
+<div class="row">
+<div class="col">
+<div id="dark-toggle-wrapper" class="d-none">
+<div class="form-check form-switch">
+<input id="inputDarkToggle" class="form-check-input" type="checkbox">
+<label class="form-check-label" for="inputDarkToggle">
+Dark Mode
+<a id="buttonDarkToggleReset" class="d-none" href="javascript:void(0);">(reset)</a>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+  
+
+  
+    document.addEventListener("DOMContentLoaded", function() {
+      initToC();
+    });
+  
+</script>
+</body>
+</html>

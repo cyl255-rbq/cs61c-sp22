@@ -1,0 +1,4 @@
+作业内容			推荐终端			为什么？
+C 语言、RISC-V 汇编	Ubuntu Bash (WSL)	需要 Linux 原生的 gcc、gdb 和 valgrind（内存检查工具）。
+电路图 (Logisim)	Git Bash (Windows)	Logisim 是带窗口的软件，在 Windows 下跑图形界面最稳定。
+日常文件操作/Git	Git Bash (Windows)	方便你在 Windows 文件夹里直接看到代码。

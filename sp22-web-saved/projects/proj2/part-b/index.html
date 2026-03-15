@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="language" content="english">
+<title>Part B | CS 61C Spring 2022</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<link rel="shortcut icon" type="image/png" href="../../../img/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../../css/main.css@h=36c89645dcb547d13f6f293a379a176dff22aab9affcefc8d3a19bc23c0f8db2.css" />
+<script defer type="text/javascript" src="../../../js/main.js@h=4096b5e2a18784c27ca139ca897694176eea13de3e2168cd7e7bcdd827a35c8d"></script>
+
+<script type="text/javascript" src="../../../js/main-sync.js@h=daca62fef99fb16ad6a5fd1517d7b18bed66d3241431785bf3ac1f134c166bf1"></script>
+<script>initDarkToggle();</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.17.0/tocbot.min.js" integrity="sha512-DJhUMo5TIBb3fFziiE+3OJG+j7ky+GxScxHdLADCXskEpc/AKQsbsorIYmGFJFaJvDIyP65rJNhnCTytfYAdUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+<div class="container">
+<a class="navbar-brand" href="../../../index.html">
+<img class="d-inline-block me-2 rounded" height="48" width="48" src="../../../img/icon-small.png" alt="outline of square computer chip with cs61c label" />
+<span class="align-middle">CS 61C Spring 2022</span>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle Navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item">
+<a class="nav-link" href="../../../calendar/index.html">Calendar</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../staff/index.html">Staff</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../policies/index.html">Policies</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../resources/index.html">Resources</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../exam/index.html">Exam</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../extensions/index.html">Extensions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://oh.cs61c.org/">OH Queue</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://venus.cs61c.org/">Venus</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://inst.eecs.berkeley.edu/~cs61c/archives.html">Semesters</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<main class="mb-4">
+<section class="section">
+<div class="container">
+<div class="row spec">
+<nav class="col-md-3 d-print-none sticky-md-top nav-wrapper" aria-label="table of contents">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="../index.html">Project 2: CS61Classify</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="../part-a/index.html">Part A</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html">Part B</a>
+<div id="toc-wrapper">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-7-read-matrix">Task 7: Read Matrix</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#conceptual-overview-matrix-files">Conceptual Overview: Matrix Files</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#your-task">Your Task</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-and-debugging">Testing and debugging</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-8-write-matrix">Task 8: Write Matrix</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-and-debugging-1">Testing and debugging</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-9-classify">Task 9: Classify</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-and-debugging-2">Testing and debugging</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-10-readme">Task 10: README</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#submission-and-grading">Submission and Grading</a>
+</li>
+</ul>
+</div>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../function-definitions/index.html">Appendix: Function Definitions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../calling-convention/index.html">Appendix: Calling Convention</a>
+</li>
+</ul>
+</nav>
+<div id="toc-content-wrapper" class="content col-md-9">
+<h1>Part B: File Operations and Classification</h1>
+<p>In this part, you will implement file operations to read pictures of handwritten digits. Then you will use your math functions from the previous part to determine what digit is in the picture.</p>
+<p>If you are curious how the machine learning algorithm works, you can expand the Neural Networks section below. This is optional and not required to finish the project.</p>
+<details>
+<summary>Optional: Neural Networks</summary>
+<p>At a basic level, a neural networks tries to approximate a (non-linear) function that maps your input into a desired output. A basic neuron consists of a weighted linear combination of the input, followed by a non-linearity -- for example, a threshold. Consider the following neuron, which implements the logical <code>AND</code> operation:</p>
+<p><img src="neuron.png" alt="" /></p>
+<p>It is easy to see that for A=0, B=0, the linear combination 0*0.6 + 0*0.6 = 0, which is less than the threshold of 1 and will result in a 0 output. With an input A=0, B=1 or A=1, B=0 the linear combination will results in 1*0.6 + 0*0.6 = 0.6, which is less than 1 and result in a 0 output. Similarly, A=1, B=1 will result in 1*0.6+1*0.6=1.2, which is greater than the threshold and will result in a 1 output! What is interesting is that the simple neuron operation can also be described as an inner product between the vector [A,B]^T and the weights vector [0.6,0.6]^T followed by as thresholding, non-linear operation.</p>
+<p>More complex functions can not be described by a simple neuron alone. We can extend the system into a network of neurons, in order to approximate the complex functions. For example, the following 2 layer network approximates the logical function <code>XOR</code>:</p>
+<p><img src="XOR.png" alt="" /></p>
+<p>The above is a 2 layer network. The network takes 2 inputs, computes 2 intermediate values, and finally computes a single final output.</p>
+<p>It can be written as matrix multiplications with matrices <code>m_0</code> and <code>m_1</code> with thresholding operations in between as shown below:</p>
+<p><img src="mtx.png" alt="" /></p>
+<p>Convince yourself that this implements an <code>XOR</code> for the appropriate inputs!</p>
+<p>You are probably wondering how the weights of the network were determined? This is beyond the scope of this project, and we would encourage you to take advanced classes in numerical linear algebra, signal processing, machine learning and optimization. We will only say that the weights can be trained by giving the network pairs of correct inputs and outputs and changing the weights such that the error between the outputs of the network and the correct outputs is minimized. Learning the weights is called: &quot;Training&quot;. Using the weights on inputs is called &quot;Inference&quot;. We will only perform inference, and you will be given weights that were pre-trained by your dedicated TA's.</p>
+<p>In this project we will implement a similar, but slightly more complex network which is able to classify handwritten digits. As inputs, we will use the <a href="http://yann.lecun.com/exdb/mnist/">MNIST</a> data set, which is a dataset of 60,000 28x28 images containing handwritten digits ranging from 0-9. We will treat these images as &quot;flattened&quot; input vectors of size 784 (<code>= 28 * 28</code>). In a similar way to the example before, we will perform matrix multiplications with pre-trained weight matrices <code>m_0</code> and <code>m_1</code>. Instead of thresholding we will use two different non-linearities: The <code>ReLU</code> and <code>ArgMax</code> functions. Details will be provided in descriptions of the individual tasks.
+<img src="MNIST.png" alt="" /></p>
+</details>
+<h2 id="task-7-read-matrix">Task 7: Read Matrix</h2>
+<h3 id="conceptual-overview-matrix-files">Conceptual Overview: Matrix Files</h3>
+<p>Remember from Task 5 that matrices are stored in memory as an integer array in row-major order.</p>
+<p>Matrices are stored in files as a consecutive sequence of 4-byte integers. The first and second integers in the file indicate the number of rows and columns in the matrix, respectively. The rest of the integers store the elements in the matrix in row-major order.</p>
+<p>All the matrix files end in a <code>.bin</code> file extension and are in the <code>tests</code> folder. To view matrix files, you can run <code>xxd -e matrix_file.bin</code>, replacing <code>matrix_file.bin</code> with the matrix file you want to read.</p>
+<details>
+<summary>Reading matrix files</summary>
+<p>In your local terminal (not the Venus) terminal, navigate to the <code>tests</code> folder (e.g. <code>cd tests</code>), then navigate to the folder that contains the files you want to read. In this example, we'll <code>cd read-matrix-1</code> to check the first test.</p>
+<p><code>ls</code> to see the files in this directory. There should be one file, <code>input.bin</code>. Run <code>xxd -e input.bin</code> to see the contents of this file. The output should look something like this:</p>
+<pre class="z-code"><code><span class="z-text z-plain">00000000: 00000003 00000003 00000001 00000002  ................
+00000010: 00000003 00000004 00000005 00000006  ................
+00000020: 00000007 00000008 00000009           ............
+</span></code>
+<p>The left-most column indexes the bytes in the file (e.g. the third row starts at the <code>0x20</code>th byte of the file). The dots on the right display the bytes in the file as ASCII, but these bytes don't correspond to printable ASCII characters so only dot placeholders appear.</p>
+<p>The actual contents of the file are listed in 4-byte blocks, 4 per row. The first row has the numbers 3 (row count), 3 (column count), 1 (first element), and 2 (second element). This is a 3x3 matrix with elements [1, 2, 3, 4, 5, 6, 7, 8, 9].</p>
+</details></pre>
+<h3 id="your-task">Your Task</h3>
+<p>Fill in the <code>read_matrix</code> function in <code>src/read_matrix.s</code>. This function should do the following:</p>
+<ol>
+<li>Open the file with read permissions. The filepath is provided as an argument (<code>a0</code>).</li>
+<li>Read the number of rows and columns from the file (remember: these are the first two integers in the file). Store these integers in memory at the provided pointers (<code>a1</code> for rows and <code>a2</code> for columns).</li>
+<li>Allocate space on the heap to store the matrix. (Hint: Use the number of rows and columns from the previous step to determine how much space to allocate.)</li>
+<li>Read the matrix from the file to the memory allocated in the previous step.</li>
+<li>Close the file.</li>
+<li>Return a pointer to the matrix in memory.</li>
+</ol>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>read_matrix</code>: Task 7.</td>
+</tr>
+<tr>
+<td rowspan="3" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>char *</code></td>
+<td>A pointer to the filename string.</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>int *</code></td>
+<td>A pointer to an integer which will contain the number of rows. You can assume this points to allocated memory.</td>
+</tr>
+<tr>
+<td><code>a2</code></td>
+<td><code>int *</code></td>
+<td>A pointer to an integer which will contain the number of columns. You can assume this points to allocated memory.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the matrix in memory.</td>
+</tr>
+</tbody>
+</table>
+<p>If the input is malformed in the following ways, put the appropriate return code into <code>a0</code> and run <code>j exit</code> to quit the program.</p>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 85%;">
+</colgroup>
+<tbody>
+<tr>
+<td><b>Return code</b></td>
+<td><b>Exception</b></td>
+</tr>
+<tr>
+<td>26</td>
+<td><code>malloc</code> returns an error.</td>
+</tr>
+<tr>
+<td>27</td>
+<td><code>fopen</code> returns an error.</td>
+</tr>
+<tr>
+<td>28</td>
+<td><code>fclose</code> returns an error.</td>
+</tr>
+<tr>
+<td>29</td>
+<td><code>fread</code> does not read the correct number of bytes.</td>
+</tr>
+</tbody>
+</table>
+<p>To implement this function, you will need to call some utility functions. A complete set of function definitions can be found in the appendix. The relevant function definitions for this task are provided below (expand the section to see them).</p>
+<details>
+<summary>Task 7: Relevant Function Definitions</summary>
+<ol>
+<li>Open the file with read permissions. The filepath is provided as an argument (<code>a0</code>).</li>
+</ol>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>fopen</code>: Open a file for reading or writing.</td>
+</tr>
+<tr>
+<td rowspan="2" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>str *</code></td>
+<td>A pointer to the filename string.</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>int</code></td>
+<td>Permission bits. 0 for read-only, 1 for write-only.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>A file descriptor. This integer can be used in other file operation functions to refer to the opened file. If opening the file failed, this value is -1.</td>
+</tr>
+</tbody>
+</table>
+<ol start="2">
+<li>Read the number of rows and columns from the file (remember: these are the first two integers in the file). Store these integers in memory at the provided pointers (<code>a1</code> for rows and <code>a2</code> for columns).</li>
+</ol>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>fread</code>: Read bytes from a file to a buffer in memory. Subsequent reads will read from later parts of the file.</td>
+</tr>
+<tr>
+<td rowspan="3" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The file descriptor of the file we want to read from, previously returned by <code>fopen</code>.</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>int*</code></td>
+<td>A pointer to the buffer where the read bytes will be stored. The buffer should have been previously allocated with <code>malloc</code>.</td>
+</tr>
+<tr>
+<td><code>a2</code></td>
+<td><code>int</code></td>
+<td>The number of bytes to read from the file.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The number of bytes actually read from the file. If this differs from the argument provided in <code>a2</code>, then we either hit the end of the file or there was an error.</td>
+</tr>
+</tbody>
+</table>
+<ol start="3">
+<li>Allocate space on the heap to store the matrix. (Hint: Use the number of rows and columns from the previous step to determine how much space to allocate.)</li>
+</ol>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>malloc</code>: Allocates heap memory.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The size of the memory that we want to allocate (in bytes).</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>void *</code></td>
+<td>A pointer to the allocated memory. If the allocation failed, this value is 0.</td>
+</tr>
+</tbody>
+</table>
+<ol start="4">
+<li>
+<p>Read the matrix from the file to the memory allocated in the previous step. (Use <code>fread</code> from above.)</p>
+</li>
+<li>
+<p>Close the file.</p>
+</li>
+</ol>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>fclose</code>: Close a file, saving any writes we have made to the file.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The file descriptor of the file we want to close, previously returned by <code>fopen</code>.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>0 on success, and -1 otherwise.</td>
+</tr>
+</tbody>
+</table>
+<ol start="6">
+<li>Return a pointer to the matrix in memory.</li>
+</ol>
+</details>
+<h3 id="testing-and-debugging">Testing and debugging</h3>
+<p>To test your function, in your local terminal, run <code>bash test.sh test_read_matrix</code>.</p>
+<p>To debug your function, in your Venus terminal, run <code>cd /vmfs/test-src</code>, then run a VDB command to start the debugger:</p>
+<pre class="z-code"><code><span class="z-text z-plain">vdb test_read_1.s
+vdb test_read_2.s
+vdb test_read_3.s
+vdb test_read_fail_fclose.s
+vdb test_read_fail_fopen.s
+vdb test_read_fail_fread.s
+vdb test_read_fail_malloc.s
+</span></code></pre>
+<h2 id="task-8-write-matrix">Task 8: Write Matrix</h2>
+<p>Fill in the <code>write_matrix</code> function in <code>src/write_matrix.s</code>. This function should do the following:</p>
+<ol>
+<li>Open the file with write permissions. The filepath is provided as an argument.</li>
+<li>Write the number of rows and columns to the file. (Hint: The <code>fwrite</code> function expects a pointer to data in memory, so you should first store the data to memory, and then pass a pointer to the data to <code>fwrite</code>.)</li>
+<li>Write the data to the file.</li>
+<li>Close the file.</li>
+</ol>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>write_matrix</code>: Task 8.</td>
+</tr>
+<tr>
+<td rowspan="4" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>char *</code></td>
+<td>A pointer to the filename string.</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the matrix in memory (stored as an integer array).</td>
+</tr>
+<tr>
+<td><code>a2</code></td>
+<td><code>int</code></td>
+<td>The number of rows in the matrix.</td>
+</tr>
+<tr>
+<td><code>a3</code></td>
+<td><code>int</code></td>
+<td>The number of columns in the matrix.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td colspan="3">None</td>
+</tr>
+</tbody>
+</table>
+<p>If the input is malformed in the following ways, put the appropriate return code into <code>a0</code> and run <code>j exit</code> to quit the program.</p>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 85%;">
+</colgroup>
+<tbody>
+<tr>
+<td><b>Return code</b></td>
+<td><b>Exception</b></td>
+</tr>
+<tr>
+<td>27</td>
+<td><code>fopen</code> returns an error.</td>
+</tr>
+<tr>
+<td>30</td>
+<td><code>fwrite</code> does not write the correct number of bytes.</td>
+</tr>
+<tr>
+<td>28</td>
+<td><code>fclose</code> returns an error.</td>
+</tr>
+</tbody>
+</table>
+<p>To implement this function, you will need to call some utility functions. A complete set of function definitions can be found in the appendix. The relevant function definitions for this task are provided below (expand the section to see them).</p>
+<details>
+<summary>Task 8: Relevant Function Definitions</summary>
+<ol>
+<li>Open the file with write permissions. The filepath is provided as an argument.</li>
+</ol>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>fopen</code>: Open a file for reading or writing.</td>
+</tr>
+<tr>
+<td rowspan="2" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>str *</code></td>
+<td>A pointer to the filename string.</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>int</code></td>
+<td>Permission bits. 0 for read-only, 1 for write-only.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>A file descriptor. This integer can be used in other file operation functions to refer to the opened file. If opening the file failed, this value is -1.</td>
+</tr>
+</tbody>
+</table>
+<ol start="2">
+<li>
+<p>Write the number of rows and columns to the file. (Hint: The <code>fwrite</code> function expects a pointer to data in memory, so you should first store the data to memory, and then pass a pointer to the data to <code>fwrite</code>.)</p>
+</li>
+<li>
+<p>Write the data to the file.</p>
+</li>
+</ol>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>fwrite</code>: Write bytes from a buffer in memory to a file. Subsequent writes append to the end of the existing file.</td>
+</tr>
+<tr>
+<td rowspan="4" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The file descriptor of the file we want to write to, previously returned by <code>fopen</code>.</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>void *</code></td>
+<td>A pointer to a buffer containing what we want to write to the file.</td>
+</tr>
+<tr>
+<td><code>a2</code></td>
+<td><code>int</code></td>
+<td>The number of elements to write to the file.</td>
+</tr>
+<tr>
+<td><code>a3</code></td>
+<td><code>int</code></td>
+<td>The size of each element. In total, <code>a2</code> × <code>a3</code> bytes are written.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The number of items actually written to the file. If this differs from the number of items specified (<code>a2</code>), then we either hit the end of the file or there was an error.</td>
+</tr>
+</tbody>
+</table>
+<ol start="4">
+<li>Close the file.</li>
+</ol>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>fclose</code>: Close a file, saving any writes we have made to the file.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The file descriptor of the file we want to close, previously returned by <code>fopen</code>.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>0 on success, and -1 otherwise.</td>
+</tr>
+</tbody>
+</table>
+</details>
+<h3 id="testing-and-debugging-1">Testing and debugging</h3>
+<p>To test your function, in your local terminal, run <code>bash test.sh test_write_matrix</code>.</p>
+<p>To debug your function, in your Venus terminal, run <code>cd /vmfs/test-src</code>, then run a VDB command to start the debugger:</p>
+<pre class="z-code"><code><span class="z-text z-plain">vdb test_write_1.s
+vdb test_write_fail_fclose.s
+vdb test_write_fail_fopen.s
+vdb test_write_fail_fwrite.s
+</span></code></pre>
+<h2 id="task-9-classify">Task 9: Classify</h2>
+<p>Fill in the <code>classify</code> function in <code>src/classify.s</code>. This function should do the following:</p>
+<ol>
+<li>Read three matrices <code>m0</code>, <code>m1</code>, and <code>input</code> from files. Their filepaths are provided as arguments. You will need to allocate space for the pointer arguments to <code>read_matrix</code>, since that function is expecting a pointer to allocated memory.</li>
+<li>Compute <code>h = matmul(m0, input)</code>. You will probably need to <code>malloc</code> space to fit <code>h</code>.</li>
+<li>Compute <code>h = relu(h)</code>. Remember that <code>relu</code> is performed in-place.</li>
+<li>Compute <code>o = matmul(m1, h)</code> and write the resulting matrix to the <code>output</code> file. The <code>output</code> filepath is provided as an argument.</li>
+<li>Compute and return <code>argmax(o)</code>. If the print argument is set to 0, then also print out <code>argmax(o)</code> and a newline character.</li>
+<li>Free any data you allocated with <code>malloc</code>. This includes any heap blocks allocated from calling <code>read_matrix</code>.</li>
+<li>Remember to put the return value, <code>argmax(o)</code>, in the appropriate register before returning.</li>
+</ol>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 19%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 57%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>classify</code>: Task 9.</td>
+</tr>
+<tr>
+<td rowspan="7" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td><code>argc</code> (the number of arguments provided)</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>char **</code></td>
+<td><code>argv</code>, a pointer to an array of argument strings (<code>char *</code>)</td>
+</tr>
+<tr>
+<td><code>a1[1]</code> = <code>*(a1 + 4)</code></td>
+<td><code>char *</code></td>
+<td>A pointer to the filepath string of the first matrix file <code>m0</code>.</td>
+</tr>
+<tr>
+<td><code>a1[2]</code> = <code>*(a1 + 8)</code></td>
+<td><code>char *</code></td>
+<td>A pointer to the filepath string of the second matrix file <code>m1</code>.</td>
+</tr>
+<tr>
+<td><code>a1[3]</code> = <code>*(a1 + 12)</code></td>
+<td><code>char *</code></td>
+<td>A pointer to the filepath string of the input matrix file <code>input</code>.</td>
+</tr>
+<tr>
+<td><code>a1[4]</code> = <code>*(a1 + 16)</code></td>
+<td><code>char *</code></td>
+<td>A pointer to the filepath string of the output file.</td>
+</tr>
+<tr>
+<td><code>a2</code></td>
+<td><code>int</code></td>
+<td>If set to 0, print out the classification. Otherwise, do not print anything.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The classification (see above).</td>
+</tr>
+</tbody>
+</table>
+<p>If the input is malformed in the following ways, put the appropriate return code into <code>a0</code> and run <code>j exit</code> to quit the program.</p>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 85%;">
+</colgroup>
+<tbody>
+<tr>
+<td><b>Return code</b></td>
+<td><b>Exception</b></td>
+</tr>
+<tr>
+<td>26</td>
+<td><code>malloc</code> returns an error.</td>
+</tr>
+<tr>
+<td>31</td>
+<td>There are an incorrect number of command line arguments. Note that there are 5 arguments to the program, because <code>a1[0]</code> is reserved for the name of the program.</td>
+</tr>
+</tbody>
+</table>
+<p>To implement this function, you will need to call some utility functions. A complete set of function definitions can be found in the appendix. The relevant function definitions for this task are provided below (expand the section to see them).</p>
+<details>
+<summary>Task 9: Relevant Function Definitions</summary>
+<ol>
+<li>Read three matrices <code>m0</code>, <code>m1</code>, and <code>input</code> from files. Their filepaths are provided as arguments. You will need to allocate space for the pointer arguments to <code>read_matrix</code>, since that function is expecting a pointer to allocated memory.</li>
+</ol>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>read_matrix</code>: Task 7.</td>
+</tr>
+<tr>
+<td rowspan="3" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>char *</code></td>
+<td>A pointer to the filename string.</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>int *</code></td>
+<td>A pointer to an integer which will contain the number of rows. You can assume this points to allocated memory.</td>
+</tr>
+<tr>
+<td><code>a2</code></td>
+<td><code>int *</code></td>
+<td>A pointer to an integer which will contain the number of columns. You can assume this points to allocated memory.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the matrix in memory.</td>
+</tr>
+</tbody>
+</table>
+<ol start="2">
+<li>Compute <code>h = matmul(m0, input)</code>. You will probably need to <code>malloc</code> space to fit <code>h</code>.</li>
+</ol>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>malloc</code>: Allocates heap memory.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The size of the memory that we want to allocate (in bytes).</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>void *</code></td>
+<td>A pointer to the allocated memory. If the allocation failed, this value is 0.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>matmul</code>: Task 5.</td>
+</tr>
+<tr>
+<td rowspan="7" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of the first matrix A (stored as an integer array in row-major order).</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>int</code></td>
+<td>The number of rows (height) of the first matrix A.</td>
+</tr>
+<tr>
+<td><code>a2</code></td>
+<td><code>int</code></td>
+<td>The number of columns (width) of the first matrix A.</td>
+</tr>
+<tr>
+<td><code>a3</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of the second matrix B (stored as an integer array in row-major order).</td>
+</tr>
+<tr>
+<td><code>a4</code></td>
+<td><code>int</code></td>
+<td>The number of rows (height) of the second matrix B.</td>
+</tr>
+<tr>
+<td><code>a5</code></td>
+<td><code>int</code></td>
+<td>The number of columns (width) of the second matrix B.</td>
+</tr>
+<tr>
+<td><code>a6</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of an integer array where the result C should be stored. You can assume this memory has been allocated (but is uninitialized) and has enough space to store C.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td colspan="3">None</td>
+</tr>
+</tbody>
+</table>
+<ol start="3">
+<li>Compute <code>h = relu(h)</code>. Remember that <code>relu</code> is performed in-place.</li>
+</ol>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>relu</code>: Task 2.</td>
+</tr>
+<tr>
+<td rowspan="2" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of the integer array.</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>int</code></td>
+<td>The number of integers in the array. You can assume that this argument matches the actual length of the integer array.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td colspan="3">None</td>
+</tr>
+</tbody>
+</table>
+<ol start="4">
+<li>Compute <code>o = matmul(m1, h)</code> and write the resulting matrix to the <code>output</code> file. The <code>output</code> filepath is provided as an argument.</li>
+</ol>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>write_matrix</code>: Task 8.</td>
+</tr>
+<tr>
+<td rowspan="4" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>char *</code></td>
+<td>A pointer to the filename string.</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the matrix in memory (stored as an integer array).</td>
+</tr>
+<tr>
+<td><code>a2</code></td>
+<td><code>int</code></td>
+<td>The number of rows in the matrix.</td>
+</tr>
+<tr>
+<td><code>a3</code></td>
+<td><code>int</code></td>
+<td>The number of columns in the matrix.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td colspan="3">None</td>
+</tr>
+</tbody>
+</table>
+<ol start="5">
+<li>Compute and return <code>argmax(o)</code>. If the print argument is set to 0, then also print out <code>argmax(o)</code> and a newline character.</li>
+</ol>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>argmax</code>: Task 3.</td>
+</tr>
+<tr>
+<td rowspan="2" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of the integer array.</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>int</code></td>
+<td>The number of integers in the array. You can assume that this argument matches the actual length of the integer array.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The index of the largest element. If the largest element appears multiple times, return the smallest index.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>print_int</code>: Prints an integer.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The integer to print.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td colspan="3">None</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>print_char</code>: Prints a character.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>char</code></td>
+<td>The character to print. You can provide the ASCII code or put the character directly in the register like <code>li t0 '\n'</code>.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td colspan="3">None</td>
+</tr>
+</tbody>
+</table>
+<ol start="6">
+<li>Free any data you allocated with <code>malloc</code>. This includes any heap blocks allocated from calling <code>read_matrix</code>.</li>
+</ol>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>free</code>: Frees heap memory.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>A pointer to the allocated memory to be freed.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td colspan="3">None</td>
+</tr>
+</tbody>
+</table>
+<ol start="7">
+<li>Remember to put the return value, <code>argmax(o)</code>, in the appropriate register before returning.</li>
+</ol>
+</details>
+<h3 id="testing-and-debugging-2">Testing and debugging</h3>
+<p>To test your function, in your local terminal, run <code>bash test.sh test_classify</code>.</p>
+<p>To debug your function, in your Venus terminal, run <code>cd /vmfs/test-src</code>, then run a VDB command to start the debugger:</p>
+<pre class="z-code"><code><span class="z-text z-plain">vdb test_classify_1_silent.s ../tests/classify-1/m0.bin ../tests/classify-1/m1.bin ../tests/classify-1/input.bin ../tests/classify-1/output.bin
+vdb test_classify_2_print.s ../tests/classify-2/m0.bin ../tests/classify-2/m1.bin ../tests/classify-2/input.bin ../tests/classify-2/output.bin
+vdb test_classify_3_print.s ../tests/classify-3/m0.bin ../tests/classify-3/m1.bin ../tests/classify-3/input.bin ../tests/classify-3/output.bin
+vdb test_classify_fail_malloc.s ../tests/classify-1/m0.bin ../tests/classify-1/m1.bin ../tests/classify-1/input.bin ../tests/classify-1/output.bin
+vdb test_classify_not_enough_args.s
+</span></code></pre>
+<p>Once you have classify running, you can run <code>bash test.sh test_chain</code>. This runs your classification function twice to make sure you properly followed calling convention.</p>
+<p>To debug the chain test, run <code>cd /vmfs/test-src</code>, then run a VDB command to start the debugger:</p>
+<pre class="z-code"><code><span class="z-text z-plain">vdb ../tests/chain-1/chain.s
+</span></code></pre>
+<h2 id="task-10-readme">Task 10: README</h2>
+<p>We updated Project 2 this semester with quality-of-life improvements and hopefully a better debugging experience, and we'd love to know how it worked out for you. Fill in <code>README.md</code> with your thoughts about the project: how long did each task take you? What were some bugs you encountered? What was the hardest/easiest/most fun/least fun part of the project? Anything you say here won't affect your grade, so feel free to be honest--even if you didn't like something, constructive feedback is really helpful! 512 characters minimum, please.</p>
+<h2 id="submission-and-grading">Submission and Grading</h2>
+<p>Submit your code to the Project 2B assignment on Gradescope.</p>
+<p>To ensure the autograder runs correctly, do not add any <code>.import</code> statements to the starter code. Also, make sure there are no <code>ecall</code> instructions in your code.</p>
+<p>Congratulations on finishing Project 2! Just for fun, you can now use your code to classify your own handwritten digits. This is optional and not required to finish the project. If you're interested, expand the section below.</p>
+<details>
+<summary>Optional: Classifying Your Own Digits</summary>
+<p>First, open up any basic drawing program like Microsoft Paint.</p>
+<p>Next, resize the image to 28x28 pixels, draw your digit, and save it as a <code>.bmp</code> file in
+the directory <code>inputs/mnist/student_inputs/</code>.</p>
+<p>Inside that directory, we've provided <code>bmp_to_bin.py</code> to turn this <code>.bmp</code> file into a <code>.bin</code> file for the neural net, as well as an <code>example.bmp</code> file. To convert it, run the following from inside the <code>inputs/mnist/student_inputs</code> directory:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">python</span></span><span class="z-meta z-function-call z-arguments z-shell"> bmp_to_bin.py example</span>
+</span></code>
+<p>This will read in the <code>example.bmp</code> file, and create an <code>example.bin</code> file. We can then input it into our classifier, alongside the provided <code>m0</code> and <code>m1</code> matrices.</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">java</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>jar</span> tools/venus.jar src/main.s<span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>ms</span><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>1</span><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>it</span> inputs/mnist/bin/m0.bin inputs/mnist/bin/m1.bin inputs/mnist/student_inputs/example.bin  outputs/test_mnist_main/student_input_mnist_output.bin</span>
+</span></code></pre>
+<p>You can convert and run your own <code>.bmp</code> files in the same way.</p>
+<p>You should be able to achieve a reasonable accuracy with your own input images.</p>
+</details></pre>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container border-top pt-4 mb-5">
+<div class="row">
+<div class="col">
+<div id="dark-toggle-wrapper" class="d-none">
+<div class="form-check form-switch">
+<input id="inputDarkToggle" class="form-check-input" type="checkbox">
+<label class="form-check-label" for="inputDarkToggle">
+Dark Mode
+<a id="buttonDarkToggleReset" class="d-none" href="javascript:void(0);">(reset)</a>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+  
+
+  document.addEventListener("DOMContentLoaded", function() {
+    initToC();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="language" content="english">
+<title>Lab 2 | CS 61C Spring 2022</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<link rel="shortcut icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../css/main.css@h=36c89645dcb547d13f6f293a379a176dff22aab9affcefc8d3a19bc23c0f8db2.css" />
+<script defer type="text/javascript" src="../../js/main.js@h=4096b5e2a18784c27ca139ca897694176eea13de3e2168cd7e7bcdd827a35c8d"></script>
+
+<script type="text/javascript" src="../../js/main-sync.js@h=daca62fef99fb16ad6a5fd1517d7b18bed66d3241431785bf3ac1f134c166bf1"></script>
+<script>initDarkToggle();</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.17.0/tocbot.min.js" integrity="sha512-DJhUMo5TIBb3fFziiE+3OJG+j7ky+GxScxHdLADCXskEpc/AKQsbsorIYmGFJFaJvDIyP65rJNhnCTytfYAdUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+<div class="container">
+<a class="navbar-brand" href="../../index.html">
+<img class="d-inline-block me-2 rounded" height="48" width="48" src="../../img/icon-small.png" alt="outline of square computer chip with cs61c label" />
+<span class="align-middle">CS 61C Spring 2022</span>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle Navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item">
+<a class="nav-link" href="../../calendar/index.html">Calendar</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../staff/index.html">Staff</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../policies/index.html">Policies</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../resources/index.html">Resources</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../exam/index.html">Exam</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../extensions/index.html">Extensions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://oh.cs61c.org/">OH Queue</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://venus.cs61c.org/">Venus</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://inst.eecs.berkeley.edu/~cs61c/archives.html">Semesters</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<main class="mb-4">
+<section class="section">
+<div class="container">
+<div class="row spec">
+<nav id="toc-wrapper" class="col-md-3 d-print-none sticky-md-top nav-wrapper" aria-label="table of contents">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#setup">Setup</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-1-bit-operations">Exercise 1: Bit Operations</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-2-valgrind">Exercise 2: Valgrind</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#using-valgrind-to-find-segfaults">Using Valgrind to find segfaults</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#using-valgrind-to-detect-memory-leaks">Using Valgrind to detect memory leaks</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-3-memory-management">Exercise 3: Memory Management</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-4">Exercise 4</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#submission">Submission</a>
+</li>
+</ul>
+</nav>
+<div id="toc-content-wrapper" class="content col-md-9">
+<h1 class="title">Lab 2: C Memory Management, Valgrind</h1>
+<p class="subtitle">Deadline: Monday, February 7, 11:59:59 PM PT</p>
+<p><a href="https://docs.google.com/presentation/d/1Zr0GkyMWRy1XKkG9IW0-JYKfeIiebgWopsONJVmAk2w/edit?usp=sharing">Lab Section Slides</a></p>
+<hr />
+<h2 id="setup">Setup</h2>
+<p>In your <code>labs</code> directory, pull the files for this lab with:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> pull starter main</span>
+</span></code></pre>
+<p>If you get an error like the following:</p>
+<pre data-lang="txt" class="language-txt z-code"><code class="language-txt" data-lang="txt"><span class="z-text z-plain">fatal: &#39;starter&#39; does not appear to be a git repository
+fatal: Could not read from remote repository.
+</span></code></pre>
+<p>make sure to set the starter remote as follows:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> remote add starter https://github.com/61c-teach/sp22-lab-starter.git</span>
+</span></code></pre>
+<p>and run the original command again.</p>
+<hr />
+<h2 id="exercise-1-bit-operations">Exercise 1: Bit Operations</h2>
+<p>For this exercise, you will complete <code>bit_ops.c</code> by implementing the bit manipulation functions <code>get_bit</code>, <code>set_bit</code>, and <code>flip_bit</code> (shown below). You may <strong>ONLY</strong> use bitwise operations such as and (<code>&amp;</code>), or (<code>|</code>), xor (<code>^</code>), not (<code>~</code>), left shifts (<code>&lt;&lt;</code>), and right shifts (<code>&gt;&gt;</code>). You may not use any for/while loops or conditional statements. You also may not use modulo (<code>%</code>), division, addition, subtraction, or multiplication for this question.</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-comment z-block z-c"><span class="z-punctuation z-definition z-comment z-c">/*</span> Returns the Nth bit of X. Assumes 0 &lt;= N &lt;= 31. <span class="z-punctuation z-definition z-comment z-c">*/</span></span>
+<span class="z-storage z-type z-c">unsigned</span> <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">get_bit</span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-storage z-type z-c">unsigned</span> <span class="z-variable z-parameter z-c">x</span><span class="z-punctuation z-separator z-c">,</span> <span class="z-storage z-type z-c">unsigned</span> <span class="z-variable z-parameter z-c">n</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c"> </span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span></span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c">
+    <span class="z-comment z-block z-c"><span class="z-punctuation z-definition z-comment z-c">/*</span> YOUR CODE HERE <span class="z-punctuation z-definition z-comment z-c">*/</span></span>
+    <span class="z-keyword z-control z-flow z-return z-c">return</span> <span class="z-keyword z-operator z-arithmetic z-c">-</span><span class="z-constant z-numeric z-integer z-decimal z-c">1</span><span class="z-punctuation z-terminator z-c">;</span> <span class="z-comment z-block z-c"><span class="z-punctuation z-definition z-comment z-c">/*</span> UPDATE WITH THE CORRECT RETURN VALUE<span class="z-punctuation z-definition z-comment z-c">*/</span></span>
+</span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-end z-c">}</span></span></span>
+
+<span class="z-comment z-block z-c"><span class="z-punctuation z-definition z-comment z-c">/*</span> Set the nth bit of the value of x to v. Assumes 0 &lt;= N &lt;= 31, and V is 0 or 1 <span class="z-punctuation z-definition z-comment z-c">*/</span></span>
+<span class="z-storage z-type z-c">void</span> <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">set_bit</span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-storage z-type z-c">unsigned</span> <span class="z-keyword z-operator z-c">*</span><span class="z-variable z-parameter z-c">x</span><span class="z-punctuation z-separator z-c">,</span> <span class="z-storage z-type z-c">unsigned</span> <span class="z-variable z-parameter z-c">n</span><span class="z-punctuation z-separator z-c">,</span> <span class="z-storage z-type z-c">unsigned</span> <span class="z-variable z-parameter z-c">v</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c"> </span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span></span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c">
+    <span class="z-comment z-block z-c"><span class="z-punctuation z-definition z-comment z-c">/*</span> YOUR CODE HERE <span class="z-punctuation z-definition z-comment z-c">*/</span></span>
+</span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-end z-c">}</span></span></span>
+
+<span class="z-comment z-block z-c"><span class="z-punctuation z-definition z-comment z-c">/*</span> Flips the Nth bit in X. Assumes 0 &lt;= N &lt;= 31.<span class="z-punctuation z-definition z-comment z-c">*/</span></span>
+<span class="z-storage z-type z-c">void</span> <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">flip_bit</span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-storage z-type z-c">unsigned</span> <span class="z-keyword z-operator z-c">*</span><span class="z-variable z-parameter z-c">x</span><span class="z-punctuation z-separator z-c">,</span> <span class="z-storage z-type z-c">unsigned</span> <span class="z-variable z-parameter z-c">n</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c"> </span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span></span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c">
+    <span class="z-comment z-block z-c"><span class="z-punctuation z-definition z-comment z-c">/*</span> YOUR CODE HERE <span class="z-punctuation z-definition z-comment z-c">*/</span></span>
+</span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-end z-c">}</span></span></span>
+</span></code></pre>
+<p>Once you complete these functions, you can compile and run your code using the following commands:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">make</span></span><span class="z-meta z-function-call z-arguments z-shell"> bit_ops</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">./bit_ops</span></span>
+</span></code></pre>
+<p>This will print out the results of the tests.</p>
+<hr />
+<h2 id="exercise-2-valgrind">Exercise 2: Valgrind</h2>
+<p>Even with a debugger, we might not be able to catch all bugs. Some bugs are what we refer to as &quot;bohrbugs&quot;, meaning they manifest reliably under a well-defined, but possibly unknown, set of conditions. Other bugs are what we call &quot;heisenbugs&quot;, and instead of being determinant, they're known to disappear or alter their behavior when one attempts to study them. We can detect the first kind with debuggers, but the second kind may slip under our radar because they're (at least in C) often due to mis-managed memory. Remember that unlike other programming languages, C requires you (the programmer) to manually manage your memory.</p>
+<p>We can use a tool called Valgrind to help catch to help catch &quot;heisenbugs&quot; and &quot;bohrbugs&quot;. Valgrind is a program which emulates your CPU and tracks your memory accesses. This slows down the process you're running (which is why we don't, for example, always run all executables inside Valgrind) but also can expose bugs that may only display visible incorrect behavior under a unique set of circumstances.</p>
+<h3 id="using-valgrind-to-find-segfaults">Using Valgrind to find segfaults</h3>
+<p>In Lab 1, you learned how to find segfaults using cgdb. You can also use Valgring to find segfaults. </p>
+<ol>
+<li>Edit the <code>Makefile</code> to include the <code>-g</code> flag in <code>CFLAGS</code> to provide debugging information to Valgrind.</li>
+<li>Compile <code>linked_list.c</code> and <code>test_linked_list.c</code> by executing<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">make</span></span><span class="z-meta z-function-call z-arguments z-shell"> linked_list</span>
+</span></code></pre>
+</li>
+</ol>
+<p>(If it says that there is nothing to be done, run <code>make clean</code> and then run <code>make</code> again to make sure that it compiles with the newly added <code>-g</code> flag)</p>
+<ol start="3">
+<li>Run valgrind on the executable using the following command:<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">valgrind</span></span><span class="z-meta z-function-call z-arguments z-shell"> ./linked_list</span>
+</span></code></pre>
+</li>
+</ol>
+<p>By default, memcheck is the tool that is run when you invoke Valgrind. The documentation on Valgrind's <a href="https://valgrind.org/docs/manual/mc-manual.html">memcheck</a> is very useful, as it provides examples of the most common error messages, what they mean, and some optional arguments you can use to help debug them.</p>
+<p>Your output should look something like this. There is a lot of information here, so let's parse through it together.</p>
+<p><img src="valgrind_output.png" alt="" /></p>
+<p>Box 1. This shows us the command that we are running through Valgrind.</p>
+<p>Box 2. This is a print statement from our program.</p>
+<p>Box 3. We are reading 8 bytes from an invalid memory address on linked_list.c line 62.</p>
+<p>Box 4. Our program received a segfault by accessing invalid memory on linked_list.c line 62</p>
+<p>Box 5. There were no memory leaks at the time that the program exited.</p>
+<p>Box 6. We encountered 1 error.</p>
+<ol start="4">
+<li>Remember from Lab01 that <code>(*head)-&gt;next</code> produced a segfault because we forgot to check if <code>*head==NULL</code>. Fix this error, run your code through Valgrind again, and you should see that there are no errors reported by valgrind.</li>
+</ol>
+<h3 id="using-valgrind-to-detect-memory-leaks">Using Valgrind to detect memory leaks</h3>
+<ol>
+<li>Let's cause a memory leak in <code>test_linked_list.c</code>. Comment out the line that calls <code>free_list</code>.</li>
+<li>Run <code>make linked_list</code> to compile your code.</li>
+<li>Run valgrind<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">valgrind</span></span><span class="z-meta z-function-call z-arguments z-shell"> ./linked_list</span>
+</span></code></pre>
+</li>
+<li>We can see that our program is still producing the correct result based on the printed messages &quot;Congrats...&quot;; however, we are now experiencing memory leaks. Valgrind tells us to &quot;Rerun with --leak-check=full to see details of leaked memory&quot;, so let's do that<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">valgrind</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> --</span>leak-check</span><span class="z-keyword z-operator z-assignment z-option z-shell">=</span>full ./linked_list</span>
+</span></code></pre>
+</li>
+</ol>
+<p>Your output should look something like this. There is a lot of information here, so let's parse through it together.
+<img src="valgrind_output_2.png" alt="" /></p>
+<p>Box 1. Summary of heap usage. There were 80 bytes allocated in 5 different blocks in the heap at the time of exit.</p>
+<p>Box 2. Stack trace showing where the unfreed blocks were allocated. </p>
+<ul>
+<li>Direct blocks are those which are root nodes (blocks of memory that the programmer has direct access to, ex stack/global pointer to the heap).</li>
+<li>Indirect blocks are those which are not root nodes (ex a pointer inside of a struct). </li>
+</ul>
+<p>Box 3. Summary of leak. You can find more info about memory leaks <a href="https://www.valgrind.org/docs/manual/mc-manual.html#mc-manual.leaks">in the Valgrind docs</a></p>
+<p>You can use the stack trace to see where the unfreed blocks were allocated. Hopefully this example will help you understand Valgrind messages when you are completing your projects</p>
+<hr />
+<h2 id="exercise-3-memory-management">Exercise 3: Memory Management</h2>
+<p>This exercise uses <code>vector.h</code>, <code>test_vector.c</code>, and <code>vector.c</code>, where we provide you with a framework for implementing a variable-length array. This exercise is designed to help familiarize you with C structs and memory management in C.</p>
+<ol>
+<li>
+<p>Try to explain why <code>bad_vector_new()</code> and <code>also_bad_vector_new()</code> are bad. <strong>Hint</strong>: One of these functions will actually run correctly (assuming correctly modified <code>vector_new</code>, <code>vector_set</code>, etc.) but there may be other problems. We have provided the reasons here, so you can verify your understanding</p>
+<details>
+<summary>bad_vector_new()</summary>
+The vector is created on the stack, instead of the heap. All memory stored on the stack gets freed as soon as that function finishes running, so when the function returns, we lose the vector we constructed.
+</details>
+<details>
+<summary>also_bad_vector_new()</summary>
+While this does work, it is rather inefficient. The vector object is a "Big" thing, so when we return it, we need to copy a lot of data from the return value to the calling frame. Instead, it is generally better practice to store structs on the heap, and pass around pointers, as pointers are a fixed, "Small" size.
+</details>
+</li>
+<li>
+<p>Fill in the functions <code>vector_new()</code>, <code>vector_get()</code>, <code>vector_delete()</code>, and <code>vector_set()</code> in <code>vector.c</code> so that our test code <code>test_vector.c</code> runs without any memory management errors. </p>
+<p>Comments in the code describe how the functions should work. Look at the functions we've filled in to see how the data structures should be used. For consistency, <em>it is assumed that all entries in the vector are 0 unless set by the user. Keep this in mind as <code>malloc()</code> does not zero out the memory it allocates.</em></p>
+</li>
+</ol>
+<p>Test your implementation of <code>vector_new()</code>, <code>vector_get()</code>, <code>vector_delete()</code>, and <code>vector_set()</code> for both correctness and memory management (details below).</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-comment z-line z-number-sign z-shell"><span class="z-punctuation z-definition z-comment z-begin z-shell">#</span></span><span class="z-comment z-line z-number-sign z-shell"> 1) to check correctness</span><span class="z-comment z-line z-number-sign z-shell">
+</span><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">make</span></span><span class="z-meta z-function-call z-arguments z-shell"> vector</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">./vector</span></span>
+
+<span class="z-comment z-line z-number-sign z-shell"><span class="z-punctuation z-definition z-comment z-begin z-shell">#</span></span><span class="z-comment z-line z-number-sign z-shell"> 2) to check memory management using Valgrind:</span><span class="z-comment z-line z-number-sign z-shell">
+</span><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">valgrind</span></span><span class="z-meta z-function-call z-arguments z-shell"> ./vector</span>
+</span></code></pre>
+<p>Any number of suppressed errors is fine; they do not affect us.</p>
+<p>Feel free to also use CGDB to debug your code. </p>
+<hr />
+<h2 id="exercise-4">Exercise 4</h2>
+<p>Please fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAOPiI9CMdr05KXwDzNlbJ932Z_mNnmfH1tyaAtUQXcRN0mw/viewform?usp=sf_link">this short survey</a> about your experience with the lab. Your responses will be used to improve the lab in the future. The survey will be collecting your email to verify that you have submitted it, but your responses will be anonymized when the data is analyzed. Thank you!</p>
+<hr />
+<h2 id="submission">Submission</h2>
+<p>Save, commit, and push your work, then submit to the <strong>Lab 2</strong> assignment on Gradescope.</p>
+<hr />
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container border-top pt-4 mb-5">
+<div class="row">
+<div class="col">
+<div id="dark-toggle-wrapper" class="d-none">
+<div class="form-check form-switch">
+<input id="inputDarkToggle" class="form-check-input" type="checkbox">
+<label class="form-check-label" for="inputDarkToggle">
+Dark Mode
+<a id="buttonDarkToggleReset" class="d-none" href="javascript:void(0);">(reset)</a>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+  
+
+  
+    document.addEventListener("DOMContentLoaded", function() {
+      initToC();
+    });
+  
+</script>
+</body>
+</html>

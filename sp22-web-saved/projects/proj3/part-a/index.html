@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="language" content="english">
+<title>Part A | CS 61C Spring 2022</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<link rel="shortcut icon" type="image/png" href="../../../img/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../../css/main.css@h=36c89645dcb547d13f6f293a379a176dff22aab9affcefc8d3a19bc23c0f8db2.css" />
+<script defer type="text/javascript" src="../../../js/main.js@h=4096b5e2a18784c27ca139ca897694176eea13de3e2168cd7e7bcdd827a35c8d"></script>
+
+<script type="text/javascript" src="../../../js/main-sync.js@h=daca62fef99fb16ad6a5fd1517d7b18bed66d3241431785bf3ac1f134c166bf1"></script>
+<script>initDarkToggle();</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.17.0/tocbot.min.js" integrity="sha512-DJhUMo5TIBb3fFziiE+3OJG+j7ky+GxScxHdLADCXskEpc/AKQsbsorIYmGFJFaJvDIyP65rJNhnCTytfYAdUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+<div class="container">
+<a class="navbar-brand" href="../../../index.html">
+<img class="d-inline-block me-2 rounded" height="48" width="48" src="../../../img/icon-small.png" alt="outline of square computer chip with cs61c label" />
+<span class="align-middle">CS 61C Spring 2022</span>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle Navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item">
+<a class="nav-link" href="../../../calendar/index.html">Calendar</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../staff/index.html">Staff</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../policies/index.html">Policies</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../resources/index.html">Resources</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../exam/index.html">Exam</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../extensions/index.html">Extensions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://oh.cs61c.org/">OH Queue</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://venus.cs61c.org/">Venus</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://inst.eecs.berkeley.edu/~cs61c/archives.html">Semesters</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<main class="mb-4">
+<section class="section">
+<div class="container">
+<div class="row spec">
+<nav class="col-md-3 d-print-none sticky-md-top nav-wrapper" aria-label="table of contents">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="../index.html">Project 3: CS61CPU</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="index.html">Part A</a>
+<div id="toc-wrapper">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-1-arithmetic-logic-unit-alu">Task 1: Arithmetic Logic Unit (ALU)</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing">Testing</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#debugging">Debugging</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-2-register-file-regfile">Task 2: Register File (RegFile)</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-and-debugging">Testing and Debugging</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-3-immediate-generator">Task 3: Immediate Generator</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-and-debugging-1">Testing and Debugging</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-4-datapath">Task 4: Datapath</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-4-1-instruction-fetch">Task 4.1: Instruction Fetch</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-4-2-instruction-decode">Task 4.2: Instruction Decode</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-4-3-execute">Task 4.3: Execute</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-4-4-memory">Task 4.4: Memory</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#task-4-5-write-back">Task 4.5: Write Back</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-and-debugging-2">Testing and Debugging</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#submission-and-grading">Submission and Grading</a>
+</li>
+</ul>
+</div>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../part-b/index.html">Part B</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../control-logic/index.html">Appendix: Control Logic</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../testing/index.html">Appendix: Testing and Debugging</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../partial-load-store/index.html">Appendix: Partial Loads and Stores</a>
+</li>
+</ul>
+</nav>
+<div id="toc-content-wrapper" class="content col-md-9">
+<h1>Part A: addi</h1>
+<p>In this part, you will design a skeleton CPU that can execute the <code>addi</code> instruction.</p>
+<h2 id="task-1-arithmetic-logic-unit-alu">Task 1: Arithmetic Logic Unit (ALU)</h2>
+<p>Fill in the ALU in <code>alu.circ</code> so that it can perform the required arithmetic calculations.</p>
+<table><thead><tr><th>Input Name</th><th>Bit Width</th><th align="left">Description</th></tr></thead><tbody>
+<tr><td><code>A</code></td><td>32</td><td align="left">Data to use for Input A in the ALU operation</td></tr>
+<tr><td><code>B</code></td><td>32</td><td align="left">Data to use for Input B in the ALU operation</td></tr>
+<tr><td><code>ALUSel</code></td><td>4</td><td align="left">Selects which operation the ALU should perform (see the list of operations with corresponding switch values below)</td></tr>
+</tbody></table>
+<table><thead><tr><th>Output Name</th><th>Bit Width</th><th align="left">Description</th></tr></thead><tbody>
+<tr><td><code>ALUResult</code></td><td>32</td><td align="left">Result of the ALU operation</td></tr>
+</tbody></table>
+<p>Below is the list of ALU operations for you to implement, along with their associated ALUSel values. <code>add</code> is already made for you. You are allowed and encouraged to use built-in Logisim components to implement the arithmetic operations.</p>
+<table><thead><tr><th>ALUSel Value</th><th align="left">Instruction</th></tr></thead><tbody>
+<tr><td>0</td><td align="left">add: <code>Result = A + B</code></td></tr>
+<tr><td>1</td><td align="left">sll: <code>Result = A &lt;&lt; B</code></td></tr>
+<tr><td>2</td><td align="left">slt: <code>Result = (A &lt; B (signed)) ? 1 : 0</code></td></tr>
+<tr><td>3</td><td align="left">Unused</td></tr>
+<tr><td>4</td><td align="left">xor: <code>Result = A ^ B</code></td></tr>
+<tr><td>5</td><td align="left">srl: <code>Result = (unsigned) A &gt;&gt; B</code></td></tr>
+<tr><td>6</td><td align="left">or: <code>Result = A | B </code></td></tr>
+<tr><td>7</td><td align="left">and: <code>Result = A &amp; B</code></td></tr>
+<tr><td>8</td><td align="left">mul: <code>Result = (signed) (A * B)[31:0]</code></td></tr>
+<tr><td>9</td><td align="left">mulh: <code>Result = (signed) (A * B)[63:32]</code></td></tr>
+<tr><td>10</td><td align="left">Unused</td></tr>
+<tr><td>11</td><td align="left">mulhu: <code>Result = (A * B)[63:32]</code></td></tr>
+<tr><td>12</td><td align="left">sub: <code>Result = A - B</code></td></tr>
+<tr><td>13</td><td align="left">sra: <code>Result = (signed) A &gt;&gt; B</code></td></tr>
+<tr><td>14</td><td align="left">Unused</td></tr>
+<tr><td>15</td><td align="left">bsel: <code>Result = B</code></td></tr>
+</tbody></table>
+<p>Some additional tips:</p>
+<ul>
+<li>When performing shifts, only the lower 5 bits of <code>B</code> are needed, because only shifts of up to 32 are supported.</li>
+<li>The result of multiplying 2 32-bit numbers can be up to 64 bits of information, but we're limited to 32-bit data lines, so <code>mulh</code> and <code>mulhu</code> are used to get the upper 32 bits of the product. The <code>Multiplier</code> component has a <code>Carry Out</code> output, with the description: &quot;the upper bits of the product&quot;. This might be particularly useful for certain multiply operations. </li>
+<li>The comparator component might be useful for implementing instructions that involve comparing inputs.</li>
+<li>A multiplexer (MUX) might be useful when deciding between operation outputs. In other words, consider simply processing the input for all operations, and then outputting the one of your choice.</li>
+<li>The ALU tests for Part A only use ALUSel values for defined instructions, so your design doesn't need to worry about the unused values.</li>
+</ul>
+<h3 id="testing">Testing</h3>
+<p>On your <strong>local machine</strong>, start by <strong>running <code>bash test.sh</code></strong> in the <code>61c-proj3</code> directory on your local machine. This gives you an overview of the commands you can run for testing. In particular, <code>bash test.sh part_a</code> runs all the tests for Part A. You can also provide the name of a specific task to run all the tests for that particular task.</p>
+<p>To test this task, on your <strong>local machine</strong>, <strong>run <code>bash test.sh test_alu</code></strong>.</p>
+<p>If you fail a test, the test runner will print the difference between the expected and actual output. To view the complete reference output (<code>.ref</code> file) and your output (<code>.out</code> file), you can use run <code>bash test.sh format</code> with the name of the output file. For this task:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/unit-alu/out/alu-add.ref</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/unit-alu/out/alu-add.out</span>
+
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/unit-alu/out/alu-all.ref</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/unit-alu/out/alu-all.out</span>
+
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/unit-alu/out/alu-logic.ref</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/unit-alu/out/alu-logic.out</span>
+
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/unit-alu/out/alu-mult.ref</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/unit-alu/out/alu-mult.out</span>
+
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/unit-alu/out/alu-shift.ref</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/unit-alu/out/alu-shift.out</span>
+
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/unit-alu/out/alu-slt-sub-bsel.ref</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/unit-alu/out/alu-slt-sub-bsel.out</span>
+</span></code></pre>
+<h3 id="debugging">Debugging</h3>
+<p>See the <a href="../testing/index.html#unit-tests">Testing and Debugging appendix</a> for a more detailed debugging guide.</p>
+<p>All the testing <code>.circ</code> circuit files are in the <code>tests</code> folder. These circuits feed a sequence of inputs to your ALU circuit (one per clock cycle) and records the outputs from your circuit.</p>
+<p>In Logisim, <strong>open one of the testing circuits</strong> for this task:</p>
+<pre class="z-code"><code><span class="z-text z-plain">tests/unit-alu/alu-add.circ
+tests/unit-alu/alu-all.circ
+tests/unit-alu/alu-logic.circ
+tests/unit-alu/alu-mult.circ
+tests/unit-alu/alu-shift.circ
+tests/unit-alu/alu-slt-sub-bsel.circ
+</span></code></pre>
+<p>To view your circuit, <strong>right-click your ALU</strong>, and <strong>select <code>View alu</code></strong>. To step through the inputs to your circuit at each time step, <strong>click <code>File -&gt; Tick Full Cycle</code></strong>. As you step through the inputs, <strong>use the Poke Tool</strong> to check the values in each wire.</p>
+<p>Note: Avoid making edits in the test circuit, as they may be lost!</p>
+<h2 id="task-2-register-file-regfile">Task 2: Register File (RegFile)</h2>
+<p>Fill in <code>regfile.circ</code> so that it contains 32 registers that can be written to and read from.</p>
+<table><thead><tr><th>Input Name</th><th>Bit Width</th><th align="left">Description</th></tr></thead><tbody>
+<tr><td><code>ReadReg1</code></td><td>5</td><td align="left">Determines which register's value is sent to the <code>RegReadData1</code> output</td></tr>
+<tr><td><code>ReadReg2</code></td><td>5</td><td align="left">Determines which register's value is sent to the <code>RegReadData2</code> output</td></tr>
+<tr><td><code>WriteReg</code></td><td>5</td><td align="left">The register to write to on the next rising edge of the clock (if <code>RegWEn</code> is 1)</td></tr>
+<tr><td><code>RegWriteData</code></td><td>32</td><td align="left">The data to write into <code>rd</code> on the next rising edge of the clock (if <code>RegWEn</code> is 1)</td></tr>
+<tr><td><code>RegWEn</code></td><td>1</td><td align="left">Determines whether data is written to the register file on the next rising edge of the clock</td></tr>
+<tr><td><code>clk</code></td><td>1</td><td align="left">Clock input</td></tr>
+</tbody></table>
+<table><thead><tr><th>Output Name</th><th>Bit Width</th><th align="left">Description</th></tr></thead><tbody>
+<tr><td><code>RegReadData1</code></td><td>32</td><td align="left">The value of the register identified by <code>ReadReg1</code></td></tr>
+<tr><td><code>RegReadData2</code></td><td>32</td><td align="left">The value of the register identified by <code>ReadReg2</code></td></tr>
+<tr><td><code>ra</code></td><td>32</td><td align="left">The value of <code>ra</code> (<code>x1</code>)</td></tr>
+<tr><td><code>sp</code></td><td>32</td><td align="left">The value of <code>sp</code> (<code>x2</code>)</td></tr>
+<tr><td><code>t0</code></td><td>32</td><td align="left">The value of <code>t0</code> (<code>x5</code>)</td></tr>
+<tr><td><code>t1</code></td><td>32</td><td align="left">The value of <code>t1</code> (<code>x6</code>)</td></tr>
+<tr><td><code>t2</code></td><td>32</td><td align="left">The value of <code>t2</code> (<code>x7</code>)</td></tr>
+<tr><td><code>s0</code></td><td>32</td><td align="left">The value of <code>s0</code> (<code>x8</code>)</td></tr>
+<tr><td><code>s1</code></td><td>32</td><td align="left">The value of <code>s1</code> (<code>x9</code>)</td></tr>
+<tr><td><code>a0</code></td><td>32</td><td align="left">The value of <code>a0</code> (<code>x10</code>)</td></tr>
+</tbody></table>
+<ul>
+<li>The 8 constant output registers are included in the output of the <code>regfile</code> circuit for testing and debugging purposes. Make sure to connect these 8 output pins to their corresponding registers.</li>
+<li>The <code>x0</code> register should always contain the 0 value, even if an instruction tries writing to it.</li>
+</ul>
+<p>Some additional tips:</p>
+<ul>
+<li>Take advantage of copy-paste! It might be a good idea to make one register completely and use it as a template for the others to avoid repetitive work. You can duplicate a selected component or group of components in Logisim using <code>Ctrl/Cmd + D</code>.</li>
+<li>The <code>Enable</code> pin on the built-in register may come in handy.</li>
+</ul>
+<h3 id="testing-and-debugging">Testing and Debugging</h3>
+<p>To test your function, in your local terminal, run <code>bash test.sh test_regfile</code>.</p>
+<p>To view the reference output and your output, you can run these formatting commands:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/unit-regfile/out/regfile-more-regs.ref</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/unit-regfile/out/regfile-more-regs.out</span>
+
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/unit-regfile/out/regfile-read-only.ref</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/unit-regfile/out/regfile-read-only.out</span>
+
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/unit-regfile/out/regfile-read-write.ref</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/unit-regfile/out/regfile-read-write.out</span>
+
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/unit-regfile/out/regfile-x0.ref</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/unit-regfile/out/regfile-x0.out</span>
+</span></code></pre>
+<p>To debug your circuit, open the following test circuits, click into your regfile circuit, and tick full cycles to step through inputs:</p>
+<pre class="z-code"><code><span class="z-text z-plain">tests/unit-regfile/regfile-more-regs.circ
+tests/unit-regfile/regfile-read-only.circ
+tests/unit-regfile/regfile-read-write.circ
+tests/unit-regfile/regfile-x0.circ
+</span></code></pre>
+<h2 id="task-3-immediate-generator">Task 3: Immediate Generator</h2>
+<p>For the rest of Part A, we will be creating just enough of the CPU to execute the <code>addi</code> instruction. In Part B, you will revisit these circuits and expand them to support more instructions.</p>
+<p>Fill in the immediate generator in <code>imm-gen.circ</code> (not the <code>imm_gen</code> subcircuit in <code>cpu.circ</code>) so that it can generate immediates for the <code>addi</code> instruction. You can ignore other immediate types for now.</p>
+<table><thead><tr><th>Input Name</th><th>Bit Width</th><th align="left">Description</th></tr></thead><tbody>
+<tr><td><code>Instruction</code></td><td>32</td><td align="left">The instruction being executed</td></tr>
+<tr><td><code>ImmSel</code></td><td>3</td><td align="left">Value determining how to reconstruct the immediate (you can ignore this for now)</td></tr>
+</tbody></table>
+<table><thead><tr><th>Output Name</th><th>Bit Width</th><th align="left">Description</th></tr></thead><tbody>
+<tr><td><code>Immediate</code></td><td>32</td><td align="left">Value of the immediate in the instruction (assume the instruction is <code>addi</code> for now)</td></tr>
+</tbody></table>
+<h3 id="testing-and-debugging-1">Testing and Debugging</h3>
+<p>You'll have to complete the next task before debugging this one!</p>
+<h2 id="task-4-datapath">Task 4: Datapath</h2>
+<p>Fill in <code>cpu.circ</code> so that it contains a datapath for a single-cycle (not pipelined) processor that can execute the <code>addi</code> instruction.</p>
+<p>Here are the inputs and outputs to the processor. You can leave most of them unchanged in this task, since they are not needed for the <code>addi</code> instruction.</p>
+<table><thead><tr><th>Input Name</th><th>Bit Width</th><th align="left">Description</th></tr></thead><tbody>
+<tr><td><code>MemReadData</code></td><td>32</td><td align="left">Data at <code>MemAddress</code> from memory</td></tr>
+<tr><td><code>Instruction</code></td><td>32</td><td align="left">The instruction at memory address <code>ProgramCounter</code></td></tr>
+<tr><td><code>clk</code></td><td>1</td><td align="left">Clock input</td></tr>
+</tbody></table>
+<table><thead><tr><th>Output Name</th><th>Bit Width</th><th align="left">Description</th></tr></thead><tbody>
+<tr><td><code>ra</code></td><td>32</td><td align="left">The value of <code>ra</code> (<code>x1</code>)</td></tr>
+<tr><td><code>sp</code></td><td>32</td><td align="left">The value of <code>sp</code> (<code>x2</code>)</td></tr>
+<tr><td><code>t0</code></td><td>32</td><td align="left">The value of <code>t0</code> (<code>x5</code>)</td></tr>
+<tr><td><code>t1</code></td><td>32</td><td align="left">The value of <code>t1</code> (<code>x6</code>)</td></tr>
+<tr><td><code>t2</code></td><td>32</td><td align="left">The value of <code>t2</code> (<code>x7</code>)</td></tr>
+<tr><td><code>s0</code></td><td>32</td><td align="left">The value of <code>s0</code> (<code>x8</code>)</td></tr>
+<tr><td><code>s1</code></td><td>32</td><td align="left">The value of <code>s1</code> (<code>x9</code>)</td></tr>
+<tr><td><code>a0</code></td><td>32</td><td align="left">The value of <code>a0</code> (<code>x10</code>)</td></tr>
+<tr><td><code>MemAddress</code></td><td>32</td><td align="left">The address in memory to read from or write to</td></tr>
+<tr><td><code>MemWriteData</code></td><td>32</td><td align="left">Data to write to memory</td></tr>
+<tr><td><code>MemWriteMask</code></td><td>4</td><td align="left">The write enable mask for writing data to memory</td></tr>
+<tr><td><code>ProgramCounter</code></td><td>32</td><td align="left">Address of the <code>Instruction</code> input</td></tr>
+</tbody></table>
+<p>We know that trying to build a datapath from scratch might be intimidating, so the rest of this section offers more detailed guidance for creating your processor.</p>
+<p>Recall the five stages for executing an instruction:</p>
+<ol>
+<li>Instruction Fetch (IF)</li>
+<li>Instruction Decode (ID)</li>
+<li>Execute (EX)</li>
+<li>Memory (MEM)</li>
+<li>Write Back (WB)</li>
+</ol>
+<h3 id="task-4-1-instruction-fetch">Task 4.1: Instruction Fetch</h3>
+<p>We have already provided a simple implementation of the program counter. It is a 32-bit register that increments by 4 on each clock cycle. The <code>ProgramCounter</code> is connected to IMEM (instruction memory), and the <code>Instruction</code> is returned from IMEM.</p>
+<p>Nothing for you to implement in this sub-task!</p>
+<h3 id="task-4-2-instruction-decode">Task 4.2: Instruction Decode</h3>
+<p>In this step, we need to break down the <code>Instruction</code> input and send the bits to the right subcircuits.</p>
+<details>
+<summary>What type of instruction is <code>addi</code>? What are the different fields in the instruction, and which bits correspond to each field?</summary>
+<p><code>addi</code> is an I-type instruction. The fields are:</p>
+<ul>
+<li><code>imm [31-20]</code></li>
+<li><code>rs1 [19-15]</code></li>
+<li><code>funct3 [14-12]</code></li>
+<li><code>rd [11-7]</code></li>
+<li><code>opcode [6-0]</code></li>
+</ul>
+</details>
+<details>
+<summary>In Logisim, what tool would you use to split out different groups of bits?</summary>
+<p>Use the splitter to extract each of the 5 fields from the instruction.</p>
+</details>
+<details>
+<summary>Which fields should connect to the register file? Which inputs of the register file should they connect to?</summary>
+<p>The <code>rs1</code> bits you split from the instruction should connect to <code>ReadReg1</code> on the regfile.
+The <code>rd</code> bits you split from the instruction should connect to <code>WriteReg</code> on the regfile.
+I-type instructions don't have <code>rs2</code> so we can ignore <code>rs2</code> for now.
+Remember to connect the clock to the register file!</p>
+</details>
+<details>
+<summary>What needs to be connected to the immediate generator?</summary>
+<p>Connect the <code>Instruction</code> to the immediate generator. Your immediate generator from the previous task should take the instruction and output the correct immediate for you.</p>
+</details>
+<h3 id="task-4-3-execute">Task 4.3: Execute</h3>
+<p>In this step, we will use the decoded instruction fields to compute the actual instruction.</p>
+<details>
+<summary>What two data values (<code>A</code> and <code>B</code>) should the <code>addi</code> instruction input to the ALU?</summary>
+<p>Input <code>A</code> should be the <code>RegReadData1</code> from the regfile.</p>
+<p>Input <code>B</code> should be the immediate from the immediate generator.</p>
+</details>
+<details>
+<summary>What <code>ALUSel</code> value should the instruction input to the ALU?</summary>
+<p><code>ALUSel</code> selects which computation the ALU will perform. Since we only care about implementing <code>addi</code> for now, we can hard-code ALU to always select the <code>add</code> operation (<code>ALUSel = 0b0000</code>).</p>
+</details>
+<h3 id="task-4-4-memory">Task 4.4: Memory</h3>
+<p>The <code>addi</code> instruction doesn't use memory, so there's nothing for you to implement in this sub-task!</p>
+<p>The memory stage is where the memory can be written to using store instructions and read from using load instructions. Because the <code>addi</code> instruction does not use memory, we do not have to worry about it for Part A. Please ignore the DMEM and leave its I/O pins undriven.</p>
+<h3 id="task-4-5-write-back">Task 4.5: Write Back</h3>
+<p>In this step, we will write the result of our <code>addi</code> instruction back into a register.</p>
+<details>
+<summary>What data is the <code>addi</code> instruction writing, and where is the instruction writing this data to?</summary>
+<p><code>addi</code> takes the result of the addition computation (from the ALU output) and writes it to the register <code>rd</code>.</p>
+<p>Connect <code>ALUResult</code> to <code>RegWriteData</code> on the regfile.</p>
+<p>Since the <code>addi</code> instruction always writes to a register, you can hard-wire <code>RegWEn</code> to <code>1</code> for now so that register writes are always enabled.</p>
+</details>
+<h3 id="testing-and-debugging-2">Testing and Debugging</h3>
+<p>See the <a href="../testing/index.html#integration-tests">Testing and Debugging appendix</a> for a more detailed debugging guide.</p>
+<p>To test your function, in your local terminal, run <code>bash test.sh test_addi</code>.</p>
+<p>To view the reference output and your output, you can run these formatting commands:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/integration-addi/out/addi-basic.ref</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/integration-addi/out/addi-basic.out</span>
+
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/integration-addi/out/addi-negative.ref</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/integration-addi/out/addi-negative.out</span>
+
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/integration-addi/out/addi-positive.ref</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">bash</span></span><span class="z-meta z-function-call z-arguments z-shell"> test.sh format tests/integration-addi/out/addi-positive.out</span>
+</span></code></pre>
+<p>To debug your circuit, open the following test circuits, click into your CPU circuit, and tick full cycles to step through inputs:</p>
+<pre class="z-code"><code><span class="z-text z-plain">tests/integration-addi/addi-basic.circ
+tests/integration-addi/addi-positive.circ
+tests/integration-addi/addi-negative.circ
+</span></code></pre>
+<h2 id="submission-and-grading">Submission and Grading</h2>
+<p>Submit your repository to the Project 3A assignment on Gradescope. The autograder tests for Part A are the same as the tests you are running locally. Part A is worth 20% of your overall Project 3 grade.</p>
+<ul>
+<li>ALU (7)</li>
+<li>RegFile (8)</li>
+<li><code>addi</code> (5)</li>
+</ul>
+<p>Total: 20 points</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container border-top pt-4 mb-5">
+<div class="row">
+<div class="col">
+<div id="dark-toggle-wrapper" class="d-none">
+<div class="form-check form-switch">
+<input id="inputDarkToggle" class="form-check-input" type="checkbox">
+<label class="form-check-label" for="inputDarkToggle">
+Dark Mode
+<a id="buttonDarkToggleReset" class="d-none" href="javascript:void(0);">(reset)</a>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+  
+
+  document.addEventListener("DOMContentLoaded", function() {
+    initToC();
+  });
+</script>
+</body>
+</html>

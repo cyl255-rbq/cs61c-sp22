@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="language" content="english">
+<title>Lab 10 | CS 61C Spring 2022</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<link rel="shortcut icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../css/main.css@h=36c89645dcb547d13f6f293a379a176dff22aab9affcefc8d3a19bc23c0f8db2.css" />
+<script defer type="text/javascript" src="../../js/main.js@h=4096b5e2a18784c27ca139ca897694176eea13de3e2168cd7e7bcdd827a35c8d"></script>
+
+<script type="text/javascript" src="../../js/main-sync.js@h=daca62fef99fb16ad6a5fd1517d7b18bed66d3241431785bf3ac1f134c166bf1"></script>
+<script>initDarkToggle();</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.17.0/tocbot.min.js" integrity="sha512-DJhUMo5TIBb3fFziiE+3OJG+j7ky+GxScxHdLADCXskEpc/AKQsbsorIYmGFJFaJvDIyP65rJNhnCTytfYAdUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+<div class="container">
+<a class="navbar-brand" href="../../index.html">
+<img class="d-inline-block me-2 rounded" height="48" width="48" src="../../img/icon-small.png" alt="outline of square computer chip with cs61c label" />
+<span class="align-middle">CS 61C Spring 2022</span>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle Navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item">
+<a class="nav-link" href="../../calendar/index.html">Calendar</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../staff/index.html">Staff</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../policies/index.html">Policies</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../resources/index.html">Resources</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../exam/index.html">Exam</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../extensions/index.html">Extensions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://oh.cs61c.org/">OH Queue</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://venus.cs61c.org/">Venus</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://inst.eecs.berkeley.edu/~cs61c/archives.html">Semesters</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<main class="mb-4">
+<section class="section">
+<div class="container">
+<div class="row spec">
+<nav id="toc-wrapper" class="col-md-3 d-print-none sticky-md-top nav-wrapper" aria-label="table of contents">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#goals">Goals</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#setup">Setup</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#setup-directions">Setup Directions</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-1-working-with-camera">Exercise 1: Working with CAMERA</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#action-item">Action Item</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-2-misses">Exercise 2: Misses</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#action-item-1">Action Item</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-3-fixing-our-faults">Exercise 3: Fixing our Faults</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#action-item-2">Action Item</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-4-bringing-it-all-together">Exercise 4: Bringing it All Together</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#action-item-3">Action Item</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-5-feedback-survey">Exercise 5: Feedback Survey</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#submission">Submission</a>
+</li>
+</ul>
+</nav>
+<div id="toc-content-wrapper" class="content col-md-9">
+<h1 class="title">Lab 10: Virtual Memory</h1>
+<p class="subtitle">Deadline: Monday, April 25, 11:59:59 PM PT</p>
+<p><a href="https://docs.google.com/presentation/d/1BvNhxpBHpkP5qBPPA_TVf15H6NsSQ8qEmkyIr2gS28s/edit?usp=sharing">Lab Section Slides</a></p>
+<hr />
+<h2 id="goals">Goals</h2>
+<ul>
+<li>Explore the workings of virtual memory, specifically the TLB and the Page Table.</li>
+<li>Analyze TLB hit rate and Page Table hit rate and determine what accesses optimize these values.</li>
+</ul>
+<hr />
+<h2 id="setup">Setup</h2>
+<p>You do not need to pull from the lab starter for Lab 10.</p>
+<p>You will be submitting your answers to <a href="https://docs.google.com/forms/d/e/1FAIpQLSc9L11wWPr1SgxHw54bc6wsqwOyGJ3oBE5Jdk6j0RemMEkxIg/viewform?usp=sf_link">the Lab 10 Google Form</a></p>
+<p>For this lab we will mostly be using the virtual memory simulation features of Camera, a cache and virtual memory simulator. </p>
+<h3 id="setup-directions">Setup Directions</h3>
+<p><a href="camera-0.0.2.jar">Download the Camera program</a>. Open a terminal in your GUI environment, go to the directory where you downloaded the JAR file, and run:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">java</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> -</span>jar</span> camera-0.0.2.jar</span>
+</span></code></pre>
+<p>Once Camera opens up, select the &quot;Virtual Memory and Paging&quot; option to open a visualization of the virtual memory system. In the top left you can see the contents of physical memory. Just below that is a listing of all the pages of virtual memory for this process. To the right of these items are the contents of the TLB and the Page Table. At this point these should all be empty as we haven't done anything yet. Read about the statistics of your memory system in the &quot;PROGRESS UPDATE&quot; box at the bottom of the window. This area will keep you updated on your status through the simulation as it progresses. </p>
+<p>If Camera is not working for you, please partner up with someone who is able to run Camera. Alternatively, you can come to a lab section and follow along with the lab TA.</p>
+<p>Before you continue, <strong>MAKE SURE THAT YOU OPENED THE VM SIMULATOR AND NOT THE CACHE SIMULATOR</strong>.</p>
+<hr />
+<h2 id="exercise-1-working-with-camera">Exercise 1: Working with CAMERA</h2>
+<p>Click the button labeled &quot;Auto Generate Add. Ref. Str.&quot; at the right-hand side of the window. This will generate a set of ten address references. You can think of these as a series of RISC-V &quot;load word&quot; instructions reading from the memory address specified. Click the button labeled &quot;Next&quot; to begin the simulation.</p>
+<p>Complete the simulation and make sure that you read and understand the &quot;PROGRESS UPDATE&quot; box on every step.</p>
+<p><strong>Note</strong> Camera uses the terminology &quot;frame number&quot; to mean &quot;physical page number&quot;.</p>
+<p><strong>Note</strong> In class, our memory is byte addressable. In camera, the memory is word addressable. Therefore, the page offset in Camera will tell us the word offset within the page, not the byte offset. The diagram below shows the difference between a byte address and a word address.</p>
+<img src="addresses.png" width="500" />
+<h3 id="action-item">Action Item</h3>
+<p>Please answer the Exercise 1 questions in the lab form.</p>
+<hr />
+<h2 id="exercise-2-misses">Exercise 2: Misses</h2>
+<p>Now that you've seen what a random workload looks like in the VM system let's try creating a custom workload with a specific property. Your goal for this exercise is to create a workload of ten memory accesses that will cause ten TLB misses and ten Page Faults. You should be able to come up with such a workload on paper, but then you should run it in CAMERA to verify your work. </p>
+<details>
+<summary>Hint</summary>
+<p>Your solution should be a string of 10 accesses such that the same VPN doesn't appear twice within 4 memory accesses. This will force ten TLB misses and 10 page faults.</p>
+</details>
+<details>
+<summary>Example Solution</summary>
+<p>0x01, 0x22, 0x43, 0x64, 0x85, 0xA6, 0xC7, 0xE8, 0x09, 0x20</p>
+</details>
+<h3 id="action-item-1">Action Item</h3>
+<p>Create a workload of ten memory accesses that will cause ten TLB misses and ten Page Faults. This exercise is not autograded, but you can check yourself using Camera.</p>
+<p>To test your string in Camera, click &quot;Self Generate Add. Ref. Str.&quot; Then enter the addresses one at a time. For example, if your string was &quot;0x01, 0x22, 0x43&quot;, you would type &quot;01&quot;, then click &quot;Continue&quot;, then type &quot;22&quot;, click &quot;Continue&quot;, then type &quot;43&quot;, then click &quot;Done&quot;.</p>
+<hr />
+<h2 id="exercise-3-fixing-our-faults">Exercise 3: Fixing our Faults</h2>
+<p>Given your sequence of memory accesses from Exercise 2, can you find a change to a single parameter (e.g. TLB Size, Physical Memory Size, Virtual Memory Size, Page Size) that would result in the same number (ten) of TLB misses but result in fewer than ten page faults? There are two correct answers. </p>
+<h3 id="action-item-2">Action Item</h3>
+<p>Please provide your answers in the google form. Format your two answers in alphabetical order as such: <code>A_ANS, B_ANS</code>. For example, if your answers are <code>daisy, cotton ball</code>, write it as <code>cotton ball, daisy</code>.</p>
+<hr />
+<h2 id="exercise-4-bringing-it-all-together">Exercise 4: Bringing it All Together</h2>
+<p>Watch this video of a VMSIM simulation. VMSIM is another virtual memory simulation tool.</p>
+<video controls muted>
+ <source src="https://inst.eecs.berkeley.edu/~cs61c/su20/labs/lab08/lab08resources/vm.webm" type="video/webm">
+</video>
+<p>We can see that there are now multiple processes running in this simulation (P1, P2, P3, and P4 at the top). In the previous exercises, we were only running one process. We can also see that this simulation reports a much higher percentage of TLB misses than the previous exercises. Why might this be?</p>
+<h3 id="action-item-3">Action Item</h3>
+<p>Answer the question in the google form.</p>
+<hr />
+<h2 id="exercise-5-feedback-survey">Exercise 5: Feedback Survey</h2>
+<p>We are working to improve the labs for next semester, so please fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLScWmuClfptmgVCF9P0vZE5CeViB2O8drxLBwo4wxL8EjoVofw/viewform?usp=sf_link">this survey</a> to tell us about your experience with Lab 8. The survey will be collecting your email to verify that you have submitted it, but your responses will be anonymized before the data is analyzed. Thank you!</p>
+<hr />
+<h2 id="submission">Submission</h2>
+<p>Submit to the <strong>Lab 10</strong> assignment on Gradescope. There is no code to submit; however, please submit your lab repository to github as you usually do. The autograder will check to see if you have submitted the feedback form and received full credit on the answer form.</p>
+<hr />
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container border-top pt-4 mb-5">
+<div class="row">
+<div class="col">
+<div id="dark-toggle-wrapper" class="d-none">
+<div class="form-check form-switch">
+<input id="inputDarkToggle" class="form-check-input" type="checkbox">
+<label class="form-check-label" for="inputDarkToggle">
+Dark Mode
+<a id="buttonDarkToggleReset" class="d-none" href="javascript:void(0);">(reset)</a>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+  
+
+  
+    document.addEventListener("DOMContentLoaded", function() {
+      initToC();
+    });
+  
+</script>
+</body>
+</html>

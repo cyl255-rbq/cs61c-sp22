@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="language" content="english">
+<title>Appendix: Function Definitions | CS 61C Spring 2022</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<link rel="shortcut icon" type="image/png" href="../../../img/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../../css/main.css@h=36c89645dcb547d13f6f293a379a176dff22aab9affcefc8d3a19bc23c0f8db2.css" />
+<script defer type="text/javascript" src="../../../js/main.js@h=4096b5e2a18784c27ca139ca897694176eea13de3e2168cd7e7bcdd827a35c8d"></script>
+
+<script type="text/javascript" src="../../../js/main-sync.js@h=daca62fef99fb16ad6a5fd1517d7b18bed66d3241431785bf3ac1f134c166bf1"></script>
+<script>initDarkToggle();</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.17.0/tocbot.min.js" integrity="sha512-DJhUMo5TIBb3fFziiE+3OJG+j7ky+GxScxHdLADCXskEpc/AKQsbsorIYmGFJFaJvDIyP65rJNhnCTytfYAdUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+<div class="container">
+<a class="navbar-brand" href="../../../index.html">
+<img class="d-inline-block me-2 rounded" height="48" width="48" src="../../../img/icon-small.png" alt="outline of square computer chip with cs61c label" />
+<span class="align-middle">CS 61C Spring 2022</span>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle Navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item">
+<a class="nav-link" href="../../../calendar/index.html">Calendar</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../staff/index.html">Staff</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../policies/index.html">Policies</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../resources/index.html">Resources</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../exam/index.html">Exam</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../../extensions/index.html">Extensions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://oh.cs61c.org/">OH Queue</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://venus.cs61c.org/">Venus</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://inst.eecs.berkeley.edu/~cs61c/archives.html">Semesters</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<main class="mb-4">
+<section class="section">
+<div class="container">
+<div class="row spec">
+<nav class="col-md-3 d-print-none sticky-md-top nav-wrapper" aria-label="table of contents">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="../index.html">Project 2: CS61Classify</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../part-a/index.html">Part A</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../part-b/index.html">Part B</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html">Appendix: Function Definitions</a>
+<div id="toc-wrapper">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#utilities-memory-allocation">Utilities: Memory Allocation</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#malloc">malloc</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#free">free</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#utilities-file-operations">Utilities: File Operations</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#fopen">fopen</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#fread">fread</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#fwrite">fwrite</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#fclose">fclose</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#utilities-printing">Utilities: Printing</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#print-int">print_int</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#print-char">print_char</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#part-a">Part A</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#relu">relu</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#argmax">argmax</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#dot">dot</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#matmul">matmul</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#testing-functions">Testing functions</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#part-b">Part B</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#read-matrix">read_matrix</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#write-matrix">write_matrix</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#classify">classify</a>
+</li>
+</ul>
+
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#error-codes">Error Codes</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#part-a-1">Part A</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#part-b-1">Part B</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../calling-convention/index.html">Appendix: Calling Convention</a>
+</li>
+</ul>
+</nav>
+<div id="toc-content-wrapper" class="content col-md-9">
+<h1>Appendix: Function Definitions</h1>
+<p>This appendix contains the function definitions (arguments, return values, error codes) for all the provided utility functions and all the functions you need to implement.</p>
+<h2 id="utilities-memory-allocation">Utilities: Memory Allocation</h2>
+<h3 id="malloc"><code>malloc</code></h3>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>malloc</code>: Allocates heap memory.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The size of the memory that we want to allocate (in bytes).</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>void *</code></td>
+<td>A pointer to the allocated memory. If the allocation failed, this value is 0.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="free"><code>free</code></h3>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>free</code>: Frees heap memory.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>A pointer to the allocated memory to be freed.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td colspan="3">None</td>
+</tr>
+</tbody>
+</table>
+<h2 id="utilities-file-operations">Utilities: File Operations</h2>
+<h3 id="fopen"><code>fopen</code></h3>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>fopen</code>: Open a file for reading or writing.</td>
+</tr>
+<tr>
+<td rowspan="2" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>str *</code></td>
+<td>A pointer to the filename string.</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>int</code></td>
+<td>Permission bits. 0 for read-only, 1 for write-only.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>A file descriptor. This integer can be used in other file operation functions to refer to the opened file. If opening the file failed, this value is -1.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fread"><code>fread</code></h3>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>fread</code>: Read bytes from a file to a buffer in memory. Subsequent reads will read from later parts of the file.</td>
+</tr>
+<tr>
+<td rowspan="3" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The file descriptor of the file we want to read from, previously returned by <code>fopen</code>.</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>int*</code></td>
+<td>A pointer to the buffer where the read bytes will be stored. The buffer should have been previously allocated with <code>malloc</code>.</td>
+</tr>
+<tr>
+<td><code>a2</code></td>
+<td><code>int</code></td>
+<td>The number of bytes to read from the file.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The number of bytes actually read from the file. If this differs from the argument provided in <code>a2</code>, then we either hit the end of the file or there was an error.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fwrite"><code>fwrite</code></h3>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>fwrite</code>: Write bytes from a buffer in memory to a file. Subsequent writes append to the end of the existing file.</td>
+</tr>
+<tr>
+<td rowspan="4" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The file descriptor of the file we want to write to, previously returned by <code>fopen</code>.</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>void *</code></td>
+<td>A pointer to a buffer containing what we want to write to the file.</td>
+</tr>
+<tr>
+<td><code>a2</code></td>
+<td><code>int</code></td>
+<td>The number of elements to write to the file.</td>
+</tr>
+<tr>
+<td><code>a3</code></td>
+<td><code>int</code></td>
+<td>The size of each element. In total, <code>a2</code> × <code>a3</code> bytes are written.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The number of items actually written to the file. If this differs from the number of items specified (<code>a2</code>), then we either hit the end of the file or there was an error.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fclose"><code>fclose</code></h3>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>fclose</code>: Close a file, saving any writes we have made to the file.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The file descriptor of the file we want to close, previously returned by <code>fopen</code>.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>0 on success, and -1 otherwise.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="utilities-printing">Utilities: Printing</h2>
+<h3 id="print-int"><code>print_int</code></h3>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>print_int</code>: Prints an integer.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The integer to print.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td colspan="3">None</td>
+</tr>
+</tbody>
+</table>
+<h3 id="print-char"><code>print_char</code></h3>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>print_char</code>: Prints a character.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>char</code></td>
+<td>The character to print. You can provide the ASCII code or put the character directly in the register like <code>li t0 '\n'</code>.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td colspan="3">None</td>
+</tr>
+</tbody>
+</table>
+<h2 id="part-a">Part A</h2>
+<h3 id="relu"><code>relu</code></h3>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>relu</code>: Task 2.</td>
+</tr>
+<tr>
+<td rowspan="2" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of the integer array.</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>int</code></td>
+<td>The number of integers in the array. You can assume that this argument matches the actual length of the integer array.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td colspan="3">None</td>
+</tr>
+</tbody>
+</table>
+<h3 id="argmax"><code>argmax</code></h3>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>argmax</code>: Task 3.</td>
+</tr>
+<tr>
+<td rowspan="2" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of the integer array.</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>int</code></td>
+<td>The number of integers in the array. You can assume that this argument matches the actual length of the integer array.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The index of the largest element. If the largest element appears multiple times, return the smallest index.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dot"><code>dot</code></h3>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>dot</code>: Task 4.</td>
+</tr>
+<tr>
+<td rowspan="5" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of the first array.</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of the second array.</td>
+</tr>
+<tr>
+<td><code>a2</code></td>
+<td><code>int</code></td>
+<td>The number of elements to use in the calculation.</td>
+</tr>
+<tr>
+<td><code>a3</code></td>
+<td><code>int</code></td>
+<td>The stride of the first array.</td>
+</tr>
+<tr>
+<td><code>a4</code></td>
+<td><code>int</code></td>
+<td>The stride of the second array.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The dot product of the two arrays, using the given number of elements and the given strides.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="matmul"><code>matmul</code></h3>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>matmul</code>: Task 5.</td>
+</tr>
+<tr>
+<td rowspan="7" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of the first matrix A (stored as an integer array in row-major order).</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>int</code></td>
+<td>The number of rows (height) of the first matrix A.</td>
+</tr>
+<tr>
+ <td><code>a2</code></td>
+<td><code>int</code></td>
+<td>The number of columns (width) of the first matrix A.</td>
+</tr>
+<tr>
+<td><code>a3</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of the second matrix B (stored as an integer array in row-major order).</td>
+</tr>
+<tr>
+<td><code>a4</code></td>
+<td><code>int</code></td>
+<td>The number of rows (height) of the second matrix B.</td>
+</tr>
+<tr>
+<td><code>a5</code></td>
+<td><code>int</code></td>
+<td>The number of columns (width) of the second matrix B.</td>
+</tr>
+<tr>
+<td><code>a6</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of an integer array where the result C should be stored. You can assume this memory has been allocated (but is uninitialized) and has enough space to store C.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td colspan="3">None</td>
+</tr>
+</tbody>
+</table>
+<h3 id="testing-functions">Testing functions</h3>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4">Loss functions: Task 6.</td>
+</tr>
+<tr>
+<td rowspan="4" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of the first input array.</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of the second input array.</td>
+</tr>
+<tr>
+<td><code>a2</code></td>
+<td><code>int</code></td>
+<td>The number of integers in the array.</td>
+</tr>
+<tr>
+<td><code>a3</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the start of the output array, where the results will be stored.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The sum of the elements in the output array. (No return value for zero-one loss.)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>initialize_zero</code>: Task 6.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The size of the array to be created.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the newly-allocated array of zeros.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="part-b">Part B</h2>
+<h3 id="read-matrix"><code>read_matrix</code></h3>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>read_matrix</code>: Task 7.</td>
+</tr>
+<tr>
+<td rowspan="3" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>char *</code></td>
+<td>A pointer to the filename string.</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>int *</code></td>
+<td>A pointer to an integer which will contain the number of rows. You can assume this points to allocated memory.</td>
+</tr>
+<tr>
+<td><code>a2</code></td>
+<td><code>int *</code></td>
+<td>A pointer to an integer which will contain the number of columns. You can assume this points to allocated memory.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the matrix in memory.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="write-matrix"><code>write_matrix</code></h3>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 67%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>write_matrix</code>: Task 8.</td>
+</tr>
+<tr>
+<td rowspan="4" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>char *</code></td>
+<td>A pointer to the filename string.</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>int *</code></td>
+<td>A pointer to the matrix in memory (stored as an integer array).</td>
+</tr>
+<tr>
+<td><code>a2</code></td>
+<td><code>int</code></td>
+<td>The number of rows in the matrix.</td>
+</tr>
+<tr>
+<td><code>a3</code></td>
+<td><code>int</code></td>
+<td>The number of columns in the matrix.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td colspan="3">None</td>
+</tr>
+</tbody>
+</table>
+<h3 id="classify"><code>classify</code></h3>
+<table>
+<colgroup>
+<col span="1" style="width: 15%;">
+<col span="1" style="width: 19%;">
+<col span="1" style="width: 9%;">
+<col span="1" style="width: 57%;">
+</colgroup>
+<tbody>
+<tr>
+<td colspan="4"><code>classify</code>: Task 9.</td>
+</tr>
+<tr>
+<td rowspan="7" style="vertical-align: middle;"><b>Arguments</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td><code>argc</code> (the number of arguments provided)</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td><code>char **</code></td>
+<td><code>argv</code>, a pointer to an array of argument strings (<code>char *</code>)</td>
+</tr>
+<tr>
+<td><code>a1[1]</code> = <code>*(a1 + 4)</code></td>
+<td><code>char *</code></td>
+<td>A pointer to the filepath string of the first matrix file <code>m0</code>.</td>
+</tr>
+<tr>
+<td><code>a1[2]</code> = <code>*(a1 + 8)</code></td>
+<td><code>char *</code></td>
+<td>A pointer to the filepath string of the second matrix file <code>m1</code>.</td>
+</tr>
+<tr>
+<td><code>a1[3]</code> = <code>*(a1 + 12)</code></td>
+<td><code>char *</code></td>
+<td>A pointer to the filepath string of the input matrix file <code>input</code>.</td>
+</tr>
+<tr>
+<td><code>a1[4]</code> = <code>*(a1 + 16)</code></td>
+<td><code>char *</code></td>
+<td>A pointer to the filepath string of the output file.</td>
+</tr>
+<tr>
+<td><code>a2</code></td>
+<td><code>int</code></td>
+<td>If set to 0, print out the classification. Otherwise, do not print anything.</td>
+</tr>
+<tr>
+<td style="vertical-align: middle;"><b>Return values</b></td>
+<td><code>a0</code></td>
+<td><code>int</code></td>
+<td>The classification (see above).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="error-codes">Error Codes</h2>
+<h3 id="part-a-1">Part A</h3>
+<table>
+<colgroup>
+<col span="1" style="width: 8%;">
+<col span="1" style="width: 56%;">
+<col span="1" style="width: 36%;">
+</colgroup>
+<tbody>
+<tr>
+<td><b>Return code</b></td>
+<td><b>Exception</b></td>
+<td><b>Functions</b></td>
+</tr>
+<tr>
+<td>26</td>
+<td><code>malloc</code> returns an error.</td>
+<td><code>initialize_zero</code> (6)</td>
+</tr>
+<tr>
+<td>36</td>
+<td>The length of the array is less than 1.</td>
+<td><code>relu</code> (2), <code>argmax</code> (3), <code>dot</code> (4), loss functions (6), <code>initialize_zero</code> (6)</td>
+</tr>
+<tr>
+<td>37</td>
+<td>The stride of either array is less than 1.</td>
+<td><code>dot</code> (4)</td>
+</tr>
+<tr>
+<td>38</td>
+<td>The height or width of either matrix is less than 1.</td>
+<td><code>matmul</code> (5)</td>
+</tr>
+<tr>
+<td>38</td>
+<td>The number of columns (width) of the first matrix A is not equal to the number of rows (height) of the second matrix B.</td>
+<td><code>matmul</code> (5)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="part-b-1">Part B</h3>
+<table>
+<colgroup>
+<col span="1" style="width: 8%;">
+<col span="1" style="width: 56%;">
+<col span="1" style="width: 36%;">
+</colgroup>
+<tbody>
+<tr>
+<td><b>Return code</b></td>
+<td><b>Exception</b></td>
+<td><b>Functions</b></td>
+</tr>
+<tr>
+<td>26</td>
+<td><code>malloc</code> returns an error.</td>
+<td><code>read_matrix</code> (7), <code>classify</code> (9)</td>
+</tr>
+<tr>
+<td>27</td>
+<td><code>fopen</code> returns an error.</td>
+<td><code>read_matrix</code> (7), <code>write_matrix</code> (8)</td>
+</tr>
+<tr>
+<td>28</td>
+<td><code>fclose</code> returns an error.</td>
+<td><code>read_matrix</code> (7), <code>write_matrix</code> (8)</td>
+</tr>
+<tr>
+<td>29</td>
+<td><code>fread</code> does not read the correct number of bytes.</td>
+<td><code>read_matrix</code> (7)</td>
+</tr>
+<tr>
+<td>30</td>
+<td><code>fwrite</code> does not write the correct number of bytes.</td>
+<td><code>write_matrix</code> (8)</td>
+</tr>
+<tr>
+<td>30</td>
+<td>There are an incorrect number of command line arguments.</td>
+<td><code>classify</code> (9)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container border-top pt-4 mb-5">
+<div class="row">
+<div class="col">
+<div id="dark-toggle-wrapper" class="d-none">
+<div class="form-check form-switch">
+<input id="inputDarkToggle" class="form-check-input" type="checkbox">
+<label class="form-check-label" for="inputDarkToggle">
+Dark Mode
+<a id="buttonDarkToggleReset" class="d-none" href="javascript:void(0);">(reset)</a>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+  
+
+  document.addEventListener("DOMContentLoaded", function() {
+    initToC();
+  });
+</script>
+</body>
+</html>

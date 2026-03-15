@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="language" content="english">
+<title>Lab 9 | CS 61C Spring 2022</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<link rel="shortcut icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../css/main.css@h=36c89645dcb547d13f6f293a379a176dff22aab9affcefc8d3a19bc23c0f8db2.css" />
+<script defer type="text/javascript" src="../../js/main.js@h=4096b5e2a18784c27ca139ca897694176eea13de3e2168cd7e7bcdd827a35c8d"></script>
+
+<script type="text/javascript" src="../../js/main-sync.js@h=daca62fef99fb16ad6a5fd1517d7b18bed66d3241431785bf3ac1f134c166bf1"></script>
+<script>initDarkToggle();</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.17.0/tocbot.min.js" integrity="sha512-DJhUMo5TIBb3fFziiE+3OJG+j7ky+GxScxHdLADCXskEpc/AKQsbsorIYmGFJFaJvDIyP65rJNhnCTytfYAdUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+<div class="container">
+<a class="navbar-brand" href="../../index.html">
+<img class="d-inline-block me-2 rounded" height="48" width="48" src="../../img/icon-small.png" alt="outline of square computer chip with cs61c label" />
+<span class="align-middle">CS 61C Spring 2022</span>
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle Navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item">
+<a class="nav-link" href="../../calendar/index.html">Calendar</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../staff/index.html">Staff</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../policies/index.html">Policies</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../resources/index.html">Resources</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../exam/index.html">Exam</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../extensions/index.html">Extensions</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://oh.cs61c.org/">OH Queue</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://venus.cs61c.org/">Venus</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://inst.eecs.berkeley.edu/~cs61c/archives.html">Semesters</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<main class="mb-4">
+<section class="section">
+<div class="container">
+<div class="row spec">
+<nav id="toc-wrapper" class="col-md-3 d-print-none sticky-md-top nav-wrapper" aria-label="table of contents">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#setup">Setup</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#info-openmp">Info: OpenMP</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-1-openmp-hello-world">Exercise 1: OpenMP Hello World</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-2-vector-addition">Exercise 2: Vector Addition</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#action-items">Action Items</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#question">Question</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-3-dot-product">Exercise 3: Dot Product</a>
+<ul class="nav flex-column">
+<li class="nav-item">
+<a class="nav-link" href="index.html#action-items-1">Action Items</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#exercise-4-feedback-form">Exercise 4: Feedback Form</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="index.html#submission">Submission</a>
+</li>
+</ul>
+</nav>
+<div id="toc-content-wrapper" class="content col-md-9">
+<h1 class="title">Lab 9: Thread-Level Parallelism</h1>
+<p class="subtitle">Deadline: Monday, April 18, 11:59:59 PM PT</p>
+<hr />
+<p><a href="https://docs.google.com/presentation/d/1M81_GKo4XaEs0mT9RsoQXNDEjJyhDNGgMBhJxVOBlW4/edit?usp=sharing">Lab Section Slides</a></p>
+<h2 id="setup">Setup</h2>
+<div class="alert alert-warning">
+<p><strong>Warning</strong>: We strongly recommend working on the hive machines for this lab. OpenMP may perform differently on your local machine, and installing it can be annoying.</p>
+</div>
+<p>In your <code>labs</code> directory, pull the files for this lab with:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">git</span></span><span class="z-meta z-function-call z-arguments z-shell"> pull starter main</span>
+</span></code></pre>
+<hr />
+<h2 id="info-openmp">Info: OpenMP</h2>
+<p>OpenMP stands for <strong>O</strong>pen specification for <strong>M</strong>ulti-<strong>P</strong>rocessing. It is a framework that offers a C interface. It is not a built-in part of the C language -- most OpenMP features are compiler directives. (One example of a compiler directive you've seen in the past is <code>#include</code>.)</p>
+<p>Benefits of multi-threaded programming using OpenMP include:</p>
+<ul>
+<li>A very simple interface that allows a programmer to separate a program into serial regions and parallel regions.</li>
+<li>Convenient synchronization control (data race bugs in threads are very hard to trace).</li>
+</ul>
+<p>In this lab, we'll practice some basic usage of OpenMP. OpenMP is already installed on hive machines, so we strongly recommend that you work on the hive machines for this lab.</p>
+<hr />
+<h2 id="exercise-1-openmp-hello-world">Exercise 1: OpenMP Hello World</h2>
+<p>Consider the sample hello world program (<code>hello.c</code>), which prints <code>&quot;hello world from thread #&quot;</code> from each thread:</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-storage z-type z-c">int</span> <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">main</span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c"> </span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span></span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c">
+<span class="z-meta z-preprocessor z-c">    <span class="z-keyword z-control z-import z-c">#pragma</span> omp parallel
+</span>    <span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span>
+        <span class="z-storage z-type z-c">int</span> thread_id <span class="z-keyword z-operator z-assignment z-c">=</span> <span class="z-meta z-function-call z-c"><span class="z-variable z-function z-c">omp_get_thread_num</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function-call z-c"></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-punctuation z-terminator z-c">;</span>
+        <span class="z-meta z-function-call z-c"><span class="z-support z-function z-C99 z-c">printf</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c"><span class="z-string z-quoted z-double z-c"><span class="z-punctuation z-definition z-string z-begin z-c">&quot;</span>hello world from thread <span class="z-constant z-other z-placeholder z-c">%d</span><span class="z-constant z-character z-escape z-c">\n</span><span class="z-punctuation z-definition z-string z-end z-c">&quot;</span></span><span class="z-punctuation z-separator z-c">,</span> thread_id</span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-punctuation z-terminator z-c">;</span>
+    <span class="z-punctuation z-section z-block z-end z-c">}</span></span>
+</span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-end z-c">}</span></span></span>
+</span></code></pre>
+<p>This program will create a team of parallel threads. Each thread prints out a hello world message, along with its own thread number. </p>
+<p>Let's break down the <code>#pragma omp parallel</code> line: </p>
+<ul>
+<li><code>#pragma</code> tells the compiler that the rest of the line is a directive.</li>
+<li><code>omp</code> declares that the directive is for OpenMP.</li>
+<li><code>parallel</code> says that the following block statement -- the part inside the curly braces (<code>{</code>/<code>}</code>) -- should be executed in parallel by different threads. </li>
+</ul>
+<p><strong>IMPORTANT</strong> When writing your own code, ensure that you place the opening curly brace on a new line. Do not put it on the same line as the directive.</p>
+<p>You can change the number of OpenMP threads by setting the environment variable <code>OMP_NUM_THREADS</code> or by using the <a href="https://gcc.gnu.org/onlinedocs/libgomp/omp_005fset_005fnum_005fthreads.html"><code>omp_set_num_threads</code></a> function before the parallel section in your program. </p>
+<p>Try running the program:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">make</span></span><span class="z-meta z-function-call z-arguments z-shell"> hello</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">./hello</span></span>
+</span></code></pre>
+<p>If you run <code>./hello</code> a couple of times, you may notice that the printed numbers are not always in increasing order and will most likely vary across runs. This is because we didn't specify any sort of synchronization options, so OpenMP will not enforce any execution order. (More on that later.) It is also vital to note that the variable <code>thread_id</code> is defined inside the parallel block, so it is local to each thread and not shared across all threads. In general with OpenMP, variables declared inside the parallel block will be private to each thread, but variables declared outside a parallel block will be shared across all threads. Again, there are ways to override this, but more on that later.</p>
+<hr />
+<h2 id="exercise-2-vector-addition">Exercise 2: Vector Addition</h2>
+<p>Vector addition is a naturally parallel computation, since it's an elementwise operation (element <code>i</code> of the result vector does not depend on elements <code>j != i</code>), so it makes for a good first exercise. The <code>v_add()</code> functions inside <code>omp_apps.c</code> will store the sum of input vectors <code>x</code> and <code>y</code> into the result vector <code>z</code>. A first attempt at this might look like:</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-storage z-type z-c">void</span> <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">v_add</span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-storage z-type z-c">double</span><span class="z-keyword z-operator z-c">*</span> <span class="z-variable z-parameter z-c">x</span><span class="z-punctuation z-separator z-c">,</span> <span class="z-storage z-type z-c">double</span><span class="z-keyword z-operator z-c">*</span> <span class="z-variable z-parameter z-c">y</span><span class="z-punctuation z-separator z-c">,</span> <span class="z-storage z-type z-c">double</span><span class="z-keyword z-operator z-c">*</span> <span class="z-variable z-parameter z-c">z</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c"> </span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span></span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c">
+<span class="z-meta z-preprocessor z-c">    <span class="z-keyword z-control z-import z-c">#pragma</span> omp parallel
+</span>    <span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span>
+        <span class="z-keyword z-control z-c">for</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span><span class="z-storage z-type z-c">int</span> i<span class="z-keyword z-operator z-assignment z-c">=</span><span class="z-constant z-numeric z-integer z-decimal z-c">0</span><span class="z-punctuation z-terminator z-c">;</span> i<span class="z-keyword z-operator z-comparison z-c">&lt;</span>ARRAY_SIZE<span class="z-punctuation z-terminator z-c">;</span> i<span class="z-keyword z-operator z-arithmetic z-c">++</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span>
+        <span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span>
+            z<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>i<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span> <span class="z-keyword z-operator z-assignment z-c">=</span> x<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>i<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span> <span class="z-keyword z-operator z-arithmetic z-c">+</span> y<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>i<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span><span class="z-punctuation z-terminator z-c">;</span>
+        <span class="z-punctuation z-section z-block z-end z-c">}</span></span>
+    <span class="z-punctuation z-section z-block z-end z-c">}</span></span>
+</span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-end z-c">}</span></span></span>
+</span></code></pre>
+<p>Try running the tests:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">make</span></span><span class="z-meta z-function-call z-arguments z-shell"> v_add</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">./v_add</span></span>
+</span></code></pre>
+<p>The testing framework will time the function execution for different thread counts. You should observe that this implementation performs worse as we increase the number of threads! Why?</p>
+<p>The issue is that each thread is executing all of the code within the <code>omp parallel</code> block. If we have 8 threads, we'll actually be performing the same vector addition 8 times! Not only that, but various threads writing to the same variables in memory may cause a decrease in performance due to cache synchronization. Rather than have each thread run every iteration of the <code>for</code> loop, we need to split the <code>for</code> loop iterations across all the threads so each thread does only a portion of the work.</p>
+<p>The good news is that OpenMP has built-in functionality for dividing up the work of <code>for</code> loops among threads. The bad news is that for this exercise, we'd like you to first try splitting the for loop iterations among threads manually. Let's try to understand a couple methods we could use to divide the work, and the benefits/drawbacks of each way. You cannot use the OpenMP <code>for</code> directive for this exercise, but this is how you'd use that directive:</p>
+<pre data-lang="c" class="language-c z-code"><code class="language-c" data-lang="c"><span class="z-source z-c"><span class="z-storage z-type z-c">void</span> <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">v_add</span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-storage z-type z-c">double</span><span class="z-keyword z-operator z-c">*</span> <span class="z-variable z-parameter z-c">x</span><span class="z-punctuation z-separator z-c">,</span> <span class="z-storage z-type z-c">double</span><span class="z-keyword z-operator z-c">*</span> <span class="z-variable z-parameter z-c">y</span><span class="z-punctuation z-separator z-c">,</span> <span class="z-storage z-type z-c">double</span><span class="z-keyword z-operator z-c">*</span> <span class="z-variable z-parameter z-c">z</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c"> </span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span></span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c">
+<span class="z-meta z-preprocessor z-c">    <span class="z-keyword z-control z-import z-c">#pragma</span> omp parallel for
+</span>    <span class="z-keyword z-control z-c">for</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span><span class="z-storage z-type z-c">int</span> i<span class="z-keyword z-operator z-assignment z-c">=</span><span class="z-constant z-numeric z-integer z-decimal z-c">0</span><span class="z-punctuation z-terminator z-c">;</span> i<span class="z-keyword z-operator z-comparison z-c">&lt;</span>ARRAY_SIZE<span class="z-punctuation z-terminator z-c">;</span> i<span class="z-keyword z-operator z-arithmetic z-c">++</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span>
+    <span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span>
+        z<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>i<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span> <span class="z-keyword z-operator z-assignment z-c">=</span> x<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>i<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span> <span class="z-keyword z-operator z-arithmetic z-c">+</span> y<span class="z-meta z-brackets z-c"><span class="z-punctuation z-section z-brackets z-begin z-c">[</span>i<span class="z-punctuation z-section z-brackets z-end z-c">]</span></span><span class="z-punctuation z-terminator z-c">;</span>
+    <span class="z-punctuation z-section z-block z-end z-c">}</span></span>
+</span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-end z-c">}</span></span></span>
+</span></code></pre>
+<p>The two differences between this example and the previous one are: 1), the <code>for</code> at the end of the directive, and 2), the lack of opening and closing brackets around the parallel section. The <code>#pragma omp parallel for</code> directive needs only to be placed directly before a <code>for</code> loop; brackets are not required. Again, remember that for this exercise, you cannot use this directive. </p>
+<p>Your task is to optimize <code>v_add()</code>. Remember that speedup may increase slower after a certain number of threads, since part of the whole program is not parallelizable. Your implementations should use the following 2 functions -- don't hardcode thread counts or thread IDs:</p>
+<ul>
+<li><code>int omp_get_num_threads()</code> - returns the current <strong>total</strong> number of OpenMP threads. Note that the number of threads will be <code>1</code> outside of an OpenMP <code>parallel</code> section.</li>
+<li><code>int omp_get_thread_num()</code> - returns the thread number of the current thread, commonly used as thread ID.</li>
+</ul>
+<h3 id="action-items">Action Items</h3>
+<p>The functions you'll be implementing are in <code>omp_apps.c</code>.</p>
+<p>Start with implementing <code>v_add_optimized_adjacent()</code>, which separates the vectors into element-wise <strong>slices</strong>. Each thread handles &quot;adjacent&quot; sums; in other words, thread 0 will add the elements at indices where <code>i % num_threads == 0</code>, thread 1 will add the elements at indices where <code>i % num_threads == 1</code>, and so on.</p>
+<p>Then, implement <code>v_add_optimized_chunks()</code> which separates the vectors into contiguous <strong>chunks</strong>. As an example, if we have 3 threads, thread 0 will handle the first third of the elements in the array, thread 1 will handle the third quarter, and thread 3 will handle the last third. Remember to handle the &quot;tail case&quot; -- depending on your chunking logic, the last chunk may have slightly more or less elements than the others.</p>
+<p><img src="vector_threads.png" alt="" /></p>
+<h3 id="question">Question</h3>
+<details>
+<summary>Which version of your code runs faster, chunks or adjacent? Why?</summary>
+Chunks performs better than adjacent because adjacent indexing is more susceptible to false sharing: when different threads write to different elements in the same cache block in their own cache.
+</details>
+<hr />
+<h2 id="exercise-3-dot-product">Exercise 3: Dot Product</h2>
+<p>The next task is to compute the dot product of two vectors. At first glance, implementing this might seem not too different from <code>v_add</code>, since we should now just perform elementwise multiplication instead of addition. The challenge is how to add the products into one variable (reduction) to get our final answer. If multiple threads try to add their results to the same variable at the same time, it will lead to a <strong>data race</strong> which will result in an incorrect result.</p>
+<p>One solution is to use a <strong>critical section</strong>. The code in a critical section can only be executed by a single thread at any given time. Thus, having a critical section naturally prevents multiple threads from reading and writing to the same data, a problem that would otherwise lead to data races. OpenMP provides the <code>critical</code> primitive to allow you to perform computations within a critical section. An implementation, <code>dotp_naive()</code> in <code>omp_apps.c</code>, protects the sum with a critical section.</p>
+<p>Try running the tests:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">make</span></span><span class="z-meta z-function-call z-arguments z-shell"> dotp</span>
+<span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">./dotp</span></span>
+</span></code></pre>
+<p>Notice how the performance gets much worse as the number of threads goes up? By putting all of the work of reduction in a critical section, we have flattened the parallelism and made it so only one thread can do useful work at a time (not exactly the idea behind thread-level parallelism). This contention is problematic; each thread is constantly fighting for the critical section and only one is making any progress at any given time. As the number of threads goes up, so does the contention, and the performance pays the price. Can we reduce the number of times that each thread needs to use a critical section?</p>
+<h3 id="action-items-1">Action Items</h3>
+<p>The methods you'll be implementing are in <code>omp_apps.c</code>.</p>
+<p>First, let's fix this performance problem <strong>without</strong> using the <code>reduction</code> keyword. Write your implementation in <code>dotp_manual_optimized()</code>. Remember that we want to reduce the number of times each thread enters the <code>critical</code> section.</p>
+<p>Next, let's fix this problem using OpenMP's built-in <code>reduction</code> keyword. Write your implementation in <code>dotp_reduction_optimized()</code>. Note that your code should no longer contain <code>#pragma omp critical</code>.</p>
+<hr />
+<h2 id="exercise-4-feedback-form">Exercise 4: Feedback Form</h2>
+<p>We are working to improve the labs for next semester, so please fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLScnLt1SvURZrbF8p_IE63fZPEOaLfe79C2TINz77y4q9d7kGQ/viewform?usp=sf_link">this survey</a> to tell us about your experience with Lab 9. The survey will be collecting your email to verify that you have submitted it, but your responses will be anonymized before the data is analyzed. Thank you!</p>
+<hr />
+<h2 id="submission">Submission</h2>
+<p>Save, commit, and push your work, then submit to the <strong>Lab 9</strong> assignment on Gradescope.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container border-top pt-4 mb-5">
+<div class="row">
+<div class="col">
+<div id="dark-toggle-wrapper" class="d-none">
+<div class="form-check form-switch">
+<input id="inputDarkToggle" class="form-check-input" type="checkbox">
+<label class="form-check-label" for="inputDarkToggle">
+Dark Mode
+<a id="buttonDarkToggleReset" class="d-none" href="javascript:void(0);">(reset)</a>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+  
+
+  
+    document.addEventListener("DOMContentLoaded", function() {
+      initToC();
+    });
+  
+</script>
+</body>
+</html>
