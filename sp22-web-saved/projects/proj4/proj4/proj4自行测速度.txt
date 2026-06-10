@@ -1,0 +1,9 @@
+根据第一次未优化的实现，和优化后的实现，运行相同代码进行比较耗费的时间
+首先cd /mnt/c/Users/cyl/Desktop/cs61c/sp22-web-saved/projects/proj4/proj4
+然后conda activate cs61cproj4，运行make install
+再把unittests2.py(对比最新未为优化)/unittests3.py(对比最新和numpy)的内容复制到unittests.py里
+接着输入cd tests/unittests && python3 -m unittest unittests.py -v
+然后把第一次的未优化的代码复制到matrix.c里，然后cd ../..
+接着make install
+然后cd tests/unittests && python3 -m unittest unittests.py -v
+把两次终端显示的速度相除进行比较

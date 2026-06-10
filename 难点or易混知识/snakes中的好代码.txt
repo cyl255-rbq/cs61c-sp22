@@ -1,0 +1,60 @@
+static int incr_x(char c) {
+  // TODO: Implement this function.
+  if (strchr(">d", c))
+  {
+    return 1;
+  } else if (strchr("<a", c))
+  {
+    return -1;
+  }
+  return 0;
+}
+
+static int incr_y(char c) {
+  // TODO: Implement this function.
+  if (strchr("vs", c))
+  {
+    return 1;
+  } else if (strchr("^w", c))
+  {
+    return -1;
+  }
+  return 0;
+}
+
+static char next_square(game_state_t* state, int snum) {
+  // TODO: Implement this function.
+  unsigned int cur_x = state->snakes[snum].head_x;
+  unsigned int cur_y = state->snakes[snum].head_y;
+  char head_char = get_board_at(state, cur_x, cur_y);
+  unsigned int next_x = cur_x + incr_x(head_char);
+  unsigned int next_y = cur_y + incr_y(head_char);
+  return get_board_at(state, next_x, next_y);
+}
+
+  rewind(fp);
+  for (unsigned int i = 0; i < row; i++)
+  {
+    fgets(game->board[i], col + 1, fp);
+    char scrap;
+    while ((scrap = fgetc(fp)) != '\n' && scrap != EOF);//fgetc(fp);
+  }
+while ((scrap = fgetc(fp)) != '\n' && scrap != EOF);这里效果等价于fgetc(fp);但是比后者健壮性好
+即持续读走字符，直到撞见真正的换行符 '\n'， 这样不管中间隔了 \r 还是空格，都能精准定位到下一行开头
+这里原理是：char *fgets(char *str, int n, FILE *stream);n：最多读取 n-1 个字符，留一个位置给结尾的 '\0'。
+而因为每个文件里你是xxx\n这样的型式，你需要排除读取写入最后的\n切把\0写进去，所以让n=n+1，这时候
+只读取n个字符然后把\0写进去，然后再想办法把文件里的\n排除掉
+
+while (...) ;：注意末尾那个孤零零的分号。这表示一个空循环体。也就是说，只要括号里的条件成立，循环就会一直跑，但循环内部什么都不做。它的唯一目的就是利用判断过程中的“副作用”（读取字符）。
+(scrap = fgetc(fp))：这是一个赋值表达式。它从文件 fp 中读取一个字符，并把它存进变量 scrap 里。
+!= '\n' && scrap != EOF：这是循环的停止条件。
+只要读到的不是换行符 (\n)。
+且只要没读到文件末尾 (EOF)。
+循环就继续。
+它的直白含义是：“一直读，直到撞到换行符或文件结束为止，读到的东西全部扔掉。”
+
+因为Unix/Linux: 换行是 \n (1个字节)。你的 fgetc(fp) 跳过一个字节，刚好。
+Windows: 换行是 \r\n (2个字节)。
+如果你只用一个 fgetc(fp)，你只跳过了 \r。
+剩下的那个 \n 会在下一次循环时被 fgets 当成地图的第一个字符读进去。
+结果：整个地图会瞬间“错位”，棋盘会变成一堆乱码。

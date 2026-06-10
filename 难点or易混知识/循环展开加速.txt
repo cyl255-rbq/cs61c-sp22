@@ -1,0 +1,70 @@
+循环展开加速的3大底层秘密
+1.砍掉了巨额的“管理费”（减少循环开销）
+你写的一个普通for循环，虽然表面上只有一两行，但编译器翻译成汇编后，每次循环的屁股后面
+都雷打不动地跟着两样东西：
+1	i++((计数器自增)
+2	if（i< 4）gotoloop;（ (判断并跳转)
+如果你的循环要跑1000次，CPU就要多执行1000次自增和1000次跳转指令。这些指令不产生任
+何实质性的计算结果，纯粹是控制循环的“管理费”。
+把循环展开（比如一次跑4步），自增和跳转指令的次数就直接缩水到了原来的，省下来的时间
+全是赚到的。
+2.极大提升了“指令级并行（ILP）
+还记得我们前面讨论的ILP（指令级并行）吗？这就是它大显身手的地方！
+现代CPU内部是有好几个执行单元（ALU）的，像一个拥有4条流水线的工厂。
+不展开时：代码里只有一句话 sum += a[i］。CPU 必须等第一步算完，更新了 sum，才能算
+下一步。前后有严重的数据依赖，导致另外3条流水线只能闲着（流水线停顿）。
+展开之后：代码在宏观上变成了平铺直叙的多条独立指令。
+如果编译器发现这几条加法之间没有依赖，它就可以同时把这4条加法指令一股脑塞进单核内部的
+多个流水线里。这让单核CPU内部的指令级并行度瞬间拉满。
+3.解锁了编译器的“套娃优化”（比如自动SIMD）
+循环展开最厉害的地方，不是它自己能变多快，而是它打破了循环的边界，让编译器看到了更大的世界。
+就像你刚才在Godbolt里看到的，当编译器发现你要一口气算4个相邻的int时，它突然一拍大腿：
+“等等，既然这4个数在内存里挨在一起，而且要连续做加法，那我干嘛还要一条一条指令去加？我
+直接调用128位的 SIMD 寄存器，一巴掌把它们全吸进来（movdqu），两招对折（paddd）不就
+收工了吗！
+如果循环不展开，编译器每次只能看到一个孤立的a[i]，它是绝对不敢随便乱动用SIMD大炮的。
+
+编译器会用一些SIMD代码去替换你原有的代码
+
+以下为示例：
+long long int sum(int vals[NUM_ELEMS]) {
+    clock_t start = clock();
+
+    long long int sum = 0;
+    for(unsigned int w = 0; w < OUTER_ITERATIONS; w++) {
+        for(unsigned int i = 0; i < NUM_ELEMS; i++) {
+            if(vals[i] >= 128) {
+                sum += vals[i];
+            }
+        }
+    }
+    clock_t end = clock();
+    printf("Time taken: %Lf s\n", (long double)(end - start) / CLOCKS_PER_SEC);
+    return sum;
+}
+
+long long int sum_unrolled(int vals[NUM_ELEMS]) {
+    clock_t start = clock();
+    long long int sum = 0;
+
+    for(unsigned int w = 0; w < OUTER_ITERATIONS; w++) {
+        for(unsigned int i = 0; i < NUM_ELEMS / 4 * 4; i += 4) {
+            if(vals[i] >= 128) sum += vals[i];
+            if(vals[i + 1] >= 128) sum += vals[i + 1];
+            if(vals[i + 2] >= 128) sum += vals[i + 2];
+            if(vals[i + 3] >= 128) sum += vals[i + 3];
+        }
+
+        // TAIL CASE, for when NUM_ELEMS isn't a multiple of 4
+        // NUM_ELEMS / 4 * 4 is the largest multiple of 4 less than NUM_ELEMS
+        // Order is important, since (NUM_ELEMS / 4) effectively rounds down first
+        for(unsigned int i = NUM_ELEMS / 4 * 4; i < NUM_ELEMS; i++) {
+            if (vals[i] >= 128) {
+                sum += vals[i];
+            }
+        }
+    }
+    clock_t end = clock();
+    printf("Time taken: %Lf s\n", (long double)(end - start) / CLOCKS_PER_SEC);
+    return sum;
+}

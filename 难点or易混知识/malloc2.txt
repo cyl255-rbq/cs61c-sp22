@@ -1,0 +1,52 @@
+什么时候需要malloc，什么时候不需要？
+我们在C语言中判断一个指针要不要malloc，核心就看一句话：“这块内存是由我凭空创造的，还是
+我只是想指向一个现成的东西？”
+1.凭空创造新东西→必须malloc
+在1.4中，我们要凭空创造一个新的切片结构体（new_mat），所以我们要写：
+new_mat =(matric*)malloc(sizeof(matrix));
+2.指向现成的东西→绝对不要malloc
+data字段：我们不想创造新数据，只想指向现成的from->data+offset→不malloc，直接赋值。
+parent字段：我们不想创造一个新爸爸，只想指向现成的、传进来的那个from结构体
+→不malloc，直接赋值。
+
+因为在C语言中，函数参数的传递永远是“值传递”（也就是“复制一份再传过去"）。
+如果你想在函数内部彻底改变一个外部变量的值，你就必须把这个变量的地址传进去。
+0如果你想修改一个int变量，你要传int＊（一级指针）。
+同理，如果你想修改一个指针变量的指向（也就是创建一个新指针、分配新内存并让它带出
+去），你就必须传这个指针变量的地址，即matrix（二级指针）。
+我们用一幅清晰的对比图来彻底看懂这个底层的逻辑差异。
+1.为什么一级指针（matrix*result）不能用来“创建"？
+假设我们写一个错误的创建函数，只传一级指针：
+C
+//×错误的创建函数
+void bad_allocate(matrix *m) {
+m=（matrix*)malloc(sizeof(matrix))；//内部确实申请了内存
+}
+int main(） {
+matrix*my_mat=NULL；//外部的—个指针，当前指着NULL
+bad_allocate(my_mat);// 传进去
+//此时 my_mat 依然是 NULL！程序并没有拿到新矩阵。
+}
+因为malloc是返回指针，如果用一级指针则是只改变临时量，得用二级指针通过解引用保存
+
+matrix *trans_mat2 = NULL;
+allocate_matrix(&trans_mat2, mat2->cols, mat2->rows);
+和
+matrix *trans_mat2 ;
+allocate_matrix(&trans_mat2, mat2->cols, mat2->rows);
+
+从功能上讲，没有区别。
+你的两种写法:
+1. matrix *trans_mat2 = NULL;
+2. matrix *trans_mat2;(未初始化)
+在调用allocate_matrix(&trans_mat2，...）时，函数内部会通过指针matrix **mat 对trans_mat2 进
+行写入（例如*mat=malloc（...）），直接覆盖了trans_mat2 原来存储的地址。
+因此:
+·第一种写法先初始化为 NULL，这个 NULL会被覆盖。
+·第二种写法中trans_mat2 原本是一个未定义的垃圾值，但也不会被读取（只要 allocate_matrix 内部
+没有先读取*mat 来决定逻辑），同样被覆盖。
+所以对最终结果没有影响。
+但推荐第一种写法：
+·避免不小心在 allocate_matrix 之前误用 trans_mat22（比如 if(trans_mat2) ...）导致未定义行为。
+·更清晰表达"还没有分配内存"的意图。
+·如果分配失败，，trans_mat2 仍为 NULL，而不是残留垃圾值。

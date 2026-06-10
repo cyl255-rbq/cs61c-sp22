@@ -1,0 +1,36 @@
+将以下表达式转换为输入信号 A 和 B 的布尔表达式：
+（a）NAND
+¯A¯B + ¯AB + A¯B
+Or, using the Product of Sums rule: ¯A + ¯B
+
+3.3Create an AND gate using only NAND gates
+你的逻辑推导
+NAND1 的结果：X=!(AB)
+NAND2 的结果：Y=!(AB)
+NAND3 的结果：!(XY)=!(!(AB)!(AB))
+根据幂等律 (Idempotent Law)，ZZ=Z
+所以得出AB
+但是虽然你的三门方案逻辑正确，但在集成电路设计中，我们会追求面积更小、功耗更低。
+
+你会发现你的 NAND1 和 NAND2 做的是完全重复的工作。
+我们只需要把 NAND1 的输出同时连到 NAND3 的两个输入端即可，这样就省掉了一个 NAND2。
+标准做法（2个 NAND 门）：
+第一步： 用一个 NAND 门处理A和B，得到 !AB。
+第二步： 把这个结果分支，同时输入到第二个 NAND 门的两个输入口。
+因为 NAND(X,X)=NOT(X)
+所以 NAND(!(AB),!(AB))=NOT(!(AB))=AB
+即A-|  \。——|¯| \。-output
+   B-|  /	     |_| /
+
+或者观察法
+NAND:
+A	B	OUTPUT
+0	0	1
+0	1	1
+1	0	1
+1	1	0
+NAND 的输出和你要的 AND 输出正好相反（0 变成了 1，1 变成了 0）。
+所以逻辑很清晰：AND = NOT (NAND)。也就是说，你只需要在 NAND 门后面接一个“非门（NOT）”就行了。
+关键点——怎么用 NAND 变出 NOT？既然你没有现成的 NOT 门，只能用 NAND 强行凑。我们再来看一眼 NAND 的真值表，
+但这次我们换个思路：观察NAND的真值表，当A,B为0,0和A,B为1,1时，output为1和0正好相反，相当于not
+即把第一个NAND的值输入到第二个NAND的两端，即可得出正确答案

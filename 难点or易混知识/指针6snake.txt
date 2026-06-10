@@ -1,0 +1,17 @@
+让我们对比一下这几种写法：
+    你之前的写法（副本）：
+    snake_t cur_snake = state->snakes[i];
+    这是把蛇的数据“复印”了一份。你改复印件，原件（state->snakes 里的数据）不动。
+    你现在的写法（指针）：
+    snake_t* cur_snake = state->snakes + i;
+    这是拿到了原件的“家庭住址”。通过这个地址去改，改的就是原件。
+    另一种等价写法（取地址）：
+    snake_t* cur_snake = &(state->snakes[i]);
+    这和你现在的写法完全等价，只是风格不同。
+注意：写法变了，访问方式也要变
+既然 cur_snake 现在是一个指针了，你在使用它的时候，必须把所有的 . 换成 ->：
+// 以前是 cur_snake.live = false;
+// 现在必须是：
+cur_snake->live = false; 
+// 访问坐标也要变：
+set_board_at(state, cur_snake->head_x, cur_snake->head_y, 'x');

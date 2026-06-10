@@ -1,0 +1,35 @@
+What is an executable?
+什么是可执行文件？
+An executable is a file composed of binary that can be executed on your computer. Executables are created by compiling source code.
+可执行文件是由二进制组成的文件，可以在您的计算机上运行。可执行文件通过编译源代码创建。
+
+What is a segfault?
+什么是段错误（segfault）？
+A segfault occurs when you try to access a piece of memory that "does not belong to you." There are several things that can cause a segfault including
+当你试图访问一块“属于你的以外”的内存时，就会发生段错误（segfault）。引起段错误的原因有多种，包括
+    Accessing an array out of bounds. Note that accessing an array out of bounds will not always lead to a segfault. The index at which a segfault will occur is somewhat unpredictable.
+    越界访问数组。注意，越界访问数组并不总是会导致段错误。段错误发生的具体索引具有一定的不确定性。
+    Derefrencing a null pointer.
+    解引用空指针。
+    Accessing a pointer that has been free'd (free is not in the scope of this lab).
+    访问一个已经被 free ‘d（ free 在本实验范围之外）的指针。
+    Attempting to write to read-only memory. For example, strings created with the following syntax are read only. This means that you cannot alter the value of the string after you have created it. In other words, it is immutable.
+    试图写入只读存储器。例如，使用以下语法创建的字符串是只读的。这意味着你无法在创建后更改字符串的值。换句话说，它是不可变的。
+char *my_str = "Hello";
+However, a string created using the following syntax is mutable.
+然而，使用以下语法创建的字符串是可变的。
+char my_str[] = "hello";
+Why is the first string immutable while the second string is mutable? The first string is stored in the data portion of memory which is read-only while the second string is stored on the stack.
+为什么第一个字符串是不可变的，而第二个字符串是可变的？第一个字符串存储在只读的内存数据区，而第二个字符串存储在栈上。
+What is a header file?
+什么是头文件？
+Header files allow you to share functions and macros across different source files. For more info, see the GCC header docs.
+头文件允许你在不同的源文件之间共享函数和宏。更多信息请参见 GCC 头文件文档。
+
+你可能会问：那为什么数组写法就可以改？
+C
+char my_str[] = "Hello";
+    这里的 "Hello" 依然存在只读区。
+    但关键在于：编译器在**栈（Stack）**上又挖了一个 6 字节的坑。
+    在程序运行时，会有一条隐含的指令：把只读区的 "Hello" 拷贝到栈里的这个坑位中。
+你修改的是栈上的那个副本，而不是只读区的底稿。

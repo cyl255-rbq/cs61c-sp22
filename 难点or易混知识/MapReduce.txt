@@ -1,0 +1,68 @@
+每个 MapReduce 任务的输入由 map()的签名给出。
+emit(key k, value v) 输出键值对（k，v）
+1.给定一组硬币及每个硬币的所有者，形式为 CoinPairs 列表，
+计算每个人拥有的每种面值硬币的数量。
+CoinPair:
+	String person
+	String coinType
+map(CoinPair pair):
+	emit(pair,1)
+reduce(CoinPair pair, Iterable<int> count):
+	total = 0
+	for num in count:
+		total += num
+	emit(pair, total)
+这里问的是每个人拥有每个面值的数量，pair本身就符合每个人每个面值，
+所以只需要计算数量即可
+2.使用第一个 MapReduce 的输出，计算每个人的金额。
+valueOfCoin(String coinType) 返回对应硬币的美元价值（浮点数）。
+
+map(tuple<CoinPair，int> output):
+	pair，amount = output
+	emit(pair.person, valueOfCoin(pair.coinType) * amount)
+reduce(String person, Iterable<float> values):
+	total = 0
+	for amount in values:
+		total += amount
+	emit(person, total)
+这里算的是每个人的钱数，需要reduce的第一个变量是key，第二个是钱的数组
+因为要算每个人，所以把pair拆开
+
+假设输入文件内容：
+text
+hello world
+hello mapreduce
+Map阶段 (两个map 任务，每行一个)
+第一行“hello world"
+·单词 hello →Emitlntermediate("hello"，"1")
+·单词 world →Emitlntermediate("world"，"1")
+第二行"hello mapreduce"
+·单词 hello → Emitlntermediate( "hello"，"1")
+·单词 mapreduce → Emitlntermediate("mapreduce"， "1" )
+所有 map 输出的中间结果（未排序）：
+("hello","1")
+("world")
+("hello")
+("mapreduce")
+Shuffle阶段 (框架自动做)
+框架把相同单词的中间值聚合到一起：
+·单词"hello"F"1"
+·单词"world" → ["1"]
+·单词"mapreduce"["1"]
+Reduce阶段(每个单词一个reduce 任务)
+Reduce for "hello"
+result = 0
+·遍历["1","1"]：
+V = "1"→ ParseInt = 1 → result = 1
+"1"ParseInt = 1 → result = 2
+Emit("2"）→最终输出("hello", "2")
+Reduce for "world"
+result = 0
+·遍历 ["1"] → ParseInt("1")=1 → result = 1
+·输出（"world"，"1")
+Reduce for "mapreduce"
+·类似，输出("mapreduce","1")
+最终结果：
+hello 2
+world 1
+mapreduce 1

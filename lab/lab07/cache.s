@@ -40,6 +40,7 @@ accessWords:
 	add	s1, s0, a0 # array size
 	slli t1, a1, 2 # multiply stepsize by 4 because the size of an int is 4 bytes
 wordLoop:
+    ebreak
 	beq	a3, zero,  optionZero
     # Option 1:
 	lw	t0, 0(s0)

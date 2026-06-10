@@ -1,0 +1,229 @@
+.globl map
+
+.text
+main:
+    jal ra, create_default_list
+    add s0, a0, x0 # a0 (and now s0) is the head of node list
+
+    # Print the list
+    add a0, s0, x0
+    jal ra, print_list
+    # Print a newline
+    jal ra, print_newline
+
+    # === Calling `map(head, &square)` ===
+    # Load function arguments
+    add a0, s0, x0 # Loads the address of the first node into a0
+
+    # Load the address of the "square" function into a1 (hint: check out "la" on the green sheet)
+    ### YOUR CODE HERE ###
+    la  a1, square
+
+    # Issue the call to map
+    jal ra, map
+
+    # Print the squared list
+    add a0, s0, x0
+    jal ra, print_list
+    jal ra, print_newline
+
+    # === Calling `map(head, &decrement)` ===
+    # Because our `map` function modifies the list in-place, the decrement takes place after
+    # the square does
+
+    # Load function arguments
+    add a0, s0, x0 # Loads the address of the first node into a0
+
+    # Load the address of the "decrement" function into a1 (should be very similar to before)
+    ### YOUR CODE HERE ###
+    la  a1, decrement
+
+    # Issue the call to map
+    jal ra, map
+
+    # Print decremented list
+    add a0, s0, x0
+    jal ra, print_list
+    jal ra, print_newline
+
+    addi a0, x0, 10
+    ecall # Terminate the program
+
+map:
+    # Prologue: Make space on the stack and back-up registers
+    ### YOUR CODE HERE ###
+    addi sp, sp, -12
+    sw  ra, 0(sp)
+    sw  s0, 4(sp)
+    sw  s1, 8(sp)
+    beq a0, x0, done # If we were given a null pointer (address 0), we're done.
+
+    add s0, a0, x0 # Save address of this node in s0
+    add s1, a1, x0 # Save address of function in s1
+
+    # Remember that each node is 8 bytes long: 4 for the value followed by 4 for the pointer to next.
+    # What does this tell you about how you access the value and how you access the pointer to next?
+
+    # Load the value of the current node into a0
+    # THINK: Why a0?
+    ### YOUR CODE HERE ###
+    lw  a0, 0(s0)
+    # Call the function in question on that value. DO NOT use a label (be prepared to answer why).
+    # Hint: Where do we keep track of the function to call? Recall the parameters of "map".
+    ### YOUR CODE HERE ###
+    jalr ra, a1, 0
+    # Store the returned value back into the node
+    # Where can you assume the returned value is?
+    ### YOUR CODE HERE ###
+    sw  a0, 0(s0)
+    # Load the address of the next node into a0
+    # The address of the next node is an attribute of the current node.
+    # Think about how structs are organized in memory.
+    ### YOUR CODE HERE ###
+    lw  a0, 4(s0)
+    # Put the address of the function back into a1 to prepare for the recursion
+    # THINK: why a1? What about a0?
+    ### YOUR CODE HERE ###
+    mv  a1, s1
+    # Recurse
+    ### YOUR CODE HERE ###
+    jal ra, map
+done:
+    # Epilogue: Restore register values and free space from the stack
+    ### YOUR CODE HERE ###
+    lw ra, 0(sp)
+    lw s0, 4(sp) 
+    lw s1, 8(sp)
+    addi sp, sp, 12
+    jr ra # Return to caller
+
+# === Definition of the "square" function ===
+square:
+    mul a0, a0, a0
+    jr ra
+
+# === Definition of the "decrement" function ===
+decrement:
+    addi a0, a0, -1
+    jr ra
+
+# === Helper functions ===
+# You don't need to understand these, but reading them may be useful
+
+create_default_list:
+    addi sp, sp, -12
+    sw ra, 0(sp)
+    sw s0, 4(sp)
+    sw s1, 8(sp)
+    li s0, 0            # Pointer to the last node we handled
+    li s1, 0            # Number of nodes handled
+loop:                   # do...
+    li a0, 8
+    jal ra, malloc      #     Allocate memory for the next node
+    sw s1, 0(a0)        #     node->value = i
+    sw s0, 4(a0)        #     node->next = last
+    add s0, a0, x0      #     last = node
+    addi s1, s1, 1      #     i++
+    addi t0, x0, 10
+    bne s1, t0, loop    # ... while i!= 10
+    lw ra, 0(sp)
+    lw s0, 4(sp)
+    lw s1, 8(sp)
+    addi sp, sp, 12
+    jr ra
+
+print_list:
+    bne a0, x0, print_me_and_recurse
+    jr ra               # Nothing to print
+print_me_and_recurse:
+    add t0, a0, x0      # t0 gets current node address
+    lw a1, 0(t0)        # a1 gets value in current node
+    addi a0, x0, 1      # Prepare for print integer ecall
+    ecall
+    addi a1, x0, ' '    # a0 gets address of string containing space
+    addi a0, x0, 11     # Prepare for print char syscall
+    ecall
+    lw a0, 4(t0)        # a0 gets address of next node
+    jal x0, print_list  # Recurse. The value of ra hasn't been changed.
+
+print_newline:
+    addi a1, x0, '\n'   # Load in ascii code for newline
+    addi a0, x0, 11
+    ecall
+    jr ra
+
+malloc:
+    addi a1, a0, 0
+    addi a0, x0, 9
+    ecall
+    jr ra
+
+
+
+
+规则是对的，但“保存”并不等于“必须存入栈”。
+让我们看看为什么在 map 的代码里，我们看起来“没存 a0”，但实际上却遵守了规则。
+1. “Caller-saved” 的真实含义
+规则说 a0-a7 是 Caller-saved，意思其实是：
+“如果你（调用者）在 a0 里放了宝贝，而你跳走（jal）回来后还想要这个宝贝，那你在跳走前必须把它存起来。如果你不存，被调用者把 a0 弄脏了，你不能怪别人。”
+关键点：如果你回来后不再需要那个“旧的” a0，你根本不需要存它！
+2. 在 map 函数中，a0 的寿命极短
+看看你的 map 逻辑：
+准备参数：你把 node->value 放进 a0。
+跳走：jalr ra, s1, 0。
+回来：此时 a0 变成了函数的返回值（比如平方后的数）。
+重点在这里： 你在跳走之前，需要 a0 原来的值（那个 3）吗？不需要了，因为你已经把它传给函数了。你在跳回来之后，需要 a0 原来的值吗？也不需要了，因为你正等着拿它的返回值（那个 9）去更新内存呢。
+3. 为什么大家总觉得 a0 “没被保存”？
+因为 a0 有双重身份：它是参数，也是返回值。
+作为参数：它的任务在 jal 的那一瞬间就完成了。
+作为返回值：它在 jr ra 的那一瞬间诞生。
+既然旧的 a0（参数）已经没用了，新的 a0（返回值）正我们要的，我们干嘛还要费劲把它存到栈里再取出来呢？直接用返回值覆盖参数，是计算机最完美的“废物利用”。
+4. 什么时候“必须”保存 a0？
+假设你的代码是这样的：
+Code snippet
+# 我想计算 (x + 1) * x
+mv a0, s0        # a0 = x
+jal ra, add_one  # 调用函数，返回 a0 = x + 1
+mul a0, a0, ???  # 此时我想乘原来的 x，但我发现 a0 已经变成 x+1 了！x 丢了！
+在这种情况下，你就必须在 jal 之前保存 a0（或者像我们之前做的那样，一开始就把 x 存在 s0 这种保险箱里）。
+5. 总结：关于那个“规则”的终极解释
+当你读到“调用者需要保存 a0-a7, t0-t6”时，你应该在脑海中自动补全一句话：
+“……前提是你以后还打算用这些寄存器里现在存着的这个值。”
+对于 t 寄存器：通常我们在里面存临时计算结果，跳回来后还要接着算，所以经常要存。
+对于 ra：你跳回来后必须靠它回家，所以必存。
+对于 a0：通常跳回来后我们要的是它的新值（返回值），所以通常不存旧值。
+
+
+
+反正都要存，用哪个不一样？” 其实大不一样！
+方案 A：坚持用 t0 (Caller-saved 逻辑)
+如果你在循环里调用函数，你必须在每次循环里都存取一次内存。
+Code snippet
+loop:
+sw t0, 0(sp)       # 存 (第 1 次)
+jal ra, func
+lw t0, 0(sp)       # 取 (第 1 次)
+...
+sw t0, 0(sp)       # 存 (第 2 次)
+jal ra, func
+lw t0, 0(sp)       # 取 (第 2 次)
+j loop
+方案 B：改用 s0 (Callee-saved 逻辑) —— 推荐做法
+你只需要在函数的开头和结尾存取一次，中间可以随便跳！
+Code snippet
+# --- Prologue ---
+addi sp, sp, -4
+sw s0, 0(sp)           # 全程只存这一次！
+loop:
+mv s0, a0          # 这里的 s0 在 jal 后绝对安全
+jal ra, func
+add t1, s0, t1     # 直接用 s0，不需要 lw！
+j loop
+# --- Epilogue ---
+lw s0, 0(sp)           # 全程只取这一次！
+addi sp, sp, 4
+终极总结：什么时候用哪个？
+变量特点										推荐寄存器		为什么？
+打零工（用完就扔，或者函数里没别的调用）				t0 - t6		最快。不用写 Prologue/Epilogue，直接开干。
+长途旅客（要跨过好几个 jal，或者在循环/递归里一直要用）	s0 - s11		最省内存操作。在函数头尾存一次，中间可以“无限次”免费使用。
+函数参数/返回值									a0 - a7		这是规矩。没得选，必须按这个传。

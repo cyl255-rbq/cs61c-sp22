@@ -1,0 +1,56 @@
+计算斐波那契数列通常被视为无法并行化的典型问题，因为它需要知道前面的值才能计算下一个值。
+然而，只要运用足够的数学知识，实际上就可以对斐波那契数列进行数据级并行处理。
+通常，可并行化的算法与其原始算法有所不同，因此在开始并行化之前，花些时间仔细研究算法本身
+往往是明智之举。
+
+
+下面是填充好答案的完整代码，可以直接复制使用：
+
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <emmintrin.h>
+#define N 19
+/*Return the first n values in the sequence defined by the recursive
+definition A[n] = 7A[n-4]-A[n-8]*/
+/*For the initial values of this recursive sequence, see the array used for
+n<8*/
+int* fib(unsigned int n)
+{
+int* result = malloc(sizeof(int)*n);
+/*Base cases; if we want fewer than 8 inputs, just fill out the array
+manually*/
+if(n < 8)
+{
+int vals[8] = {0,1,1,2,3,5,8,13};
+for(int i = 0; i < n; i++) result[i]=vals[i];
+return result;
+}
+__m128i low = _mm_set_epi32(2,1,1,0); /*See the vals array for the intended
+initial values. Make sure you check the Intrinsics guide for the expected
+order of the inputs!*/
+__m128i high = _mm_set_epi32(13,8,5,3);
+_mm_storeu_si128((__m128i*)result, low);
+_mm_storeu_si128((__m128i*)(result+4), high);
+int i;
+int j = n-(n%4);
+for(i = 8; i < j; i+=4)
+{
+//Note that 7x-y is the same as (x<<3)-(x+y)
+__m128i temp = _mm_sub_epi32(_mm_slli_epi32(high,3),_mm_add_epi32(high,low));
+_mm_storeu_si128((__m128i*)(result+i), temp);
+low = high;
+high = temp;
+}
+/*Tail case, in case n isn't a multiple of 4.*/
+for(; i < n; i++) result[i] = 7*result[i-4]-result[i-8];
+return result;
+}
+int main(int argc, char** argv)
+{
+int* data = fib(N);
+for(int i = 0; i < N; i++)
+printf("%d\n", data[i]);
+free(data);
+return 0;
+}

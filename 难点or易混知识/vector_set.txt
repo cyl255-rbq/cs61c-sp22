@@ -1,0 +1,33 @@
+/* Set a value in the vector. If the extra memory allocation fails, call
+   allocation_failed(). */
+void vector_set(vector_t *v, size_t loc, int value) {
+    /* What do you need to do if the location is greater than the size we have
+     * allocated?  Remember that unset locations should contain a value of 0.
+     */
+
+    /* YOUR CODE HERE */
+    if (v == NULL)
+    {
+        return;
+    }
+    if (loc >= v->size)
+    {
+        int *new_ptr = (int*) realloc(v->data, sizeof(int) * (loc + 1));
+        if (new_ptr == NULL)
+        {
+            allocation_failed();
+        }
+        v->data = new_ptr;
+        for (size_t i = v->size; i < loc; i++)
+        {
+            v->data[i] = 0;
+        }
+        v->size = loc + 1;
+    }
+    v->data[loc] = value;
+}
+
+这里有几个注意事项，第一个是你重新分配内存的时候，要一定先让个temp去realloc，别直接让原来的指针a=(~~)realloc~~
+因为如果分配失败a就成了NULL，如果换个temp去分配的话，如果分配失败也不会丢失原来的指针
+
+第二个注意的点是，如果loc >= v->size，loc代表当前的位置，如果你让当前的位置有值的话，那么此时size应该为loc+1，分配的也是loc+1

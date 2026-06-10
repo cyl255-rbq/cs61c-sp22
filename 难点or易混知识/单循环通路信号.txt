@@ -1,0 +1,13 @@
+RegWEn (Register Write Enable)： 决定**“要不要写”**（开关）。
+WBSel (Writeback Select)： 决定**“写什么东西”**（多选一）。
+
+根据上一页的数据通路，填写下表，列出每条指令的控制信号。尽可能使用 * 表示该信号的值无关紧要（即，该信号的值可以任意变化，不会影响指令的执行）。
+如果信号的值对指令的正确执行至关重要，但可以变化，则列出所有可能的值（例如，对于一个取值为 0 或 1 的信号，请写成 0/1）。
+	BrEq        BrLT        PCSel        ImmSel        BrUn        ASel        BSel        ALUSel        MemRW        RegWEn        WBSel
+add 	  * 		 * 	   0 (PC + 4) 	   * 		     * 		0 (Reg)   0 (Reg) 	 add 		       0 		    1 		   1 (ALU)
+ori  	  * 		 * 	   	0 		   I 		     *	        0 (Reg)   1 (Imm) 	  or 		       0 		    1 		   1 (ALU)
+lw 	  * 		 * 		0 		   I 		     * 		0 (Reg)   1 (Imm)  	 add 		       0 		    1 		   2 (MEM)
+sw 	  * 		 * 		0 		   S		     * 		0 (Reg)   1 (Imm)	 add		       1 		    0 		        *
+beq	1/0 		 * 	      1/0 		   B		     * 		1 (PC)     1 (Imm)	 add 		       0 		    0		        *
+jal 	  * 		 *	   1 (ALU) 		   J 		     * 		1 (PC)     1 (Imm) 	 add		       0 		    1 		   0 (PC + 4)
+bltu 	  * 	       1/0 	      1/0 		   B		     1 		1 (PC)     1 (Imm) 	 add 		       0 		    0 		        *

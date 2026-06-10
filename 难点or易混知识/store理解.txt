@@ -1,0 +1,16 @@
+DataToMem确实会随着指令的不同而一直变化，但它的变化规律很有意思，我们可以从“数
+据来源"和"有效性"两个角度来看：
+1.数据的来源：它是rs2的影子
+在RISC-V的单周期数据通路中，DataToMem通常直接连接到寄存器堆（RegFile）的ReadData2端口。
+这意味着：只要当前指令包含rs2寄存器（比如add，sub，sw，beq），DataToMem
+线上流动的就一定是rs2寄存器里存储的那个32位数值。
+例子：
+如果是add x1，x2，x3，DataToMem 就是x3 的值。
+如果是sw x5，4(x6），DataToMem 就是x5的值。
+如果是beq x10，x11，label，DataToMem就是x11 的值。
+2.只有Store指令会让它“生效”
+虽然这条线上的数据一直在变，但DataMemory(DMEM)并不是什么时候都听它的。
+·Store指令（如sw，sh，sb）：你的MemWEn 信号会变绿（为1）。只有这时候，DMEM
+才会睁开眼看一眼DataToMem线上是什么，并把它存进内存。
+其他指令（如add，lw，beq）：虽然DataToMem线上可能跑着各种乱七八糟的寄存器数值
+但因为你的MemWEn是O，DMEM会完全无视这条线。

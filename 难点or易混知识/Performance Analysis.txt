@@ -1,0 +1,65 @@
+Register clk-to-q 30 ps		Branch comp.75 ps		Memory write 200 ps
+Register setup 20 ps			ALU 200 ps			RegFile read 150 ps
+Mux 25 ps					Memory read 250 ps		RegFile setup 20 ps
+3.1 考虑到上述数据通路各组件的延迟，单周期数据通路的最快时钟时间是多少？
+telk   ≥ tPC clk-to-q + tIMEM read + tRF read + tmux + tALU + tDMEM read + tmux + tRF setup
+	≥ 30 + 250 + 150 + 25 + 200 + 250 + 25 + 20
+	≥ 950 ps
+1/950ps= 1.05 GHz
+IF (取指)			PC clk-to-q + IMEM read		30+250
+ID(译码/读寄存器）	RegFile read				150
+EX(执行)			Mux (BSel) + ALU			25+200
+MEM (访存)		DMEM read				250
+WB (写回)			Mux (WBSel)+RegFile setup	25+20
+请注意，分支比较器的延迟被省略了，因为分支比较与 RegFile/ALU 并行执行，这需要更长的时间。
+这里因为mem read，而instruction和data都属于memory所以都是250
+
+3.2 流水线式数据通路的最快时钟时间是多少？
+IF : tPC clk-to-q + tIMEM read + tReg setup = 30 + 250 + 20 = 300 ps
+ID : tReg clk-to-q + tRF read + tReg setup = 30 + 150 + 20 = 200 ps 
+EX : tReg clk-to-q + tmux + tALu + tReg setup + tmux = 30 + 25 + 200 + 20 + 25 = 300 ps
+MEM : tReg clk-to-q + tDMEM read + tReg setup = 30 + 250 + 20 = 300 ps
+WB : tReg clk-to-q + tmux + tRF setup = 30+ 25 + 20 = 75 ps
+max(IF, ID, EX, MEM, WB) = 300 ps
+注意：对于 EX 阶段，分支比较器的时间被 ALU 计算所掩盖（ID 阶段也是如此，但由于没有提及立即数生成器的时间，我们假设它微不足道）：
+分支比较器：tPC clk-to-q + tBranch comp. = 30 + 75 = 105 ps
+ALU 计算：tReg clk-to-q + tmux + tALU + tReg setup = 25 + 200 = 275 ps
+
+mem最后多出的tmux是转发的选择开关，这里如果指令1与指令3发生数据冒险
+指令3发现自己需要的rs1还没写回寄存器堆，于是它得从MEM/WB寄存器那里"截胡"这个数据。
+这个"截胡"的动作（即Mux选择）必须发生在指令3进ALU之前。也就是说，这个Mux必须物理上安装在EX阶段的入口。
+转发的电线：从MEM/WB的输出端拉出来。转发的选择开关（Mux）：安装在EX阶段的ALU输入端。
+所以，这25pS的"开关切换时间”，自然而然就记在了EX阶段的账上，而不会拖累MEM阶段的进度。
+而1和2的也是安在第二个ex的前面，所以无论如何这个转发器的mul的25ps都安装在ex里，所以ex最后面多了个tmux
+
+
+3.3 从单周期数据通路到流水线数据通路，速度提升是多少？为什么速度提升小于 5？
+950 ps/300 ps, 即 3.2 倍加速。加速比小于 5 倍的原因是：
+(1) 需要添加流水线寄存器，这些寄存器有时钟到时钟周期 (clk-to-q) 和建立时间；
+(2) 需要将时钟设置为五个阶段中的最大值，而每个阶段所需的时间各不相同。
+注意：由于存在需要额外逻辑来解决的危险，实际速度提升可能甚至不到 3.2 倍。
+
+
+关于PC：
+1.它和谁一起运行？(单周期的视角）
+在单周期（Single-Cycle）电路中，所有的逻辑都在同一个时钟周期内发生。我们可以把电路分成两条并行的"支路"：
+支路A：数据计算路(主干道)：PC→IMEM→RegFile→ALU→DMEM→Muc→RegFile写回
+这条路非常长，包含了一次访存和一次计算，总共需要950ps。
+支路B：下一地址路(侧道）：PC→加法器/比较器→PC选择Muc→PC寄存器输入端
+这条路只需要计算PC十4或者分支跳转地址。哪怕算上分支比较器（75ps）和Mux(25ps），它的总耗时通常也就200ps左右。
+结论：在单周期里，由于这两条路是**同时（并行）**开始跑的，当你还在支路A苦哈哈地等内存
+读数据（950ps）时，支路B早在200ps的时候就把下一个PC地址算好，在PC寄存器的门口“排队“等着时钟上升沿了。
+所以，在计算单周期时钟频率时，我们只关心最慢的支路A。支路B里的那个Mux延迟，就被支路A的浸长等待给**遮蔽（Shadowed）**了。
+2. 在流水线（IF 阶段）里
+第一条赛道：取指路（主干道，决定了300ps)
+·路径:PC寄存器（输出端）→IMEM→IF/ID寄存器（输入端）。
+·动作：根据当前的PC地址，去内存里把指令代码捞出来。
+·耗时:30(clk－to-q)+250(IMEM)+20(setup)=300 ps。
+·注意：这条路上完全没有那个PCMuX。
+第二条赛道：更新路（侧道，决定下一条指令去哪）
+·路径:PC寄存器（输出端）→Adder(+4）→PC选择Muc→
+PC寄存器（输入端）。
+·动作：算出PC+4，并由Mux决定：下一周期PC是变PC+4还是变跳转地址。
+·耗时: 30(clk －to －q)+ tadder + 25(Muc)+ 20(setup)。
+假设加法器很快（比如50ps），总共也就125ps左右。
+所以依然不考虑

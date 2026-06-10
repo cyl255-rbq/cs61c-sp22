@@ -1,0 +1,30 @@
+void prepend(struct ll_node** lst, int value) {
+    if (lst == NULL) return; // 增强健壮性，防止传入空的二级指针
+    struct ll_node* temp = (struct ll_node*)malloc(sizeof(struct ll_node));
+    if (temp == NULL) return; // 内存分配失败处理，这里经常忘
+    temp->first = value;
+    // 这一行涵盖了原有的 if/else：
+    // 如果 *lst 是 NULL，temp->rest 就指向 NULL；
+    // 如果 *lst 有值，temp->rest 就指向旧的头节点。
+    temp->rest = *lst; 
+    *lst = temp; // 修改外部指针指向新节点
+}
+
+void free_ll(struct ll_node** lst) {
+    if (lst == NULL) return;//或者lst == NULL || *lst == NULL:可读性
+    struct ll_node *cur = *lst;
+    while (cur != NULL) {
+        struct ll_node *next = cur->rest;
+        free(cur);
+        cur = next;
+    }
+    *lst = NULL; // 防止外部产生野指针
+}
+
+1 void free_ll(struct ll_node** lst) {
+2 	if (*lst) {
+3 		free_ll(&((*lst)->rest));
+4 		free(*lst);
+5 	}
+6 	*lst = NULL; // 使对**lst的写入失败，而不是写入不可用的内存。.
+7 }

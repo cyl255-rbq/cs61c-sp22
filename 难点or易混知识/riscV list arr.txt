@@ -1,0 +1,40 @@
+令 `s1` 存储链表 `lst` 的地址 0xABCD0000。
+假设整数和指针占用 4 个字节，并且结构体是紧密排列的。
+假设 `lst` 的最后一个节点的 `next` 指针指向内存地址 0x00000000。
+loop: beq s1, x0, end
+	lw t0, 0(s1)
+	addi t0, t0, 1
+	sw t0, 0(s1)
+	lw s1, 4(s1)
+	jal x0, loop
+end:
+
+解析：
+lw t0, 0(s1)：读取当前节点的 val（结构体第一个成员）。
+addi t0, t0, 1：值加 1。
+sw t0, 0(s1)：写回 val。
+lw s1, 4(s1)：这是灵魂操作。4(s1) 是 next 指针，这行相当于 C 语言里的 lst = lst->next。
+beq s1, x0, end：如果指针变成 NULL (0)，就退出。
+
+Increments all values in the linked list by 1.
+
+	add t0, x0, x0
+loop: slti t1, t0, 6
+	beq t1, x0, end
+	slli t2, t0, 2
+	add t3, s0, t2
+	lw t4, 0(t3)
+	sub t4, x0, t4
+	sw t4, 0(t3)
+	addi t0, t0, 1
+	jal x0, loop
+end:
+Negates all elements in arr.
+
+计算阶段：地址 = 基址 + (索引 * 4)
+步进阶段：索引 = 索引 + 1
+
+让t0初始化为0，然后slti是 set less than 立即数，符合则1，不符则0
+然后判断是否t1为0，然后t2=t0*向左移动4byte，即偏移值
+然后add s0+偏移值t2，最后读取后取负再写回去，然后t0+=1，然后继续循环
+第一次t2=0*4，第二次t2=1*4，第三次是2*4，4为一个数字的byte，0,1,2为偏移量

@@ -1,0 +1,50 @@
+void deallocate_matrix(matrix *mat) {
+    // 方块一：筑起防线
+    if (mat == NULL) {
+        return;
+    }
+    // 方块二：老板的命运交给账本
+    if (mat->parent == NULL) {
+        mat->ref_cnt -= 1;
+        if (mat->ref_cnt == 0) {
+            free(mat->data);
+            free(mat);
+        }
+    } 
+    // 方块三：打工仔一路向上推演，最后自我解脱
+    else {
+        deallocate_matrix(mat->parent);
+        free(mat);
+    }
+}
+
+第一块：擒贼先擒王（GuardClause）
+程序员在写递归时，最害怕的就是“套娃"停不下来，最后导致栈溢出（StackOverflow）或者解引l用空指针。
+所以设计者的第一个直觉是：无论谁调用我，只要传进来的指针是空的，我什么都不干，立刻弹回。
+if (mat == NULL） 
+return;
+
+第二块：抓出真正的“幕后大老板”
+接下来，设计者开始思考矩阵的分类。在这个项目里，矩阵只有两种身份：
+主矩阵（大老板）：parent == NULL。它拥有真正的 data。
+切片矩阵（打工仔）：parent！=NULL。它没有自己的 data，只是借用大老板的 data。
+如果当前进来的矩阵是大老板（mat->parent ==NULL）：
+if (mat->parent == NULL） {
+	mat->ref_cnt-= 1；//账本上登记：少了—个使用者
+	if (mat->ref_cnt == θ) {
+		free(mat->data)；//没人用了，把核心资产（大内存）销毁
+		free(mat);//把老板自己的办公室（结构体）销毁
+【设计心法】：这是标准的引l用计数（ReferenceCounting）模型。大老板的生死，完全取决于“还
+有多少人在用我”（ref_cnt）。只要还有切片在用它，它的ref_cnt就不为O，它就得在内存里
+挺着，直到最后一个使用者说“我用完了”，大老板才体面地把data和自己一起释放掉。
+
+第三块：打工仔的“推卸责任"与“金蝉脱壳”
+那如果进来的矩阵是打工仔（切片）呢？也就是走到了else分支。
+设计者在这里展现了最惊艳的递归甩锅思维。打工仔自己是没有data的，它的性命和大老板紧紧
+绑在一起。既然如此：
+我要死了，我得先通知我的上司（parent），让他也去处理他的生命周期。
+2上司处理完（或者登记完）之后，我再把我自己给物理抹去。
+于是就有了这神来之笔的两行：
+else
+	deallocate_matrix(mat->parent)；//1．甩锅给上司：“老大，我不干了，你看着办”
+	free(mat);//2．金蝉脱壳：把我自己的结构体给free 掉

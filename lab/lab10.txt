@@ -1,0 +1,4 @@
+https://www.learncs.site/docs/curriculum-resource/cs61c/labs/lab08
+
+Use the appletviewer command in your Terminal like so (doesn’t work on Hive):
+appletviewer https://denninginstitute.com/workbenches/vmsim/vm.html 

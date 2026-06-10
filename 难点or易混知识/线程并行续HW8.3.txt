@@ -1,0 +1,99 @@
+(b) // Set arr to be an array of Fibonacci numbers.
+arr[0] = 0;
+arr[1] = 1;
+#pragma omp parallel for
+for (int i = 2; i < n; i++)
+arr[i] = arr[i-1] + arr[i - 2];
+
+i=2(线程0): arr[2] = arr[1]+ arr[θ] = 1 +θ= 1。(正确)
+i=3(线程0): arr[3]= arr[2]+ arr[1]=1+1 = 2。(正确)
+...线程0正在极其缓慢地往后推进.
+i=51(线程1同时启动了):线程1要算arr[51]=arr[50]+arr[49]。但此时线程0还没
+算到49和50，这两个位置上的值还是一开始的垃圾值或者默认值0。
+于是，线程1算出了一个错误的结果存进了arr[51]。
+i=52(线程1):arr[52]=arr[51]+arr[5θ]。因为 arr[51]已经是错的了，所以
+arr[52]必然也是错的。
+这就引发了多米诺骨牌效应：从线程1负责的第一个元素（i=51）开始，后面所有的计算全部坍
+塌，无一幸免。
+
+int A[1048576];
+initializedata(&A);
+int j;
+#pragma omp parallel for
+	for (int i = 0; i < 1024; i++) {
+		for (j = 0; j < 1024; j++) {
+			A[i + j*1024] = i + j*1024;
+		}
+	}
+for 指令将变量 i 设为私有变量，但 j 仍然在线程间共享。
+如果一个线程在另一个线程完成写入之前递增了 j，则代码将无法正常工作。
+
+(c) // Set all elements in arr to 0;
+int i;
+#pragma omp parallel for
+for (i = 0; i < n; i++)
+	arr[i] = 0;
+比串行执行更快：for指令会自动将循环变量（例如索引l）设为私有，因此可以正常工
+作。for指令会将循环迭代拆分成连续的块，供每个线程使用，因此不会出现数据依赖
+或伪共享。
+
+
+关键原因
+在OpenMP规范中，#pragma omp paraLlel for 有一条至高无上的特例条款：
+规定：紧跟在 #pragma omp parallel for 后面的那个循环控制变量（也就是这里的i），无论
+你在外面把它定义成什么（即使定义成了全局变量或普通的局部变量），OpenMP在编译时都一定
+会强行把它变成每个线程私有的(Private)。
+
+注意看这两个循环变量i和j的待遇差别：
+对于外层循环变量i：
+因为它是紧跟在 #pragmaomp parallelfor 后面的直接控制变量。根据我们上面说的特例
+条款，i被成功且自动地私有化了。每个线程分到的i范围不同，这没问题。
+2对于内层循环变量j：
+重点来了！OpenMP的自动私有化特权，只对紧跟在它后面的那“一层"循环变量有效。对于内
+层的循环或者循环体内的其他变量，OpenMP默认遵循常规的数据共享规则：因为intj；是
+在并行区域（#pragma）外面声明的，所以j是所有线程共享的(Shared)!
+
+只有紧跟的第一个无论是在内在外声明会被自动私有化
+根据OpenMP的标准规范：
+#pragma omp parallelfor 后面必须"紧跟（Immediatelyfollow）”—个标准的for 循环语句。
+在你的代码中，你在 #pragma 和 for 循环之间插入了 int a=1；和 a=a+1；两行其他代码。编
+译器在解析到 #pragma omp parallel for 之后，往后看第一眼发现居然不是 for 关键字，就会
+直接抛出编译错误
+即：
+int i;
+#pragma omp parallel for
+int a=1;
+a=a+1;
+for (i = 0; i < n; i++)
+arr[i] = 0;
+无法通过编译
+
+
+// 将数组arr 的第i 个元素减 1。n 是 omp-get_num_threads（）的整数倍
+#pragma omp parallel
+{
+	int threadCount = omp-get_num_threads();
+	int myThread = omp-get_thread_num();
+	for （int i=θ;i<n;i++）{
+		if (i % threadCount == myThread) arr[i] -= 1;
+}
+【翻译】
+问题：会引发伪共享（False Sharing)问题。
+理由：伪共享之所以会发生，是因为不同的线程在同一时间修改了位于同一个内存硬件区块（即缓
+存行CacheLine）中的不同元素。这在硬件层面是一个严重的问题：当某个线程修改了arr[i]
+时，它会强行让自己及其他线程中包含该元素的整个CPU缓存行直接失效（Invalidating)。如果其他
+线程接下来要修改相邻的元素，就必须重新去主内存中拉取最新的缓存，从而导致极其严重的性能
+恶化。
+【深度解析】
+代码意图：这段代码通过交错取模的方式（i %threadCount== myThread）手动给各个线
+程分配任务。例如有2个线程：
+o线程0负责：arr[θ]，arr[2]，arr[4]，arr[6] ….
+o线程1负责：arr[1]，arr[3]，arr[5]，arr[7] ….
+为什么是灾难性的“伪共享”：
+在计算机硬件中，CPU并不是按单个字节或单个int读写内存的，而是以缓存行（Cache
+Line，通常是64字节)为单位。
+arr[θ]和arr[1]物理上紧挨在一起，绝对在同一个缓存行里。当线程O试图修改
+arr[θ］，线程1试图修改arr[1]时，它们为了争夺这同一个缓存行的写权限，会在CPU核
+之间来回搬运、频繁锁死和刷新缓存。这种现象在业务逻辑上是正确的（各算各的），但在硬
+件底层却在“打架”，会导致多线程的速度比单线程慢上百倍。标准的做法是使用omp
+parallelfor让线程处理连续的、大块的数据块。

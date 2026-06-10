@@ -1,0 +1,22 @@
+Exercise 1:
+    1.32
+    2.3,7,0,7
+    3.no(因为TLB的大小为0，已经映射了所有的page，也就是说如果新的虚拟page加载进来，会把旧的给顶掉，因为物理内存只有4页，所有pagetable也只有4条目，对应的tlb也只有4条目，在pagetable里的一定在tlb里，除非tlb比较少)，no
+
+Exercise 2:
+    1.00,20,40,60,80,00,20,40,60,80
+
+Exercise 3:
+    1.page size(因为如果页面大小变小了，则page的数量变多了),Physical Memory Size
+(TLB Size不行的原因是：
+因为要按练习2的序列，假设顺序是:00,20,40,60,80,00,20,40,60,80/00,20,40,60,80,A0,C0,E0
+减少TLB Size后，由于page的数量还是4个，到了80就会把00踢出去，下一次访问00就是miss了
+因为page的数量没变，这个顺序保证是page miss，如果不用练习2的顺序则可以实现)
+--- lines below are ignored by the AG ---
+
+Exercise 1 Checkoff Questions:
+    1.第一次因为什么都没有，所以tlb是miss，然后去pagetable里找，发现valid是0，所以page fault，然后os负责把数据从disk搬到physical memory里，此时pagetable对应的页表项跟新，valid更新为1，然后tlb更新，然后再hit
+    2.因为虚拟内存一般大于物理内存，用于存储disk里的值，page有4页，所以是2位，而vpn有8页
+
+Exercise 4 Checkoff Question:
+    1.因为首先是tlb条目的数量远远比page的数量少，其次是每次切换上下文都会重置tlb(首先系统设置为TLB为8条目，page的数量为2^4，P1,P2,P3,P4代表4个不同的程序，每次切换都用上下文切换)

@@ -1,0 +1,102 @@
+Naive: 32 threads took 1.905993 seconds
+Optimized adjacent: 1 thread(s) took 0.449741 seconds
+Optimized adjacent: 2 thread(s) took 0.347462 seconds
+Optimized adjacent: 3 thread(s) took 0.366322 seconds
+Optimized adjacent: 4 thread(s) took 0.458238 seconds
+Optimized adjacent: 5 thread(s) took 0.509989 seconds
+Optimized adjacent: 6 thread(s) took 0.539286 seconds
+Optimized adjacent: 7 thread(s) took 0.615288 seconds
+Optimized adjacent: 8 thread(s) took 0.749591 seconds
+Optimized adjacent: 9 thread(s) took 0.738250 seconds
+Optimized adjacent: 10 thread(s) took 0.715799 seconds
+Optimized adjacent: 11 thread(s) took 0.668957 seconds
+Optimized adjacent: 12 thread(s) took 0.794874 seconds
+Optimized adjacent: 13 thread(s) took 0.743141 seconds
+Optimized adjacent: 14 thread(s) took 0.648928 seconds
+Optimized adjacent: 15 thread(s) took 0.566173 seconds
+Optimized adjacent: 16 thread(s) took 0.700029 seconds
+Optimized adjacent: 17 thread(s) took 0.531566 seconds
+Optimized adjacent: 18 thread(s) took 0.548095 seconds
+Optimized adjacent: 19 thread(s) took 0.531051 seconds
+Optimized adjacent: 20 thread(s) took 0.557832 seconds
+Optimized adjacent: 21 thread(s) took 0.528874 seconds
+Optimized adjacent: 22 thread(s) took 0.542103 seconds
+Optimized adjacent: 23 thread(s) took 0.499153 seconds
+Optimized adjacent: 24 thread(s) took 0.575477 seconds
+Optimized adjacent: 25 thread(s) took 0.496000 seconds
+Optimized adjacent: 26 thread(s) took 0.513118 seconds
+Optimized adjacent: 27 thread(s) took 0.499785 seconds
+Optimized adjacent: 28 thread(s) took 0.512381 seconds
+Optimized adjacent: 29 thread(s) took 0.506444 seconds
+Optimized adjacent: 30 thread(s) took 0.565897 seconds
+Optimized adjacent: 31 thread(s) took 0.534329 seconds
+Optimized adjacent: 32 thread(s) took 0.659457 seconds
+Optimized chunks: 1 thread(s) took 0.374107 seconds
+Optimized chunks: 2 thread(s) took 0.216298 seconds
+Optimized chunks: 3 thread(s) took 0.165227 seconds
+Optimized chunks: 4 thread(s) took 0.153713 seconds
+Optimized chunks: 5 thread(s) took 0.130494 seconds
+Optimized chunks: 6 thread(s) took 0.152724 seconds
+Optimized chunks: 7 thread(s) took 0.151740 seconds
+Optimized chunks: 8 thread(s) took 0.112546 seconds
+Optimized chunks: 9 thread(s) took 0.114134 seconds
+Optimized chunks: 10 thread(s) took 0.113476 seconds
+Optimized chunks: 11 thread(s) took 0.109523 seconds
+Optimized chunks: 12 thread(s) took 0.114432 seconds
+Optimized chunks: 13 thread(s) took 0.114078 seconds
+Optimized chunks: 14 thread(s) took 0.114715 seconds
+Optimized chunks: 15 thread(s) took 0.117011 seconds
+Optimized chunks: 16 thread(s) took 0.119370 seconds
+Optimized chunks: 17 thread(s) took 0.121605 seconds
+Optimized chunks: 18 thread(s) took 0.120456 seconds
+Optimized chunks: 19 thread(s) took 0.121365 seconds
+Optimized chunks: 20 thread(s) took 0.126673 seconds
+Optimized chunks: 21 thread(s) took 0.118475 seconds
+Optimized chunks: 22 thread(s) took 0.121727 seconds
+Optimized chunks: 23 thread(s) took 0.117551 seconds
+Optimized chunks: 24 thread(s) took 0.118829 seconds
+Optimized chunks: 25 thread(s) took 0.123663 seconds
+Optimized chunks: 26 thread(s) took 0.135191 seconds
+Optimized chunks: 27 thread(s) took 0.132838 seconds
+Optimized chunks: 28 thread(s) took 0.130217 seconds
+Optimized chunks: 29 thread(s) took 0.133161 seconds
+Optimized chunks: 30 thread(s) took 0.143521 seconds
+Optimized chunks: 31 thread(s) took 0.158498 seconds
+Optimized chunks: 32 thread(s) took 0.150658 seconds
+
+核心原因：CacheLine（缓存行）的抢夺
+在CPU内部，内存不是按单个double（8字节）载入缓存的，而是按CacheLine（通常是64字
+节）为单位载入的。也就是说，一个Cache Line里面可以同时容纳8个double 类型的元素。
+o你的Adjacent方法：
+线程0写z[θ]，线程1写z[1]，线程2写z[2]….发现了吗？这8个线程同时写入的8
+个连续元素，在物理上处于同一个CacheLine里面！
+当线程O修改了z[θ］，整个CacheLine在硬件层面上就会被标记为“失效（Invalid）”，逼迫
+线程1重新去主存或低级缓存里拉取最新的数据。这就导致这个CacheLine在不同的CPU核心
+之间像乒乓球一样被疯狂传递（CacheBouncing）。CPU核心把绝大部分时间都花在了硬件握
+手和同步缓存上，根本没在认真算加法。
+o你的Chunks方法：
+每个线程负责连续的一大块。比如线程0专心写前10000个元素，线程1写接下来的10000
+个。只有在两个块交界处的极少数元素才会共享同一个CacheLine，其余99.9%的时间各个核
+心都在读写属于自己的缓存，互不干扰，速度自然飙升。
+2.为什么增加到8-11个线程后，性能就不再提升了，甚至开始回落？
+仔细观察 Optimized chunks 的耗时:
+o1thread: 0.374s
+o2 threads:0.216s (明显提升)
+o4 threads:0.153s (继续提升)
+o8 threads:0.112s (达到巅峰)
+o16 threads:0.119s (停滞)
+o32 threads:0.150s (反而变慢)
+这里有两个物理层面的限制：
+
+①内存带宽瓶颈（MemoryBandwidthBound)
+向量加法（z[i]=x[i]+y[i]）是一个计算强度极低、内存访问极高的操作。每做一次加法，
+CPU就要从内存读两个 double，写一个 double。
+当你有8个核心全速向内存要数据时，你的主存总线（MemoryBus）其实已经被塞满了。再增加线
+程，核心也只能坐在那儿干等数据从内存里运过来。
+②线程创建与同步开销
+你是在WSL／虚拟机（从你的路径／mnt/c/..．能看出来）下运行的。在 #pragmaomp
+paraLlel内部，OpenMP需要在操作系统中唤醒或创建32个线程，并在结束时对它们进行同步
+(Barrier)。
+线程的调度、上下文切换（ContextSwitch）都是有成本的。当线程数（32）超过了你电脑CPU的
+物理核心数时，多个线程就会开始抢占同一个物理核心，多出来的开销已经远超并行带来的那一点
+点收益了。

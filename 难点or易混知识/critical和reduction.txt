@@ -1,0 +1,72 @@
+double dotp_naive(double* x, double* y, int arr_size) {
+    double global_sum = 0.0;
+    #pragma omp parallel
+    {
+        #pragma omp for
+        for (int i = 0; i < arr_size; i++)
+            #pragma omp critical
+            global_sum += x[i] * y[i];
+    }
+    return global_sum;
+}
+
+// Manual Reduction
+double dotp_manual_optimized(double* x, double* y, int arr_size) {
+    double global_sum = 0.0;
+    // TODO: Implement this function
+    // Do NOT use the `reduction` directive here!
+    #pragma omp parallel
+    {
+        double private_sum = 0;
+        #pragma omp for
+        for (int i = 0; i < arr_size; i++)
+        {
+            private_sum += x[i] * y[i];
+        }
+        #pragma omp critical
+        global_sum += private_sum;
+    }
+    return global_sum;
+}
+这里让每个线程自己定义一个private_sum，尽可能完成不是冲突的部分
+从而让归约操作的次数减少
+
+// Reduction Keyword
+double dotp_reduction_optimized(double* x, double* y, int arr_size) {
+    double global_sum = 0.0;
+    // TODO: Implement this function
+    // Please DO use the `reduction` directive here!
+    #pragma omp parallel
+    {
+        #pragma omp for reduction(+:global_sum)
+        for (int i = 0; i < arr_size; i++)
+            global_sum += x[i] * y[i];
+    }
+    return global_sum;
+}
+
+在做点积（Dot Product）时，我们需要计算global_sum=Σ(x[i]×y[i])。如果多个线程同时
+往一个global_sum变量里加结果，就会产生严重的数据竟争（DataRace）。之前你可能用过
+#pragmaompcritical）（临界区）来锁住这行代码，让线程排队相加，但这样效率极低。
+OpenMP提供的reduction关键字，就是专门为了优雅、高效地解决这个问题而生的。
+#pragma omp parallel for reduction(操作符 : 变量名)
+
+当编译器看到reduction（+:global_sum）时，它在底层悄悄做了三件事：
+1局部私有化（PrivateCopy）：它帮每个线程在它们的私有寄存器或专属缓存里，悄悄创建了
+一个global_sum 的本地副本（并自动初始化为）。
+2无锁乱飙（Local Accumulation）：在paraLlel块内部，每个线程其实都在往自己的那个
+“隐私副本"里疯狂加和。因为大家互不干扰，所以没有任何冲突，没有任何等待，流水线跑满。
+3硬件级汇总（TreeReduction）：当所有线程都把自己负责的那一堆算完之后，OpenMP框架
+会用一种类似于“二叉树两两相加"的高效算法，把这32个线程的隐私副本里的值汇总，最后加
+到外面真正的全局global_sum变量里。
+有了它，你就不需要写让人头疼的critical锁，直接把底层最复杂的并行优化交给了编译器。你
+可以去试试看，用这个写法跑出来的点积成绩，绝对比用critical的版本要快上几个数量级！
+
+为什么32线程时，手写版本又开始变慢了？
+细心的你一定注意到了，在32线程时：
+oReduction Optimized 依l旧稳健在0.071 秒。
+o你的 ManualOptimized 却翘头回到了0.109 秒。
+这是因为在极端多核心（32线程）的高压下，32个线程同时出循环去抢占那个global_sum+=
+private_sum；的临界区时，发生了微小的锁冲突。而OpenMP内置的 reduction 关键字在最后
+合并32个线程的结果时，用的是硬件级的二叉树两两合并（TreeReduction），它不需要32个人同
+时去抢一个锁，所以在大并发下抗压能力更强。

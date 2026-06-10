@@ -1,0 +1,68 @@
+1. map(f)
+o翻译：返回一个新的项，该项是通过对源元素调用函数f转换而来的。
+0详细解释：这是一个“—对一"的映射操作。Spark会遍历原RDD 中的每一个元素，将函数f
+作用于它，并将f的返回值作为新RDD中的元素。
+0例子：如果RDD是［1，2，3］，f 是×->× *2，那么 map 后的新 RDD就是
+[2，4，6］。
+2. flatMap(f)
+o翻译：类似于map，但每个输入项可以被映射为0个或多个输出项（因此函数f应该返回
+一个序列，而不是单一的项）。
+详细解释：这是一个“一对多”（或一对零）的映射并“压平"的操作。它首先像map一样处理
+每个元素，但要求f 返回的是一个集合（如列表）。然后，（flatMap会把这些集合中的所
+有元素提取出来，合并（打平）成一个一维的新RDD。
+例子：如果 RDD 是包含句子的列表［"heLLo world"，“hi spark"］，f是按空格拆
+分单词。map 会返回[["hello"，“world"]，["hi"，"spark"]]，而 flatMap 会将
+其压平返回["hello"，“world"，"hi"，"spark"]。
+3. reduceBykey(f)
+o翻译：当在一个由（K，V）键值对组成的数据集上调用时，返回一个（K，V）键值对的数据
+集，其中每个键对应的值使用给定的聚合函数f 进行聚合。
+该函数f的类型必须是(V，V)→V。
+详细解释：这是专门用于处理键值对(Key-Value)数据的分组聚合操作。Spark会自动把具有
+相同Key的数据分到一组，然后使用你提供的函数f将它们的Value逐步合并成一个单一的
+值。函数f必须接收两个相同类型的值，并返回一个同类型的值。
+o例子:如果RDD是［("a"，1)，（"b"，1)，（"a"，2)］，f是加法×+y。那么
+reduceByKey 会把Key为“a"的值 1和2 加起来，最终返回［("a"，3)，（"b"，1)］。
+常用于词频统计等场景。
+二、Actions (行动操作：从RDD返回具体数值)
+行动操作会触发Spark提交作业，执行之前所有的转换逻辑，并将最终结果返回给驱动程序
+(Driver）或写入外部存储。
+1. reduce(f)
+o翻译：使用函数f聚合数据集中的所有元素，不区分键（keys）。
+详细解释：这是最常用的行动操作之一。它接收一个函数f（接收两个参数并返回一个同类
+型的值），将RDD中的所有元素依次两两结合，最终将整个数据集缩减为一个单一的结果。
+例子：如果RDD是[1，2，3，4，5］，f是加法，reduce 会计算1+2+3+4+5，最
+终向你的Python程序返回具体的数值 15，而不是一个RDD。
+三、RDD 的创建
+sc.parallelize(data)
+翻译：调用sc.parallelize(data）来将一个Python集合data 并行化。
+O详细解释：这是在Spark中最基础的创建RDD的方法。它获取你本地Python脚本中的一个普
+通内存集合（比如一个list），将其切割成多个分区（partitions），并分布到 Spark集群的各
+个节点上，从而把它变成一个可以进行分布式并行计算的RDD。
+例子: my_list = [1, 2,3,4]; my_rdd = sc.parallelize(my_list)。
+
+给定一组硬币及其所有者，计算每个人拥有的每种面值硬币的数量。
+然后，利用第一个结果的输出，计算每个人的总金额。
+假设已定义valueOfCoin(coinType)，并返回该硬币的美元价值。
+coinPairs的类型是一个包含（人员，币种）对的元组。
+
+coinData = sc.parallelize(coinPairs)
+out1 = coinData.map(lambda (k1，k2):((k1，k2)，1))
+	.reduceByKey(lambda v1, v2: v1 + v2)
+out2 = out1.map(lambda (k,v):(k[0],v ＊ valueofCoin(k[1])))
+	.reduceByKey(lambda v1， v2: v1 + v2)
+
+给定学生的姓名和所修课程，输出他们的姓名和平均绩点（GPA）。
+CourseData:
+	int courseID
+	float studentGrade // a number from 0-4
+学生类型是（学生姓名，课程数据）对的列表。
+studentsData = sc.parallelize(students)
+out = studentsData.map(lambda (k,v):(k,(v.studentGrade,1)))
+	.reduceByKey(lambda v1，v2:(v1[0] + v2[0],v1[1] + v2[1]))
+	.map(lambda (k，v):(k，v[0] / v[1]))
+
+在原生MapReduce中，你必须显式地写Mapper类和Reducer类，
+而且往往要手写中间结果写磁盘的逻辑。
+在Spark中，reduceByKey(Lambda x,y：x+y）仅仅是一行代码。
+Spark引擎（DAGScheduler）在解析这行代码时，
+会在底层默默地帮你划分Stage，默默地在Stage 之间插入Shuffle 操作。

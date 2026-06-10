@@ -1,0 +1,26 @@
+你的代码：
+#pragma omp parallel
+{
+    double private_sum = 0;        // 每个线程私有，因为定义在并行区域内
+    #pragma omp for
+    for (int i = 0; i < arr_size; i++) { ... }
+    #pragma omp critical
+    global_sum += private_sum;
+}
+
+换成 #pragma omp parallel for 也可以有私有变量：
+double global_sum = 0;
+#pragma omp parallel for private(private_sum)   // 或者不加 private，直接在循环内定义
+for (int i = 0; i < arr_size; i++) {
+    // 但不能每个线程独立累加，因为变量作用域问题
+}
+但是 parallel for 组合指令不能在循环结束后再做 critical 累加，因为 for 是紧跟着的并行区域结束。你没法拆开写 critical 部分。
+    真正的区别：
+        #pragma omp parallel + #pragma omp for 分开：
+        可以控制整个并行区域的范围，在 for 前后加入每个线程执行的代码（比如这里的 private_sum 定义和最后的 critical 累加）。
+        #pragma omp parallel for 一把抓：
+        只有循环体内部是并行执行的，循环结束后线程就合并了，无法再做每个线程的局部收尾工作。
+私有变量在两种方式里都能有：
+    在 parallel 区域内定义（自动私有）
+    或者用 private(var) 子句
+所以你问的“没法加私有变量”是不对的 —— parallel for 也能加，只是不能像分开写那样在循环结束后还保持每个线程的私有副本去做 critical 累加。

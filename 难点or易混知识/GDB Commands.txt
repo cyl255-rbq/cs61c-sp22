@@ -1,0 +1,11 @@
+info locals打印当前堆栈帧中所有局部变量的值
+
+command 每次到达断点时执行一系列命令。例如：
+b 73 
+commands 1
+输入你想执行的命令列表，每个命令用换行符分隔。在命令列表后，输入 end 并按下 Enter 。
+p var1
+p var2
+end
+
+delete 删除指定的断点

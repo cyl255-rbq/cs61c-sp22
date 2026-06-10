@@ -1,0 +1,17 @@
+static int product_vectorized(int n, int *a) {
+    int result[4];
+    // 1. 初始化向量为 1
+    __m128i prod_v = _mm_set1_epi32(1); 
+    // 2. 向量化循环：边界控制在 n - 3（或 n - n % 4），每次前进 4
+    for (int i = 0; i < n/4 * 4; i += 4) { (这里不能是i<n，因为假如n是5,i是4，此时会再进行一轮，而我们要在进行最后余下的之前停下)
+        prod_v = _mm_mullo_epi32(prod_v, _mm_loadu_si128((__m128i *)(a + i)));
+    }
+    // 3. 将向量寄存器的值存回临时数组
+    _mm_storeu_si128((__m128i *)result, prod_v); // 题目里的 __mm_storeu 是官方 typo，写单下划线即可
+    // 4. 处理尾部无法被 4 整除的剩余元素（从 n - n % 4 开始）
+    for (int i = n - n % 4; i < n; i++) { 
+        result[0] *= a[i]; // 你的这个思路非常棒，直接乘进 result[0] 里
+    }
+    // 5. 将 4 个通道的值乘起来得到最终结果
+    return result[0] * result[1] * result[2] * result[3];
+}

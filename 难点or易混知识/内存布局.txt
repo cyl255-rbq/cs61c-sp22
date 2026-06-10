@@ -1,0 +1,26 @@
+#define SPOCK 1701          // 宏定义（预处理阶段替换为字面量）
+int KIRK = 1701;            // 全局变量
+int sulu(int scotty) {      // 函数名 sulu, 参数 scotty
+return scotty * scotty;
+}
+int main(int argc, char *argv[]) {
+int *chekov = malloc(sizeof(int) * 1701); // 指针 chekov, 动态分配内存 *chekov
+...
+}
+Q1.1: sulu —— (d) Code
+解释： sulu 是一个函数的名称。在 C 语言中，编译后的函数机器指令（二进制代码）存储在 Code Segment（代码段，也叫 Text Segment） 中。这是只读的。
+Q1.2: chekov —— (a) Stack
+解释： chekov 是在 main 函数内部定义的局部变量（是一个 int* 类型的指针）。所有在函数内部声明的非静态局部变量都存储在 Stack（栈） 上。
+注意： 这里的 chekov 只是那个保存地址的“盒子”，盒子本身在栈上。
+Q1.3: *chekov —— (b) Heap
+解释： *chekov 表示指针 chekov 指向的那块内存。因为这块内存是通过 malloc() 函数申请的，所有动态分配的内存都存储在 Heap（堆） 中。
+Q1.4: KIRK —— (c) Static/Data
+解释： KIRK 是在所有函数之外定义的全局变量。全局变量和被 static 修饰的变量存储在 Static/Data Segment（静态/数据段） 中。它们在程序启动时分配，程序结束时释放。
+Q1.5: scotty —— (a) Stack
+解释： scotty 是函数 sulu 的参数。当函数被调用时，系统会为该函数创建一个“栈帧”（Stack Frame），函数的参数和它内部的局部变量都会被压入这个栈帧中。所以它在 Stack 上。
+Q1.6: SPOCK 在哪？ —— (d) Code
+解释： 这是一个陷阱题。#define SPOCK 1701 是一个预处理宏。在编译器真正开始编译之前，所有的 SPOCK 都会被替换成数字 1701。
+在 sulu(SPOCK); 这一行，编译器实际上看到的是 sulu(1701);。这个数字 1701 是一个立即数（Literal），它直接硬编码在调用函数的机器指令中，因此它随指令一起存在 Code 段里。
+
+变量（比如 KIRK）：像是一个储物柜。你得先去内存（Data 段）找到那个柜子，把里面的东西取出来，再送去给函数。
+立即数（比如 SPOCK）：像是纹身。它直接纹在了指令（Code 段）的身上。你执行指令的时候，数就在指令上面，不需要再去翻柜子。

@@ -1,0 +1,25 @@
+OpenMP 代表开放多处理规范(Open specification for Multi-Processing)
+#pragma omp parallel
+#pragma 告诉编译器，行的其余部分是一个指令。
+omp 声明该指令用于 OpenMP。
+parallel 表示以下块语句——即大括号内的部分（ { / } ）——应由不同的线程并行执行。
+
+void v_add(double* x, double* y, double* z) {
+    #pragma omp parallel
+    {
+        for(int i=0; i<ARRAY_SIZE; i++)
+        {
+            z[i] = x[i] + y[i];
+        }
+    }
+}
+
+void v_add(double* x, double* y, double* z) {
+    #pragma omp parallel for
+    for(int i=0; i<ARRAY_SIZE; i++)
+    {
+        z[i] = x[i] + y[i];
+    }
+}
+这个示例与前一个示例的两个区别是：1）指令末尾的 for,以及 2）没有在并行部分周围加上括号。
+ #pragma omp parallel for 指令只需要直接放在 for 循环之前；不需要括号。

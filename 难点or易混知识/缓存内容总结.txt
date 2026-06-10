@@ -1,0 +1,4 @@
+组件				缓冲的是什么？			解决什么问题？
+TLB				地址映射(VPN→PPN)		翻译太慢 (跳过PageWalk)
+Data Cache		实际数据(Data)			内存太慢(跳过RAM访问)
+Virtual Memory		硬盘上的数据块			内存太小(通过Swap扩容)

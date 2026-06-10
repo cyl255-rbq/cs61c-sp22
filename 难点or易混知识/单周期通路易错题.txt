@@ -1,0 +1,21 @@
+1.2：对于该数据通路中执行时间最长的指令，哪些组件与关键路径计算相关？
+（不要包括指令仍在使用但对于给定的延迟而言不在关键路径上的组件）
+
+(b) PC register,(c) IMEM,(e) RegFile read,(g) A-MUX,(i) ALU,(j) DMEM,(k) WB-MUX,(l) RegFile Write
+选g而不选h(B-MUX)的原因是:选 g (A-MUX) 是因为这条路径比 B-MUX 所在的路径更“慢”。
+1.什么是关键路径(CriticalPath)？
+关键路径是指从输入到输出之间耗时最长的那条逻辑链条。在一个单周期处理器中，我们要找的是
+那个决定了整个时钟周期（ClockCycle）长度的瓶颈。
+2.对比两条并行的”支路”
+在lw（Load Word，通常是路径最长的指令）中，信号在进入ALU 之前会分叉：
+路径A（menujuA-MUX):PC→ IMEM → RegFile Read (150 ps)→ A-MUX .
+路径B（menujuB-MUX）:PC→IMEM→Imm-Gen（忽略不计或非常小）→B-MUX.
+3.为什么A-MUX在关键路径上，而B-MUX不在？
+虽然A-MUX和B-MUX在电路图上看起来是对称的，但它们等待的数据来源速度不同：
+寄存器堆读取（RegFileRead）通常需要访问SRAM阵列，耗时较长（题目中给出了150
+ps）。立即数生成（Imm-Gen）本质上只是几根信号线的"重新排列"和"符号扩展”，
+它的物理延迟非常小，几乎可以忽略不计（或者远小于150ps）。
+结论：
+当信号通过Imm-Gen到达B-MUX的时候，A-MUX还在苦苦等待RegFile传过来的数据。这意
+味着B-MUX早早就准备好了，它不是系统的瓶颈；而A-MUX必须等RegFile完成后才能开始工作。
+因此，整个系统的"最长耗时"是由通过A-MUX的那条线决定的。

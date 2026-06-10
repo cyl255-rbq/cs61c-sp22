@@ -1,0 +1,17 @@
+SIMD优化
+OpenMP优化
+算法优化
+
+Reduce function calls: Function calls are slow because the program must set up 
+a stack frame and jump to a different part of code. If some part of your code is repeatedly calling a function, you could try to reduce the number of times the function is called.
+减少函数调用：函数调用较慢，因为程序必须建立一个堆栈帧并跳转到代码的不同部分。
+如果你的代码中某个部分反复调用同一个函数，可以尝试减少函数的调用次数。
+Loop unrolling: You can manually reduce the number of loop iterations your program 
+needs to execute. See this link for a simple example of loop unrolling.
+循环展开：你可以手动减少程序需要执行的循环次数。请参考这个链接，了解一个关于循环展开的简单示例。
+Cache blocking: You can rearrange how data is stored in memory to improve locality 
+for better cache performance. For example, accessing a column of data in a row-major 
+matrix requires skipping through elements in the matrix, but if the same matrix were stored 
+in column-major order, the column of data would be located in one continuous block of memory.
+缓存阻塞：你可以重新安排数据在内存中的存储方式，以改善局部性，从而提升缓存性能。
+例如，访问行主序矩阵中的一列数据需要跳过矩阵中的元素，但如果将同一矩阵存储为列主序，那么这列数据将位于连续的内存块中。
